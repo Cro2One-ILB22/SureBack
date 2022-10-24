@@ -1,0 +1,6 @@
+framework module Pods_SureBack {
+  umbrella header "Pods-SureBack-umbrella.h"
+
+  export *
+  module * { export * }
+}

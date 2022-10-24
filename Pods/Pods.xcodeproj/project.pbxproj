@@ -1,0 +1,755 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		024619E6528FB0DA114E4CF4523C340A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		071334E919618B9E21D8D9038C4ACA2F /* Pods-SureBackTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 69341D718794CA230ED1A83230C4D8D1 /* Pods-SureBackTests-dummy.m */; };
+		1E932BFFD9BF8A2CBC91920ADB15E694 /* Pods-SureBackTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D42AEF72C50B0A004DF1AADA43FC7C61 /* Pods-SureBackTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		47E2183E3C8B74A331537234050325C9 /* Pods-SureBack-SureBackUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8340D8123748B6FE31C886B0A6B16B74 /* Pods-SureBack-SureBackUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		68BC995F3854D5B3082989267E1DB123 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		7350E9C8528867F36C8A0D145E5BFB39 /* Pods-SureBack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B398926EEB8D79BDEBA0608C0B7A16A7 /* Pods-SureBack-dummy.m */; };
+		8FBBC4A195F251F577BE53CDC5A4C181 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		94F6499BB9D7D9CB7C3E2145995186B8 /* Pods-SureBack-SureBackUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C8B882225CB905C17F2D932FE3D3F6 /* Pods-SureBack-SureBackUITests-dummy.m */; };
+		FD0ED3CCF62C83FB4095AF63DB38E136 /* Pods-SureBack-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A60FC4143B45EA8CEBF6CEE7008510C /* Pods-SureBack-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C15DFF82CD996F7C8A7D8F76D93D2BA4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B34B46D359E60BDE798D1DE61F5E26BF;
+			remoteInfo = "Pods-SureBack";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		084CE1FDC194E941E509DEA14E5919AF /* Pods-SureBack-SureBackUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SureBack-SureBackUITests-Info.plist"; sourceTree = "<group>"; };
+		0F541F7D8E4918F9831E2424DC5296FD /* Pods-SureBack-SureBackUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SureBack-SureBackUITests.release.xcconfig"; sourceTree = "<group>"; };
+		14E3E911BFC67E9922DC77AABAC83C05 /* Pods-SureBack.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SureBack.modulemap"; sourceTree = "<group>"; };
+		1BEE0FE744D371D503C32C526007A7D0 /* Pods-SureBack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SureBack.debug.xcconfig"; sourceTree = "<group>"; };
+		1E31CDADDCF4DD5BEB98BDB53B55734D /* Pods-SureBack-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SureBack-acknowledgements.markdown"; sourceTree = "<group>"; };
+		23E7D4359307954659C8D6DA8E5BAA54 /* Pods-SureBackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SureBackTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2D08A0A182AD2F74563073307A7711EF /* Pods-SureBack-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SureBack-acknowledgements.plist"; sourceTree = "<group>"; };
+		3AF8C1CC4C5F9674C88FECBD29745F8F /* Pods-SureBack-SureBackUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SureBack-SureBackUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		45130C517F43B4819AB972BD159A3430 /* Pods-SureBackTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SureBackTests.modulemap"; sourceTree = "<group>"; };
+		4F2B52D086CFF2D9E4BBACA8299FB83C /* Pods-SureBackTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SureBackTests"; path = Pods_SureBackTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		58C8B882225CB905C17F2D932FE3D3F6 /* Pods-SureBack-SureBackUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SureBack-SureBackUITests-dummy.m"; sourceTree = "<group>"; };
+		69341D718794CA230ED1A83230C4D8D1 /* Pods-SureBackTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SureBackTests-dummy.m"; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		7A60FC4143B45EA8CEBF6CEE7008510C /* Pods-SureBack-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SureBack-umbrella.h"; sourceTree = "<group>"; };
+		8340D8123748B6FE31C886B0A6B16B74 /* Pods-SureBack-SureBackUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SureBack-SureBackUITests-umbrella.h"; sourceTree = "<group>"; };
+		85F207B1CBCAC362140C627D7F2E81D8 /* Pods-SureBackTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SureBackTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		883A5CAE06F55754FB34702787ECAD5C /* Pods-SureBackTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SureBackTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		8944FC415451427B3839D3F88CAA35B2 /* Pods-SureBackTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SureBackTests-Info.plist"; sourceTree = "<group>"; };
+		8CFBE908CCD12F1B2389CAF6BDDE92D9 /* Pods-SureBack-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SureBack-Info.plist"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		B398926EEB8D79BDEBA0608C0B7A16A7 /* Pods-SureBack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SureBack-dummy.m"; sourceTree = "<group>"; };
+		B817D8CBD0EFF33B42CBA5C5ADD57503 /* Pods-SureBack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SureBack.release.xcconfig"; sourceTree = "<group>"; };
+		B9137B0027195CB1AAF4AA0A909EEE6C /* Pods-SureBackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SureBackTests.release.xcconfig"; sourceTree = "<group>"; };
+		B96C58F39F8979DA15BDB3EAAC07449F /* Pods-SureBack */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SureBack"; path = Pods_SureBack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2346EDAEEED9A648A39EFAE3E7A2E4D /* Pods-SureBack-SureBackUITests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SureBack-SureBackUITests"; path = Pods_SureBack_SureBackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD1DFC98C57CC3FBE7B1FDE69C1F3910 /* Pods-SureBack-SureBackUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SureBack-SureBackUITests.modulemap"; sourceTree = "<group>"; };
+		D42AEF72C50B0A004DF1AADA43FC7C61 /* Pods-SureBackTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SureBackTests-umbrella.h"; sourceTree = "<group>"; };
+		D835FCEEDD86E3C0CBAE31F00B6F66AF /* Pods-SureBack-SureBackUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SureBack-SureBackUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB364495DF59824759B80F2384FF63B2 /* Pods-SureBack-SureBackUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SureBack-SureBackUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		192FCC045282419F7B5E0FE155E31B99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68BC995F3854D5B3082989267E1DB123 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4BDD0586FDFE1568151259CDDC530B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8FBBC4A195F251F577BE53CDC5A4C181 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D22376092593FA4C683EDCA3EDC6D98F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				024619E6528FB0DA114E4CF4523C340A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2A8A5E65EE9946AEAA4A95EF0581C1E1 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A8BA886A814D339D605A1AB90320578D /* Pods-SureBack */,
+				8DBDD5046EF41BFECD9DF03D04B6273D /* Pods-SureBack-SureBackUITests */,
+				67BA030FB594029D1CD8914E143E4786 /* Pods-SureBackTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		67BA030FB594029D1CD8914E143E4786 /* Pods-SureBackTests */ = {
+			isa = PBXGroup;
+			children = (
+				45130C517F43B4819AB972BD159A3430 /* Pods-SureBackTests.modulemap */,
+				883A5CAE06F55754FB34702787ECAD5C /* Pods-SureBackTests-acknowledgements.markdown */,
+				85F207B1CBCAC362140C627D7F2E81D8 /* Pods-SureBackTests-acknowledgements.plist */,
+				69341D718794CA230ED1A83230C4D8D1 /* Pods-SureBackTests-dummy.m */,
+				8944FC415451427B3839D3F88CAA35B2 /* Pods-SureBackTests-Info.plist */,
+				D42AEF72C50B0A004DF1AADA43FC7C61 /* Pods-SureBackTests-umbrella.h */,
+				23E7D4359307954659C8D6DA8E5BAA54 /* Pods-SureBackTests.debug.xcconfig */,
+				B9137B0027195CB1AAF4AA0A909EEE6C /* Pods-SureBackTests.release.xcconfig */,
+			);
+			name = "Pods-SureBackTests";
+			path = "Target Support Files/Pods-SureBackTests";
+			sourceTree = "<group>";
+		};
+		8DBDD5046EF41BFECD9DF03D04B6273D /* Pods-SureBack-SureBackUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CD1DFC98C57CC3FBE7B1FDE69C1F3910 /* Pods-SureBack-SureBackUITests.modulemap */,
+				3AF8C1CC4C5F9674C88FECBD29745F8F /* Pods-SureBack-SureBackUITests-acknowledgements.markdown */,
+				EB364495DF59824759B80F2384FF63B2 /* Pods-SureBack-SureBackUITests-acknowledgements.plist */,
+				58C8B882225CB905C17F2D932FE3D3F6 /* Pods-SureBack-SureBackUITests-dummy.m */,
+				084CE1FDC194E941E509DEA14E5919AF /* Pods-SureBack-SureBackUITests-Info.plist */,
+				8340D8123748B6FE31C886B0A6B16B74 /* Pods-SureBack-SureBackUITests-umbrella.h */,
+				D835FCEEDD86E3C0CBAE31F00B6F66AF /* Pods-SureBack-SureBackUITests.debug.xcconfig */,
+				0F541F7D8E4918F9831E2424DC5296FD /* Pods-SureBack-SureBackUITests.release.xcconfig */,
+			);
+			name = "Pods-SureBack-SureBackUITests";
+			path = "Target Support Files/Pods-SureBack-SureBackUITests";
+			sourceTree = "<group>";
+		};
+		A8BA886A814D339D605A1AB90320578D /* Pods-SureBack */ = {
+			isa = PBXGroup;
+			children = (
+				14E3E911BFC67E9922DC77AABAC83C05 /* Pods-SureBack.modulemap */,
+				1E31CDADDCF4DD5BEB98BDB53B55734D /* Pods-SureBack-acknowledgements.markdown */,
+				2D08A0A182AD2F74563073307A7711EF /* Pods-SureBack-acknowledgements.plist */,
+				B398926EEB8D79BDEBA0608C0B7A16A7 /* Pods-SureBack-dummy.m */,
+				8CFBE908CCD12F1B2389CAF6BDDE92D9 /* Pods-SureBack-Info.plist */,
+				7A60FC4143B45EA8CEBF6CEE7008510C /* Pods-SureBack-umbrella.h */,
+				1BEE0FE744D371D503C32C526007A7D0 /* Pods-SureBack.debug.xcconfig */,
+				B817D8CBD0EFF33B42CBA5C5ADD57503 /* Pods-SureBack.release.xcconfig */,
+			);
+			name = "Pods-SureBack";
+			path = "Target Support Files/Pods-SureBack";
+			sourceTree = "<group>";
+		};
+		CCCE8441ABD12AF59B137C708ACD6233 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B96C58F39F8979DA15BDB3EAAC07449F /* Pods-SureBack */,
+				C2346EDAEEED9A648A39EFAE3E7A2E4D /* Pods-SureBack-SureBackUITests */,
+				4F2B52D086CFF2D9E4BBACA8299FB83C /* Pods-SureBackTests */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				CCCE8441ABD12AF59B137C708ACD6233 /* Products */,
+				2A8A5E65EE9946AEAA4A95EF0581C1E1 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		113248D78F6C600EB84FA95AE77E4AB6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD0ED3CCF62C83FB4095AF63DB38E136 /* Pods-SureBack-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A29A6C4921921C537373E461748E58E7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47E2183E3C8B74A331537234050325C9 /* Pods-SureBack-SureBackUITests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F71E4B80AEF69E95CDA764927440EFFC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E932BFFD9BF8A2CBC91920ADB15E694 /* Pods-SureBackTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		60F74ECC828BBCD4006C609FAF30B8A6 /* Pods-SureBackTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1B5A9BFAFD8DE180DE616D20A407E1B /* Build configuration list for PBXNativeTarget "Pods-SureBackTests" */;
+			buildPhases = (
+				F71E4B80AEF69E95CDA764927440EFFC /* Headers */,
+				1A365AE84EB2E5DC187852245D7DD203 /* Sources */,
+				192FCC045282419F7B5E0FE155E31B99 /* Frameworks */,
+				8710457B11377C7B269D0FF9C03586AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				35E8038ED2F2FF69271030CD3FDD8080 /* PBXTargetDependency */,
+			);
+			name = "Pods-SureBackTests";
+			productName = Pods_SureBackTests;
+			productReference = 4F2B52D086CFF2D9E4BBACA8299FB83C /* Pods-SureBackTests */;
+			productType = "com.apple.product-type.framework";
+		};
+		B34B46D359E60BDE798D1DE61F5E26BF /* Pods-SureBack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50DDD21681AB805845246A7AD64B795A /* Build configuration list for PBXNativeTarget "Pods-SureBack" */;
+			buildPhases = (
+				113248D78F6C600EB84FA95AE77E4AB6 /* Headers */,
+				5103AF2C529354B0DAB1AD237C817487 /* Sources */,
+				D22376092593FA4C683EDCA3EDC6D98F /* Frameworks */,
+				F436967E987B0AC9268C40893C36A244 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-SureBack";
+			productName = Pods_SureBack;
+			productReference = B96C58F39F8979DA15BDB3EAAC07449F /* Pods-SureBack */;
+			productType = "com.apple.product-type.framework";
+		};
+		E81ECBE37CEAC2775D95E61D78FF5730 /* Pods-SureBack-SureBackUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B582D40655CF097AE2CB859E8BB4E552 /* Build configuration list for PBXNativeTarget "Pods-SureBack-SureBackUITests" */;
+			buildPhases = (
+				A29A6C4921921C537373E461748E58E7 /* Headers */,
+				8DC786BACBC30208989CF8008B6B2AEF /* Sources */,
+				B4BDD0586FDFE1568151259CDDC530B2 /* Frameworks */,
+				8B70D731A95D266300AED64FCF1281AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-SureBack-SureBackUITests";
+			productName = Pods_SureBack_SureBackUITests;
+			productReference = C2346EDAEEED9A648A39EFAE3E7A2E4D /* Pods-SureBack-SureBackUITests */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = CCCE8441ABD12AF59B137C708ACD6233 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B34B46D359E60BDE798D1DE61F5E26BF /* Pods-SureBack */,
+				E81ECBE37CEAC2775D95E61D78FF5730 /* Pods-SureBack-SureBackUITests */,
+				60F74ECC828BBCD4006C609FAF30B8A6 /* Pods-SureBackTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8710457B11377C7B269D0FF9C03586AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B70D731A95D266300AED64FCF1281AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F436967E987B0AC9268C40893C36A244 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1A365AE84EB2E5DC187852245D7DD203 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				071334E919618B9E21D8D9038C4ACA2F /* Pods-SureBackTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5103AF2C529354B0DAB1AD237C817487 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7350E9C8528867F36C8A0D145E5BFB39 /* Pods-SureBack-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DC786BACBC30208989CF8008B6B2AEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94F6499BB9D7D9CB7C3E2145995186B8 /* Pods-SureBack-SureBackUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		35E8038ED2F2FF69271030CD3FDD8080 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SureBack";
+			target = B34B46D359E60BDE798D1DE61F5E26BF /* Pods-SureBack */;
+			targetProxy = C15DFF82CD996F7C8A7D8F76D93D2BA4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1151D0ED805CE2611C30D2C48534A184 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D835FCEEDD86E3C0CBAE31F00B6F66AF /* Pods-SureBack-SureBackUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SureBack-SureBackUITests/Pods-SureBack-SureBackUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SureBack-SureBackUITests/Pods-SureBack-SureBackUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		1E5BD3991B7F9640D8860E1EA3F6BBB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23E7D4359307954659C8D6DA8E5BAA54 /* Pods-SureBackTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3534E6333B4BDB4EAA58F0A4227CC33D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9137B0027195CB1AAF4AA0A909EEE6C /* Pods-SureBackTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		409E507AFD7F6620E0FD6D6781BB80D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BEE0FE744D371D503C32C526007A7D0 /* Pods-SureBack.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SureBack/Pods-SureBack-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SureBack/Pods-SureBack.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		54B2647EFB46698AED55D384E8808AD5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F541F7D8E4918F9831E2424DC5296FD /* Pods-SureBack-SureBackUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SureBack-SureBackUITests/Pods-SureBack-SureBackUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SureBack-SureBackUITests/Pods-SureBack-SureBackUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8506AF1F398627EE2801F0C6CB4B5F19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B817D8CBD0EFF33B42CBA5C5ADD57503 /* Pods-SureBack.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SureBack/Pods-SureBack-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SureBack/Pods-SureBack.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		903A0004D3E6651EFD5D2E16214D101B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		B4EFE046ACF8F37157F6E322C7FCFC28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B4EFE046ACF8F37157F6E322C7FCFC28 /* Debug */,
+				903A0004D3E6651EFD5D2E16214D101B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50DDD21681AB805845246A7AD64B795A /* Build configuration list for PBXNativeTarget "Pods-SureBack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				409E507AFD7F6620E0FD6D6781BB80D7 /* Debug */,
+				8506AF1F398627EE2801F0C6CB4B5F19 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1B5A9BFAFD8DE180DE616D20A407E1B /* Build configuration list for PBXNativeTarget "Pods-SureBackTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E5BD3991B7F9640D8860E1EA3F6BBB7 /* Debug */,
+				3534E6333B4BDB4EAA58F0A4227CC33D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B582D40655CF097AE2CB859E8BB4E552 /* Build configuration list for PBXNativeTarget "Pods-SureBack-SureBackUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1151D0ED805CE2611C30D2C48534A184 /* Debug */,
+				54B2647EFB46698AED55D384E8808AD5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

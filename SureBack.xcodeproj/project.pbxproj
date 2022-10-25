@@ -22,6 +22,8 @@
 		2DDDD70EABE69B42303C1AED /* Pods_SureBackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */; };
 		8A2D3CC34125394E06212A07 /* Pods_SureBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6F53CE101281D823C272BB /* Pods_SureBack.framework */; };
 		9CCB778BAEA00AE5C43FB920 /* Pods_SureBack_SureBackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */; };
+		AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3FEDCB2908346C0011202E /* RequestFunction.swift */; };
+		AC3FEDCE290834EA0011202E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3FEDCD290834EA0011202E /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		80439164880B2D80FB83B23C /* Pods-SureBack-SureBackUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBack-SureBackUITests.release.xcconfig"; path = "Target Support Files/Pods-SureBack-SureBackUITests/Pods-SureBack-SureBackUITests.release.xcconfig"; sourceTree = "<group>"; };
 		956FF58F6BF05A02F4470599 /* Pods-SureBackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBackTests.release.xcconfig"; path = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.release.xcconfig"; sourceTree = "<group>"; };
 		A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBackTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC3FEDCB2908346C0011202E /* RequestFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFunction.swift; sourceTree = "<group>"; };
+		AC3FEDCD290834EA0011202E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		BB6F53CE101281D823C272BB /* Pods_SureBack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -157,6 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				11B2DD2C2907CF500065E98D /* Utils */,
+				AC3FEDCB2908346C0011202E /* RequestFunction.swift */,
+				AC3FEDCD290834EA0011202E /* Model.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -462,6 +468,8 @@
 			files = (
 				119B765A2906976E00530C80 /* ViewController.swift in Sources */,
 				119B76562906976E00530C80 /* AppDelegate.swift in Sources */,
+				AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */,
+				AC3FEDCE290834EA0011202E /* Model.swift in Sources */,
 				11B2DD2F2907CF760065E98D /* APICall.swift in Sources */,
 				119B76582906976E00530C80 /* SceneDelegate.swift in Sources */,
 			);

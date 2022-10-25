@@ -17,11 +17,14 @@ protocol Endpoint {
 
 enum Endpoints: Endpoint {
     case login
-
+    case getAccount
+    
     public var url: String {
         switch self {
         case .login:
             return "\(API.baseUrl)/api/auth/login"
+        case .getAccount:
+            return "\(API.baseUrl)/api/auth/me"
         }
     }
 }

@@ -4,10 +4,28 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>SureBack.xcscheme_^#shared#^_</key>
+		<key>SureBack.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>119B76512906976E00530C80</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>119B76672906976F00530C80</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>119B76712906976F00530C80</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

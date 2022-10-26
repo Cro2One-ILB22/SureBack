@@ -18,6 +18,7 @@ protocol Endpoint {
 enum Endpoints: Endpoint {
     case login
     case getAccount
+    case getProfileIG
     
     public var url: String {
         switch self {
@@ -25,6 +26,8 @@ enum Endpoints: Endpoint {
             return "\(API.baseUrl)/api/auth/login"
         case .getAccount:
             return "\(API.baseUrl)/api/auth/me"
+        case .getProfileIG:
+            return "\(API.baseUrl)/api/ig/profile?username="
         }
     }
 }

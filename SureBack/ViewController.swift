@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        print(Endpoints.login.url)
+        print("\(Endpoints.getProfileIG.url)dithanrchy")
         
         let bodyLogin: [String: String] = [
             "email": "duta@sampolain.com",
@@ -22,6 +22,5 @@ class ViewController: UIViewController {
         ]
         
         request.postLogin(url: Endpoints.login.url, bodyLogin: bodyLogin)
-        
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let request = RequestFunction()
+    let request = NetworkService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,13 +18,8 @@ class ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         print("\(Endpoints.getProfileIG.url)dithanrchy")
-        
-        let bodyLogin: [String: String] = [
-            "email": "duta@sampolain.com",
-            "password": "hahahahah"
-        ]
-        
-        request.postLogin(url: Endpoints.login.url, bodyLogin: bodyLogin)
+
+        request.postLogin(email: "duta@sampolain.com", password: "hahahahah")
 
         let buttonGenerate = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
         buttonGenerate.backgroundColor = .blue
@@ -41,6 +36,15 @@ class ViewController: UIViewController {
         buttonScan.addTarget(self, action: #selector(scanQrButtonAction), for: .touchUpInside)
 
         self.view.addSubview(buttonScan)
+//        do {
+//            let token = "tokenjwt"
+//            try KeychainHelper.standard.save(key: .accessToken, value: token)
+//            let check = try KeychainHelper.standard.read(key: .accessToken)
+//            print("Read token :", check)
+//        } catch {
+//            print(error)
+//        }
+       
     }
 
     @objc func generateQrButtonAction(sender: UIButton!) {

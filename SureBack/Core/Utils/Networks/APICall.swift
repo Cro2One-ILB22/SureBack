@@ -17,13 +17,18 @@ protocol Endpoint {
 
 enum Endpoints: Endpoint {
     case login
+    case preRegister
+    case register
     case getAccount
     case getProfileIG
-    
     public var url: String {
         switch self {
         case .login:
             return "\(API.baseUrl)/api/auth/login"
+        case .preRegister:
+            return "\(API.baseUrl)/api/auth/instagram-otp"
+        case .register:
+            return "\(API.baseUrl)/api/auth/verify-instagram-otp"
         case .getAccount:
             return "\(API.baseUrl)/api/auth/me"
         case .getProfileIG:

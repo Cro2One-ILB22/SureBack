@@ -9,13 +9,11 @@ import Foundation
 import UIKit
 
 class Function {
-
     func generateQR(userID: Int) -> UIImage? {
         let myString = String(userID)
         let data = myString.data(using: String.Encoding.ascii)
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
         qrFilter.setValue(data, forKey: "inputMessage")
-        
         // Get the output image
         guard let qrImage = qrFilter.outputImage else { return nil }
         // Scale the image
@@ -29,4 +27,3 @@ class Function {
         return processedImage
     }
 }
-

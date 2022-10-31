@@ -17,14 +17,12 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
 
         // Do any additional setup after loading the view.
-        print("\(Endpoints.getProfileIG.url)dithanrchy")
-        
         let bodyLogin: [String: String] = [
-            "email": "duta@sampolain.com",
+            "email": "d@sampolain.com",
             "password": "hahahahah"
         ]
         
-        request.postLogin(url: Endpoints.login.url, bodyLogin: bodyLogin)
+        request.postLogin(url: Endpoints.login.url, body: bodyLogin)
 
         let buttonGenerate = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
         buttonGenerate.backgroundColor = .blue

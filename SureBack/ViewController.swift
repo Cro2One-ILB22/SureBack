@@ -8,9 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
     let request = RequestFunction()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,10 +17,10 @@ class ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         let bodyLogin: [String: String] = [
-            "email": "d@sampolain.com",
-            "password": "hahahahah"
+            "email": "dit@sampolain.com",
+            "password": "hahahahah",
         ]
-        
+
         request.postLogin(url: Endpoints.login.url, body: bodyLogin)
 
         let buttonGenerate = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
@@ -30,7 +29,7 @@ class ViewController: UIViewController {
         buttonGenerate.setTitle("Generate QR Code", for: .normal)
         buttonGenerate.addTarget(self, action: #selector(generateQrButtonAction), for: .touchUpInside)
 
-        self.view.addSubview(buttonGenerate)
+        view.addSubview(buttonGenerate)
 
         let buttonScan = UIButton(frame: CGRect(x: 100, y: 200, width: 200, height: 50))
         buttonScan.backgroundColor = .blue
@@ -38,21 +37,19 @@ class ViewController: UIViewController {
         buttonScan.setTitle("Scan QR Code", for: .normal)
         buttonScan.addTarget(self, action: #selector(scanQrButtonAction), for: .touchUpInside)
 
-        self.view.addSubview(buttonScan)
+        view.addSubview(buttonScan)
     }
 
     @objc func generateQrButtonAction(sender: UIButton!) {
-
         print("Button Generate tapped")
         let generateQrVC = GenerateQrViewController()
-        self.navigationController?.pushViewController(generateQrVC, animated: true)
+        navigationController?.pushViewController(generateQrVC, animated: true)
 //        self.present(generateQrVC, animated: true, completion: nil)
     }
 
     @objc func scanQrButtonAction(sender: UIButton!) {
-
         print("Button Scan QR tapped")
         let scanQrVC = ScanQrViewController()
-        self.navigationController?.pushViewController(scanQrVC, animated: true)
+        navigationController?.pushViewController(scanQrVC, animated: true)
     }
 }

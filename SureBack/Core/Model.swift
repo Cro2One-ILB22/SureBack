@@ -105,7 +105,7 @@ struct Story: Codable {
     let instagramID: String
     let imageURI, videoURI, status, note: JSONNull?
     let createdAt, updatedAt: String
-    let submittedAt: JSONNull?
+    let submittedAt: String?
 
     enum CodingKeys: String, CodingKey {
         case id

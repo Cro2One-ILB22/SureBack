@@ -34,20 +34,24 @@ class RequestFunction {
 //                }
 //
 //                let bodyGenerateTokenffline: [String: Int] = [
-//                    "customer_id": 2,
-//                    "purchase_amount": 100
+//                    "customer_id": 810194945419968513,
+//                    "purchase_amount": 100,
 //                ]
 //
 //                self.postGenerateTokenOffline(url: Endpoints.generateToken.url, accessToken: data.accessToken, body: bodyGenerateTokenffline) { result in
 //                    switch result {
-//                    case .success(let data):
+//                    case let .success(data):
 //                        print("story id: \(data.story.id)")
-//                    case .failure(let error):
+//                    case let .failure(error):
 //                        print(error.localizedDescription)
 //                    }
 //                }
 
-                self.getStoryIG(accessToken: data.accessToken, storyId: 810204763009581058) { result in
+//                self.getStoryIG(accessToken: data.accessToken, storyId: 810204763009581058) { result in
+//                    print(result)
+//                }
+
+                self.redeemToken(accessToken: data.accessToken, token: "09c7e080") { result in
                     print(result)
                 }
 
@@ -81,6 +85,22 @@ class RequestFunction {
     func postGenerateTokenOffline(url: String, accessToken: String, body: [String: Int], completion: @escaping (Result<GenerateTokenOffline, AFError>) -> Void) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(accessToken)",
+        ]
+
+        AF.request(url, method: .post, parameters: body, headers: headers).responseDecodable(of: GenerateTokenOffline.self) {
+            completion($0.result)
+        }
+    }
+
+    func redeemToken(accessToken: String, token: String, completion: @escaping (Result<GenerateTokenOffline, AFError>) -> Void) {
+        let url = Endpoints.redeemToken.url
+
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)",
+        ]
+
+        let body: [String: String] = [
+            "token": token,
         ]
 
         AF.request(url, method: .post, parameters: body, headers: headers).responseDecodable(of: GenerateTokenOffline.self) {

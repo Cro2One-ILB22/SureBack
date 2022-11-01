@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let request = NetworkService()
+    let request = RequestFunction()
     
     override func viewDidLoad() {
         super.viewDidLoad()

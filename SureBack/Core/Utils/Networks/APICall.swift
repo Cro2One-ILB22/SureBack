@@ -21,6 +21,8 @@ enum Endpoints: Endpoint {
     case register
     case getAccount
     case getProfileIG
+    case generateToken
+
     public var url: String {
         switch self {
         case .login:
@@ -33,6 +35,8 @@ enum Endpoints: Endpoint {
             return "\(API.baseUrl)/api/auth/me"
         case .getProfileIG:
             return "\(API.baseUrl)/api/ig/profile?username="
+        case .generateToken:
+            return "\(API.baseUrl)/api/ig/token/generate"
         }
     }
 }

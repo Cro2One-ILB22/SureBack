@@ -16,12 +16,8 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
 
         // Do any additional setup after loading the view.
-        let bodyLogin: [String: String] = [
-            "email": "dit@sampolain.com",
-            "password": "hahahahah",
-        ]
 
-        request.postLogin(url: Endpoints.login.url, body: bodyLogin)
+        request.postLogin(email: "dit@sampolain.com", password: "hahahahah")
 
         let buttonGenerate = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
         buttonGenerate.backgroundColor = .blue

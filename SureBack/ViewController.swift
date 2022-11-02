@@ -8,9 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
     let request = RequestFunction()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,13 +22,17 @@ class ViewController: UIViewController {
 //
 //        request.postLogin(email: "duta@sampolain.com", password: "hahahahah")
 
+        // Do any additional setup after loading the view.
+
+        request.postLogin(email: "dit@sampolain.com", password: "hahahahah")
+
         let buttonGenerate = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
         buttonGenerate.backgroundColor = .blue
         buttonGenerate.layer.cornerRadius = 15
         buttonGenerate.setTitle("Generate QR Code", for: .normal)
         buttonGenerate.addTarget(self, action: #selector(generateQrButtonAction), for: .touchUpInside)
 
-        self.view.addSubview(buttonGenerate)
+        view.addSubview(buttonGenerate)
 
         let buttonScan = UIButton(frame: CGRect(x: 100, y: 200, width: 200, height: 50))
         buttonScan.backgroundColor = .blue
@@ -50,17 +53,15 @@ class ViewController: UIViewController {
     }
 
     @objc func generateQrButtonAction(sender: UIButton!) {
-
         print("Button Generate tapped")
         let generateQrVC = GenerateQrViewController()
-        self.navigationController?.pushViewController(generateQrVC, animated: true)
+        navigationController?.pushViewController(generateQrVC, animated: true)
 //        self.present(generateQrVC, animated: true, completion: nil)
     }
 
     @objc func scanQrButtonAction(sender: UIButton!) {
-
         print("Button Scan QR tapped")
         let scanQrVC = ScanQrViewController()
-        self.navigationController?.pushViewController(scanQrVC, animated: true)
+        navigationController?.pushViewController(scanQrVC, animated: true)
     }
 }

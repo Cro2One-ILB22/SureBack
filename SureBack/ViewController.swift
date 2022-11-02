@@ -24,7 +24,7 @@ class ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
 
-        request.postLogin(email: "dit@sampolain.com", password: "hahahahah")
+//        request.postLogin(email: "dit@sampolain.com", password: "hahahahah")
 
         let buttonGenerate = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
         buttonGenerate.backgroundColor = .blue
@@ -50,7 +50,11 @@ class ViewController: UIViewController {
 //            print(error)
 //        }
 
-        request.submitStory(storyId: 810204763009581058, instagtamStoryId: 2961825513959555038, accessToken: "810382258313920513|6ovjGXmWDADwY6uRGirS8bnRMeRZLKTKxXFPGRDr")
+//        request.submitStory(storyId: 810204763009581058, instagtamStoryId: 2961825513959555038, accessToken: "810382258313920513|6ovjGXmWDADwY6uRGirS8bnRMeRZLKTKxXFPGRDr")
+
+        request.getListCustomer(accessToken: "810399654622461954|SW7nElNE7ZaOPoRQGYOk08CYi1Fr05hzYHdQxv9y") { result in
+            print(result)
+        }
     }
 
     @objc func generateQrButtonAction(sender: UIButton!) {

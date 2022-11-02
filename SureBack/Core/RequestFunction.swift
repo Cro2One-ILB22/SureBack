@@ -231,3 +231,17 @@ extension RequestFunction {
         }
     }
 }
+
+extension RequestFunction {
+    func getListCustomer(accessToken: String, completion: @escaping (Result<ListCustomerResponse, AFError>) -> Void){
+        let url = Endpoints.getListCustomer.url
+
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)",
+        ]
+
+        AF.request(url, headers: headers).responseDecodable(of: ListCustomerResponse.self){
+            completion($0.result)
+        }
+    }
+}

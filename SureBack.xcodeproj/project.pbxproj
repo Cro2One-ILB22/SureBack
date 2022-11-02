@@ -34,6 +34,7 @@
 		ACE5CDA82912716B00D08177 /* GenerateTokenOfflineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA72912716B00D08177 /* GenerateTokenOfflineResponse.swift */; };
 		ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */; };
 		ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */; };
+		ACE5CDB029127E6200D08177 /* ListCustomerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		ACE5CDA72912716B00D08177 /* GenerateTokenOfflineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateTokenOfflineResponse.swift; sourceTree = "<group>"; };
 		ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIGResponse.swift; sourceTree = "<group>"; };
 		ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionStoryIGResponse.swift; sourceTree = "<group>"; };
+		ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCustomerResponse.swift; sourceTree = "<group>"; };
 		BB6F53CE101281D823C272BB /* Pods_SureBack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -217,6 +219,7 @@
 				ACE5CDA72912716B00D08177 /* GenerateTokenOfflineResponse.swift */,
 				ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */,
 				ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */,
+				ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				AC04BD7E2909914600635147 /* GenerateQrViewController.swift in Sources */,
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
 				ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */,
+				ACE5CDB029127E6200D08177 /* ListCustomerResponse.swift in Sources */,
 				119B765A2906976E00530C80 /* ViewController.swift in Sources */,
 				ACE5CDA82912716B00D08177 /* GenerateTokenOfflineResponse.swift in Sources */,
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,

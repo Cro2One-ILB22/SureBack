@@ -11,7 +11,7 @@ struct API {
     static let baseUrl: String = ProcessInfo.processInfo.environment["BASE_URL"] ?? "http://localhost:8000"
 }
 
-protocol Endpoint { 
+protocol Endpoint {
     var url: String { get }
 }
 
@@ -44,7 +44,7 @@ enum Endpoints: Endpoint {
         case .submitStory:
             return "\(API.baseUrl)/api/ig/story"
         case .getStoryIG:
-            return "\(API.baseUrl)/api/ig/story?story_id="
+            return "\(API.baseUrl)/api/ig/story"
         case .redeemToken:
             return "\(API.baseUrl)/api/ig/token/redeem"
         case .getUser:

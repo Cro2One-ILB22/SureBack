@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        
+
 //        request.register(name: "tes", email: "aku@gmail.com", password: "tes12345", role: "customer", username: "tbadhit")
 //        request.register(name: "anaksoleh", email: "anaksoleh@gmail.com", password: "12345678", role: "customer", username: "tbadhit")
 //        // Do any additional setup after loading the view.
@@ -24,7 +24,7 @@ class ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
 
-//        request.postLogin(email: "dit@sampolain.com", password: "hahahahah")
+        request.postLogin(email: "dit@sampolain.com", password: "hahahahah")
 
         let buttonGenerate = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
         buttonGenerate.backgroundColor = .blue

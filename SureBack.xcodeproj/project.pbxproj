@@ -29,7 +29,12 @@
 		AC04BD7E2909914600635147 /* GenerateQrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04BD7D2909914600635147 /* GenerateQrViewController.swift */; };
 		AC04BD80290995AD00635147 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04BD7F290995AD00635147 /* Function.swift */; };
 		AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3FEDCB2908346C0011202E /* RequestFunction.swift */; };
-		AC3FEDCE290834EA0011202E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3FEDCD290834EA0011202E /* Model.swift */; };
+		AC3FEDCE290834EA0011202E /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3FEDCD290834EA0011202E /* JSONNull.swift */; };
+		ACE5CDA42912704800D08177 /* AccountInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA32912704800D08177 /* AccountInfoResponse.swift */; };
+		ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */; };
+		ACE5CDA82912716B00D08177 /* GenerateTokenOfflineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA72912716B00D08177 /* GenerateTokenOfflineResponse.swift */; };
+		ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */; };
+		ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,7 +86,12 @@
 		AC04BD7D2909914600635147 /* GenerateQrViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateQrViewController.swift; sourceTree = "<group>"; };
 		AC04BD7F290995AD00635147 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		AC3FEDCB2908346C0011202E /* RequestFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFunction.swift; sourceTree = "<group>"; };
-		AC3FEDCD290834EA0011202E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		AC3FEDCD290834EA0011202E /* JSONNull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNull.swift; sourceTree = "<group>"; };
+		ACE5CDA32912704800D08177 /* AccountInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoResponse.swift; sourceTree = "<group>"; };
+		ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateTokenOnlineResponse.swift; sourceTree = "<group>"; };
+		ACE5CDA72912716B00D08177 /* GenerateTokenOfflineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateTokenOfflineResponse.swift; sourceTree = "<group>"; };
+		ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIGResponse.swift; sourceTree = "<group>"; };
+		ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionStoryIGResponse.swift; sourceTree = "<group>"; };
 		BB6F53CE101281D823C272BB /* Pods_SureBack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -173,7 +183,6 @@
 		11B2DD2B2907CF490065E98D /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				AC3FEDCD290834EA0011202E /* Model.swift */,
 				AC3FEDCB2908346C0011202E /* RequestFunction.swift */,
 				11B2DD2C2907CF500065E98D /* Utils */,
 			);
@@ -186,6 +195,7 @@
 				16930E39290FB2D0003DFEBE /* Models */,
 				11B2DD2D2907CF6C0065E98D /* Networks */,
 				1694878729104CE70088821C /* KeychainHelper.swift */,
+				AC3FEDCD290834EA0011202E /* JSONNull.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -205,6 +215,11 @@
 				16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */,
 				16930E3E290FBB27003DFEBE /* LoginResponse.swift */,
 				169487892912728B0088821C /* UserResponse.swift */,
+				ACE5CDA32912704800D08177 /* AccountInfoResponse.swift */,
+				ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */,
+				ACE5CDA72912716B00D08177 /* GenerateTokenOfflineResponse.swift */,
+				ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */,
+				ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -494,14 +509,19 @@
 				16930E3B290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift in Sources */,
 				1694878A2912728B0088821C /* UserResponse.swift in Sources */,
 				AC04BD7E2909914600635147 /* GenerateQrViewController.swift in Sources */,
+				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
+				ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */,
 				119B765A2906976E00530C80 /* ViewController.swift in Sources */,
+				ACE5CDA82912716B00D08177 /* GenerateTokenOfflineResponse.swift in Sources */,
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,
 				119B76562906976E00530C80 /* AppDelegate.swift in Sources */,
+				ACE5CDA42912704800D08177 /* AccountInfoResponse.swift in Sources */,
 				AC00FA35290A5D3600B6347D /* ScanQrViewController.swift in Sources */,
 				AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */,
 				1694878829104CE70088821C /* KeychainHelper.swift in Sources */,
+				ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */,
 				16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */,
-				AC3FEDCE290834EA0011202E /* Model.swift in Sources */,
+				AC3FEDCE290834EA0011202E /* JSONNull.swift in Sources */,
 				16930E3F290FBB27003DFEBE /* LoginResponse.swift in Sources */,
 				11B2DD2F2907CF760065E98D /* APICall.swift in Sources */,
 			);

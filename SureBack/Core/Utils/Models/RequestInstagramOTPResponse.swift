@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PreRegisterResponse: Codable {
+struct RequestInstagramOTPResponse: Codable {
     let otp, expiresIn: Int
 
     enum CodingKeys: String, CodingKey {

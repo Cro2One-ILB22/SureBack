@@ -17,8 +17,8 @@
 		119B76792906976F00530C80 /* SureBackUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119B76782906976F00530C80 /* SureBackUITestsLaunchTests.swift */; };
 		119B76862906979B00530C80 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 119B76852906979B00530C80 /* .gitignore */; };
 		11B2DD2F2907CF760065E98D /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2DD2E2907CF760065E98D /* APICall.swift */; };
-		16930E3B290FB2E1003DFEBE /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3A290FB2E1003DFEBE /* RegisterResponse.swift */; };
-		16930E3D290FB8C7003DFEBE /* PreRegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3C290FB8C7003DFEBE /* PreRegisterResponse.swift */; };
+		16930E3B290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3A290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift */; };
+		16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */; };
 		16930E3F290FBB27003DFEBE /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3E290FBB27003DFEBE /* LoginResponse.swift */; };
 		1694878829104CE70088821C /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694878729104CE70088821C /* KeychainHelper.swift */; };
 		2DDDD70EABE69B42303C1AED /* Pods_SureBackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */; };
@@ -63,8 +63,8 @@
 		119B76782906976F00530C80 /* SureBackUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SureBackUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		119B76852906979B00530C80 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		11B2DD2E2907CF760065E98D /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
-		16930E3A290FB2E1003DFEBE /* RegisterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterResponse.swift; sourceTree = "<group>"; };
-		16930E3C290FB8C7003DFEBE /* PreRegisterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreRegisterResponse.swift; sourceTree = "<group>"; };
+		16930E3A290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyInstagramOTPResponse.swift; sourceTree = "<group>"; };
+		16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInstagramOTPResponse.swift; sourceTree = "<group>"; };
 		16930E3E290FBB27003DFEBE /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		1694878729104CE70088821C /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack_SureBackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +171,7 @@
 		11B2DD2B2907CF490065E98D /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				AC3FEDCD290834EA0011202E /* Model.swift */,
 				AC3FEDCB2908346C0011202E /* RequestFunction.swift */,
 				11B2DD2C2907CF500065E98D /* Utils */,
 			);
@@ -198,9 +199,8 @@
 		16930E39290FB2D0003DFEBE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AC3FEDCD290834EA0011202E /* Model.swift */,
-				16930E3A290FB2E1003DFEBE /* RegisterResponse.swift */,
-				16930E3C290FB8C7003DFEBE /* PreRegisterResponse.swift */,
+				16930E3A290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift */,
+				16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */,
 				16930E3E290FBB27003DFEBE /* LoginResponse.swift */,
 			);
 			path = Models;
@@ -488,7 +488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16930E3B290FB2E1003DFEBE /* RegisterResponse.swift in Sources */,
+				16930E3B290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift in Sources */,
 				AC04BD7E2909914600635147 /* GenerateQrViewController.swift in Sources */,
 				119B765A2906976E00530C80 /* ViewController.swift in Sources */,
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,
@@ -496,7 +496,7 @@
 				AC00FA35290A5D3600B6347D /* ScanQrViewController.swift in Sources */,
 				AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */,
 				1694878829104CE70088821C /* KeychainHelper.swift in Sources */,
-				16930E3D290FB8C7003DFEBE /* PreRegisterResponse.swift in Sources */,
+				16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */,
 				AC3FEDCE290834EA0011202E /* Model.swift in Sources */,
 				16930E3F290FBB27003DFEBE /* LoginResponse.swift in Sources */,
 				11B2DD2F2907CF760065E98D /* APICall.swift in Sources */,

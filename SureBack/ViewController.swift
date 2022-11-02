@@ -15,11 +15,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-
-        // Do any additional setup after loading the view.
-        print("\(Endpoints.getProfileIG.url)dithanrchy")
-
-        request.postLogin(email: "duta@sampolain.com", password: "hahahahah")
+        
+        request.register(name: "tes", email: "aku@gmail.com", password: "tes12345", role: "customer", username: "tbadhit")
+//        request.register(name: "anaksoleh", email: "anaksoleh@gmail.com", password: "12345678", role: "customer", username: "tbadhit")
+//        // Do any additional setup after loading the view.
+//        print("\(Endpoints.getProfileIG.url)dithanrchy")
+//
+//        request.postLogin(email: "duta@sampolain.com", password: "hahahahah")
 
         let buttonGenerate = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
         buttonGenerate.backgroundColor = .blue

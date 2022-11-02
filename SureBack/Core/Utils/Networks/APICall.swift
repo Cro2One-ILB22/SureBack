@@ -37,7 +37,7 @@ enum Endpoints: Endpoint {
         case .getAccount:
             return "\(API.baseUrl)/api/auth/me"
         case .getProfileIG:
-            return "\(API.baseUrl)/api/ig/profile?username="
+            return "\(API.baseUrl)/api/ig/profile"
         case .generateToken:
             return "\(API.baseUrl)/api/ig/token/generate"
         case .submitStory:
@@ -47,6 +47,5 @@ enum Endpoints: Endpoint {
         case .redeemToken:
             return "\(API.baseUrl)/api/ig/token/redeem"
         }
-        
     }
 }

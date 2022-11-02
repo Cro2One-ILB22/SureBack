@@ -256,4 +256,16 @@ extension RequestFunction {
             completion($0.result)
         }
     }
+
+    func getListTransaction(accessToken: String, completion: @escaping (Result<ListTransactionResponse, AFError>) -> Void) {
+        let url = Endpoints.getListTransaction.url
+
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)",
+        ]
+
+        AF.request(url, headers: headers).responseDecodable(of: ListTransactionResponse.self) {
+            completion($0.result)
+        }
+    }
 }

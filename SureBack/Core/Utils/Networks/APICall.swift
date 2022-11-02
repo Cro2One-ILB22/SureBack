@@ -27,6 +27,7 @@ enum Endpoints: Endpoint {
     case redeemToken
     case getListCustomer
     case getListPartner
+    case getListTransaction
 
     public var url: String {
         switch self {
@@ -52,6 +53,8 @@ enum Endpoints: Endpoint {
             return "\(API.baseUrl)/api/customer"
         case .getListPartner:
             return "\(API.baseUrl)/api/partner"
+        case .getListTransaction:
+            return "\(API.baseUrl)/api/transaction"
         }
     }
 }

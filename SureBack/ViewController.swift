@@ -41,17 +41,17 @@ class ViewController: UIViewController {
         buttonScan.addTarget(self, action: #selector(scanQrButtonAction), for: .touchUpInside)
 
         self.view.addSubview(buttonScan)
-//        do {
-//            let token = "tokenjwt"
-//            try KeychainHelper.standard.save(key: .accessToken, value: token)
-//            let check = try KeychainHelper.standard.read(key: .accessToken)
-//            print("Read token :", check)
-//        } catch {
-//            print(error)
-//        }
-        
-        request.submitStory(storyId: 810204763009581058, instagtamStoryId: 2961825513959555038, accessToken: "810382258313920513|6ovjGXmWDADwY6uRGirS8bnRMeRZLKTKxXFPGRDr")
-       
+        do {
+            let token = "tokenjwtaku"
+            KeychainHelper.standard.delete(key: .accessToken)
+            try KeychainHelper.standard.save(key: .accessToken, value: token)
+            let check = try KeychainHelper.standard.read(key: .accessToken)
+            print("Read token :", check)
+        } catch {
+            print(error)
+        }
+//        request.submitStory(storyId: 810204763009581058, instagtamStoryId: 2961825513959555038, accessToken: "810382258313920513|6ovjGXmWDADwY6uRGirS8bnRMeRZLKTKxXFPGRDr")
+//        request.getUser(accessToken: "810382258313920513|6ovjGXmWDADwY6uRGirS8bnRMeRZLKTKxXFPGRDr")
     }
 
     @objc func generateQrButtonAction(sender: UIButton!) {

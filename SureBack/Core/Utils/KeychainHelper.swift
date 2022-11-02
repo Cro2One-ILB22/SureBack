@@ -51,4 +51,11 @@ class KeychainHelper {
         guard let itemData = item as? Data else {throw KeychainError.readFailed }
         return String(decoding: itemData, as: UTF8.self)
     }
+    func delete(key: Key) {
+        let query = [
+            kSecClass as String: kSecClassKey,
+            kSecAttrApplicationTag as String: key.tag
+        ] as CFDictionary
+        SecItemDelete(query)
+    }
 }

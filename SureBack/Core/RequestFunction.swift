@@ -90,6 +90,23 @@ class RequestFunction {
                 }
             }
     }
+    func getUser(accessToken: String) {
+        let url = Endpoints.getUser.url
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)",
+            "Accept": "application/json"
+        ]
+        AF.request(url, headers: headers)
+            .validate()
+            .responseDecodable(of: UserResponse.self) { response in
+                switch response.result {
+                case .success(let data):
+                    print("Data", data)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+    }
 }
 
 // MARK: Instagram

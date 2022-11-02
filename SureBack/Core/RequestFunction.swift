@@ -233,14 +233,26 @@ extension RequestFunction {
 }
 
 extension RequestFunction {
-    func getListCustomer(accessToken: String, completion: @escaping (Result<ListCustomerResponse, AFError>) -> Void){
+    func getListCustomer(accessToken: String, completion: @escaping (Result<ListCustomerResponse, AFError>) -> Void) {
         let url = Endpoints.getListCustomer.url
 
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(accessToken)",
         ]
 
-        AF.request(url, headers: headers).responseDecodable(of: ListCustomerResponse.self){
+        AF.request(url, headers: headers).responseDecodable(of: ListCustomerResponse.self) {
+            completion($0.result)
+        }
+    }
+
+    func getListPartner(accessToken: String, completion: @escaping (Result<ListPartnerResponse, AFError>) -> Void) {
+        let url = Endpoints.getListPartner.url
+
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)",
+        ]
+
+        AF.request(url, headers: headers).responseDecodable(of: ListPartnerResponse.self) {
             completion($0.result)
         }
     }

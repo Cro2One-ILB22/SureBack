@@ -55,6 +55,10 @@ class ViewController: UIViewController {
         request.getListCustomer(accessToken: "810399654622461954|SW7nElNE7ZaOPoRQGYOk08CYi1Fr05hzYHdQxv9y") { result in
             print(result)
         }
+
+        request.getListPartner(accessToken: "810399654622461954|SW7nElNE7ZaOPoRQGYOk08CYi1Fr05hzYHdQxv9y") { result in
+            print(result)
+        }
     }
 
     @objc func generateQrButtonAction(sender: UIButton!) {

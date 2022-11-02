@@ -35,6 +35,7 @@
 		ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */; };
 		ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */; };
 		ACE5CDB029127E6200D08177 /* ListCustomerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */; };
+		ACE5CDB22912835400D08177 /* ListPartnerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDB12912835400D08177 /* ListPartnerResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIGResponse.swift; sourceTree = "<group>"; };
 		ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionStoryIGResponse.swift; sourceTree = "<group>"; };
 		ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCustomerResponse.swift; sourceTree = "<group>"; };
+		ACE5CDB12912835400D08177 /* ListPartnerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPartnerResponse.swift; sourceTree = "<group>"; };
 		BB6F53CE101281D823C272BB /* Pods_SureBack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -220,6 +222,7 @@
 				ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */,
 				ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */,
 				ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */,
+				ACE5CDB12912835400D08177 /* ListPartnerResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16930E3B290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift in Sources */,
+				ACE5CDB22912835400D08177 /* ListPartnerResponse.swift in Sources */,
 				AC04BD7E2909914600635147 /* GenerateQrViewController.swift in Sources */,
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
 				ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */,

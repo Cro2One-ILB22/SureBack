@@ -33,7 +33,7 @@ class KeychainHelper {
         }
         print("Finished save token")
     }
-    func read(key: Key) throws -> String? {
+    func read(key: Key) throws -> String {
         print("Read token...")
         let getQuery: [String: Any] = [
             kSecClass as String: kSecClassKey,

@@ -1,18 +1,18 @@
 //
-//  UserResponse.swift
+//  UpdateUserResponse.swift
 //  SureBack
 //
-//  Created by Tubagus Adhitya Permana on 02/11/22.
+//  Created by Tubagus Adhitya Permana on 03/11/22.
 //
+import Foundation
 
-struct UserResponse: Codable {
+struct UpdateUserResponse: Codable {
     let id: Double
     let name: String
     let instagramID, balance, points: Int
     let email: String
     let emailVerifiedAt: String?
     let createdAt, updatedAt: String
-    let roles: [String]
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -21,6 +21,5 @@ struct UserResponse: Codable {
         case emailVerifiedAt = "email_verified_at"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case roles
     }
 }

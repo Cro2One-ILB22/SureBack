@@ -24,7 +24,17 @@ class ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
 
-        request.postLogin(email: "dit@sampolain.com", password: "hahahahah")
+//        request.postLogin(email: "dit@sampolain.com", password: "hahahahah") { data in
+//            do {
+//                KeychainHelper.standard.delete(key: .accessToken)
+//                try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
+//            } catch {
+//                print(error)
+//            }
+//        }
+        request.updateUser(name: "Ditha") { data in
+            print(data)
+        }
 
         let buttonGenerate = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
         buttonGenerate.backgroundColor = .blue
@@ -41,15 +51,15 @@ class ViewController: UIViewController {
         buttonScan.addTarget(self, action: #selector(scanQrButtonAction), for: .touchUpInside)
 
         self.view.addSubview(buttonScan)
-        do {
-            let token = "tokenjwtaku"
-            KeychainHelper.standard.delete(key: .accessToken)
-            try KeychainHelper.standard.save(key: .accessToken, value: token)
-            let check = try KeychainHelper.standard.read(key: .accessToken)
-            print("Read token :", check)
-        } catch {
-            print(error)
-        }
+//        do {
+//            let token = "tokenjwtaku"
+//            KeychainHelper.standard.delete(key: .accessToken)
+//            try KeychainHelper.standard.save(key: .accessToken, value: token)
+//            let check = try KeychainHelper.standard.read(key: .accessToken)
+//            print("Read token :", check)
+//        } catch {
+//            print(error)
+//        }
 //        request.submitStory(storyId: 810204763009581058, instagtamStoryId: 2961825513959555038, accessToken: "810382258313920513|6ovjGXmWDADwY6uRGirS8bnRMeRZLKTKxXFPGRDr")
 //        request.getUser(accessToken: "810382258313920513|6ovjGXmWDADwY6uRGirS8bnRMeRZLKTKxXFPGRDr")
     }

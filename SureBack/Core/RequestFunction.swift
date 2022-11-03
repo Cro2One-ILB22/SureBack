@@ -9,26 +9,26 @@ import Alamofire
 import Foundation
 
 // MARK: Auth
-
 class RequestFunction {
-    func postLogin(email: String, password: String) {
+    private let accessToken: String = try! KeychainHelper.standard.read(key: .accessToken)
+    func postLogin(email: String, password: String, completionHandler: @escaping (_ data: LoginResponse) -> Void) {
         let url = Endpoints.login.url
 
         let body: [String: String] = [
             "email": email,
-            "password": password,
+            "password": password
         ]
 
         AF.request(url, method: .post, parameters: body).responseDecodable(of: LoginResponse.self) { response in
             switch response.result {
             case let .success(data):
-                print(data.roles)
-                self.getAccount(accessToken: data.accessToken) { result in
-                    print(result)
-                }
-                self.getProfileIG(accessToken: data.accessToken, username: "dithanrchy") { result in
-                    print(result)
-                }
+                completionHandler(data)
+//                self.getAccount(accessToken: data.accessToken) { result in
+//                    print(result)
+//                }
+//                self.getProfileIG(accessToken: data.accessToken, username: "dithanrchy") { result in
+//                    print(result)
+//                }
 //                self.postGenerateTokenOnline(accessToken: data.accessToken, purchaseAmount: 1000) { result in
 //                    print(result)
 //                }
@@ -43,16 +43,15 @@ class RequestFunction {
 //                self.getStoryIG(accessToken: data.accessToken, storyId: 810204763009581058) { result in
 //                    print(result)
 //                }
-                self.redeemToken(accessToken: data.accessToken, token: "dda39f08") { result in
-                    print(result)
-                }
-                print(data.accessToken)
+//                self.redeemToken(accessToken: data.accessToken, token: "dda39f08") { result in
+//                    print(result)
+//                }
+//                print(data.accessToken)
             case .failure:
                 print("Failed to login")
             }
         }
     }
-
     func preRegister(name: String, email: String, password: String, role: String, username: String) {
         let url = Endpoints.preRegister.url
         let body: [String: String] = [
@@ -60,9 +59,8 @@ class RequestFunction {
             "email": email,
             "password": password,
             "role": role,
-            "username": password,
+            "username": password
         ]
-        print("URL", url)
         AF.request(url, method: .post, parameters: body)
             .validate()
             .responseDecodable(of: RequestInstagramOTPResponse.self) { response in
@@ -82,7 +80,7 @@ class RequestFunction {
             "email": email,
             "password": password,
             "role": role,
-            "username": username,
+            "username": username
         ]
         AF.request(url, method: .post, parameters: body)
             .validate()
@@ -95,55 +93,64 @@ class RequestFunction {
                 }
             }
     }
-    func getUser(accessToken: String) {
-        let url = Endpoints.getUser.url
+    func getAccount(completion: @escaping (Result<AccountInfoResponse, AFError>) -> Void) {
+        let url = Endpoints.getAccount.url
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(accessToken)",
             "Accept": "application/json"
         ]
         AF.request(url, headers: headers)
             .validate()
-            .responseDecodable(of: UserResponse.self) { response in
+            .responseDecodable(of: AccountInfoResponse.self) {
+                completion($0.result)
+            }
+    }
+}
+
+// MARK: User
+extension RequestFunction {
+    func updateUser(name: String, completionHandler: @escaping (_ data: UpdateUserResponse) -> Void) {
+        let url = Endpoints.updateUser.url
+        let body: [String: String] = [
+            "name": name
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)",
+            "Accept": "application/json"
+        ]
+        AF.request(url, method: .put, parameters: body, headers: headers)
+            .validate()
+            .responseDecodable(of: UpdateUserResponse.self) { response in
                 switch response.result {
                 case .success(let data):
-                    print("Data", data)
+                    completionHandler(data)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    print(error)
                 }
             }
     }
 }
 
 // MARK: Instagram
-
 extension RequestFunction {
-    func submitStory(storyId: Int, instagtamStoryId: Int, accessToken: String) {
+    func submitStory(storyId: Int, instagtamStoryId: Int) {
         let url = Endpoints.register.url
         let body: [String: Int] = [
             "story_id": storyId,
-            "instagram_story_id": instagtamStoryId,
+            "instagram_story_id": instagtamStoryId
         ]
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(accessToken)",
-            "Accept": "application/json",
+            "Accept": "application/json"
         ]
         AF.request(url, method: .post, parameters: body, headers: headers)
-            .response { result in
-                print("Data result: ", result)
-            }
-    }
-
-    func getAccount(accessToken: String, completion: @escaping (Result<AccountInfoResponse, AFError>) -> Void) {
-        let url = Endpoints.getAccount.url
-
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-            "Accept": "application/json",
-        ]
-        AF.request(url, headers: headers)
-            .validate()
-            .responseDecodable(of: AccountInfoResponse.self) {
-                completion($0.result)
+            .response { response in
+                switch response.result {
+                case.success(let data):
+                    print(data)
+                case.failure(let error):
+                    print(error)
+                }
             }
     }
 
@@ -202,11 +209,9 @@ extension RequestFunction {
         let parameters: [String: String] = [
             "username": username,
         ]
-
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(accessToken)",
         ]
-
         AF.request(url, parameters: parameters, headers: headers).responseDecodable(of: ProfileIGResponse.self) {
             completion($0.result)
         }
@@ -216,12 +221,10 @@ extension RequestFunction {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(accessToken)",
         ]
-
         AF.request(url, method: .post, parameters: body, headers: headers).responseDecodable(of: GenerateTokenOnlineResponse.self) {
             completion($0.result)
         }
     }
-
     func postGenerateTokenOffline(url: String, accessToken: String, body: [String: Int], completion: @escaping (Result<GenerateTokenOfflineResponse, AFError>) -> Void) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(accessToken)",

@@ -11,7 +11,7 @@ import Foundation
 // MARK: Auth
 
 class RequestFunction {
-    private let accessToken: String = try! KeychainHelper.standard.read(key: .accessToken)
+    private let accessToken: String? = try? KeychainHelper.standard.read(key: .accessToken)
 
     func postLogin(email: String, password: String, completionHandler: @escaping (_ data: LoginResponse) -> Void) {
         let url = Endpoints.login.url
@@ -219,25 +219,6 @@ extension RequestFunction {
             "Authorization": "Bearer \(accessToken)",
         ]
         AF.request(url, parameters: parameters, headers: headers).responseDecodable(of: ProfileIGResponse.self) {
-            completion($0.result)
-        }
-    }
-
-    func postGenerateTokenOnline(url: String, body: [String: Int], completion: @escaping (Result<GenerateTokenOnlineResponse, AFError>) -> Void) {
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-        ]
-        AF.request(url, method: .post, parameters: body, headers: headers).responseDecodable(of: GenerateTokenOnlineResponse.self) {
-            completion($0.result)
-        }
-    }
-
-    func postGenerateTokenOffline(url: String, body: [String: Int], completion: @escaping (Result<GenerateTokenOfflineResponse, AFError>) -> Void) {
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-        ]
-
-        AF.request(url, method: .post, parameters: body, headers: headers).responseDecodable(of: GenerateTokenOfflineResponse.self) {
             completion($0.result)
         }
     }

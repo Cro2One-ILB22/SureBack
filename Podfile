@@ -6,6 +6,9 @@ target 'SureBack' do
   use_frameworks!
   pod 'Alamofire'
   pod 'SwiftLint'
+  pod 'FirebaseCore'
+  pod 'FirebaseAnalytics'
+  pod 'FirebaseMessaging'
 
   # Pods for SureBack
 

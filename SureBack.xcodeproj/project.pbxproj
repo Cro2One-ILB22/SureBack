@@ -30,6 +30,7 @@
 		AC04BD80290995AD00635147 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04BD7F290995AD00635147 /* Function.swift */; };
 		AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3FEDCB2908346C0011202E /* RequestFunction.swift */; };
 		AC3FEDCE290834EA0011202E /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3FEDCD290834EA0011202E /* JSONNull.swift */; };
+		ACC1C0FA29141E94003E2FD8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */; };
 		ACDD097A29128F1E00309FBC /* ListTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD097929128F1E00309FBC /* ListTransactionResponse.swift */; };
 		ACE5CDA42912704800D08177 /* AccountInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA32912704800D08177 /* AccountInfoResponse.swift */; };
 		ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */; };
@@ -90,6 +91,8 @@
 		AC04BD7F290995AD00635147 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		AC3FEDCB2908346C0011202E /* RequestFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFunction.swift; sourceTree = "<group>"; };
 		AC3FEDCD290834EA0011202E /* JSONNull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNull.swift; sourceTree = "<group>"; };
+		ACC1C0F829141D71003E2FD8 /* SureBack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SureBack.entitlements; sourceTree = "<group>"; };
+		ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ACDD097929128F1E00309FBC /* ListTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransactionResponse.swift; sourceTree = "<group>"; };
 		ACE5CDA32912704800D08177 /* AccountInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoResponse.swift; sourceTree = "<group>"; };
 		ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateTokenOnlineResponse.swift; sourceTree = "<group>"; };
@@ -156,6 +159,8 @@
 		119B76542906976E00530C80 /* SureBack */ = {
 			isa = PBXGroup;
 			children = (
+				ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */,
+				ACC1C0F829141D71003E2FD8 /* SureBack.entitlements */,
 				11B2DD2B2907CF490065E98D /* Core */,
 				119B76552906976E00530C80 /* AppDelegate.swift */,
 				119B76592906976E00530C80 /* ViewController.swift */,
@@ -368,6 +373,7 @@
 			files = (
 				1101ABBE2906AE8200F15996 /* .swiftlint.yml in Resources */,
 				119B76862906979B00530C80 /* .gitignore in Resources */,
+				ACC1C0FA29141E94003E2FD8 /* GoogleService-Info.plist in Resources */,
 				119B76622906976F00530C80 /* LaunchScreen.storyboard in Resources */,
 				119B765F2906976F00530C80 /* Assets.xcassets in Resources */,
 			);
@@ -703,11 +709,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SureBack/SureBack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C8VS35NTZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "To be able to Scan QR Code, you must allow the use of the camera.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -734,11 +742,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SureBack/SureBack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C8VS35NTZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "To be able to Scan QR Code, you must allow the use of the camera.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

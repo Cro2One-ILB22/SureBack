@@ -60,6 +60,7 @@ class ViewController: UIViewController {
 //        } catch {
 //            print(error)
 //        }
+
 //        request.submitStory(storyId: 810204763009581058, instagtamStoryId: 2961825513959555038, accessToken: "810382258313920513|6ovjGXmWDADwY6uRGirS8bnRMeRZLKTKxXFPGRDr")
 //        request.getUser(accessToken: "810382258313920513|6ovjGXmWDADwY6uRGirS8bnRMeRZLKTKxXFPGRDr")
     }

@@ -32,9 +32,21 @@ class ViewController: UIViewController {
                 print(error)
             }
         }
-        request.updateUser(name: "Ditha") { data in
-            print(data)
+//        request.updateUser(name: "Ditha") { data in
+//            print(data)
+//        }
+        request.getProfileIG(username: "dithanrchy") { result in
+            print("Get profile IG from username: \(result)")
         }
+        request.getUserIG(id: "200439848") { result in
+            print("Get profile IG from id: \(result)")
+        }
+//        request.getAccount { result in
+//            print(result)
+//        }
+//        request.getListPartner { result in
+//            print(result)
+//        }
 
         let buttonGenerate = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
         buttonGenerate.backgroundColor = .blue

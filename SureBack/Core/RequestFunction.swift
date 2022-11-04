@@ -20,7 +20,6 @@ class RequestFunction {
             "email": email,
             "password": password,
         ]
-
         AF.request(url, method: .post, parameters: body).responseDecodable(of: LoginResponse.self) { response in
             switch response.result {
             case let .success(data):
@@ -100,9 +99,10 @@ class RequestFunction {
     func getAccount(completion: @escaping (Result<AccountInfoResponse, AFError>) -> Void) {
         let url = Endpoints.getAccount.url
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
+            "Authorization": "Bearer \(accessToken!)",
             "Accept": "application/json",
         ]
+
         AF.request(url, headers: headers)
             .validate()
             .responseDecodable(of: AccountInfoResponse.self) {
@@ -120,7 +120,7 @@ extension RequestFunction {
             "name": name,
         ]
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
+            "Authorization": "Bearer \(accessToken!)",
             "Accept": "application/json",
         ]
         AF.request(url, method: .put, parameters: body, headers: headers)
@@ -146,7 +146,7 @@ extension RequestFunction {
             "instagram_story_id": instagtamStoryId,
         ]
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
+            "Authorization": "Bearer \(accessToken!)",
             "Accept": "application/json",
         ]
         AF.request(url, method: .post, parameters: body, headers: headers)
@@ -164,7 +164,7 @@ extension RequestFunction {
         let url = Endpoints.generateToken.url
 
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
+            "Authorization": "Bearer \(accessToken!)",
         ]
 
         let body: [String: Int] = [
@@ -180,7 +180,7 @@ extension RequestFunction {
         let url = Endpoints.generateToken.url
 
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
+            "Authorization": "Bearer \(accessToken!)",
         ]
 
         let body: [String: Int] = [
@@ -197,7 +197,7 @@ extension RequestFunction {
         let url = Endpoints.redeemToken.url
 
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
+            "Authorization": "Bearer \(accessToken!)",
         ]
 
         let body: [String: String] = [
@@ -210,15 +210,24 @@ extension RequestFunction {
     }
 
     func getProfileIG(username: String, completion: @escaping (Result<ProfileIGResponse, AFError>) -> Void) {
-        let url = Endpoints.getProfileIG.url
+        let url = "\(Endpoints.getProfileIG.url)\(username)"
 
-        let parameters: [String: String] = [
-            "username": username,
-        ]
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
+            "Authorization": "Bearer \(accessToken!)",
         ]
-        AF.request(url, parameters: parameters, headers: headers).responseDecodable(of: ProfileIGResponse.self) {
+        AF.request(url, headers: headers).responseDecodable(of: ProfileIGResponse.self) {
+            completion($0.result)
+        }
+    }
+
+    func getUserIG(id: String, completion: @escaping (Result<ProfileIGResponse, AFError>) -> Void) {
+        let url = "\(Endpoints.getUserIG.url)\(id)"
+
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken!)",
+        ]
+
+        AF.request(url, headers: headers).responseDecodable(of: ProfileIGResponse.self) {
             completion($0.result)
         }
     }
@@ -231,7 +240,7 @@ extension RequestFunction {
         ]
 
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
+            "Authorization": "Bearer \(accessToken!)",
         ]
 
         AF.request(url, parameters: parameters, headers: headers).responseDecodable(of: MentionStoryIGResponse.self) { response in
@@ -245,7 +254,7 @@ extension RequestFunction {
         let url = Endpoints.getListCustomer.url
 
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
+            "Authorization": "Bearer \(accessToken!)",
         ]
 
         AF.request(url, headers: headers).responseDecodable(of: ListCustomerResponse.self) {
@@ -257,7 +266,7 @@ extension RequestFunction {
         let url = Endpoints.getListPartner.url
 
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
+            "Authorization": "Bearer \(accessToken!)",
         ]
 
         AF.request(url, headers: headers).responseDecodable(of: ListPartnerResponse.self) {
@@ -269,7 +278,7 @@ extension RequestFunction {
         let url = Endpoints.getListTransaction.url
 
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
+            "Authorization": "Bearer \(accessToken!)",
         ]
 
         AF.request(url, headers: headers).responseDecodable(of: ListTransactionResponse.self) {

@@ -17,7 +17,7 @@ struct AccountInfoResponse: Codable {
     let createdAt, updatedAt: String
     let instagramUsername: String?
     let roles: [String]
-    let partnerDetail: PartnerDetail?
+    let partnerDetail: PartnerDetailResponse?
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -29,19 +29,5 @@ struct AccountInfoResponse: Codable {
         case instagramUsername = "instagram_username"
         case roles
         case partnerDetail = "partner_detail"
-    }
-}
-
-// MARK: - PartnerDetail
-struct PartnerDetail: Codable {
-    let cashbackPercent: String
-    let cashbackLimit, dailyTokenLimit: JSONNull?
-    let todaysTokenCount: Int
-
-    enum CodingKeys: String, CodingKey {
-        case cashbackPercent = "cashback_percent"
-        case cashbackLimit = "cashback_limit"
-        case dailyTokenLimit = "daily_token_limit"
-        case todaysTokenCount = "todays_token_count"
     }
 }

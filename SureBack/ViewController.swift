@@ -24,22 +24,25 @@ class ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
 
-        request.postLogin(email: "dit@sampolain.com", password: "hahahahah") { data in
-            do {
-                KeychainHelper.standard.delete(key: .accessToken)
-                try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
-            } catch {
-                print(error)
-            }
-        }
+//        request.postLogin(email: "av@sampolain.com", password: "hahahahah") { data in
+//            do {
+//                KeychainHelper.standard.delete(key: .accessToken)
+//                try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
+//            } catch {
+//                print(error)
+//            }
+//        }
 //        request.updateUser(name: "Ditha") { data in
 //            print(data)
 //        }
-        request.getProfileIG(username: "dithanrchy") { result in
-            print("Get profile IG from username: \(result)")
-        }
-        request.getUserIG(id: "200439848") { result in
-            print("Get profile IG from id: \(result)")
+//        request.getProfileIG(username: "dithanrchy") { result in
+//            print("Get profile IG from username: \(result)")
+//        }
+//        request.getUserIG(id: "200439848") { result in
+//            print("Get profile IG from id: \(result)")
+//        }
+        request.updatePartnerDetail(cashbackPercent: 2, cashbackLimit: nil, dailyTokenLimit: nil) { result in
+            print("update: \(result)")
         }
 //        request.getAccount { result in
 //            print(result)

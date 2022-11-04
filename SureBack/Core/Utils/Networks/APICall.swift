@@ -27,6 +27,7 @@ enum Endpoints: Endpoint {
     case getStoryIG
     case redeemToken
     case updateUser
+    case updatePartnerDetail
     case getListCustomer
     case getListPartner
     case getListTransaction
@@ -55,6 +56,8 @@ enum Endpoints: Endpoint {
             return "\(API.baseUrl)/api/ig/token/redeem"
         case .updateUser:
             return "\(API.baseUrl)/api/user"
+        case .updatePartnerDetail:
+            return "\(API.baseUrl)/api/user/partner-detail"
         case .getListCustomer:
             return "\(API.baseUrl)/api/customer"
         case .getListPartner:

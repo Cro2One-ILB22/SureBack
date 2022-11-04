@@ -24,30 +24,30 @@ class RequestFunction {
             switch response.result {
             case let .success(data):
                 completionHandler(data)
-//                self.getAccount(accessToken: data.accessToken) { result in
-//                    print(result)
-//                }
-//                self.getProfileIG(accessToken: data.accessToken, username: "dithanrchy") { result in
-//                    print(result)
-//                }
-//                self.postGenerateTokenOnline(accessToken: data.accessToken, purchaseAmount: 1000) { result in
-//                    print(result)
-//                }
-//                self.postGenerateTokenOffline(accessToken: data.accessToken, customerId: 810194945419968513, purchaseAmount: 1000) { result in
-//                    switch result {
-//                    case let .success(data):
-//                        print("story id: \(data.story.id)")
-//                    case let .failure(error):
-//                        print(error.localizedDescription)
-//                    }
-//                }
-//                self.getStoryIG(accessToken: data.accessToken, storyId: 810204763009581058) { result in
-//                    print(result)
-//                }
-//                self.redeemToken(accessToken: data.accessToken, token: "dda39f08") { result in
-//                    print(result)
-//                }
-//                print(data.accessToken)
+            //                self.getAccount(accessToken: data.accessToken) { result in
+            //                    print(result)
+            //                }
+            //                self.getProfileIG(accessToken: data.accessToken, username: "dithanrchy") { result in
+            //                    print(result)
+            //                }
+            //                self.postGenerateTokenOnline(accessToken: data.accessToken, purchaseAmount: 1000) { result in
+            //                    print(result)
+            //                }
+            //                self.postGenerateTokenOffline(accessToken: data.accessToken, customerId: 810194945419968513, purchaseAmount: 1000) { result in
+            //                    switch result {
+            //                    case let .success(data):
+            //                        print("story id: \(data.story.id)")
+            //                    case let .failure(error):
+            //                        print(error.localizedDescription)
+            //                    }
+            //                }
+            //                self.getStoryIG(accessToken: data.accessToken, storyId: 810204763009581058) { result in
+            //                    print(result)
+            //                }
+            //                self.redeemToken(accessToken: data.accessToken, token: "dda39f08") { result in
+            //                    print(result)
+            //                }
+            //                print(data.accessToken)
             case .failure:
                 print("Failed to login")
             }
@@ -132,6 +132,25 @@ extension RequestFunction {
                 case let .failure(error):
                     print(error)
                 }
+            }
+    }
+
+    func updatePartnerDetail(cashbackPercent: Float, cashbackLimit: Int?, dailyTokenLimit: Int?, completion: @escaping (Result<PartnerDetailResponse, AFError>) -> Void) {
+        let url = Endpoints.updatePartnerDetail.url
+        
+        var body: [String: Any] = [:]
+        body["cashback_percent"] = cashbackPercent
+        body["cashback_limit"] = cashbackLimit ?? nil
+        body["daily_token_limit"] = dailyTokenLimit ?? nil
+
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken!)",
+            "Accept": "application/json",
+        ]
+        AF.request(url, method: .put, parameters: body, headers: headers)
+            .validate()
+            .responseDecodable(of: PartnerDetailResponse.self) {
+                completion($0.result)
             }
     }
 }

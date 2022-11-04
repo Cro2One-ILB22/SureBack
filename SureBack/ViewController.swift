@@ -41,8 +41,8 @@ class ViewController: UIViewController {
 //        request.getUserIG(id: "200439848") { result in
 //            print("Get profile IG from id: \(result)")
 //        }
-        request.updatePartnerDetail(cashbackPercent: 2, cashbackLimit: nil, dailyTokenLimit: nil) { result in
-            print("update: \(result)")
+        request.updatePartnerCashbackPercent(cashbackPercent: 1.5) { result in
+            print("percent: \(result)")
         }
 //        request.getAccount { result in
 //            print(result)

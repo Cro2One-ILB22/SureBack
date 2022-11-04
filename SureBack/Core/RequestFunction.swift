@@ -134,14 +134,65 @@ extension RequestFunction {
                 }
             }
     }
+}
 
-    func updatePartnerDetail(cashbackPercent: Float, cashbackLimit: Int?, dailyTokenLimit: Int?, completion: @escaping (Result<PartnerDetailResponse, AFError>) -> Void) {
+// MARK: Partner
+
+extension RequestFunction {
+    func updatePartnerCashbackPercent(cashbackPercent: Float, completion: @escaping (Result<PartnerDetailResponse, AFError>) -> Void) {
         let url = Endpoints.updatePartnerDetail.url
-        
-        var body: [String: Any] = [:]
+        var body: [String: Float] = [:]
         body["cashback_percent"] = cashbackPercent
-        body["cashback_limit"] = cashbackLimit ?? nil
-        body["daily_token_limit"] = dailyTokenLimit ?? nil
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken!)",
+            "Accept": "application/json",
+        ]
+        AF.request(url, method: .put, parameters: body, headers: headers)
+            .validate()
+            .responseDecodable(of: PartnerDetailResponse.self) {
+                completion($0.result)
+            }
+    }
+
+    func updatePartnerCashbackLimit(cashbackLimit: Int, completion: @escaping (Result<PartnerDetailResponse, AFError>) -> Void) {
+        let url = Endpoints.updatePartnerDetail.url
+        let body: [String: Int] = [
+            "cashback_limit": cashbackLimit,
+        ]
+
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken!)",
+            "Accept": "application/json",
+        ]
+        AF.request(url, method: .put, parameters: body, headers: headers)
+            .validate()
+            .responseDecodable(of: PartnerDetailResponse.self) {
+                completion($0.result)
+            }
+    }
+
+    func updatePartnerDailyTokenLimit(dailyTokenLimit: Int, completion: @escaping (Result<PartnerDetailResponse, AFError>) -> Void) {
+        let url = Endpoints.updatePartnerDetail.url
+        let body: [String: Int] = [
+            "daily_token_limit": dailyTokenLimit,
+        ]
+
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken!)",
+            "Accept": "application/json",
+        ]
+        AF.request(url, method: .put, parameters: body, headers: headers)
+            .validate()
+            .responseDecodable(of: PartnerDetailResponse.self) {
+                completion($0.result)
+            }
+    }
+
+    func updatePartnerIsActiveToken(isActiveToken: Bool, completion: @escaping (Result<PartnerDetailResponse, AFError>) -> Void) {
+        let url = Endpoints.updatePartnerDetail.url
+        let body: [String: Bool] = [
+            "is_active_generating_token": isActiveToken,
+        ]
 
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(accessToken!)",

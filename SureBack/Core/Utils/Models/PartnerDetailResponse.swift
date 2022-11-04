@@ -12,6 +12,7 @@ struct PartnerDetailResponse: Codable {
     let cashbackPercent: Float
     let cashbackLimit, dailyTokenLimit: Int?
     let updatedAt: String?
+    let isActiveGeneratingToken: Bool
     let todaysTokenCount: Int
 
     enum CodingKeys: String, CodingKey {
@@ -19,6 +20,7 @@ struct PartnerDetailResponse: Codable {
         case cashbackLimit = "cashback_limit"
         case dailyTokenLimit = "daily_token_limit"
         case updatedAt = "updated_at"
+        case isActiveGeneratingToken = "is_active_generating_token"
         case todaysTokenCount = "todays_token_count"
     }
 }

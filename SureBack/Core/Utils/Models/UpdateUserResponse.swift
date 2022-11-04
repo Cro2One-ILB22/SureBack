@@ -6,13 +6,14 @@
 //
 import Foundation
 
+// MARK: - UpdateUserResponse
 struct UpdateUserResponse: Codable {
     let id: Double
     let name: String
     let instagramID, balance, points: Int
     let email: String
     let emailVerifiedAt: String?
-    let createdAt, updatedAt: String
+    let createdAt, updatedAt, instagramUsername: String
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -21,5 +22,6 @@ struct UpdateUserResponse: Codable {
         case emailVerifiedAt = "email_verified_at"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case instagramUsername = "instagram_username"
     }
 }

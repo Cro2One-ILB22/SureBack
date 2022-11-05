@@ -7,13 +7,13 @@
 
 import Foundation
 
-// MARK: - AccountInfoResponse
-struct AccountInfoResponse: Codable {
+// MARK: - UserInfoResponse
+struct UserInfoResponse: Codable {
     let id: Double
     let name: String
     let instagramID, balance, points: Int
     let email: String
-    let emailVerifiedAt: JSONNull?
+    let emailVerifiedAt: String?
     let createdAt, updatedAt: String
     let instagramUsername: String?
     let roles: [String]

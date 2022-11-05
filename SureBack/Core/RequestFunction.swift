@@ -96,7 +96,7 @@ class RequestFunction {
             }
     }
 
-    func getAccount(completion: @escaping (Result<AccountInfoResponse, AFError>) -> Void) {
+    func getUserInfo(completion: @escaping (Result<UserInfoResponse, AFError>) -> Void) {
         let url = Endpoints.getAccount.url
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(accessToken!)",
@@ -105,7 +105,7 @@ class RequestFunction {
 
         AF.request(url, headers: headers)
             .validate()
-            .responseDecodable(of: AccountInfoResponse.self) {
+            .responseDecodable(of: UserInfoResponse.self) {
                 completion($0.result)
             }
     }

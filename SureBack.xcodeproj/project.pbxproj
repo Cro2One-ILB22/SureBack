@@ -40,6 +40,8 @@
 		ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */; };
 		ACE5CDB029127E6200D08177 /* ListCustomerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */; };
 		ACE5CDB22912835400D08177 /* ListPartnerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDB12912835400D08177 /* ListPartnerResponse.swift */; };
+		ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE8C3582916267800BEA778 /* LoginViewController.swift */; };
+		ACE8C35B2916D60700BEA778 /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE8C35A2916D60700BEA778 /* DummyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,8 @@
 		ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionStoryIGResponse.swift; sourceTree = "<group>"; };
 		ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCustomerResponse.swift; sourceTree = "<group>"; };
 		ACE5CDB12912835400D08177 /* ListPartnerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPartnerResponse.swift; sourceTree = "<group>"; };
+		ACE8C3582916267800BEA778 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		ACE8C35A2916D60700BEA778 /* DummyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
 		BB6F53CE101281D823C272BB /* Pods_SureBack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -172,6 +176,8 @@
 				AC04BD7D2909914600635147 /* GenerateQrViewController.swift */,
 				AC04BD7F290995AD00635147 /* Function.swift */,
 				AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */,
+				ACE8C3582916267800BEA778 /* LoginViewController.swift */,
+				ACE8C35A2916D60700BEA778 /* DummyViewController.swift */,
 			);
 			path = SureBack;
 			sourceTree = "<group>";
@@ -527,6 +533,8 @@
 				16930E3B290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift in Sources */,
 				ACE5CDB22912835400D08177 /* ListPartnerResponse.swift in Sources */,
 				AC04BD7E2909914600635147 /* GenerateQrViewController.swift in Sources */,
+				ACE8C35B2916D60700BEA778 /* DummyViewController.swift in Sources */,
+				ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */,
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
 				ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */,
 				ACE5CDB029127E6200D08177 /* ListCustomerResponse.swift in Sources */,

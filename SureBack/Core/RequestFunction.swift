@@ -13,17 +13,17 @@ import Foundation
 class RequestFunction {
     private let accessToken: String? = try? KeychainHelper.standard.read(key: .accessToken)
 
-    func postLogin(email: String, password: String, completionHandler: @escaping (_ data: LoginResponse) -> Void) {
+    func postLogin(email: String, password: String, completionHandler: @escaping (Result<LoginResponse, AFError>) -> Void) {
         let url = Endpoints.login.url
 
         let body: [String: String] = [
             "email": email,
             "password": password,
         ]
-        AF.request(url, method: .post, parameters: body).responseDecodable(of: LoginResponse.self) { response in
-            switch response.result {
-            case let .success(data):
-                completionHandler(data)
+        AF.request(url, method: .post, parameters: body).responseDecodable(of: LoginResponse.self) {
+            completionHandler($0.result)
+//            switch response.result {
+//            case let .success(data):
             //                self.getAccount(accessToken: data.accessToken) { result in
             //                    print(result)
             //                }
@@ -48,9 +48,9 @@ class RequestFunction {
             //                    print(result)
             //                }
             //                print(data.accessToken)
-            case .failure:
-                print("Failed to login")
-            }
+//            case .failure:
+//                print("Failed to login")
+//            }
         }
     }
 

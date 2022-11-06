@@ -20,21 +20,24 @@ class ViewController: UIViewController {
 //        // Do any additional setup after loading the view.
 //        print("\(Endpoints.getProfileIG.url)dithanrchy")
 //
-//        request.postLogin(email: "duta@sampolain.com", password: "hahahahah")
+//        request.postLogin(email: "dit@sampolain.com", password: "hahahahah")
 
         // Do any additional setup after loading the view.
 
-//        request.postLogin(email: "dit@sampolain.com", password: "hahahahah") { data in
-//            do {
-//                KeychainHelper.standard.delete(key: .accessToken)
-//                try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
-//            } catch {
-//                print(error)
-//            }
-//        }
-        request.updateUser(name: "Ditha") { data in
+        request.postLogin(email: "av@sampolain.com", password: "hahahahah") { data in
+            do {
+                KeychainHelper.standard.delete(key: .accessToken)
+                try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
+            } catch {
+                print(error)
+            }
+        }
+        request.approveStory(false, id: 810395039646547970) { data in
             print(data)
         }
+//        request.updateUser(name: "Ditha") { data in
+//            print(data)
+//        }
 
         let buttonGenerate = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
         buttonGenerate.backgroundColor = .blue

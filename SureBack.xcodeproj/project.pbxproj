@@ -22,6 +22,7 @@
 		16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */; };
 		16930E3F290FBB27003DFEBE /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3E290FBB27003DFEBE /* LoginResponse.swift */; };
 		1694878829104CE70088821C /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694878729104CE70088821C /* KeychainHelper.swift */; };
+		16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */; };
 		2DDDD70EABE69B42303C1AED /* Pods_SureBackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */; };
 		8A2D3CC34125394E06212A07 /* Pods_SureBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6F53CE101281D823C272BB /* Pods_SureBack.framework */; };
 		9CCB778BAEA00AE5C43FB920 /* Pods_SureBack_SureBackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */; };
@@ -77,6 +78,7 @@
 		16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInstagramOTPResponse.swift; sourceTree = "<group>"; };
 		16930E3E290FBB27003DFEBE /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		1694878729104CE70088821C /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveOrRejectStoryResponse.swift; sourceTree = "<group>"; };
 		3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack_SureBackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FB4E7EBF11E0E918FCC83A /* Pods-SureBack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBack.release.xcconfig"; path = "Target Support Files/Pods-SureBack/Pods-SureBack.release.xcconfig"; sourceTree = "<group>"; };
 		5F47E67A5BE033AB27E63DDB /* Pods-SureBackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBackTests.debug.xcconfig"; path = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */,
 				ACE5CDB12912835400D08177 /* ListPartnerResponse.swift */,
 				ACDD097929128F1E00309FBC /* ListTransactionResponse.swift */,
+				16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
 				ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */,
 				ACE5CDB029127E6200D08177 /* ListCustomerResponse.swift in Sources */,
+				16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */,
 				119B765A2906976E00530C80 /* ViewController.swift in Sources */,
 				ACE5CDA82912716B00D08177 /* GenerateTokenOfflineResponse.swift in Sources */,
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,

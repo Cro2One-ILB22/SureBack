@@ -10,7 +10,14 @@ import Foundation
 
 // MARK: Auth
 class RequestFunction {
-    private let accessToken: String = try! KeychainHelper.standard.read(key: .accessToken)
+    private var accessToken: String {
+        do {
+            return try KeychainHelper.standard.read(key: .accessToken)
+        } catch {
+            print(error)
+            return "noToken"
+        }
+    }
     func postLogin(email: String, password: String, completionHandler: @escaping (_ data: LoginResponse) -> Void) {
         let url = Endpoints.login.url
 
@@ -18,35 +25,10 @@ class RequestFunction {
             "email": email,
             "password": password
         ]
-
         AF.request(url, method: .post, parameters: body).responseDecodable(of: LoginResponse.self) { response in
             switch response.result {
             case let .success(data):
                 completionHandler(data)
-//                self.getAccount(accessToken: data.accessToken) { result in
-//                    print(result)
-//                }
-//                self.getProfileIG(accessToken: data.accessToken, username: "dithanrchy") { result in
-//                    print(result)
-//                }
-//                self.postGenerateTokenOnline(accessToken: data.accessToken, purchaseAmount: 1000) { result in
-//                    print(result)
-//                }
-//                self.postGenerateTokenOffline(accessToken: data.accessToken, customerId: 810194945419968513, purchaseAmount: 1000) { result in
-//                    switch result {
-//                    case let .success(data):
-//                        print("story id: \(data.story.id)")
-//                    case let .failure(error):
-//                        print(error.localizedDescription)
-//                    }
-//                }
-//                self.getStoryIG(accessToken: data.accessToken, storyId: 810204763009581058) { result in
-//                    print(result)
-//                }
-//                self.redeemToken(accessToken: data.accessToken, token: "dda39f08") { result in
-//                    print(result)
-//                }
-//                print(data.accessToken)
             case .failure:
                 print("Failed to login")
             }
@@ -133,6 +115,27 @@ extension RequestFunction {
 
 // MARK: Instagram
 extension RequestFunction {
+    func approveStory(_ isApproved: Bool, id: Int, completionHandler: @escaping (_ data: ApproveOrRejectStoryResponse) -> Void) {
+        let url = Endpoints.approveOrRejectStory.url
+        let body: [String: Any] = [
+            "id": id,
+            "approved": isApproved
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)",
+            "Accept": "application/json"
+        ]
+        AF.request(url, method: .put, parameters: body, headers: headers)
+            .validate()
+            .responseDecodable(of: ApproveOrRejectStoryResponse.self) { response in
+                switch response.result {
+                case .success(let data):
+                    completionHandler(data)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
     func submitStory(storyId: Int, instagtamStoryId: Int) {
         let url = Endpoints.register.url
         let body: [String: Int] = [

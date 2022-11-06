@@ -7,13 +7,14 @@
 
 import Foundation
 
+// MARK: - ProfileIGResponse
 struct ProfileIGResponse: Codable {
     let id, username, fullName: String
     let profilePicURL, profilePicURLHD: String
     let biography: String
-    let externalURL: JSONNull?
+    let externalURL: String?
     let isPrivate, isVerified: Bool
-    let postCount, followerCount, followingCount: Int
+    let mediaCount, followerCount, followingCount: Int
 
     enum CodingKeys: String, CodingKey {
         case id, username
@@ -24,7 +25,7 @@ struct ProfileIGResponse: Codable {
         case externalURL = "external_url"
         case isPrivate = "is_private"
         case isVerified = "is_verified"
-        case postCount = "post_count"
+        case mediaCount = "media_count"
         case followerCount = "follower_count"
         case followingCount = "following_count"
     }

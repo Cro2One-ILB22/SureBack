@@ -21,11 +21,13 @@ enum Endpoints: Endpoint {
     case register
     case getAccount
     case getProfileIG
+    case getUserIG
     case generateToken
     case submitStory
     case getStoryIG
     case redeemToken
     case updateUser
+    case updatePartnerDetail
     case getListCustomer
     case getListPartner
     case getListTransaction
@@ -42,7 +44,9 @@ enum Endpoints: Endpoint {
         case .getAccount:
             return "\(API.baseUrl)/api/auth/me"
         case .getProfileIG:
-            return "\(API.baseUrl)/api/ig/profile"
+            return "\(API.baseUrl)/api/ig/profile/"
+        case .getUserIG:
+            return "\(API.baseUrl)/api/ig/user/"
         case .generateToken:
             return "\(API.baseUrl)/api/ig/token/generate"
         case .submitStory:
@@ -53,6 +57,8 @@ enum Endpoints: Endpoint {
             return "\(API.baseUrl)/api/ig/token/redeem"
         case .updateUser:
             return "\(API.baseUrl)/api/user"
+        case .updatePartnerDetail:
+            return "\(API.baseUrl)/api/user/partner-detail"
         case .getListCustomer:
             return "\(API.baseUrl)/api/customer"
         case .getListPartner:

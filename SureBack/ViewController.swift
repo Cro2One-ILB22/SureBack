@@ -24,14 +24,14 @@ class ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
 
-        request.postLogin(email: "av@sampolain.com", password: "hahahahah") { data in
-            do {
-                KeychainHelper.standard.delete(key: .accessToken)
-                try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
-            } catch {
-                print(error)
-            }
-        }
+//        request.postLogin(email: "av@sampolain.com", password: "hahahahah") { data in
+//            do {
+//                KeychainHelper.standard.delete(key: .accessToken)
+//                try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
+//            } catch {
+//                print(error)
+//            }
+//        }
         request.approveStory(false, id: 810395039646547970) { data in
             print(data)
         }
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
         buttonScan.setTitle("Scan QR Code", for: .normal)
         buttonScan.addTarget(self, action: #selector(scanQrButtonAction), for: .touchUpInside)
 
-        self.view.addSubview(buttonScan)
+        view.addSubview(buttonScan)
 //        do {
 //            let token = "tokenjwtaku"
 //            KeychainHelper.standard.delete(key: .accessToken)

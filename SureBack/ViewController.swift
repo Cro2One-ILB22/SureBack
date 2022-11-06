@@ -20,7 +20,7 @@ class ViewController: UIViewController {
 //        // Do any additional setup after loading the view.
 //        print("\(Endpoints.getProfileIG.url)dithanrchy")
 //
-//        request.postLogin(email: "duta@sampolain.com", password: "hahahahah")
+//        request.postLogin(email: "dit@sampolain.com", password: "hahahahah")
 
         // Do any additional setup after loading the view.
 
@@ -32,23 +32,11 @@ class ViewController: UIViewController {
 //                print(error)
 //            }
 //        }
+        request.approveStory(false, id: 810395039646547970) { data in
+            print(data)
+        }
 //        request.updateUser(name: "Ditha") { data in
 //            print(data)
-//        }
-//        request.getProfileIG(username: "dithanrchy") { result in
-//            print("Get profile IG from username: \(result)")
-//        }
-//        request.getUserIG(id: "200439848") { result in
-//            print("Get profile IG from id: \(result)")
-//        }
-        request.updatePartnerCashbackPercent(cashbackPercent: 1.5) { result in
-            print("percent: \(result)")
-        }
-//        request.getAccount { result in
-//            print(result)
-//        }
-//        request.getListPartner { result in
-//            print(result)
 //        }
 
         let buttonGenerate = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))

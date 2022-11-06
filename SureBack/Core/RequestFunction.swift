@@ -29,37 +29,8 @@ class RequestFunction {
         ]
         AF.request(url, method: .post, parameters: body).responseDecodable(of: LoginResponse.self) {
             completionHandler($0.result)
-        AF.request(url, method: .post, parameters: body).responseDecodable(of: LoginResponse.self) {
-            completionHandler($0.result)
-//            switch response.result {
-//            case let .success(data):
-            //                self.getAccount(accessToken: data.accessToken) { result in
-            //                    print(result)
-            //                }
-            //                self.getProfileIG(accessToken: data.accessToken, username: "dithanrchy") { result in
-            //                    print(result)
-            //                }
-            //                self.postGenerateTokenOnline(accessToken: data.accessToken, purchaseAmount: 1000) { result in
-            //                    print(result)
-            //                }
-            //                self.postGenerateTokenOffline(accessToken: data.accessToken, customerId: 810194945419968513, purchaseAmount: 1000) { result in
-            //                    switch result {
-            //                    case let .success(data):
-            //                        print("story id: \(data.story.id)")
-            //                    case let .failure(error):
-            //                        print(error.localizedDescription)
-            //                    }
-            //                }
-            //                self.getStoryIG(accessToken: data.accessToken, storyId: 810204763009581058) { result in
-            //                    print(result)
-            //                }
-            //                self.redeemToken(accessToken: data.accessToken, token: "dda39f08") { result in
-            //                    print(result)
-            //                }
-            //                print(data.accessToken)
-//            case .failure:
-//                print("Failed to login")
-//            }
+        }
+    }
 
     func preRegister(name: String, email: String, password: String, role: String, username: String) {
         let url = Endpoints.preRegister.url

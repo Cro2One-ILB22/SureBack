@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().delegate = self
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        let viewController = LoginViewController()
+        let viewController = ViewController()
         let nav = UINavigationController(rootViewController: viewController)
         window?.rootViewController = nav
         window?.makeKeyAndVisible()

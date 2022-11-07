@@ -18,6 +18,7 @@
 		119B76862906979B00530C80 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 119B76852906979B00530C80 /* .gitignore */; };
 		11B2DD2F2907CF760065E98D /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2DD2E2907CF760065E98D /* APICall.swift */; };
 		1610F2882913AED80047F862 /* UpdateUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1610F2872913AED80047F862 /* UpdateUserResponse.swift */; };
+		1619BB272918B5E800085B74 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB262918B5E800085B74 /* AuthManager.swift */; };
 		16930E3B290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3A290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift */; };
 		16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */; };
 		16930E3F290FBB27003DFEBE /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3E290FBB27003DFEBE /* LoginResponse.swift */; };
@@ -76,6 +77,7 @@
 		119B76852906979B00530C80 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		11B2DD2E2907CF760065E98D /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
 		1610F2872913AED80047F862 /* UpdateUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserResponse.swift; sourceTree = "<group>"; };
+		1619BB262918B5E800085B74 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		16930E3A290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyInstagramOTPResponse.swift; sourceTree = "<group>"; };
 		16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInstagramOTPResponse.swift; sourceTree = "<group>"; };
 		16930E3E290FBB27003DFEBE /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				ACC1C0F829141D71003E2FD8 /* SureBack.entitlements */,
 				11B2DD2B2907CF490065E98D /* Core */,
 				119B76552906976E00530C80 /* AppDelegate.swift */,
+				1619BB262918B5E800085B74 /* AuthManager.swift */,
 				119B76592906976E00530C80 /* ViewController.swift */,
 				119B765E2906976F00530C80 /* Assets.xcassets */,
 				119B76602906976F00530C80 /* LaunchScreen.storyboard */,
@@ -528,6 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16930E3B290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift in Sources */,
+				1619BB272918B5E800085B74 /* AuthManager.swift in Sources */,
 				ACE5CDB22912835400D08177 /* ListPartnerResponse.swift in Sources */,
 				AC04BD7E2909914600635147 /* GenerateQrViewController.swift in Sources */,
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,

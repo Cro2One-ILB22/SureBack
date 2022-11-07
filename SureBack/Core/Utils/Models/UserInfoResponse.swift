@@ -9,25 +9,26 @@ import Foundation
 
 // MARK: - UserInfoResponse
 struct UserInfoResponse: Codable {
-    let id: Double
+    let id: Int
     let name: String
-    let instagramID, balance, points: Int
+    let instagramID: Int
+    let instagramUsername: String
+    let balance, coins: Int
     let email: String
     let emailVerifiedAt: String?
     let createdAt, updatedAt: String
-    let instagramUsername: String?
     let roles: [String]
-    let partnerDetail: PartnerDetailResponse?
+    let merchantDetail: MerchantDetailResponse?
 
     enum CodingKeys: String, CodingKey {
         case id, name
         case instagramID = "instagram_id"
-        case balance, points, email
+        case instagramUsername = "instagram_username"
+        case balance, coins, email
         case emailVerifiedAt = "email_verified_at"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case instagramUsername = "instagram_username"
         case roles
-        case partnerDetail = "partner_detail"
+        case merchantDetail = "merchant_detail"
     }
 }

@@ -25,16 +25,21 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
 
 //        request.postLogin(email: "av@sampolain.com", password: "hahahahah") { data in
-//            do {
-//                KeychainHelper.standard.delete(key: .accessToken)
-//                try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
-//            } catch {
+//            switch(data) {
+//            case.success(let data):
+//                do {
+////                    KeychainHelper.standard.delete(key: .accessToken)
+////                    try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
+//                } catch {
+//                    print(error)
+//                }
+//            case.failure(let error):
 //                print(error)
 //            }
 //        }
-        request.approveStory(false, id: 810395039646547970) { data in
-            print(data)
-        }
+//        request.updateUser(name: "ditaaaaaaa") { data in
+//            print("Tes",data)
+//        }
 //        request.updateUser(name: "Ditha") { data in
 //            print(data)
 //        }

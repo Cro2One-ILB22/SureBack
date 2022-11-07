@@ -104,27 +104,20 @@ class RequestFunction {
 }
 
 // MARK: User
-
 extension RequestFunction {
     func updateUser(name: String, completionHandler: @escaping (_ data: UpdateUserResponse) -> Void) {
         let url = Endpoints.updateUser.url
         let body: [String: String] = [
             "name": name,
         ]
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-            "Accept": "application/json",
-        ]
-        AF.request(url, method: .put, parameters: body, headers: headers)
-            .validate()
-            .responseDecodable(of: UpdateUserResponse.self) { response in
-                switch response.result {
-                case let .success(data):
-                    completionHandler(data)
-                case let .failure(error):
-                    print(error)
-                }
+        requestWithToken(url: url, method: .put, parameters: body, decodable: UpdateUserResponse.self) { response in
+            switch response.result {
+            case let .success(data):
+                completionHandler(data)
+            case let .failure(error):
+                print(error)
             }
+        }
     }
 }
 
@@ -207,20 +200,14 @@ extension RequestFunction {
             "id": id,
             "approved": isApproved,
         ]
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-            "Accept": "application/json",
-        ]
-        AF.request(url, method: .put, parameters: body, headers: headers)
-            .validate()
-            .responseDecodable(of: ApproveOrRejectStoryResponse.self) { response in
-                switch response.result {
-                case let .success(data):
-                    completionHandler(data)
-                case let .failure(error):
-                    print(error)
-                }
+        requestWithToken(url: url, method: .put, parameters: body, decodable: ApproveOrRejectStoryResponse.self) { response in
+            switch response.result {
+            case .success(let data):
+                completionHandler(data)
+            case .failure(let error):
+                print(error)
             }
+        }
     }
 
     func submitStory(storyId: Int, instagtamStoryId: Int) {
@@ -367,6 +354,27 @@ extension RequestFunction {
 
         AF.request(url, headers: headers).responseDecodable(of: ListTransactionResponse.self) {
             completion($0.result)
+        }
+    }
+}
+
+extension RequestFunction {
+    private func requestWithToken<T: Decodable>(
+        url: String,
+        method: HTTPMethod = .get,
+        parameters: Dictionary<String, Any>? = nil,
+        decodable: T.Type = T.self,
+        completionHandler: @escaping (DataResponse<T, AFError>) -> Void) {
+        AuthManager.shared.withValidToken { token in
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(token)",
+                "Accept": "application/json"
+            ]
+            AF.request(url, method: method, parameters: parameters, headers: headers)
+                .validate()
+                .responseDecodable(of: decodable) { response in
+                    completionHandler(response)
+                }
         }
     }
 }

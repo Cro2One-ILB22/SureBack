@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 class Function {
-    func generateQR(userID: Int) -> UIImage? {
-        let myString = String(userID)
+    func generateQR(stringJSON: String) -> UIImage? {
+        let myString = String(stringJSON)
         let data = myString.data(using: String.Encoding.ascii)
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
         qrFilter.setValue(data, forKey: "inputMessage")

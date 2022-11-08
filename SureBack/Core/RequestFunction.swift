@@ -25,10 +25,22 @@ class RequestFunction {
 
         let body: [String: String] = [
             "email": email,
-            "password": password
+            "password": password,
         ]
         AF.request(url, method: .post, parameters: body).responseDecodable(of: LoginResponse.self) {
-            completionHandler($0.result)
+            response in
+            switch response.result {
+            case let .success(data):
+                do {
+                    KeychainHelper.standard.delete(key: .accessToken)
+                    try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
+                } catch {
+                    print(error)
+                }
+            case .failure:
+                break
+            }
+            completionHandler(response.result)
         }
     }
 
@@ -39,7 +51,7 @@ class RequestFunction {
             "email": email,
             "password": password,
             "role": role,
-            "username": password
+            "username": password,
         ]
         AF.request(url, method: .post, parameters: body)
             .validate()
@@ -60,7 +72,7 @@ class RequestFunction {
             "email": email,
             "password": password,
             "role": role,
-            "username": username
+            "username": username,
         ]
         AF.request(url, method: .post, parameters: body)
             .validate()
@@ -78,8 +90,10 @@ class RequestFunction {
         let url = Endpoints.getAccount.url
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(accessToken)",
-            "Accept": "application/json"
+            "Accept": "application/json",
         ]
+
+        print("Access Token \(accessToken)")
 
         AF.request(url, headers: headers)
             .validate()
@@ -94,7 +108,7 @@ extension RequestFunction {
     func updateUser(name: String, completionHandler: @escaping (_ data: UpdateUserResponse) -> Void) {
         let url = Endpoints.updateUser.url
         let body: [String: String] = [
-            "name": name
+            "name": name,
         ]
         requestWithToken(url: url, method: .put, parameters: body, decodable: UpdateUserResponse.self) { response in
             switch response.result {
@@ -108,24 +122,25 @@ extension RequestFunction {
 }
 
 // MARK: Partner
+
 extension RequestFunction {
-    func updatePartnerCashbackPercent(cashbackPercent: Float, completion: @escaping (Result<PartnerDetailResponse, AFError>) -> Void) {
-        let url = Endpoints.updatePartnerDetail.url
+    func updatePartnerCashbackPercent(cashbackPercent: Float, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
+        let url = Endpoints.updateMerchantDetail.url
         var body: [String: Float] = [:]
         body["cashback_percent"] = cashbackPercent
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(accessToken)",
-            "Accept": "application/json"
+            "Accept": "application/json",
         ]
         AF.request(url, method: .put, parameters: body, headers: headers)
             .validate()
-            .responseDecodable(of: PartnerDetailResponse.self) {
+            .responseDecodable(of: MerchantDetailResponse.self) {
                 completion($0.result)
             }
     }
 
-    func updatePartnerCashbackLimit(cashbackLimit: Int, completion: @escaping (Result<PartnerDetailResponse, AFError>) -> Void) {
-        let url = Endpoints.updatePartnerDetail.url
+    func updatePartnerCashbackLimit(cashbackLimit: Int, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
+        let url = Endpoints.updateMerchantDetail.url
         let body: [String: Int] = [
             "cashback_limit": cashbackLimit,
         ]
@@ -136,13 +151,13 @@ extension RequestFunction {
         ]
         AF.request(url, method: .put, parameters: body, headers: headers)
             .validate()
-            .responseDecodable(of: PartnerDetailResponse.self) {
+            .responseDecodable(of: MerchantDetailResponse.self) {
                 completion($0.result)
             }
     }
 
-    func updatePartnerDailyTokenLimit(dailyTokenLimit: Int, completion: @escaping (Result<PartnerDetailResponse, AFError>) -> Void) {
-        let url = Endpoints.updatePartnerDetail.url
+    func updatePartnerDailyTokenLimit(dailyTokenLimit: Int, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
+        let url = Endpoints.updateMerchantDetail.url
         let body: [String: Int] = [
             "daily_token_limit": dailyTokenLimit,
         ]
@@ -153,13 +168,13 @@ extension RequestFunction {
         ]
         AF.request(url, method: .put, parameters: body, headers: headers)
             .validate()
-            .responseDecodable(of: PartnerDetailResponse.self) {
+            .responseDecodable(of: MerchantDetailResponse.self) {
                 completion($0.result)
             }
     }
 
-    func updatePartnerIsActiveToken(isActiveToken: Bool, completion: @escaping (Result<PartnerDetailResponse, AFError>) -> Void) {
-        let url = Endpoints.updatePartnerDetail.url
+    func updatePartnerIsActiveToken(isActiveToken: Bool, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
+        let url = Endpoints.updateMerchantDetail.url
         let body: [String: Bool] = [
             "is_active_generating_token": isActiveToken,
         ]
@@ -170,7 +185,7 @@ extension RequestFunction {
         ]
         AF.request(url, method: .put, parameters: body, headers: headers)
             .validate()
-            .responseDecodable(of: PartnerDetailResponse.self) {
+            .responseDecodable(of: MerchantDetailResponse.self) {
                 completion($0.result)
             }
     }
@@ -183,7 +198,7 @@ extension RequestFunction {
         let url = Endpoints.approveOrRejectStory.url
         let body: [String: Any] = [
             "id": id,
-            "approved": isApproved
+            "approved": isApproved,
         ]
         requestWithToken(url: url, method: .put, parameters: body, decodable: ApproveOrRejectStoryResponse.self) { response in
             switch response.result {
@@ -194,6 +209,7 @@ extension RequestFunction {
             }
         }
     }
+
     func submitStory(storyId: Int, instagtamStoryId: Int) {
         let url = Endpoints.register.url
         let body: [String: Int] = [

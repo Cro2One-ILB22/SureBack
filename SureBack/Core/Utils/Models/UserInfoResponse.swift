@@ -17,7 +17,7 @@ struct UserInfoResponse: Codable {
     let email: String
     let emailVerifiedAt: String?
     let createdAt, updatedAt: String
-    let roles: [String]
+    let roles: [String]?
     let merchantDetail: MerchantDetailResponse?
 
     enum CodingKeys: String, CodingKey {

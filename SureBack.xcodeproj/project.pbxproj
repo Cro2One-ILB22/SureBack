@@ -17,11 +17,9 @@
 		119B76792906976F00530C80 /* SureBackUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119B76782906976F00530C80 /* SureBackUITestsLaunchTests.swift */; };
 		119B76862906979B00530C80 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 119B76852906979B00530C80 /* .gitignore */; };
 		11B2DD2F2907CF760065E98D /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2DD2E2907CF760065E98D /* APICall.swift */; };
-		1610F2882913AED80047F862 /* UpdateUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1610F2872913AED80047F862 /* UpdateUserResponse.swift */; };
 		1619BB272918B5E800085B74 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB262918B5E800085B74 /* AuthManager.swift */; };
-		16930E3B290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3A290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift */; };
 		16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */; };
-		16930E3F290FBB27003DFEBE /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3E290FBB27003DFEBE /* LoginResponse.swift */; };
+		16930E3F290FBB27003DFEBE /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3E290FBB27003DFEBE /* AuthResponse.swift */; };
 		1694878829104CE70088821C /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694878729104CE70088821C /* KeychainHelper.swift */; };
 		16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */; };
 		2DDDD70EABE69B42303C1AED /* Pods_SureBackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */; };
@@ -43,7 +41,7 @@
 		ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */; };
 		ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */; };
 		ACE5CDB029127E6200D08177 /* ListCustomerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */; };
-		ACE5CDB22912835400D08177 /* ListPartnerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDB12912835400D08177 /* ListPartnerResponse.swift */; };
+		ACE5CDB22912835400D08177 /* ListMerchantResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDB12912835400D08177 /* ListMerchantResponse.swift */; };
 		ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE8C3582916267800BEA778 /* LoginViewController.swift */; };
 		ACE8C35B2916D60700BEA778 /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE8C35A2916D60700BEA778 /* DummyViewController.swift */; };
 /* End PBXBuildFile section */
@@ -80,11 +78,9 @@
 		119B76782906976F00530C80 /* SureBackUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SureBackUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		119B76852906979B00530C80 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		11B2DD2E2907CF760065E98D /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
-		1610F2872913AED80047F862 /* UpdateUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserResponse.swift; sourceTree = "<group>"; };
 		1619BB262918B5E800085B74 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		16930E3A290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyInstagramOTPResponse.swift; sourceTree = "<group>"; };
 		16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInstagramOTPResponse.swift; sourceTree = "<group>"; };
-		16930E3E290FBB27003DFEBE /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		16930E3E290FBB27003DFEBE /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		1694878729104CE70088821C /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveOrRejectStoryResponse.swift; sourceTree = "<group>"; };
 		3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack_SureBackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,7 +108,7 @@
 		ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIGResponse.swift; sourceTree = "<group>"; };
 		ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionStoryIGResponse.swift; sourceTree = "<group>"; };
 		ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCustomerResponse.swift; sourceTree = "<group>"; };
-		ACE5CDB12912835400D08177 /* ListPartnerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPartnerResponse.swift; sourceTree = "<group>"; };
+		ACE5CDB12912835400D08177 /* ListMerchantResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMerchantResponse.swift; sourceTree = "<group>"; };
 		ACE8C3582916267800BEA778 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ACE8C35A2916D60700BEA778 /* DummyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
 		BB6F53CE101281D823C272BB /* Pods_SureBack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -185,10 +181,10 @@
 				AC04BD7D2909914600635147 /* GenerateQrViewController.swift */,
 				AC04BD7F290995AD00635147 /* Function.swift */,
 				AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */,
-				ACE8C3582916267800BEA778 /* LoginViewController.swift */,
 				ACE8C35A2916D60700BEA778 /* DummyViewController.swift */,
-				AC22879329182E8E00397ED0 /* ShowQRViewController.swift */,
+				ACE8C3582916267800BEA778 /* LoginViewController.swift */,
 				AC2287992918521F00397ED0 /* LoggedInViewController.swift */,
+				AC22879329182E8E00397ED0 /* ShowQRViewController.swift */,
 			);
 			path = SureBack;
 			sourceTree = "<group>";
@@ -241,17 +237,15 @@
 		16930E39290FB2D0003DFEBE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				16930E3A290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift */,
 				16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */,
-				16930E3E290FBB27003DFEBE /* LoginResponse.swift */,
+				16930E3E290FBB27003DFEBE /* AuthResponse.swift */,
 				ACE5CDA32912704800D08177 /* UserInfoResponse.swift */,
 				ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */,
 				ACE5CDA72912716B00D08177 /* GenerateTokenOfflineResponse.swift */,
 				ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */,
 				ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */,
-				1610F2872913AED80047F862 /* UpdateUserResponse.swift */,
 				ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */,
-				ACE5CDB12912835400D08177 /* ListPartnerResponse.swift */,
+				ACE5CDB12912835400D08177 /* ListMerchantResponse.swift */,
 				ACDD097929128F1E00309FBC /* ListTransactionResponse.swift */,
 				16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */,
 				AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */,
@@ -542,9 +536,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16930E3B290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift in Sources */,
 				1619BB272918B5E800085B74 /* AuthManager.swift in Sources */,
-				ACE5CDB22912835400D08177 /* ListPartnerResponse.swift in Sources */,
+				ACE5CDB22912835400D08177 /* ListMerchantResponse.swift in Sources */,
 				AC04BD7E2909914600635147 /* GenerateQrViewController.swift in Sources */,
 				ACE8C35B2916D60700BEA778 /* DummyViewController.swift in Sources */,
 				ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */,
@@ -566,9 +559,8 @@
 				ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */,
 				16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */,
 				AC3FEDCE290834EA0011202E /* JSONNull.swift in Sources */,
-				16930E3F290FBB27003DFEBE /* LoginResponse.swift in Sources */,
+				16930E3F290FBB27003DFEBE /* AuthResponse.swift in Sources */,
 				11B2DD2F2907CF760065E98D /* APICall.swift in Sources */,
-				1610F2882913AED80047F862 /* UpdateUserResponse.swift in Sources */,
 				AC22879A2918521F00397ED0 /* LoggedInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

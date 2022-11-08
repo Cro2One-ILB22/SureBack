@@ -20,14 +20,14 @@ class RequestFunction {
         }
     }
 
-    func postLogin(email: String, password: String, completionHandler: @escaping (Result<LoginResponse, AFError>) -> Void) {
+    func postLogin(email: String, password: String, completionHandler: @escaping (Result<AuthResponse, AFError>) -> Void) {
         let url = Endpoints.login.url
-
         let body: [String: String] = [
             "email": email,
             "password": password,
         ]
-        AF.request(url, method: .post, parameters: body).responseDecodable(of: LoginResponse.self) {
+
+        AF.request(url, method: .post, parameters: body).responseDecodable(of: AuthResponse.self) {
             response in
             switch response.result {
             case let .success(data):
@@ -51,7 +51,7 @@ class RequestFunction {
             "email": email,
             "password": password,
             "role": role,
-            "username": password,
+            "username": username,
         ]
         AF.request(url, method: .post, parameters: body)
             .validate()
@@ -60,7 +60,7 @@ class RequestFunction {
                 case let .success(data):
                     print("Data", data)
                 case let .failure(error):
-                    print(error)
+                    print("Error: \(error.localizedDescription)")
                 }
             }
     }
@@ -76,7 +76,7 @@ class RequestFunction {
         ]
         AF.request(url, method: .post, parameters: body)
             .validate()
-            .responseDecodable(of: VerifyInstagramOTPResponse.self) { response in
+            .responseDecodable(of: AuthResponse.self) { response in
                 switch response.result {
                 case let .success(data):
                     print("Data", data)
@@ -88,29 +88,22 @@ class RequestFunction {
 
     func getUserInfo(completion: @escaping (Result<UserInfoResponse, AFError>) -> Void) {
         let url = Endpoints.getAccount.url
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-            "Accept": "application/json",
-        ]
 
-        print("Access Token \(accessToken)")
-
-        AF.request(url, headers: headers)
-            .validate()
-            .responseDecodable(of: UserInfoResponse.self) {
-                completion($0.result)
-            }
+        requestWithToken(url: url, decodable: UserInfoResponse.self) {
+            completion($0.result)
+        }
     }
 }
 
 // MARK: User
+
 extension RequestFunction {
-    func updateUser(name: String, completionHandler: @escaping (_ data: UpdateUserResponse) -> Void) {
+    func updateUser(name: String, completionHandler: @escaping (_ data: UserInfoResponse) -> Void) {
         let url = Endpoints.updateUser.url
         let body: [String: String] = [
             "name": name,
         ]
-        requestWithToken(url: url, method: .put, parameters: body, decodable: UpdateUserResponse.self) { response in
+        requestWithToken(url: url, method: .put, parameters: body, decodable: UserInfoResponse.self) { response in
             switch response.result {
             case let .success(data):
                 completionHandler(data)
@@ -128,15 +121,10 @@ extension RequestFunction {
         let url = Endpoints.updateMerchantDetail.url
         var body: [String: Float] = [:]
         body["cashback_percent"] = cashbackPercent
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-            "Accept": "application/json",
-        ]
-        AF.request(url, method: .put, parameters: body, headers: headers)
-            .validate()
-            .responseDecodable(of: MerchantDetailResponse.self) {
-                completion($0.result)
-            }
+
+        requestWithToken(url: url, method: .put, parameters: body, decodable: MerchantDetailResponse.self) {
+            completion($0.result)
+        }
     }
 
     func updatePartnerCashbackLimit(cashbackLimit: Int, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
@@ -145,15 +133,9 @@ extension RequestFunction {
             "cashback_limit": cashbackLimit,
         ]
 
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-            "Accept": "application/json",
-        ]
-        AF.request(url, method: .put, parameters: body, headers: headers)
-            .validate()
-            .responseDecodable(of: MerchantDetailResponse.self) {
-                completion($0.result)
-            }
+        requestWithToken(url: url, method: .put, parameters: body, decodable: MerchantDetailResponse.self) {
+            completion($0.result)
+        }
     }
 
     func updatePartnerDailyTokenLimit(dailyTokenLimit: Int, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
@@ -162,15 +144,9 @@ extension RequestFunction {
             "daily_token_limit": dailyTokenLimit,
         ]
 
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-            "Accept": "application/json",
-        ]
-        AF.request(url, method: .put, parameters: body, headers: headers)
-            .validate()
-            .responseDecodable(of: MerchantDetailResponse.self) {
-                completion($0.result)
-            }
+        requestWithToken(url: url, method: .put, parameters: body, decodable: MerchantDetailResponse.self) {
+            completion($0.result)
+        }
     }
 
     func updatePartnerIsActiveToken(isActiveToken: Bool, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
@@ -179,15 +155,9 @@ extension RequestFunction {
             "is_active_generating_token": isActiveToken,
         ]
 
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-            "Accept": "application/json",
-        ]
-        AF.request(url, method: .put, parameters: body, headers: headers)
-            .validate()
-            .responseDecodable(of: MerchantDetailResponse.self) {
-                completion($0.result)
-            }
+        requestWithToken(url: url, method: .put, parameters: body, decodable: MerchantDetailResponse.self) {
+            completion($0.result)
+        }
     }
 }
 
@@ -202,9 +172,9 @@ extension RequestFunction {
         ]
         requestWithToken(url: url, method: .put, parameters: body, decodable: ApproveOrRejectStoryResponse.self) { response in
             switch response.result {
-            case .success(let data):
+            case let .success(data):
                 completionHandler(data)
-            case .failure(let error):
+            case let .failure(error):
                 print(error)
             }
         }
@@ -233,49 +203,34 @@ extension RequestFunction {
 
     func postGenerateTokenOnline(purchaseAmount: Int, completion: @escaping (Result<GenerateTokenOnlineResponse, AFError>) -> Void) {
         let url = Endpoints.generateToken.url
-
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-        ]
-
         let body: [String: Int] = [
             "purchase_amount": purchaseAmount,
         ]
 
-        AF.request(url, method: .post, parameters: body, headers: headers).responseDecodable(of: GenerateTokenOnlineResponse.self) {
+        requestWithToken(url: url, method: .post, parameters: body, decodable: GenerateTokenOnlineResponse.self) {
             completion($0.result)
         }
     }
 
     func postGenerateTokenOffline(customerId: Int, purchaseAmount: Int, completion: @escaping (Result<GenerateTokenOfflineResponse, AFError>) -> Void) {
         let url = Endpoints.generateToken.url
-
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-        ]
-
         let body: [String: Int] = [
             "customer_id": customerId,
             "purchase_amount": purchaseAmount,
         ]
 
-        AF.request(url, method: .post, parameters: body, headers: headers).responseDecodable(of: GenerateTokenOfflineResponse.self) {
+        requestWithToken(url: url, method: .post, parameters: body, decodable: GenerateTokenOfflineResponse.self) {
             completion($0.result)
         }
     }
 
     func redeemToken(token: String, completion: @escaping (Result<GenerateTokenOfflineResponse, AFError>) -> Void) {
         let url = Endpoints.redeemToken.url
-
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-        ]
-
         let body: [String: String] = [
             "token": token,
         ]
 
-        AF.request(url, method: .post, parameters: body, headers: headers).responseDecodable(of: GenerateTokenOfflineResponse.self) {
+        requestWithToken(url: url, method: .post, parameters: body, decodable: GenerateTokenOfflineResponse.self) {
             completion($0.result)
         }
     }
@@ -283,10 +238,7 @@ extension RequestFunction {
     func getProfileIG(username: String, completion: @escaping (Result<ProfileIGResponse, AFError>) -> Void) {
         let url = "\(Endpoints.getProfileIG.url)\(username)"
 
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-        ]
-        AF.request(url, headers: headers).responseDecodable(of: ProfileIGResponse.self) {
+        requestWithToken(url: url, decodable: ProfileIGResponse.self) {
             completion($0.result)
         }
     }
@@ -294,28 +246,19 @@ extension RequestFunction {
     func getUserIG(id: String, completion: @escaping (Result<ProfileIGResponse, AFError>) -> Void) {
         let url = "\(Endpoints.getUserIG.url)\(id)"
 
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-        ]
-
-        AF.request(url, headers: headers).responseDecodable(of: ProfileIGResponse.self) {
+        requestWithToken(url: url, decodable: ProfileIGResponse.self) {
             completion($0.result)
         }
     }
 
     func getStoryIG(storyId: Int, completion: @escaping (Result<MentionStoryIGResponse, AFError>) -> Void) {
-        let url = Endpoints.getStoryIG.url
-
+        let url = Endpoints.toStoryIG.url
         let parameters: [String: Int] = [
             "story_id": storyId,
         ]
 
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-        ]
-
-        AF.request(url, parameters: parameters, headers: headers).responseDecodable(of: MentionStoryIGResponse.self) { response in
-            print(response.result)
+        requestWithToken(url: url, parameters: parameters, decodable: MentionStoryIGResponse.self) {
+            completion($0.result)
         }
     }
 }
@@ -324,23 +267,15 @@ extension RequestFunction {
     func getListCustomer(completion: @escaping (Result<ListCustomerResponse, AFError>) -> Void) {
         let url = Endpoints.getListCustomer.url
 
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-        ]
-
-        AF.request(url, headers: headers).responseDecodable(of: ListCustomerResponse.self) {
+        requestWithToken(url: url, decodable: ListCustomerResponse.self) {
             completion($0.result)
         }
     }
 
-    func getListPartner(completion: @escaping (Result<ListPartnerResponse, AFError>) -> Void) {
-        let url = Endpoints.getListPartner.url
+    func getListMerchant(completion: @escaping (Result<ListMerchantResponse, AFError>) -> Void) {
+        let url = Endpoints.getListMerchant.url
 
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-        ]
-
-        AF.request(url, headers: headers).responseDecodable(of: ListPartnerResponse.self) {
+        requestWithToken(url: url, decodable: ListMerchantResponse.self) {
             completion($0.result)
         }
     }
@@ -348,11 +283,7 @@ extension RequestFunction {
     func getListTransaction(completion: @escaping (Result<ListTransactionResponse, AFError>) -> Void) {
         let url = Endpoints.getListTransaction.url
 
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)",
-        ]
-
-        AF.request(url, headers: headers).responseDecodable(of: ListTransactionResponse.self) {
+        requestWithToken(url: url, decodable: ListTransactionResponse.self) {
             completion($0.result)
         }
     }
@@ -368,7 +299,7 @@ extension RequestFunction {
         AuthManager.shared.withValidToken { token in
             let headers: HTTPHeaders = [
                 "Authorization": "Bearer \(token)",
-                "Accept": "application/json"
+                "Accept": "application/json",
             ]
             AF.request(url, method: method, parameters: parameters, headers: headers)
                 .validate()

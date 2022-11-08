@@ -1,5 +1,5 @@
 //
-//  ListCustomerResponse.swift
+//  ListPartnerResponse.swift
 //  SureBack
 //
 //  Created by Ditha Nurcahya Avianty on 02/11/22.
@@ -7,6 +7,7 @@
 
 import Foundation
 
-struct ListCustomerResponse: Codable {
+// MARK: - ListMerchantResponse
+struct ListMerchantResponse: Codable {
     let results: [UserInfoResponse]
 }

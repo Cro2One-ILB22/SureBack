@@ -14,6 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
+        navigationItem.title = "Testingg"
 
 //        request.register(name: "tes", email: "aku@gmail.com", password: "tes12345", role: "customer", username: "tbadhit")
 //        request.register(name: "anaksoleh", email: "anaksoleh@gmail.com", password: "12345678", role: "customer", username: "tbadhit")
@@ -28,8 +29,8 @@ class ViewController: UIViewController {
 //            switch(data) {
 //            case.success(let data):
 //                do {
-////                    KeychainHelper.standard.delete(key: .accessToken)
-////                    try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
+//                    KeychainHelper.standard.delete(key: .accessToken)
+//                    try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
 //                } catch {
 //                    print(error)
 //                }

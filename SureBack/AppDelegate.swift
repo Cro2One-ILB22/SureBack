@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         let viewController = ViewController()
         let nav = UINavigationController(rootViewController: viewController)
-        window?.rootViewController = nav
+        window?.rootViewController = RegistrationViewController()
         window?.makeKeyAndVisible()
 
         return true

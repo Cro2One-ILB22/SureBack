@@ -18,6 +18,10 @@
 		119B76862906979B00530C80 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 119B76852906979B00530C80 /* .gitignore */; };
 		11B2DD2F2907CF760065E98D /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2DD2E2907CF760065E98D /* APICall.swift */; };
 		1619BB272918B5E800085B74 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB262918B5E800085B74 /* AuthManager.swift */; };
+		1619BB292919082700085B74 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB282919082700085B74 /* TabBarViewController.swift */; };
+		1619BB2B2919B74800085B74 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB2A2919B74800085B74 /* RegistrationViewController.swift */; };
+		1619BB2E2919D9DC00085B74 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB2D2919D9DC00085B74 /* UIView+Ext.swift */; };
+		16930E3B290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3A290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift */; };
 		16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */; };
 		16930E3F290FBB27003DFEBE /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3E290FBB27003DFEBE /* AuthResponse.swift */; };
 		1694878829104CE70088821C /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694878729104CE70088821C /* KeychainHelper.swift */; };
@@ -79,6 +83,10 @@
 		119B76852906979B00530C80 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		11B2DD2E2907CF760065E98D /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
 		1619BB262918B5E800085B74 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		1619BB282919082700085B74 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		1619BB2A2919B74800085B74 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		1619BB2D2919D9DC00085B74 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		16930E3A290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyInstagramOTPResponse.swift; sourceTree = "<group>"; };
 		16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInstagramOTPResponse.swift; sourceTree = "<group>"; };
 		16930E3E290FBB27003DFEBE /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		1694878729104CE70088821C /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
@@ -169,6 +177,7 @@
 		119B76542906976E00530C80 /* SureBack */ = {
 			isa = PBXGroup;
 			children = (
+				1619BB2C2919D9C600085B74 /* Extension */,
 				ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */,
 				ACC1C0F829141D71003E2FD8 /* SureBack.entitlements */,
 				11B2DD2B2907CF490065E98D /* Core */,
@@ -183,6 +192,9 @@
 				AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */,
 				ACE8C35A2916D60700BEA778 /* DummyViewController.swift */,
 				ACE8C3582916267800BEA778 /* LoginViewController.swift */,
+				1619BB282919082700085B74 /* TabBarViewController.swift */,
+				1619BB2A2919B74800085B74 /* RegistrationViewController.swift */,
+				AC22879329182E8E00397ED0 /* ShowQRViewController.swift */,
 				AC2287992918521F00397ED0 /* LoggedInViewController.swift */,
 				AC22879329182E8E00397ED0 /* ShowQRViewController.swift */,
 			);
@@ -232,6 +244,14 @@
 				11B2DD2E2907CF760065E98D /* APICall.swift */,
 			);
 			path = Networks;
+			sourceTree = "<group>";
+		};
+		1619BB2C2919D9C600085B74 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1619BB2D2919D9DC00085B74 /* UIView+Ext.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		16930E39290FB2D0003DFEBE /* Models */ = {
@@ -539,6 +559,7 @@
 				1619BB272918B5E800085B74 /* AuthManager.swift in Sources */,
 				ACE5CDB22912835400D08177 /* ListMerchantResponse.swift in Sources */,
 				AC04BD7E2909914600635147 /* GenerateQrViewController.swift in Sources */,
+				1619BB292919082700085B74 /* TabBarViewController.swift in Sources */,
 				ACE8C35B2916D60700BEA778 /* DummyViewController.swift in Sources */,
 				ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */,
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
@@ -549,10 +570,13 @@
 				ACE5CDA82912716B00D08177 /* GenerateTokenOfflineResponse.swift in Sources */,
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,
 				ACDD097A29128F1E00309FBC /* ListTransactionResponse.swift in Sources */,
+				1619BB2E2919D9DC00085B74 /* UIView+Ext.swift in Sources */,
+				AC67ABE7291515150042FECF /* PartnerDetailResponse.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
 				AC22879429182E8E00397ED0 /* ShowQRViewController.swift in Sources */,
 				119B76562906976E00530C80 /* AppDelegate.swift in Sources */,
 				ACE5CDA42912704800D08177 /* UserInfoResponse.swift in Sources */,
+				1619BB2B2919B74800085B74 /* RegistrationViewController.swift in Sources */,
 				AC00FA35290A5D3600B6347D /* ScanQrViewController.swift in Sources */,
 				AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */,
 				1694878829104CE70088821C /* KeychainHelper.swift in Sources */,

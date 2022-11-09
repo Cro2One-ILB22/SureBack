@@ -22,7 +22,8 @@
 		1619BB2B2919B74800085B74 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB2A2919B74800085B74 /* RegistrationViewController.swift */; };
 		1619BB2E2919D9DC00085B74 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB2D2919D9DC00085B74 /* UIView+Ext.swift */; };
 		1619BB302919FCF700085B74 /* ConfirmRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB2F2919FCF700085B74 /* ConfirmRegistrationViewController.swift */; };
-		16930E3B290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3A290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift */; };
+		1619BB32291B500300085B74 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB31291B500300085B74 /* UIViewController+Ext.swift */; };
+		1619BB34291B525900085B74 /* MerchantDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB33291B525900085B74 /* MerchantDashboardViewController.swift */; };
 		16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */; };
 		16930E3F290FBB27003DFEBE /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3E290FBB27003DFEBE /* AuthResponse.swift */; };
 		1694878829104CE70088821C /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694878729104CE70088821C /* KeychainHelper.swift */; };
@@ -88,7 +89,8 @@
 		1619BB2A2919B74800085B74 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		1619BB2D2919D9DC00085B74 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		1619BB2F2919FCF700085B74 /* ConfirmRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationViewController.swift; sourceTree = "<group>"; };
-		16930E3A290FB2E1003DFEBE /* VerifyInstagramOTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyInstagramOTPResponse.swift; sourceTree = "<group>"; };
+		1619BB31291B500300085B74 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		1619BB33291B525900085B74 /* MerchantDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDashboardViewController.swift; sourceTree = "<group>"; };
 		16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInstagramOTPResponse.swift; sourceTree = "<group>"; };
 		16930E3E290FBB27003DFEBE /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		1694878729104CE70088821C /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
@@ -196,10 +198,10 @@
 				ACE8C3582916267800BEA778 /* LoginViewController.swift */,
 				1619BB282919082700085B74 /* TabBarViewController.swift */,
 				1619BB2A2919B74800085B74 /* RegistrationViewController.swift */,
-				AC22879329182E8E00397ED0 /* ShowQRViewController.swift */,
 				AC2287992918521F00397ED0 /* LoggedInViewController.swift */,
 				1619BB2F2919FCF700085B74 /* ConfirmRegistrationViewController.swift */,
 				AC22879329182E8E00397ED0 /* ShowQRViewController.swift */,
+				1619BB33291B525900085B74 /* MerchantDashboardViewController.swift */,
 			);
 			path = SureBack;
 			sourceTree = "<group>";
@@ -253,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				1619BB2D2919D9DC00085B74 /* UIView+Ext.swift */,
+				1619BB31291B500300085B74 /* UIViewController+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				ACE5CDA82912716B00D08177 /* GenerateTokenOfflineResponse.swift in Sources */,
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,
 				1619BB302919FCF700085B74 /* ConfirmRegistrationViewController.swift in Sources */,
+				1619BB32291B500300085B74 /* UIViewController+Ext.swift in Sources */,
 				ACDD097A29128F1E00309FBC /* ListTransactionResponse.swift in Sources */,
 				1619BB2E2919D9DC00085B74 /* UIView+Ext.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
@@ -587,6 +591,7 @@
 				ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */,
 				16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */,
 				AC3FEDCE290834EA0011202E /* JSONNull.swift in Sources */,
+				1619BB34291B525900085B74 /* MerchantDashboardViewController.swift in Sources */,
 				16930E3F290FBB27003DFEBE /* AuthResponse.swift in Sources */,
 				11B2DD2F2907CF760065E98D /* APICall.swift in Sources */,
 				AC22879A2918521F00397ED0 /* LoggedInViewController.swift in Sources */,

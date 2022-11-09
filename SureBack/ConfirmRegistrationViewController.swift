@@ -81,9 +81,13 @@ class ConfirmRegistrationViewController: UIViewController {
             email: email,
             password: password,
             role: role,
-            username: usernameIG) {
-                data in
-                print(data)
+            username: usernameIG) { data, error in
+                if error != nil {
+                    self.showAlert(title: "Error", message: error?.localizedDescription ?? "", action: "Okey")
+                    return
+                }
+                let mainVC = DummyViewController()
+                self.navigationController?.pushViewController(mainVC, animated: true)
             }
     }
     

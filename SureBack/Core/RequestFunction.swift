@@ -54,7 +54,7 @@ class RequestFunction {
         }
     }
 
-    func preRegister(name: String, email: String, password: String, role: String, username: String, completion: @escaping (RequestInstagramOTPResponse) -> Void) {
+    func preRegister(name: String, email: String, password: String, role: String, username: String, completion: @escaping (RequestInstagramOTPResponse?, AFError?) -> Void) {
         let url = Endpoints.preRegister.url
         let body: [String: Any] = [
             "name": name,
@@ -68,14 +68,15 @@ class RequestFunction {
             .responseDecodable(of: RequestInstagramOTPResponse.self) { response in
                 switch response.result {
                 case let .success(data):
-                    completion(data)
+                    completion(data, nil)
                 case let .failure(error):
+                    completion(nil, error)
                     print("Error: \(error.localizedDescription)")
                 }
             }
     }
 
-    func register(name: String, email: String, password: String, role: String, username: String, completion: @escaping (VerifyInstagramOTPResponse) -> Void) {
+    func register(name: String, email: String, password: String, role: String, username: String, completion: @escaping (AuthResponse?, AFError?) -> Void) {
         let url = Endpoints.register.url
         let body: [String: Any] = [
             "name": name,
@@ -93,8 +94,9 @@ class RequestFunction {
                     .responseDecodable(of: AuthResponse.self) { response in
                         switch response.result {
                         case let .success(data):
-                            print("Data", data)
+                            completion(data, nil)
                         case let .failure(error):
+                            completion(nil, error)
                             print(error.localizedDescription)
                         }
                     }
@@ -133,7 +135,6 @@ extension RequestFunction {
 }
 
 // MARK: Partner
-
 extension RequestFunction {
     func updatePartnerCashbackPercent(cashbackPercent: Float, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
         let url = Endpoints.updateMerchantDetail.url

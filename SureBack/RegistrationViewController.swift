@@ -94,13 +94,12 @@ class RegistrationViewController: UIViewController {
         return button
     }()
     private let loadingIndicator: UIActivityIndicatorView = {
-       let loading = UIActivityIndicatorView()
+        let loading = UIActivityIndicatorView()
         loading.style = .gray
         loading.translatesAutoresizingMaskIntoConstraints = false
         loading.isHidden = true
         return loading
     }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -126,7 +125,13 @@ class RegistrationViewController: UIViewController {
         guard let password = passwordField.text, !password.isEmpty else {return}
         guard let confirmPass = confirmPasswordField.text, !confirmPass.isEmpty else {return}
         let request = RequestFunction()
-        request.preRegister(name: name, email: email, password: password, role: "merchant", username: usernameIG) { result in
+        request.preRegister(name: name, email: email, password: password, role: "merchant", username: usernameIG) { result, error  in
+            if error != nil {
+                self.loadingIndicator.stopAnimating()
+                self.loadingIndicator.isHidden = true
+                self.showAlert(title: "Error", message: error?.localizedDescription ?? "", action: "Oke")
+                return
+            }
             self.loadingIndicator.stopAnimating()
             self.loadingIndicator.isHidden = true
             print(result)

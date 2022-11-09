@@ -11,7 +11,6 @@ struct AuthResponse: Codable {
     let roles: [String]
     let accessToken, tokenType: String
     let expiresIn: Int
-    
     enum CodingKeys: String, CodingKey {
         case roles
         case accessToken = "access_token"

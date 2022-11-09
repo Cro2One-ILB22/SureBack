@@ -38,7 +38,7 @@ enum Endpoints: Endpoint {
         case .login:
             return "\(API.baseUrl)/api/auth/login"
         case .preRegister:
-            return "\(API.baseUrl)/api/auth/instagram-otp"
+            return "\(API.baseUrl)/api/auth/register/instagram-otp"
         case .register:
             return "\(API.baseUrl)/api/auth/verify-instagram-otp"
         case .getAccount:

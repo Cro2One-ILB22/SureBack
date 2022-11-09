@@ -9,7 +9,6 @@ import Alamofire
 import Foundation
 
 // MARK: Auth
-
 class RequestFunction {
     private var accessToken: String {
         do {
@@ -25,7 +24,7 @@ class RequestFunction {
 
         let body: [String: String] = [
             "email": email,
-            "password": password,
+            "password": password
         ]
         AF.request(url, method: .post, parameters: body).responseDecodable(of: LoginResponse.self) {
             response in
@@ -44,44 +43,44 @@ class RequestFunction {
         }
     }
 
-    func preRegister(name: String, email: String, password: String, role: String, username: String) {
+    func preRegister(name: String, email: String, password: String, role: String, username: String, completion: @escaping (RequestInstagramOTPResponse) -> Void) {
         let url = Endpoints.preRegister.url
-        let body: [String: String] = [
+        let body: [String: Any] = [
             "name": name,
             "email": email,
             "password": password,
             "role": role,
-            "username": password,
+            "username": password
         ]
         AF.request(url, method: .post, parameters: body)
             .validate()
             .responseDecodable(of: RequestInstagramOTPResponse.self) { response in
                 switch response.result {
                 case let .success(data):
-                    print("Data", data)
+                    completion(data)
                 case let .failure(error):
                     print(error)
                 }
             }
     }
 
-    func register(name: String, email: String, password: String, role: String, username: String) {
+    func register(name: String, email: String, password: String, role: String, username: String, completion: @escaping (VerifyInstagramOTPResponse) -> Void) {
         let url = Endpoints.register.url
-        let body: [String: String] = [
+        let body: [String: Any] = [
             "name": name,
             "email": email,
             "password": password,
             "role": role,
-            "username": username,
+            "username": username
         ]
         AF.request(url, method: .post, parameters: body)
             .validate()
             .responseDecodable(of: VerifyInstagramOTPResponse.self) { response in
                 switch response.result {
                 case let .success(data):
-                    print("Data", data)
+                    completion(data)
                 case let .failure(error):
-                    print(error.localizedDescription)
+                    print(error)
                 }
             }
     }

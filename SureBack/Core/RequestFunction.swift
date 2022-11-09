@@ -6,6 +6,7 @@
 //
 
 import Alamofire
+import FirebaseMessaging
 import Foundation
 
 // MARK: Auth
@@ -27,20 +28,30 @@ class RequestFunction {
             "password": password,
         ]
 
-        AF.request(url, method: .post, parameters: body).responseDecodable(of: AuthResponse.self) {
-            response in
-            switch response.result {
-            case let .success(data):
-                do {
-                    KeychainHelper.standard.delete(key: .accessToken)
-                    try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
-                } catch {
-                    print(error)
+        fetchHeadersForDeviceRegistration { response in
+            switch response {
+            case let .success(headers):
+                AF.request(url, method: .post, parameters: body, headers: headers).validate().responseDecodable(of: AuthResponse.self) { response in
+                    switch response.result {
+                    case let .success(data):
+                        do {
+                            KeychainHelper.standard.delete(key: .accessToken)
+                            try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
+                        } catch {
+                            print(error)
+                        }
+                    case .failure:
+                        if let data = response.data {
+                            let json = String(data: data, encoding: .utf8)
+                            print("Failure Response: \(String(describing: json))")
+                        }
+                    }
+                    completionHandler(response.result)
                 }
-            case .failure:
-                break
+            case let .failure(error):
+                print(error)
+                completionHandler(.failure(error.asAFError(orFailWith: "Error fetching FCM token")))
             }
-            completionHandler(response.result)
         }
     }
 
@@ -74,16 +85,24 @@ class RequestFunction {
             "role": role,
             "username": username,
         ]
-        AF.request(url, method: .post, parameters: body)
-            .validate()
-            .responseDecodable(of: AuthResponse.self) { response in
-                switch response.result {
-                case let .success(data):
-                    print("Data", data)
-                case let .failure(error):
-                    print(error.localizedDescription)
-                }
+
+        fetchHeadersForDeviceRegistration { response in
+            switch response {
+            case let .success(headers):
+                AF.request(url, method: .post, parameters: body, headers: headers)
+                    .validate()
+                    .responseDecodable(of: AuthResponse.self) { response in
+                        switch response.result {
+                        case let .success(data):
+                            print("Data", data)
+                        case let .failure(error):
+                            print(error.localizedDescription)
+                        }
+                    }
+            case let .failure(error):
+                print(error)
             }
+        }
     }
 
     func getUserInfo(completion: @escaping (Result<UserInfoResponse, AFError>) -> Void) {
@@ -306,6 +325,27 @@ extension RequestFunction {
                 .responseDecodable(of: decodable) { response in
                     completionHandler(response)
                 }
+        }
+    }
+
+    private func fetchHeadersForDeviceRegistration(completion: @escaping (Result<HTTPHeaders, Error>) -> Void
+    ) {
+        var headers: HTTPHeaders = [
+            "x-device-identifier": UIDevice.current.identifierForVendor?.uuidString ?? "",
+            "x-device-name": UIDevice.current.name,
+            "x-device-os": UIDevice.current.systemName,
+            "x-device-os-version": UIDevice.current.systemVersion,
+            "x-device-model": UIDevice.current.model,
+        ]
+
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("Error fetching FCM registration token: \(error)")
+                completion(.failure(error))
+            } else if let token = token {
+                headers["x-device-notification-token"] = token
+                completion(.success(headers))
+            }
         }
     }
 }

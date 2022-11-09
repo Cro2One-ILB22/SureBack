@@ -12,10 +12,33 @@ class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
 
+    weak var delegate: SendDataDelegate?
+
+    let instruction1Label: UILabel = {
+        let label = UILabel()
+        label.text = "Please point the scanner at the"
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.sizeToFit()
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    let instruction2Label: UILabel = {
+        let label = UILabel()
+        label.text = "Customer Identity QR"
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.sizeToFit()
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.black
+
         captureSession = AVCaptureSession()
 
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
@@ -27,7 +50,7 @@ class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             return
         }
 
-        if (captureSession.canAddInput(videoInput)) {
+        if captureSession.canAddInput(videoInput) {
             captureSession.addInput(videoInput)
         } else {
             failed()
@@ -36,7 +59,7 @@ class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 
         let metadataOutput = AVCaptureMetadataOutput()
 
-        if (captureSession.canAddOutput(metadataOutput)) {
+        if captureSession.canAddOutput(metadataOutput) {
             captureSession.addOutput(metadataOutput)
 
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
@@ -51,9 +74,12 @@ class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
 
-        DispatchQueue.global(qos: .background).async{
+        DispatchQueue.global(qos: .background).async {
             self.captureSession.startRunning()
         }
+
+        setupInstruction1()
+        setupInstruction2()
     }
 
     func failed() {
@@ -66,8 +92,8 @@ class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if (captureSession?.isRunning == false) {
-            DispatchQueue.global(qos: .background).async{
+        if captureSession?.isRunning == false {
+            DispatchQueue.global(qos: .background).async {
                 self.captureSession.startRunning()
             }
         }
@@ -76,7 +102,7 @@ class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if (captureSession?.isRunning == true) {
+        if captureSession?.isRunning == true {
             captureSession.stopRunning()
         }
     }
@@ -88,15 +114,15 @@ class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            found(userID: stringValue)
+            found(userData: stringValue)
         }
 
-        self.navigationController?.popToRootViewController(animated: true)
-
+        navigationController?.popToRootViewController(animated: true)
     }
 
-    func found(userID: String) {
-        print(userID) //userID
+    func found(userData: String) {
+        print("scanQR result: \(userData)")
+        delegate?.passData(data: userData)
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -105,5 +131,21 @@ class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
+    }
+}
+
+extension ScanQrViewController {
+    private func setupInstruction1() {
+        view.addSubview(instruction1Label)
+        instruction1Label.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50)
+        instruction1Label.setLeftAnchorConstraint(equalTo: view.leftAnchor)
+        instruction1Label.setRightAnchorConstraint(equalTo: view.rightAnchor)
+    }
+
+    private func setupInstruction2() {
+        view.addSubview(instruction2Label)
+        instruction2Label.setTopAnchorConstraint(equalTo: instruction1Label.bottomAnchor,constant: 5)
+        instruction2Label.setLeftAnchorConstraint(equalTo: view.leftAnchor)
+        instruction2Label.setRightAnchorConstraint(equalTo: view.rightAnchor)
     }
 }

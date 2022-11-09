@@ -32,7 +32,6 @@
 		8A2D3CC34125394E06212A07 /* Pods_SureBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6F53CE101281D823C272BB /* Pods_SureBack.framework */; };
 		9CCB778BAEA00AE5C43FB920 /* Pods_SureBack_SureBackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */; };
 		AC00FA35290A5D3600B6347D /* ScanQrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */; };
-		AC04BD7E2909914600635147 /* GenerateQrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04BD7D2909914600635147 /* GenerateQrViewController.swift */; };
 		AC04BD80290995AD00635147 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04BD7F290995AD00635147 /* Function.swift */; };
 		AC1A6CBB291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */; };
 		AC22879429182E8E00397ED0 /* ShowQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC22879329182E8E00397ED0 /* ShowQRViewController.swift */; };
@@ -105,7 +104,6 @@
 		956FF58F6BF05A02F4470599 /* Pods-SureBackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBackTests.release.xcconfig"; path = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.release.xcconfig"; sourceTree = "<group>"; };
 		A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBackTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQrViewController.swift; sourceTree = "<group>"; };
-		AC04BD7D2909914600635147 /* GenerateQrViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateQrViewController.swift; sourceTree = "<group>"; };
 		AC04BD7F290995AD00635147 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantGenerateTokenViewController.swift; sourceTree = "<group>"; };
 		AC22879329182E8E00397ED0 /* ShowQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowQRViewController.swift; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 				119B765E2906976F00530C80 /* Assets.xcassets */,
 				119B76602906976F00530C80 /* LaunchScreen.storyboard */,
 				119B76632906976F00530C80 /* Info.plist */,
-				AC04BD7D2909914600635147 /* GenerateQrViewController.swift */,
 				AC04BD7F290995AD00635147 /* Function.swift */,
 				AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */,
 				ACE8C35A2916D60700BEA778 /* DummyViewController.swift */,
@@ -567,7 +564,6 @@
 			files = (
 				1619BB272918B5E800085B74 /* AuthManager.swift in Sources */,
 				ACE5CDB22912835400D08177 /* ListMerchantResponse.swift in Sources */,
-				AC04BD7E2909914600635147 /* GenerateQrViewController.swift in Sources */,
 				1619BB292919082700085B74 /* TabBarViewController.swift in Sources */,
 				ACE8C35B2916D60700BEA778 /* DummyViewController.swift in Sources */,
 				ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */,

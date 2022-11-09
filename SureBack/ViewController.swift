@@ -23,29 +23,15 @@ class ViewController: UIViewController {
 
         view.backgroundColor = .white
         navigationItem.title = "Testingg"
-        
-        let buttonGenerate = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
-        buttonGenerate.backgroundColor = .blue
-        buttonGenerate.layer.cornerRadius = 15
-        buttonGenerate.setTitle("Generate QR Code", for: .normal)
-        buttonGenerate.addTarget(self, action: #selector(generateQrButtonAction), for: .touchUpInside)
-
-        view.addSubview(buttonGenerate)
 
         buttonScan.addTarget(self, action: #selector(scanQrButtonAction), for: .touchUpInside)
         view.addSubview(buttonScan)
-    }
-
-    @objc func generateQrButtonAction(sender: UIButton!) {
-        print("Button Generate tapped")
-        let generateQrVC = GenerateQrViewController()
-        navigationController?.pushViewController(generateQrVC, animated: true)
-//        self.present(generateQrVC, animated: true, completion: nil)
     }
 
     @objc func scanQrButtonAction(sender: UIButton!) {
         print("Button Scan QR tapped")
         let scanQrVC = ScanQrViewController()
         navigationController?.pushViewController(scanQrVC, animated: true)
+//        self.present(generateQrVC, animated: true, completion: nil)
     }
 }

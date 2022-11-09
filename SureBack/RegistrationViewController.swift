@@ -7,6 +7,14 @@
 
 import UIKit
 
+struct Register {
+    let name: String
+    let usernameIG: String
+    let email: String
+    let role: String
+    let password: String
+}
+
 class RegistrationViewController: UIViewController {
     private let titleTextView: UITextView = {
         let title = UITextView()
@@ -18,7 +26,7 @@ class RegistrationViewController: UIViewController {
         title.isScrollEnabled = false
         return title
     }()
-    private let namelField: UITextField = {
+    private let nameField: UITextField = {
         let nameField = UITextField()
         nameField.placeholder = "Name"
         nameField.layer.borderWidth = 1
@@ -76,7 +84,8 @@ class RegistrationViewController: UIViewController {
     }()
     private let signUpButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = .gray
+        button.isEnabled = false
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Join", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +93,13 @@ class RegistrationViewController: UIViewController {
         button.layer.cornerRadius = 10
         return button
     }()
-
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.style = .gray
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.isHidden = true
+        return loading
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -92,11 +107,62 @@ class RegistrationViewController: UIViewController {
         setupTextFields()
         setupAlreadyHaveAccount()
         setupButton()
+        setupLoadingIndicator()
         signUpButton.addTarget(self, action: #selector(signUpTapped), for: .touchUpInside)
         toSignInLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(signInTapped)))
+        nameField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
+        usernamIGField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
+        emaillField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
+        passwordField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
+        confirmPasswordField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
     }
     @objc func signUpTapped() {
-        print("Tapped")
+        loadingIndicator.startAnimating()
+        loadingIndicator.isHidden = false
+        guard let name = nameField.text, !name.isEmpty else {return}
+        guard let usernameIG = usernamIGField.text?.lowercased(), !usernameIG.isEmpty else {return}
+        guard let email = emaillField.text, !email.isEmpty else {return}
+        guard let password = passwordField.text, !password.isEmpty else {return}
+        guard let confirmPass = confirmPasswordField.text, !confirmPass.isEmpty else {return}
+        let request = RequestFunction()
+        request.preRegister(name: name, email: email, password: password, role: "merchant", username: usernameIG) { result, error  in
+            if error != nil {
+                self.loadingIndicator.stopAnimating()
+                self.loadingIndicator.isHidden = true
+                self.showAlert(title: "Error", message: error?.localizedDescription ?? "", action: "Oke")
+                return
+            }
+            self.loadingIndicator.stopAnimating()
+            self.loadingIndicator.isHidden = true
+            print(result)
+            let confirmRegistVC = ConfirmRegistrationViewController()
+            let dataRegister = Register(
+                name: name,
+                usernameIG: usernameIG,
+                email: email,
+                role: "merchant",
+                password: password)
+            confirmRegistVC.responseOTP = result
+            confirmRegistVC.dataRegister = dataRegister
+            self.navigationController?.pushViewController(confirmRegistVC, animated: true)
+        }
+    }
+    @objc func handleTextChanged() {
+        guard let name = nameField.text,
+              let usernameIG = usernamIGField.text,
+              let email = emaillField.text,
+              let password = passwordField.text,
+              let confirmPass = confirmPasswordField.text else {
+            return
+        }
+        let isFormFilled = !name.isEmpty && !usernameIG.isEmpty && !email.isEmpty && !password.isEmpty && !confirmPass.isEmpty
+        if isFormFilled {
+            signUpButton.backgroundColor = .blue
+            signUpButton.isEnabled = true
+        } else {
+            signUpButton.backgroundColor = .gray
+            signUpButton.isEnabled = false
+        }
     }
     @objc func signInTapped() {
         print("Sign in tapped")
@@ -111,7 +177,7 @@ extension RegistrationViewController {
         titleTextView.setRightAnchorConstraint(equalTo: view.rightAnchor)
     }
     private func setupTextFields() {
-        let stackView = UIStackView(arrangedSubviews: [namelField, usernamIGField, emaillField, passwordField, confirmPasswordField])
+        let stackView = UIStackView(arrangedSubviews: [nameField, usernamIGField, emaillField, passwordField, confirmPasswordField])
         stackView.axis = .vertical
         stackView.spacing = 10
         stackView.distribution = .fillEqually
@@ -137,5 +203,10 @@ extension RegistrationViewController {
         signUpButton.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 40)
         signUpButton.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -40)
         signUpButton.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+    }
+    private func setupLoadingIndicator() {
+        view.addSubview(loadingIndicator)
+        loadingIndicator.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
+        loadingIndicator.setCenterYAnchorConstraint(equalTo: view.centerYAnchor)
     }
 }

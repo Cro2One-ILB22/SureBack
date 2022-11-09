@@ -10,7 +10,6 @@ import FirebaseMessaging
 import Foundation
 
 // MARK: Auth
-
 class RequestFunction {
     private var accessToken: String {
         do {
@@ -25,7 +24,7 @@ class RequestFunction {
         let url = Endpoints.login.url
         let body: [String: String] = [
             "email": email,
-            "password": password,
+            "password": password
         ]
 
         fetchHeadersForDeviceRegistration { response in
@@ -55,9 +54,9 @@ class RequestFunction {
         }
     }
 
-    func preRegister(name: String, email: String, password: String, role: String, username: String) {
+    func preRegister(name: String, email: String, password: String, role: String, username: String, completion: @escaping (RequestInstagramOTPResponse?, AFError?) -> Void) {
         let url = Endpoints.preRegister.url
-        let body: [String: String] = [
+        let body: [String: Any] = [
             "name": name,
             "email": email,
             "password": password,
@@ -69,21 +68,22 @@ class RequestFunction {
             .responseDecodable(of: RequestInstagramOTPResponse.self) { response in
                 switch response.result {
                 case let .success(data):
-                    print("Data", data)
+                    completion(data, nil)
                 case let .failure(error):
+                    completion(nil, error)
                     print("Error: \(error.localizedDescription)")
                 }
             }
     }
 
-    func register(name: String, email: String, password: String, role: String, username: String) {
+    func register(name: String, email: String, password: String, role: String, username: String, completion: @escaping (AuthResponse?, AFError?) -> Void) {
         let url = Endpoints.register.url
-        let body: [String: String] = [
+        let body: [String: Any] = [
             "name": name,
             "email": email,
             "password": password,
             "role": role,
-            "username": username,
+            "username": username
         ]
 
         fetchHeadersForDeviceRegistration { response in
@@ -94,8 +94,9 @@ class RequestFunction {
                     .responseDecodable(of: AuthResponse.self) { response in
                         switch response.result {
                         case let .success(data):
-                            print("Data", data)
+                            completion(data, nil)
                         case let .failure(error):
+                            completion(nil, error)
                             print(error.localizedDescription)
                         }
                     }
@@ -134,7 +135,6 @@ extension RequestFunction {
 }
 
 // MARK: Partner
-
 extension RequestFunction {
     func updatePartnerCashbackPercent(cashbackPercent: Float, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
         let url = Endpoints.updateMerchantDetail.url

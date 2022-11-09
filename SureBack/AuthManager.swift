@@ -23,7 +23,7 @@ final class AuthManager {
     private var tokenExpirationDate: Date? {
         return nil
     }
-    public func cacheToken(result: LoginResponse) {
+    public func cacheToken(result: AuthResponse) {
         do {
             try KeychainHelper.standard.save(key: .accessToken, value: result.accessToken)
             // Expired Date :

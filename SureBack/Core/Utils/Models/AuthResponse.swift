@@ -1,5 +1,5 @@
 //
-//  LoginResponse.swift
+//  AuthResponse.swift
 //  SureBack
 //
 //  Created by Tubagus Adhitya Permana on 31/10/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LoginResponse: Codable {
+struct AuthResponse: Codable {
     let roles: [String]
     let accessToken, tokenType: String
     let expiresIn: Int

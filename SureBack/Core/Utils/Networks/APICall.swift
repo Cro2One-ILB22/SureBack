@@ -23,13 +23,12 @@ enum Endpoints: Endpoint {
     case getProfileIG
     case getUserIG
     case generateToken
-    case submitStory
-    case getStoryIG
+    case toStoryIG
     case redeemToken
     case updateUser
     case updateMerchantDetail
     case getListCustomer
-    case getListPartner
+    case getListMerchant
     case getListTransaction
     case approveOrRejectStory
 
@@ -40,7 +39,7 @@ enum Endpoints: Endpoint {
         case .preRegister:
             return "\(API.baseUrl)/api/auth/register/instagram-otp"
         case .register:
-            return "\(API.baseUrl)/api/auth/verify-instagram-otp"
+            return "\(API.baseUrl)/api/auth/register"
         case .getAccount:
             return "\(API.baseUrl)/api/auth/me"
         case .getProfileIG:
@@ -49,9 +48,7 @@ enum Endpoints: Endpoint {
             return "\(API.baseUrl)/api/ig/user/"
         case .generateToken:
             return "\(API.baseUrl)/api/ig/token/generate"
-        case .submitStory:
-            return "\(API.baseUrl)/api/ig/story"
-        case .getStoryIG:
+        case .toStoryIG:
             return "\(API.baseUrl)/api/ig/story"
         case .redeemToken:
             return "\(API.baseUrl)/api/ig/token/redeem"
@@ -61,8 +58,8 @@ enum Endpoints: Endpoint {
             return "\(API.baseUrl)/api/user/merchant-detail"
         case .getListCustomer:
             return "\(API.baseUrl)/api/customer"
-        case .getListPartner:
-            return "\(API.baseUrl)/api/partner"
+        case .getListMerchant:
+            return "\(API.baseUrl)/api/merchant"
         case .getListTransaction:
             return "\(API.baseUrl)/api/transaction"
         case .approveOrRejectStory:

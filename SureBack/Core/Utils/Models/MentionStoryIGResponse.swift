@@ -14,12 +14,12 @@ struct MentionStoryIGResponse: Codable {
 // MARK: - ResultStoryIG
 
 struct ResultStoryIG: Codable {
-    let id: String
+    let id: Int
     let takenAt, expiringAt, mediaType: Int
     let imageURL: String
-    let videoURL, musicMetadata: JSONNull?
+    let videoURL, musicMetadata: String?
     let storyURL: String
-    let submittedAt: JSONNull?
+    let submittedAt: Int?
 
     enum CodingKeys: String, CodingKey {
         case id

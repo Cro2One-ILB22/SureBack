@@ -41,9 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().delegate = self
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        let viewController = RegistrationViewController()
+        let viewController = MerchantDashboardViewController()
         let nav = UINavigationController(rootViewController: viewController)
-        window?.rootViewController = nav
+        window?.rootViewController = TabBarViewController()
         window?.makeKeyAndVisible()
 
         return true

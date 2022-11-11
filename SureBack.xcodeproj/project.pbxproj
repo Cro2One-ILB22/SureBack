@@ -28,6 +28,12 @@
 		16930E3F290FBB27003DFEBE /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3E290FBB27003DFEBE /* AuthResponse.swift */; };
 		1694878829104CE70088821C /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694878729104CE70088821C /* KeychainHelper.swift */; };
 		16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */; };
+		16BD919E291C58860010731E /* UIScreen+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD919D291C58860010731E /* UIScreen+Ext.swift */; };
+		16BD91A3291D52610010731E /* CoinHistoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91A2291D52610010731E /* CoinHistoryCardView.swift */; };
+		16BD91A5291D527C0010731E /* BussinesStatusCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91A4291D527C0010731E /* BussinesStatusCardView.swift */; };
+		16BD91A7291D52E30010731E /* StoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91A6291D52E30010731E /* StoryTableViewCell.swift */; };
+		16BD91A9291D534C0010731E /* HeaderMerchantDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91A8291D534C0010731E /* HeaderMerchantDashboardView.swift */; };
+		16BD91AB291E88790010731E /* ItemStoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91AA291E88790010731E /* ItemStoryCollectionViewCell.swift */; };
 		2DDDD70EABE69B42303C1AED /* Pods_SureBackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */; };
 		8A2D3CC34125394E06212A07 /* Pods_SureBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6F53CE101281D823C272BB /* Pods_SureBack.framework */; };
 		9CCB778BAEA00AE5C43FB920 /* Pods_SureBack_SureBackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */; };
@@ -95,6 +101,12 @@
 		16930E3E290FBB27003DFEBE /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		1694878729104CE70088821C /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveOrRejectStoryResponse.swift; sourceTree = "<group>"; };
+		16BD919D291C58860010731E /* UIScreen+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Ext.swift"; sourceTree = "<group>"; };
+		16BD91A2291D52610010731E /* CoinHistoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinHistoryCardView.swift; sourceTree = "<group>"; };
+		16BD91A4291D527C0010731E /* BussinesStatusCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BussinesStatusCardView.swift; sourceTree = "<group>"; };
+		16BD91A6291D52E30010731E /* StoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTableViewCell.swift; sourceTree = "<group>"; };
+		16BD91A8291D534C0010731E /* HeaderMerchantDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMerchantDashboardView.swift; sourceTree = "<group>"; };
+		16BD91AA291E88790010731E /* ItemStoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack_SureBackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FB4E7EBF11E0E918FCC83A /* Pods-SureBack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBack.release.xcconfig"; path = "Target Support Files/Pods-SureBack/Pods-SureBack.release.xcconfig"; sourceTree = "<group>"; };
 		5F47E67A5BE033AB27E63DDB /* Pods-SureBackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBackTests.debug.xcconfig"; path = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -181,6 +193,7 @@
 		119B76542906976E00530C80 /* SureBack */ = {
 			isa = PBXGroup;
 			children = (
+				16BD919F291D521D0010731E /* Views */,
 				1619BB2C2919D9C600085B74 /* Extension */,
 				ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */,
 				ACC1C0F829141D71003E2FD8 /* SureBack.entitlements */,
@@ -201,7 +214,6 @@
 				AC2287992918521F00397ED0 /* LoggedInViewController.swift */,
 				1619BB2F2919FCF700085B74 /* ConfirmRegistrationViewController.swift */,
 				AC22879329182E8E00397ED0 /* ShowQRViewController.swift */,
-				1619BB33291B525900085B74 /* MerchantDashboardViewController.swift */,
 			);
 			path = SureBack;
 			sourceTree = "<group>";
@@ -256,6 +268,7 @@
 			children = (
 				1619BB2D2919D9DC00085B74 /* UIView+Ext.swift */,
 				1619BB31291B500300085B74 /* UIViewController+Ext.swift */,
+				16BD919D291C58860010731E /* UIScreen+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -277,6 +290,35 @@
 				AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		16BD919F291D521D0010731E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				16BD91A0291D52280010731E /* MerchantDashboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		16BD91A0291D52280010731E /* MerchantDashboard */ = {
+			isa = PBXGroup;
+			children = (
+				16BD91A1291D52380010731E /* Components */,
+				1619BB33291B525900085B74 /* MerchantDashboardViewController.swift */,
+			);
+			path = MerchantDashboard;
+			sourceTree = "<group>";
+		};
+		16BD91A1291D52380010731E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				16BD91A2291D52610010731E /* CoinHistoryCardView.swift */,
+				16BD91A4291D527C0010731E /* BussinesStatusCardView.swift */,
+				16BD91A6291D52E30010731E /* StoryTableViewCell.swift */,
+				16BD91A8291D534C0010731E /* HeaderMerchantDashboardView.swift */,
+				16BD91AA291E88790010731E /* ItemStoryCollectionViewCell.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		D3D0951AA4B7EF45A5C42768 /* Pods */ = {
@@ -564,13 +606,16 @@
 			files = (
 				1619BB272918B5E800085B74 /* AuthManager.swift in Sources */,
 				ACE5CDB22912835400D08177 /* ListMerchantResponse.swift in Sources */,
+				16BD91AB291E88790010731E /* ItemStoryCollectionViewCell.swift in Sources */,
 				AC04BD7E2909914600635147 /* GenerateQrViewController.swift in Sources */,
 				1619BB292919082700085B74 /* TabBarViewController.swift in Sources */,
+				16BD91A5291D527C0010731E /* BussinesStatusCardView.swift in Sources */,
 				ACE8C35B2916D60700BEA778 /* DummyViewController.swift in Sources */,
 				ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */,
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
 				ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */,
 				ACE5CDB029127E6200D08177 /* ListCustomerResponse.swift in Sources */,
+				16BD919E291C58860010731E /* UIScreen+Ext.swift in Sources */,
 				16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */,
 				119B765A2906976E00530C80 /* ViewController.swift in Sources */,
 				ACE5CDA82912716B00D08177 /* GenerateTokenOfflineResponse.swift in Sources */,
@@ -582,7 +627,10 @@
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
 				AC22879429182E8E00397ED0 /* ShowQRViewController.swift in Sources */,
+				16BD91A7291D52E30010731E /* StoryTableViewCell.swift in Sources */,
 				119B76562906976E00530C80 /* AppDelegate.swift in Sources */,
+				16BD91A9291D534C0010731E /* HeaderMerchantDashboardView.swift in Sources */,
+				16BD91A3291D52610010731E /* CoinHistoryCardView.swift in Sources */,
 				ACE5CDA42912704800D08177 /* UserInfoResponse.swift in Sources */,
 				1619BB2B2919B74800085B74 /* RegistrationViewController.swift in Sources */,
 				AC00FA35290A5D3600B6347D /* ScanQrViewController.swift in Sources */,

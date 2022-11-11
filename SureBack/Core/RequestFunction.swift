@@ -85,7 +85,6 @@ class RequestFunction {
             "role": role,
             "username": username
         ]
-
         fetchHeadersForDeviceRegistration { response in
             switch response {
             case let .success(headers):

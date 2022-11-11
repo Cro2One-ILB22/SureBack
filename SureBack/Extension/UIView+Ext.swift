@@ -32,4 +32,13 @@ extension UIView {
     func setCenterYAnchorConstraint(equalTo: NSLayoutAnchor<NSLayoutYAxisAnchor>, constant: CGFloat = 0) {
         centerYAnchor.constraint(equalTo: equalTo, constant: constant).isActive = true
     }
+    func setHeightAnchorConstraint(equalToConstant: CGFloat) {
+        heightAnchor.constraint(equalToConstant: equalToConstant).isActive = true
+    }
+    func setWidthAnchorConstraint(equalToConstant: CGFloat) {
+        widthAnchor.constraint(equalToConstant: equalToConstant).isActive = true
+    }
+    func setWidthAnchorConstraint(equalTo: NSLayoutAnchor<NSLayoutDimension>) {
+        widthAnchor.constraint(equalTo: equalTo).isActive = true
+    }
 }

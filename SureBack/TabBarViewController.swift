@@ -12,7 +12,7 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let dashboardVC = ViewController()
+        let dashboardVC = MerchantDashboardViewController()
         let qrVC = ViewController()
         let profileVC = ViewController()
         let navDashboard = UINavigationController(rootViewController: dashboardVC)

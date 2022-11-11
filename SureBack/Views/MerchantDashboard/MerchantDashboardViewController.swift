@@ -68,3 +68,25 @@ extension MerchantDashboardViewController {
         tableView.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     }
 }
+
+//#if DEBUG
+//import SwiftUI
+//struct UIKitPreviewProvider: UIViewControllerRepresentable {
+//    typealias UIViewControllerType = UIViewController
+//    private let viewController: UIViewController
+//    init (vc: UIViewControllerType) {
+//        viewController = vc
+//    }
+//    func makeUIViewController(context: Context) -> UIViewController {
+//        return viewController
+//    }
+//    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+//    }
+//}
+//@available(iOS 13.0, *)
+//struct VC_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UIKitPreviewProvider(vc: MerchantDashboardViewController(nibName: nil, bundle: nil))
+//    }
+//}
+//#endif

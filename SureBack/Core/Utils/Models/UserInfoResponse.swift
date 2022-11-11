@@ -18,6 +18,7 @@ struct UserInfoResponse: Codable {
     let emailVerifiedAt: String?
     let createdAt, updatedAt: String
     let roles: [String]?
+    let profilePicture: String?
     let merchantDetail: MerchantDetailResponse?
 
     enum CodingKeys: String, CodingKey {
@@ -29,6 +30,7 @@ struct UserInfoResponse: Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case roles
+        case profilePicture
         case merchantDetail = "merchant_detail"
     }
 }

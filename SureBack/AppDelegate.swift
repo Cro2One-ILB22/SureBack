@@ -112,4 +112,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         completionHandler(UIBackgroundFetchResult.newData)
     }
+
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let env = ProcessInfo.processInfo.environment["ENV"]
+        let apnsTokenType: MessagingAPNSTokenType = env == "development" ? .sandbox : .prod
+        Messaging.messaging().setAPNSToken(deviceToken, type: apnsTokenType)
+    }
 }

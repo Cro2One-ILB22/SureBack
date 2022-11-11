@@ -11,22 +11,33 @@ import Foundation
 struct GenerateTokenOfflineResponse: Codable {
     let id: Int
     let token: String
-    let instagramID, purchaseAmount, cashbackAmount: Int
-    let cashbackPercent: Float
+    let instagramID, purchaseAmount: Int
     let expiresAt, createdAt, updatedAt: String
     let story: ApproveOrRejectStoryResponse
+    let cashback: Cashback
     let merchant: UserInfoResponse?
 
     enum CodingKeys: String, CodingKey {
         case id, token
         case instagramID = "instagram_id"
         case purchaseAmount = "purchase_amount"
-        case cashbackAmount = "cashback_amount"
-        case cashbackPercent = "cashback_percent"
         case expiresAt = "expires_at"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case story, merchant
+        case story, cashback, merchant
+    }
+}
+
+// MARK: - Cashback
+struct Cashback: Codable {
+    let amount: Int
+    let percent: Double
+    let type, createdAt, updatedAt: String
+
+    enum CodingKeys: String, CodingKey {
+        case amount, percent, type
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 }
 

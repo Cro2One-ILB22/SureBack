@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
 
     let firstLabel: UILabel = {
         let label = UILabel()
-        label.text = "Haven't sign up yet?"
+        label.text = "Don't have an account yet, "
         label.font = UIFont.systemFont(ofSize: 15)
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
 
     let toRegisterLabel: UILabel = {
         let label = UILabel()
-        label.text = "Sign up"
+        label.text = "join now"
         label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = .blue
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -59,66 +59,54 @@ class LoginViewController: UIViewController {
 
     let loginButton: UIButton = {
         let button = UIButton()
+        button.backgroundColor = .gray
+        button.isEnabled = false
+        button.setTitleColor(.white, for: .normal)
         button.setTitle("Login", for: .normal)
-        button.backgroundColor = .blue
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.layer.cornerRadius = 10
         return button
+    }()
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.style = .gray
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.isHidden = true
+        return loading
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let stackView = mainStackView()
-
         view.backgroundColor = .white
-        view.addSubview(titleTextView)
-        view.addSubview(stackView)
-        view.addSubview(firstLabel)
-        view.addSubview(toRegisterLabel)
-        view.addSubview(loginButton)
+
+        setupTitle()
+        setupTextFields()
+        setupToRegister()
+        setupButton()
+        setupLoadingIndicator()
 
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-
-        let registerTapped = UITapGestureRecognizer(target: self, action: #selector(registerButtonTapped))
-        toRegisterLabel.addGestureRecognizer(registerTapped)
+        toRegisterLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(registerButtonTapped)))
         toRegisterLabel.isUserInteractionEnabled = true
 
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
-
-        stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        stackView.topAnchor.constraint(equalTo: titleTextView.topAnchor, constant: 120).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
-
-        firstLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 100).isActive = true
-        firstLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        firstLabel.trailingAnchor.constraint(equalTo: toRegisterLabel.leadingAnchor).isActive = true
-
-        toRegisterLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 100).isActive = true
-        toRegisterLabel.leadingAnchor.constraint(equalTo: firstLabel.trailingAnchor).isActive = true
-        toRegisterLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-
-        loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        loginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
-
-        setupLayout()
+        emailTextField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
     }
 
-    private func setupLayout() {
-        titleTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        titleTextView.topAnchor.constraint(equalTo: view.topAnchor, constant: 120).isActive = true
-        titleTextView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        titleTextView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-    }
-
-    func mainStackView() -> UIStackView {
-        let stackView = UIStackView(arrangedSubviews: [emailTextField,
-                                                       passwordTextField])
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.spacing = 10
-        return stackView
+    @objc func handleTextChanged() {
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text else {
+            return
+        }
+        let isFormFilled = !email.isEmpty && !password.isEmpty
+        if isFormFilled {
+            loginButton.backgroundColor = .blue
+            loginButton.isEnabled = true
+        } else {
+            loginButton.backgroundColor = .gray
+            loginButton.isEnabled = false
+        }
     }
 
     @objc func loginButtonTapped() {
@@ -154,5 +142,48 @@ class LoginViewController: UIViewController {
         let registerVC = DummyViewController()
         registerVC.title = "Dummy Register"
         navigationController?.pushViewController(registerVC, animated: true)
+    }
+
+}
+
+extension LoginViewController {
+    private func setupTitle() {
+        view.addSubview(titleTextView)
+        titleTextView.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30)
+        titleTextView.setLeftAnchorConstraint(equalTo: view.leftAnchor)
+        titleTextView.setRightAnchorConstraint(equalTo: view.rightAnchor)
+    }
+    private func setupTextFields() {
+        let stackView = UIStackView(arrangedSubviews: [emailTextField,
+                                                       passwordTextField])
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stackView)
+        stackView.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
+        stackView.setTopAnchorConstraint(equalTo: titleTextView.bottomAnchor, constant: 50)
+        stackView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 30)
+    }
+    private func setupToRegister() {
+        let stackView = UIStackView(arrangedSubviews: [firstLabel, toRegisterLabel])
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stackView)
+        stackView.setTopAnchorConstraint(equalTo: passwordTextField.bottomAnchor, constant: 15)
+        stackView.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
+    }
+    private func setupButton() {
+        view.addSubview(loginButton)
+        loginButton.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 40)
+        loginButton.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -40)
+        loginButton.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+    }
+    private func setupLoadingIndicator() {
+        view.addSubview(loadingIndicator)
+        loadingIndicator.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
+        loadingIndicator.setCenterYAnchorConstraint(equalTo: view.centerYAnchor)
     }
 }

@@ -1,37 +1,39 @@
 //
-//  GenerateTokenOfflineResponse.swift
+//  Token.swift
 //  SureBack
 //
-//  Created by Ditha Nurcahya Avianty on 02/11/22.
+//  Created by Ditha Nurcahya Avianty on 12/11/22.
 //
 
 import Foundation
 
-// MARK: - GenerateTokenOfflineResponse
-struct GenerateTokenOfflineResponse: Codable {
+// MARK: - Token
+struct Token: Codable {
     let id: Int
-    let token: String
-    let instagramID, purchaseAmount: Int
+    let code: String
+    let instagramID: Int
     let expiresAt, createdAt, updatedAt: String
-    let story: ApproveOrRejectStoryResponse
-    let cashback: Cashback
-    let merchant: UserInfoResponse?
+    let merchant: UserInfoResponse
+    let purchase: ScanQrResponse
+    let story: ApproveOrRejectStoryResponse?
+    let tokenCashback: TokenCashback?
 
     enum CodingKeys: String, CodingKey {
-        case id, token
+        case id, code
         case instagramID = "instagram_id"
-        case purchaseAmount = "purchase_amount"
         case expiresAt = "expires_at"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case story, cashback, merchant
+        case merchant, purchase
+        case tokenCashback
+        case story
     }
 }
 
-// MARK: - Cashback
-struct Cashback: Codable {
+// MARK: - TokenCashback
+struct TokenCashback: Codable {
     let amount: Int
-    let percent: Double
+    let percent: JSONNull?
     let type, createdAt, updatedAt: String
 
     enum CodingKeys: String, CodingKey {
@@ -40,5 +42,3 @@ struct Cashback: Codable {
         case updatedAt = "updated_at"
     }
 }
-
-

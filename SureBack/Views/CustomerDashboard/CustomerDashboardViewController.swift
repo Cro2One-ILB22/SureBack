@@ -16,6 +16,8 @@ struct MerchantData {
 }
 
 class CustomerDashboardViewController: UIViewController {
+
+    let request = RequestFunction()
     var user: UserInfoResponse?
     var merchantData = [MerchantData]()
 
@@ -30,7 +32,6 @@ class CustomerDashboardViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
-        let request = RequestFunction()
         request.getUserInfo { data in
             switch data {
             case let .success(result):
@@ -55,6 +56,8 @@ class CustomerDashboardViewController: UIViewController {
         tableView.tableHeaderView = headerView
         headerView.activeTokenCard.redeemButton.addTarget(self, action: #selector(redeemTokenTapped), for: .touchUpInside)
         headerView.seeAllMerchantButton.addTarget(self, action: #selector(seeAllMerchantTapped), for: .touchUpInside)
+
+        getMerchantData()
     }
 
     @objc func redeemTokenTapped() {
@@ -62,6 +65,12 @@ class CustomerDashboardViewController: UIViewController {
     }
     @objc func seeAllMerchantTapped() {
         print("see All Merchant tapped")
+    }
+
+    func getMerchantData() {
+        request.getListMerchant { data in
+            print(data)
+        }
     }
 
     func addDummyData() {

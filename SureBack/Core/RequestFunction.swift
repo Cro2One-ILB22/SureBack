@@ -10,6 +10,7 @@ import FirebaseMessaging
 import Foundation
 
 // MARK: Auth
+
 class RequestFunction {
     private var accessToken: String {
         do {
@@ -24,7 +25,7 @@ class RequestFunction {
         let url = Endpoints.login.url
         let body: [String: String] = [
             "email": email,
-            "password": password
+            "password": password,
         ]
 
         fetchHeadersForDeviceRegistration { response in
@@ -83,7 +84,7 @@ class RequestFunction {
             "email": email,
             "password": password,
             "role": role,
-            "username": username
+            "username": username,
         ]
         fetchHeadersForDeviceRegistration { response in
             switch response {
@@ -134,6 +135,7 @@ extension RequestFunction {
 }
 
 // MARK: Partner
+
 extension RequestFunction {
     func updatePartnerCashbackPercent(cashbackPercent: Float, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
         let url = Endpoints.updateMerchantDetail.url
@@ -198,8 +200,8 @@ extension RequestFunction {
         }
     }
 
-    func submitStory(storyId: Int, instagtamStoryId: Int) {
-        let url = Endpoints.register.url
+    func submitStory(storyId: Int, instagtamStoryId: Int, completion: @escaping (Result<Data?, AFError>) -> Void) {
+        let url = Endpoints.submitStory.url
         let body: [String: Int] = [
             "story_id": storyId,
             "instagram_story_id": instagtamStoryId,
@@ -209,12 +211,17 @@ extension RequestFunction {
             "Accept": "application/json",
         ]
         AF.request(url, method: .post, parameters: body, headers: headers)
+            .validate()
             .response { response in
+                completion(response.result)
                 switch response.result {
-                case let .success(data):
-                    print(data)
+                case .success:
+                    break
                 case let .failure(error):
-                    print(error)
+                    if let data = response.data {
+                        let json = String(data: data, encoding: .utf8)
+                        print("Failure Response: \(String(describing: json))")
+                    }
                 }
             }
     }
@@ -230,26 +237,49 @@ extension RequestFunction {
         }
     }
 
-    func postGenerateTokenOffline(customerId: Int, purchaseAmount: Int, completion: @escaping (Result<GenerateTokenOfflineResponse, AFError>) -> Void) {
-        let url = Endpoints.generateToken.url
+    func postGenerateTokenOffline(customerId: Int, purchaseAmount: Int, isRequestingToken: Int, completion: @escaping (Result<ScanQrResponse, AFError>) -> Void) {
+        let url = Endpoints.scanQr.url
         let body: [String: Int] = [
             "customer_id": customerId,
             "purchase_amount": purchaseAmount,
+            "is_requesting_for_token": isRequestingToken,
         ]
 
-        requestWithToken(url: url, method: .post, parameters: body, decodable: GenerateTokenOfflineResponse.self) {
-            completion($0.result)
+        requestWithToken(url: url, method: .post, parameters: body, decodable: ScanQrResponse.self) {
+            response in
+            completion(response.result)
+            switch response.result {
+            case .success:
+                break
+            case let .failure(error):
+                if let data = response.data {
+                    let json = String(data: data, encoding: .utf8)
+                    print("Failure Response: \(String(describing: json))")
+                }
+            }
         }
     }
 
-    func redeemToken(token: String, completion: @escaping (Result<GenerateTokenOfflineResponse, AFError>) -> Void) {
+    func redeemToken(token: String, completion: @escaping (Result<Token, AFError>) -> Void) {
         let url = Endpoints.redeemToken.url
         let body: [String: String] = [
             "token": token,
         ]
 
-        requestWithToken(url: url, method: .post, parameters: body, decodable: GenerateTokenOfflineResponse.self) {
-            completion($0.result)
+        requestWithToken(url: url, method: .post, parameters: body, decodable: Token.self) {
+            //            completion($0.result)
+            response in
+            completion(response.result)
+            switch response.result {
+            case .success:
+                break
+            case let .failure(error):
+                //                print(error.localizedDescription)
+                if let data = response.data {
+                    let json = String(data: data, encoding: .utf8)
+                    print("Failure Response: \(String(describing: json))")
+                }
+            }
         }
     }
 

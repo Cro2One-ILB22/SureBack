@@ -12,31 +12,39 @@ struct ListTransactionResponse: Codable {
     let results: [Transaction]
 }
 
-// MARK: - Result
+// MARK: - Transaction
 struct Transaction: Codable {
     let id, amount: Int
-    let category: Category
     let resultDescription: JSONNull?
-    let type: TypeEnum
-    let instrument: Instrument
-    let createdAt: String
+    let accountingEntry: AccountingEntry
+    let createdAt, updatedAt: String
+    let status: Status
+    let category: Category
+    let paymentInstrument: PaymentInstrument
 
     enum CodingKeys: String, CodingKey {
-        case id, amount, category
+        case id, amount
         case resultDescription = "description"
-        case type, instrument
+        case accountingEntry = "accounting_entry"
         case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case status, category
+        case paymentInstrument = "payment_instrument"
     }
 }
 
+enum AccountingEntry: String, Codable {
+    case c = "C"
+}
+
 enum Category: String, Codable {
-    case story = "story"
+    case purchase = "purchase"
 }
 
-enum Instrument: String, Codable {
-    case coins = "coins"
+enum PaymentInstrument: String, Codable {
+    case other = "other"
 }
 
-enum TypeEnum: String, Codable {
-    case d = "D"
+enum Status: String, Codable {
+    case success = "success"
 }

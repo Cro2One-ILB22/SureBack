@@ -49,12 +49,13 @@
 		AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3FEDCB2908346C0011202E /* RequestFunction.swift */; };
 		AC3FEDCE290834EA0011202E /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3FEDCD290834EA0011202E /* JSONNull.swift */; };
 		AC59F885291F50B5000F8345 /* HeaderCustomerDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F884291F50B5000F8345 /* HeaderCustomerDashboard.swift */; };
+		AC59F88B291F8117000F8345 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F88A291F8117000F8345 /* Token.swift */; };
 		AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */; };
 		ACC1C0FA29141E94003E2FD8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */; };
 		ACDD097A29128F1E00309FBC /* ListTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD097929128F1E00309FBC /* ListTransactionResponse.swift */; };
 		ACE5CDA42912704800D08177 /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA32912704800D08177 /* UserInfoResponse.swift */; };
 		ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */; };
-		ACE5CDA82912716B00D08177 /* GenerateTokenOfflineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA72912716B00D08177 /* GenerateTokenOfflineResponse.swift */; };
+		ACE5CDA82912716B00D08177 /* ScanQrResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA72912716B00D08177 /* ScanQrResponse.swift */; };
 		ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */; };
 		ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */; };
 		ACE5CDB029127E6200D08177 /* ListCustomerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */; };
@@ -132,13 +133,14 @@
 		AC3FEDCB2908346C0011202E /* RequestFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFunction.swift; sourceTree = "<group>"; };
 		AC3FEDCD290834EA0011202E /* JSONNull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNull.swift; sourceTree = "<group>"; };
 		AC59F884291F50B5000F8345 /* HeaderCustomerDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCustomerDashboard.swift; sourceTree = "<group>"; };
+		AC59F88A291F8117000F8345 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailResponse.swift; sourceTree = "<group>"; };
 		ACC1C0F829141D71003E2FD8 /* SureBack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SureBack.entitlements; sourceTree = "<group>"; };
 		ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ACDD097929128F1E00309FBC /* ListTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransactionResponse.swift; sourceTree = "<group>"; };
 		ACE5CDA32912704800D08177 /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
 		ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateTokenOnlineResponse.swift; sourceTree = "<group>"; };
-		ACE5CDA72912716B00D08177 /* GenerateTokenOfflineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateTokenOfflineResponse.swift; sourceTree = "<group>"; };
+		ACE5CDA72912716B00D08177 /* ScanQrResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQrResponse.swift; sourceTree = "<group>"; };
 		ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIGResponse.swift; sourceTree = "<group>"; };
 		ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionStoryIGResponse.swift; sourceTree = "<group>"; };
 		ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCustomerResponse.swift; sourceTree = "<group>"; };
@@ -291,7 +293,7 @@
 				16930E3E290FBB27003DFEBE /* AuthResponse.swift */,
 				ACE5CDA32912704800D08177 /* UserInfoResponse.swift */,
 				ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */,
-				ACE5CDA72912716B00D08177 /* GenerateTokenOfflineResponse.swift */,
+				ACE5CDA72912716B00D08177 /* ScanQrResponse.swift */,
 				ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */,
 				ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */,
 				ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */,
@@ -299,6 +301,7 @@
 				ACDD097929128F1E00309FBC /* ListTransactionResponse.swift */,
 				16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */,
 				AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */,
+				AC59F88A291F8117000F8345 /* Token.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -649,7 +652,7 @@
 				16BD919E291C58860010731E /* UIScreen+Ext.swift in Sources */,
 				16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */,
 				119B765A2906976E00530C80 /* ViewController.swift in Sources */,
-				ACE5CDA82912716B00D08177 /* GenerateTokenOfflineResponse.swift in Sources */,
+				ACE5CDA82912716B00D08177 /* ScanQrResponse.swift in Sources */,
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,
 				1619BB302919FCF700085B74 /* ConfirmRegistrationViewController.swift in Sources */,
 				1619BB32291B500300085B74 /* UIViewController+Ext.swift in Sources */,
@@ -671,6 +674,7 @@
 				1694878829104CE70088821C /* KeychainHelper.swift in Sources */,
 				ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */,
 				16BD91AD291E93270010731E /* MerchantDashboardViewController.swift in Sources */,
+				AC59F88B291F8117000F8345 /* Token.swift in Sources */,
 				16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */,
 				AC12F575291C29E10096CB5A /* ItemMerchantTableViewCell.swift in Sources */,
 				AC3FEDCE290834EA0011202E /* JSONNull.swift in Sources */,

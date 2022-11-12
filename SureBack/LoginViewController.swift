@@ -122,26 +122,20 @@ class LoginViewController: UIViewController {
             print(data)
             switch data {
             case .success:
-                let mainScreenVC = DummyViewController()
-                mainScreenVC.title = "Dummy Main Screen"
-                let alert = UIAlertController(title: "Success", message: "your login success", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                    self.navigationController?.pushViewController(mainScreenVC, animated: true)
-                }))
-                self.present(alert, animated: true, completion: nil)
+                self.navigationController?.pushViewController(TabBarViewController(), animated: true)
+                self.navigationController?.isNavigationBarHidden = true
+                self.showAlert(title: "Success", message: "Success Log In", action: "Ok")
             case .failure:
                 print("Failed to Login")
-                let alert = UIAlertController(title: "Wrong Email or Password", message: "please try again", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: "Default action"), style: .default))
-                self.present(alert, animated: true, completion: nil)
+                self.showAlert(title: "Wrong Email or Password", message: "Please try again", action: "Ok")
             }
         }
     }
 
     @objc func registerButtonTapped(sender: UITapGestureRecognizer) {
-        let registerVC = DummyViewController()
-        registerVC.title = "Dummy Register"
+        let registerVC = RegistrationViewController()
         navigationController?.pushViewController(registerVC, animated: true)
+        self.navigationController?.isNavigationBarHidden = true
     }
 
 }

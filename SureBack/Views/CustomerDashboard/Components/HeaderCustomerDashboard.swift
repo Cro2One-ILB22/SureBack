@@ -78,8 +78,7 @@ class HeaderCustomerDashboard: UIView {
         backgroundColor = .white
         setupProfileLabel()
         setupProfile2Label()
-        setupTokenLabel()
-        setupActiveTokenCard()
+        setupToken()
         setupMerchantLabel()
     }
     required init?(coder: NSCoder) {
@@ -104,13 +103,11 @@ extension HeaderCustomerDashboard {
         stackView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
     }
 
-    private func setupTokenLabel() {
+    private func setupToken() {
         addSubview(tokenLabel)
         tokenLabel.setTopAnchorConstraint(equalTo: levelButton.bottomAnchor, constant: 20)
         tokenLabel.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
         tokenLabel.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
-    }
-    private func setupActiveTokenCard() {
         addSubview(activeTokenCard)
         activeTokenCard.setTopAnchorConstraint(equalTo: tokenLabel.bottomAnchor, constant: 20)
         activeTokenCard.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)

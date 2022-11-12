@@ -8,6 +8,8 @@
 import UIKit
 
 class MerchantDashboardViewController: UIViewController {
+    var user: UserInfoResponse?
+
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(StoryTableViewCell.self, forCellReuseIdentifier: StoryTableViewCell.id)
@@ -15,6 +17,7 @@ class MerchantDashboardViewController: UIViewController {
         table.separatorColor = UIColor.clear
         return table
     }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -27,6 +30,7 @@ class MerchantDashboardViewController: UIViewController {
         tableView.dataSource = self
         tableView.tableHeaderView = headerView
     }
+
     @objc func switchStateDidChange(_ sender: UISwitch!) {
         if sender.isOn {
             print("State is now on")
@@ -34,9 +38,11 @@ class MerchantDashboardViewController: UIViewController {
             print("State is now off")
         }
     }
+
     @objc func seeAllCoinHistory() {
         print("See all coin history tapped")
     }
+
     @objc func seeAllCustomers() {
         print("See all customer tapped")
     }
@@ -46,13 +52,16 @@ extension MerchantDashboardViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: StoryTableViewCell.id, for: indexPath) as? StoryTableViewCell else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: StoryTableViewCell.id, for: indexPath) as? StoryTableViewCell else { return UITableViewCell() }
         return cell
     }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 300
     }
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
@@ -69,9 +78,9 @@ extension MerchantDashboardViewController {
     }
 }
 
-//#if DEBUG
-//import SwiftUI
-//struct UIKitPreviewProvider: UIViewControllerRepresentable {
+// #if DEBUG
+// import SwiftUI
+// struct UIKitPreviewProvider: UIViewControllerRepresentable {
 //    typealias UIViewControllerType = UIViewController
 //    private let viewController: UIViewController
 //    init (vc: UIViewControllerType) {
@@ -82,11 +91,11 @@ extension MerchantDashboardViewController {
 //    }
 //    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
 //    }
-//}
-//@available(iOS 13.0, *)
-//struct VC_Previews: PreviewProvider {
+// }
+// @available(iOS 13.0, *)
+// struct VC_Previews: PreviewProvider {
 //    static var previews: some View {
 //        UIKitPreviewProvider(vc: MerchantDashboardViewController(nibName: nil, bundle: nil))
 //    }
-//}
-//#endif
+// }
+// #endif

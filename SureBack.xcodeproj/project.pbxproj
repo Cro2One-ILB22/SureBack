@@ -50,6 +50,7 @@
 		AC3FEDCE290834EA0011202E /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3FEDCD290834EA0011202E /* JSONNull.swift */; };
 		AC59F885291F50B5000F8345 /* HeaderCustomerDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F884291F50B5000F8345 /* HeaderCustomerDashboard.swift */; };
 		AC59F88B291F8117000F8345 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F88A291F8117000F8345 /* Token.swift */; };
+		AC59F88D29202888000F8345 /* IsLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F88C29202888000F8345 /* IsLoginViewController.swift */; };
 		AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */; };
 		ACC1C0FA29141E94003E2FD8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */; };
 		ACDD097A29128F1E00309FBC /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD097929128F1E00309FBC /* Transaction.swift */; };
@@ -133,6 +134,7 @@
 		AC3FEDCD290834EA0011202E /* JSONNull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNull.swift; sourceTree = "<group>"; };
 		AC59F884291F50B5000F8345 /* HeaderCustomerDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCustomerDashboard.swift; sourceTree = "<group>"; };
 		AC59F88A291F8117000F8345 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		AC59F88C29202888000F8345 /* IsLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsLoginViewController.swift; sourceTree = "<group>"; };
 		AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailResponse.swift; sourceTree = "<group>"; };
 		ACC1C0F829141D71003E2FD8 /* SureBack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SureBack.entitlements; sourceTree = "<group>"; };
 		ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				AC22879329182E8E00397ED0 /* ShowQRViewController.swift */,
 				AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */,
 				AC12F578291D3FBB0096CB5A /* MerchantDetailViewController.swift */,
+				AC59F88C29202888000F8345 /* IsLoginViewController.swift */,
 			);
 			path = SureBack;
 			sourceTree = "<group>";
@@ -654,6 +657,7 @@
 				1619BB32291B500300085B74 /* UIViewController+Ext.swift in Sources */,
 				ACDD097A29128F1E00309FBC /* Transaction.swift in Sources */,
 				1619BB2E2919D9DC00085B74 /* UIView+Ext.swift in Sources */,
+				AC59F88D29202888000F8345 /* IsLoginViewController.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
 				AC22879429182E8E00397ED0 /* ShowQRViewController.swift in Sources */,
@@ -849,7 +853,7 @@
 				CODE_SIGN_ENTITLEMENTS = SureBack/SureBack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BAFJ582D2S;
+				DEVELOPMENT_TEAM = C8VS35NTZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To be able to Scan QR Code, you must allow the use of the camera.";
@@ -866,7 +870,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = mfahmialkautsar.SureBack;
+				PRODUCT_BUNDLE_IDENTIFIER = cro2one.SureBack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -10,16 +10,16 @@ import UIKit
 
 class MerchantDetailViewController: UIViewController {
     var user: UserInfoResponse?
-    var merchantData: MerchantData?
+    var merchantData: UserInfoResponse?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
 
-//        guard let user = user, let merchantData = merchantData else {
-//            return
-//        }
+        guard let user = user, let merchantData = merchantData else {
+            return
+        }
 
-        print("merchant tag: \(merchantData?.merchantTag)")
+        print("merchant name : \(merchantData.name)")
     }
 }

@@ -165,7 +165,9 @@ class RegistrationViewController: UIViewController {
         }
     }
     @objc func signInTapped() {
-        print("Sign in tapped")
+        let loginVC = LoginViewController()
+        navigationController?.pushViewController(loginVC, animated: true)
+        self.navigationController?.isNavigationBarHidden = true
     }
 }
 

@@ -40,11 +40,15 @@
 		AC00FA35290A5D3600B6347D /* ScanQrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */; };
 		AC04BD80290995AD00635147 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04BD7F290995AD00635147 /* Function.swift */; };
 		AC12F573291BF21D0096CB5A /* CustomerDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC12F572291BF21D0096CB5A /* CustomerDashboardViewController.swift */; };
+		AC12F575291C29E10096CB5A /* ItemMerchantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC12F574291C29E10096CB5A /* ItemMerchantTableViewCell.swift */; };
+		AC12F579291D3FBB0096CB5A /* MerchantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC12F578291D3FBB0096CB5A /* MerchantDetailViewController.swift */; };
 		AC1A6CBB291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */; };
 		AC22879429182E8E00397ED0 /* ShowQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC22879329182E8E00397ED0 /* ShowQRViewController.swift */; };
 		AC22879A2918521F00397ED0 /* LoggedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2287992918521F00397ED0 /* LoggedInViewController.swift */; };
+		AC2AC1BD291F3C5B00E9F8A7 /* ActiveTokenCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2AC1BC291F3C5B00E9F8A7 /* ActiveTokenCardView.swift */; };
 		AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3FEDCB2908346C0011202E /* RequestFunction.swift */; };
 		AC3FEDCE290834EA0011202E /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3FEDCD290834EA0011202E /* JSONNull.swift */; };
+		AC59F885291F50B5000F8345 /* HeaderCustomerDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F884291F50B5000F8345 /* HeaderCustomerDashboard.swift */; };
 		AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */; };
 		ACC1C0FA29141E94003E2FD8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */; };
 		ACDD097A29128F1E00309FBC /* ListTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD097929128F1E00309FBC /* ListTransactionResponse.swift */; };
@@ -119,11 +123,15 @@
 		AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQrViewController.swift; sourceTree = "<group>"; };
 		AC04BD7F290995AD00635147 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		AC12F572291BF21D0096CB5A /* CustomerDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDashboardViewController.swift; sourceTree = "<group>"; };
+		AC12F574291C29E10096CB5A /* ItemMerchantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMerchantTableViewCell.swift; sourceTree = "<group>"; };
+		AC12F578291D3FBB0096CB5A /* MerchantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailViewController.swift; sourceTree = "<group>"; };
 		AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantGenerateTokenViewController.swift; sourceTree = "<group>"; };
 		AC22879329182E8E00397ED0 /* ShowQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowQRViewController.swift; sourceTree = "<group>"; };
 		AC2287992918521F00397ED0 /* LoggedInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInViewController.swift; sourceTree = "<group>"; };
+		AC2AC1BC291F3C5B00E9F8A7 /* ActiveTokenCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTokenCardView.swift; sourceTree = "<group>"; };
 		AC3FEDCB2908346C0011202E /* RequestFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFunction.swift; sourceTree = "<group>"; };
 		AC3FEDCD290834EA0011202E /* JSONNull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNull.swift; sourceTree = "<group>"; };
+		AC59F884291F50B5000F8345 /* HeaderCustomerDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCustomerDashboard.swift; sourceTree = "<group>"; };
 		AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailResponse.swift; sourceTree = "<group>"; };
 		ACC1C0F829141D71003E2FD8 /* SureBack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SureBack.entitlements; sourceTree = "<group>"; };
 		ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -216,7 +224,7 @@
 				1619BB2F2919FCF700085B74 /* ConfirmRegistrationViewController.swift */,
 				AC22879329182E8E00397ED0 /* ShowQRViewController.swift */,
 				AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */,
-				AC12F572291BF21D0096CB5A /* CustomerDashboardViewController.swift */,
+				AC12F578291D3FBB0096CB5A /* MerchantDetailViewController.swift */,
 			);
 			path = SureBack;
 			sourceTree = "<group>";
@@ -298,6 +306,7 @@
 		16BD919F291D521D0010731E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AC2AC1B8291F391400E9F8A7 /* CustomerDashboard */,
 				16BD91A0291D52280010731E /* MerchantDashboard */,
 			);
 			path = Views;
@@ -320,6 +329,25 @@
 				16BD91A6291D52E30010731E /* StoryTableViewCell.swift */,
 				16BD91A8291D534C0010731E /* HeaderMerchantDashboardView.swift */,
 				16BD91AA291E88790010731E /* ItemStoryCollectionViewCell.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		AC2AC1B8291F391400E9F8A7 /* CustomerDashboard */ = {
+			isa = PBXGroup;
+			children = (
+				AC2AC1B9291F399400E9F8A7 /* Components */,
+				AC12F572291BF21D0096CB5A /* CustomerDashboardViewController.swift */,
+			);
+			path = CustomerDashboard;
+			sourceTree = "<group>";
+		};
+		AC2AC1B9291F399400E9F8A7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AC2AC1BC291F3C5B00E9F8A7 /* ActiveTokenCardView.swift */,
+				AC59F884291F50B5000F8345 /* HeaderCustomerDashboard.swift */,
+				AC12F574291C29E10096CB5A /* ItemMerchantTableViewCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -614,6 +642,7 @@
 				16BD91A5291D527C0010731E /* BussinesStatusCardView.swift in Sources */,
 				ACE8C35B2916D60700BEA778 /* DummyViewController.swift in Sources */,
 				ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */,
+				AC59F885291F50B5000F8345 /* HeaderCustomerDashboard.swift in Sources */,
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
 				ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */,
 				ACE5CDB029127E6200D08177 /* ListCustomerResponse.swift in Sources */,
@@ -634,6 +663,7 @@
 				16BD91A9291D534C0010731E /* HeaderMerchantDashboardView.swift in Sources */,
 				16BD91A3291D52610010731E /* CoinHistoryCardView.swift in Sources */,
 				ACE5CDA42912704800D08177 /* UserInfoResponse.swift in Sources */,
+				AC12F579291D3FBB0096CB5A /* MerchantDetailViewController.swift in Sources */,
 				1619BB2B2919B74800085B74 /* RegistrationViewController.swift in Sources */,
 				AC00FA35290A5D3600B6347D /* ScanQrViewController.swift in Sources */,
 				AC12F573291BF21D0096CB5A /* CustomerDashboardViewController.swift in Sources */,
@@ -642,11 +672,13 @@
 				ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */,
 				16BD91AD291E93270010731E /* MerchantDashboardViewController.swift in Sources */,
 				16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */,
+				AC12F575291C29E10096CB5A /* ItemMerchantTableViewCell.swift in Sources */,
 				AC3FEDCE290834EA0011202E /* JSONNull.swift in Sources */,
 				16930E3F290FBB27003DFEBE /* AuthResponse.swift in Sources */,
 				AC1A6CBB291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift in Sources */,
 				11B2DD2F2907CF760065E98D /* APICall.swift in Sources */,
 				AC22879A2918521F00397ED0 /* LoggedInViewController.swift in Sources */,
+				AC2AC1BD291F3C5B00E9F8A7 /* ActiveTokenCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,11 +7,6 @@
 
 import Foundation
 
-// MARK: - ListTransactionResponse
-struct ListTransactionResponse: Codable {
-    let results: [Transaction]
-}
-
 // MARK: - Transaction
 struct Transaction: Codable {
     let id, amount: Int

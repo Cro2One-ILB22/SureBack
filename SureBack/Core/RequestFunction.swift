@@ -312,26 +312,26 @@ extension RequestFunction {
 }
 
 extension RequestFunction {
-    func getListCustomer(completion: @escaping (Result<ListCustomerResponse, AFError>) -> Void) {
+    func getListCustomer(completion: @escaping (Result<ResponseData<UserInfoResponse>, AFError>) -> Void) {
         let url = Endpoints.getListCustomer.url
 
-        requestWithToken(url: url, decodable: ListCustomerResponse.self) {
+        requestWithToken(url: url, decodable: ResponseData<UserInfoResponse>.self) {
             completion($0.result)
         }
     }
 
-    func getListMerchant(completion: @escaping (Result<ListMerchantResponse, AFError>) -> Void) {
+    func getListMerchant(completion: @escaping (Result<ResponseData<UserInfoResponse>, AFError>) -> Void) {
         let url = Endpoints.getListMerchant.url
 
-        requestWithToken(url: url, decodable: ListMerchantResponse.self) {
+        requestWithToken(url: url, decodable: ResponseData<UserInfoResponse>.self) {
             completion($0.result)
         }
     }
 
-    func getListTransaction(completion: @escaping (Result<ListTransactionResponse, AFError>) -> Void) {
+    func getListTransaction(completion: @escaping (Result<ResponseData<Transaction>, AFError>) -> Void) {
         let url = Endpoints.getListTransaction.url
 
-        requestWithToken(url: url, decodable: ListTransactionResponse.self) {
+        requestWithToken(url: url, decodable: ResponseData<Transaction>.self) {
             completion($0.result)
         }
     }

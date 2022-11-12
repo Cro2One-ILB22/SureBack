@@ -52,14 +52,13 @@
 		AC59F88B291F8117000F8345 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F88A291F8117000F8345 /* Token.swift */; };
 		AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */; };
 		ACC1C0FA29141E94003E2FD8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */; };
-		ACDD097A29128F1E00309FBC /* ListTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD097929128F1E00309FBC /* ListTransactionResponse.swift */; };
+		ACDD097A29128F1E00309FBC /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD097929128F1E00309FBC /* Transaction.swift */; };
 		ACE5CDA42912704800D08177 /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA32912704800D08177 /* UserInfoResponse.swift */; };
 		ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */; };
 		ACE5CDA82912716B00D08177 /* ScanQrResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA72912716B00D08177 /* ScanQrResponse.swift */; };
 		ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */; };
 		ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */; };
-		ACE5CDB029127E6200D08177 /* ListCustomerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */; };
-		ACE5CDB22912835400D08177 /* ListMerchantResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDB12912835400D08177 /* ListMerchantResponse.swift */; };
+		ACE5CDB029127E6200D08177 /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAF29127E6200D08177 /* ResponseData.swift */; };
 		ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE8C3582916267800BEA778 /* LoginViewController.swift */; };
 		ACE8C35B2916D60700BEA778 /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE8C35A2916D60700BEA778 /* DummyViewController.swift */; };
 /* End PBXBuildFile section */
@@ -137,14 +136,13 @@
 		AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailResponse.swift; sourceTree = "<group>"; };
 		ACC1C0F829141D71003E2FD8 /* SureBack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SureBack.entitlements; sourceTree = "<group>"; };
 		ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		ACDD097929128F1E00309FBC /* ListTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransactionResponse.swift; sourceTree = "<group>"; };
+		ACDD097929128F1E00309FBC /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		ACE5CDA32912704800D08177 /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
 		ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateTokenOnlineResponse.swift; sourceTree = "<group>"; };
 		ACE5CDA72912716B00D08177 /* ScanQrResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQrResponse.swift; sourceTree = "<group>"; };
 		ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIGResponse.swift; sourceTree = "<group>"; };
 		ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionStoryIGResponse.swift; sourceTree = "<group>"; };
-		ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCustomerResponse.swift; sourceTree = "<group>"; };
-		ACE5CDB12912835400D08177 /* ListMerchantResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMerchantResponse.swift; sourceTree = "<group>"; };
+		ACE5CDAF29127E6200D08177 /* ResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData.swift; sourceTree = "<group>"; };
 		ACE8C3582916267800BEA778 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ACE8C35A2916D60700BEA778 /* DummyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
 		BB6F53CE101281D823C272BB /* Pods_SureBack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -296,9 +294,8 @@
 				ACE5CDA72912716B00D08177 /* ScanQrResponse.swift */,
 				ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */,
 				ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */,
-				ACE5CDAF29127E6200D08177 /* ListCustomerResponse.swift */,
-				ACE5CDB12912835400D08177 /* ListMerchantResponse.swift */,
-				ACDD097929128F1E00309FBC /* ListTransactionResponse.swift */,
+				ACE5CDAF29127E6200D08177 /* ResponseData.swift */,
+				ACDD097929128F1E00309FBC /* Transaction.swift */,
 				16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */,
 				AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */,
 				AC59F88A291F8117000F8345 /* Token.swift */,
@@ -639,7 +636,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1619BB272918B5E800085B74 /* AuthManager.swift in Sources */,
-				ACE5CDB22912835400D08177 /* ListMerchantResponse.swift in Sources */,
 				16BD91AB291E88790010731E /* ItemStoryCollectionViewCell.swift in Sources */,
 				1619BB292919082700085B74 /* TabBarViewController.swift in Sources */,
 				16BD91A5291D527C0010731E /* BussinesStatusCardView.swift in Sources */,
@@ -648,7 +644,7 @@
 				AC59F885291F50B5000F8345 /* HeaderCustomerDashboard.swift in Sources */,
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
 				ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */,
-				ACE5CDB029127E6200D08177 /* ListCustomerResponse.swift in Sources */,
+				ACE5CDB029127E6200D08177 /* ResponseData.swift in Sources */,
 				16BD919E291C58860010731E /* UIScreen+Ext.swift in Sources */,
 				16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */,
 				119B765A2906976E00530C80 /* ViewController.swift in Sources */,
@@ -656,7 +652,7 @@
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,
 				1619BB302919FCF700085B74 /* ConfirmRegistrationViewController.swift in Sources */,
 				1619BB32291B500300085B74 /* UIViewController+Ext.swift in Sources */,
-				ACDD097A29128F1E00309FBC /* ListTransactionResponse.swift in Sources */,
+				ACDD097A29128F1E00309FBC /* Transaction.swift in Sources */,
 				1619BB2E2919D9DC00085B74 /* UIView+Ext.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
@@ -853,7 +849,7 @@
 				CODE_SIGN_ENTITLEMENTS = SureBack/SureBack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C8VS35NTZ7;
+				DEVELOPMENT_TEAM = BAFJ582D2S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To be able to Scan QR Code, you must allow the use of the camera.";
@@ -870,7 +866,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = cro2one.SureBack;
+				PRODUCT_BUNDLE_IDENTIFIER = mfahmialkautsar.SureBack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

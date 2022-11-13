@@ -1,5 +1,5 @@
 //
-//  HeaderCustomerDashboard.swift
+//  HeaderCustomerDashboardView.swift
 //  SureBack
 //
 //  Created by Ditha Nurcahya Avianty on 12/11/22.
@@ -7,8 +7,7 @@
 
 import UIKit
 
-class HeaderCustomerDashboard: UIView {
-
+class HeaderCustomerDashboardView: UIView {
     let profileLabel: UILabel = {
         let label = UILabel()
         label.text = "Hi, @bestie"
@@ -46,13 +45,14 @@ class HeaderCustomerDashboard: UIView {
         return label
     }()
 
-    private let tokenLabel: UILabel = {
+    let tokenLabel: UILabel = {
         let label = UILabel()
         label.text = "Token"
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+
     let activeTokenCard: ActiveTokenCardView = {
         let card = ActiveTokenCardView()
         return card
@@ -65,33 +65,41 @@ class HeaderCustomerDashboard: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+
     let seeAllMerchantButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setTitle("See All", for: .normal)
         button.setTitleColor(.blue, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
-    override init(frame: CGRect) {
+    init(count: Int, activeTokenData: [GenerateTokenOnlineResponse], frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
         setupProfileLabel()
         setupProfile2Label()
-        setupToken()
-        setupMerchantLabel()
+        if count > 0 {
+            setupToken()
+            setupMerchantLabel()
+
+            activeTokenCard.tokenMerchantNameLabel.text = activeTokenData[0].merchant.name
+        } else {
+            deactiveToken()
+        }
     }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension HeaderCustomerDashboard {
+extension HeaderCustomerDashboardView {
     private func setupProfileLabel() {
         addSubview(profileLabel)
         profileLabel.setTopAnchorConstraint(equalTo: topAnchor)
         profileLabel.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
     }
+
     private func setupProfile2Label() {
         let stackView = UIStackView(arrangedSubviews: [levelButton, totalCoinsLabel, loyaltyCoinsLabel])
         stackView.axis = .horizontal
@@ -114,6 +122,7 @@ extension HeaderCustomerDashboard {
         activeTokenCard.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
         activeTokenCard.setHeightAnchorConstraint(equalToConstant: 150)
     }
+
     private func setupMerchantLabel() {
         let stackView = UIStackView(arrangedSubviews: [merchantLabel, seeAllMerchantButton])
         stackView.axis = .horizontal
@@ -122,6 +131,19 @@ extension HeaderCustomerDashboard {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
         stackView.setTopAnchorConstraint(equalTo: activeTokenCard.bottomAnchor, constant: 20)
+        stackView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
+        stackView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
+        stackView.setBottomAnchorConstraint(equalTo: bottomAnchor, constant: -20)
+    }
+
+    private func deactiveToken() {
+        let stackView = UIStackView(arrangedSubviews: [merchantLabel, seeAllMerchantButton])
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stackView)
+        stackView.setTopAnchorConstraint(equalTo: loyaltyCoinsLabel.bottomAnchor, constant: 20)
         stackView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
         stackView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
         stackView.setBottomAnchorConstraint(equalTo: bottomAnchor, constant: -20)

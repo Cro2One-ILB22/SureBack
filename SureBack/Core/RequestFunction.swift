@@ -335,6 +335,20 @@ extension RequestFunction {
             completion($0.result)
         }
     }
+
+    func getListToken(expired: Int, submitted: Int, redeemed: Int, completion: @escaping (Result<ResponseData<GenerateTokenOnlineResponse>, AFError>) -> Void) {
+        let url = Endpoints.getToken.url
+        let parameters: [String: Int] = [
+            "expired": expired,
+            "submitted": submitted,
+            "redeemed": redeemed
+        ]
+
+        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<GenerateTokenOnlineResponse>.self) {
+            completion($0.result)
+        }
+
+    }
 }
 
 extension RequestFunction {

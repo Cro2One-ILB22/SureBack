@@ -33,6 +33,7 @@ enum Endpoints: Endpoint {
     case getListTransaction
     case approveOrRejectStory
     case submitStory
+    case getToken
 
     public var url: String {
         switch self {
@@ -70,6 +71,8 @@ enum Endpoints: Endpoint {
             return "\(API.baseUrl)/api/ig/purchase/qr"
         case .submitStory:
             return "\(API.baseUrl)/api/ig/story/submit"
+        case .getToken:
+            return "\(API.baseUrl)/api/ig/token"
         }
     }
 }

@@ -41,16 +41,19 @@
 		AC04BD80290995AD00635147 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04BD7F290995AD00635147 /* Function.swift */; };
 		AC12F573291BF21D0096CB5A /* CustomerDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC12F572291BF21D0096CB5A /* CustomerDashboardViewController.swift */; };
 		AC12F575291C29E10096CB5A /* ItemMerchantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC12F574291C29E10096CB5A /* ItemMerchantTableViewCell.swift */; };
-		AC12F579291D3FBB0096CB5A /* MerchantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC12F578291D3FBB0096CB5A /* MerchantDetailViewController.swift */; };
+		AC12F579291D3FBB0096CB5A /* CustomerHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC12F578291D3FBB0096CB5A /* CustomerHistoryViewController.swift */; };
 		AC1A6CBB291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */; };
 		AC22879429182E8E00397ED0 /* ShowQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC22879329182E8E00397ED0 /* ShowQRViewController.swift */; };
 		AC22879A2918521F00397ED0 /* LoggedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2287992918521F00397ED0 /* LoggedInViewController.swift */; };
 		AC2AC1BD291F3C5B00E9F8A7 /* ActiveTokenCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2AC1BC291F3C5B00E9F8A7 /* ActiveTokenCardView.swift */; };
 		AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3FEDCB2908346C0011202E /* RequestFunction.swift */; };
 		AC3FEDCE290834EA0011202E /* JSONNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3FEDCD290834EA0011202E /* JSONNull.swift */; };
-		AC59F885291F50B5000F8345 /* HeaderCustomerDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F884291F50B5000F8345 /* HeaderCustomerDashboard.swift */; };
+		AC59F885291F50B5000F8345 /* HeaderCustomerDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F884291F50B5000F8345 /* HeaderCustomerDashboardView.swift */; };
 		AC59F88B291F8117000F8345 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F88A291F8117000F8345 /* Token.swift */; };
 		AC59F88D29202888000F8345 /* IsLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F88C29202888000F8345 /* IsLoginViewController.swift */; };
+		AC59F892292057CE000F8345 /* HeaderCustomerHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F891292057CE000F8345 /* HeaderCustomerHistoryView.swift */; };
+		AC59F89429206137000F8345 /* ItemCustomerHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F89329206137000F8345 /* ItemCustomerHistoryTableViewCell.swift */; };
+		AC59F89629207256000F8345 /* FooterCustomerHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F89529207256000F8345 /* FooterCustomerHistoryView.swift */; };
 		AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */; };
 		ACC1C0FA29141E94003E2FD8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */; };
 		ACDD097A29128F1E00309FBC /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD097929128F1E00309FBC /* Transaction.swift */; };
@@ -125,16 +128,19 @@
 		AC04BD7F290995AD00635147 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		AC12F572291BF21D0096CB5A /* CustomerDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDashboardViewController.swift; sourceTree = "<group>"; };
 		AC12F574291C29E10096CB5A /* ItemMerchantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMerchantTableViewCell.swift; sourceTree = "<group>"; };
-		AC12F578291D3FBB0096CB5A /* MerchantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailViewController.swift; sourceTree = "<group>"; };
+		AC12F578291D3FBB0096CB5A /* CustomerHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerHistoryViewController.swift; sourceTree = "<group>"; };
 		AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantGenerateTokenViewController.swift; sourceTree = "<group>"; };
 		AC22879329182E8E00397ED0 /* ShowQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowQRViewController.swift; sourceTree = "<group>"; };
 		AC2287992918521F00397ED0 /* LoggedInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInViewController.swift; sourceTree = "<group>"; };
 		AC2AC1BC291F3C5B00E9F8A7 /* ActiveTokenCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTokenCardView.swift; sourceTree = "<group>"; };
 		AC3FEDCB2908346C0011202E /* RequestFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFunction.swift; sourceTree = "<group>"; };
 		AC3FEDCD290834EA0011202E /* JSONNull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONNull.swift; sourceTree = "<group>"; };
-		AC59F884291F50B5000F8345 /* HeaderCustomerDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCustomerDashboard.swift; sourceTree = "<group>"; };
+		AC59F884291F50B5000F8345 /* HeaderCustomerDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCustomerDashboardView.swift; sourceTree = "<group>"; };
 		AC59F88A291F8117000F8345 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		AC59F88C29202888000F8345 /* IsLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsLoginViewController.swift; sourceTree = "<group>"; };
+		AC59F891292057CE000F8345 /* HeaderCustomerHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCustomerHistoryView.swift; sourceTree = "<group>"; };
+		AC59F89329206137000F8345 /* ItemCustomerHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCustomerHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		AC59F89529207256000F8345 /* FooterCustomerHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCustomerHistoryView.swift; sourceTree = "<group>"; };
 		AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailResponse.swift; sourceTree = "<group>"; };
 		ACC1C0F829141D71003E2FD8 /* SureBack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SureBack.entitlements; sourceTree = "<group>"; };
 		ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -226,7 +232,6 @@
 				1619BB2F2919FCF700085B74 /* ConfirmRegistrationViewController.swift */,
 				AC22879329182E8E00397ED0 /* ShowQRViewController.swift */,
 				AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */,
-				AC12F578291D3FBB0096CB5A /* MerchantDetailViewController.swift */,
 				AC59F88C29202888000F8345 /* IsLoginViewController.swift */,
 			);
 			path = SureBack;
@@ -309,7 +314,7 @@
 		16BD919F291D521D0010731E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AC2AC1B8291F391400E9F8A7 /* CustomerDashboard */,
+				AC59F88E29205480000F8345 /* Customer */,
 				16BD91A0291D52280010731E /* MerchantDashboard */,
 			);
 			path = Views;
@@ -349,8 +354,36 @@
 			isa = PBXGroup;
 			children = (
 				AC2AC1BC291F3C5B00E9F8A7 /* ActiveTokenCardView.swift */,
-				AC59F884291F50B5000F8345 /* HeaderCustomerDashboard.swift */,
+				AC59F884291F50B5000F8345 /* HeaderCustomerDashboardView.swift */,
 				AC12F574291C29E10096CB5A /* ItemMerchantTableViewCell.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		AC59F88E29205480000F8345 /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				AC59F88F292056E8000F8345 /* CustomerHistory */,
+				AC2AC1B8291F391400E9F8A7 /* CustomerDashboard */,
+			);
+			path = Customer;
+			sourceTree = "<group>";
+		};
+		AC59F88F292056E8000F8345 /* CustomerHistory */ = {
+			isa = PBXGroup;
+			children = (
+				AC59F89029205710000F8345 /* Components */,
+				AC12F578291D3FBB0096CB5A /* CustomerHistoryViewController.swift */,
+			);
+			path = CustomerHistory;
+			sourceTree = "<group>";
+		};
+		AC59F89029205710000F8345 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AC59F891292057CE000F8345 /* HeaderCustomerHistoryView.swift */,
+				AC59F89329206137000F8345 /* ItemCustomerHistoryTableViewCell.swift */,
+				AC59F89529207256000F8345 /* FooterCustomerHistoryView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -644,7 +677,7 @@
 				16BD91A5291D527C0010731E /* BussinesStatusCardView.swift in Sources */,
 				ACE8C35B2916D60700BEA778 /* DummyViewController.swift in Sources */,
 				ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */,
-				AC59F885291F50B5000F8345 /* HeaderCustomerDashboard.swift in Sources */,
+				AC59F885291F50B5000F8345 /* HeaderCustomerDashboardView.swift in Sources */,
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
 				ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */,
 				ACE5CDB029127E6200D08177 /* ResponseData.swift in Sources */,
@@ -659,20 +692,23 @@
 				1619BB2E2919D9DC00085B74 /* UIView+Ext.swift in Sources */,
 				AC59F88D29202888000F8345 /* IsLoginViewController.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
+				AC59F892292057CE000F8345 /* HeaderCustomerHistoryView.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
 				AC22879429182E8E00397ED0 /* ShowQRViewController.swift in Sources */,
+				AC59F89629207256000F8345 /* FooterCustomerHistoryView.swift in Sources */,
 				16BD91A7291D52E30010731E /* StoryTableViewCell.swift in Sources */,
 				119B76562906976E00530C80 /* AppDelegate.swift in Sources */,
 				16BD91A9291D534C0010731E /* HeaderMerchantDashboardView.swift in Sources */,
 				16BD91A3291D52610010731E /* CoinHistoryCardView.swift in Sources */,
 				ACE5CDA42912704800D08177 /* UserInfoResponse.swift in Sources */,
-				AC12F579291D3FBB0096CB5A /* MerchantDetailViewController.swift in Sources */,
+				AC12F579291D3FBB0096CB5A /* CustomerHistoryViewController.swift in Sources */,
 				1619BB2B2919B74800085B74 /* RegistrationViewController.swift in Sources */,
 				AC00FA35290A5D3600B6347D /* ScanQrViewController.swift in Sources */,
 				AC12F573291BF21D0096CB5A /* CustomerDashboardViewController.swift in Sources */,
 				AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */,
 				1694878829104CE70088821C /* KeychainHelper.swift in Sources */,
 				ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */,
+				AC59F89429206137000F8345 /* ItemCustomerHistoryTableViewCell.swift in Sources */,
 				16BD91AD291E93270010731E /* MerchantDashboardViewController.swift in Sources */,
 				AC59F88B291F8117000F8345 /* Token.swift in Sources */,
 				16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */,

@@ -12,8 +12,7 @@ class CustomerDashboardViewController: UIViewController {
     let request = RequestFunction()
     var user: UserInfoResponse!
     var merchantData = [UserInfoResponse]()
-
-    let headerView = HeaderCustomerDashboard(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 270))
+    var activeTokenData = [GenerateTokenOnlineResponse]()
 
     var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -41,6 +40,25 @@ class CustomerDashboardViewController: UIViewController {
                 print("failed to get list merchant")
             }
         }
+
+        request.getListToken(expired: 0, submitted: 0, redeemed: 1) { data in
+            switch data {
+            case let .success(result):
+                do {
+                    print(result.data.count)
+//                    self.activeTokenData = result.data
+
+                    let height = result.data.count > 0 ? 270 : 150
+                    let headerView = HeaderCustomerDashboardView(count: result.data.count, activeTokenData: result.data, frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: height))
+                    self.setupView2(headerView: headerView)
+                } catch let error as NSError {
+                    print(error.description)
+                }
+            case let .failure(error):
+                print(error)
+                print("failed to get active token")
+            }
+        }
     }
 
     @objc func redeemTokenTapped() {
@@ -54,13 +72,15 @@ class CustomerDashboardViewController: UIViewController {
 
 extension CustomerDashboardViewController {
     private func setupView() {
-        view.addSubview(headerView)
-        headerView.profileLabel.text = "Hi, \(user.name)!"
-        print(user.coins)
-        headerView.totalCoinsLabel.text = " \(user.coins![0].allTimeReward)"
         setupTableView()
         tableView.delegate = self
         tableView.dataSource = self
+    }
+
+    private func setupView2(headerView: HeaderCustomerDashboardView) {
+        view.addSubview(headerView)
+        headerView.profileLabel.text = "Hi, \(user.name)!"
+        headerView.totalCoinsLabel.text = " \(user.coins![0].outstanding)"
         tableView.tableHeaderView = headerView
         headerView.activeTokenCard.redeemButton.addTarget(self, action: #selector(redeemTokenTapped), for: .touchUpInside)
         headerView.seeAllMerchantButton.addTarget(self, action: #selector(seeAllMerchantTapped), for: .touchUpInside)
@@ -104,7 +124,8 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         let selected = indexPath.row
         print(selected)
 
-        let merchantDetailVC = MerchantDetailViewController()
+        let merchantDetailVC = CustomerHistoryViewController()
+        merchantDetailVC.title = "Merchant"
         merchantDetailVC.user = user
         merchantDetailVC.merchantData = merchantData[indexPath.row]
         navigationController?.pushViewController(merchantDetailVC, animated: true)

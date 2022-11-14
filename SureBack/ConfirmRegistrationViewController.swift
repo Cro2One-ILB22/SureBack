@@ -86,7 +86,7 @@ class ConfirmRegistrationViewController: UIViewController {
                     self.showAlert(title: "Error", message: error?.localizedDescription ?? "", action: "Okey")
                     return
                 }
-                let mainVC = DummyViewController()
+                let mainVC = IsLoginViewController()
                 self.navigationController?.pushViewController(mainVC, animated: true)
             }
     }

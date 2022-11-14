@@ -341,13 +341,37 @@ extension RequestFunction {
         let parameters: [String: Int] = [
             "expired": expired,
             "submitted": submitted,
-            "redeemed": redeemed
+            "redeemed": redeemed,
         ]
 
         requestWithToken(url: url, parameters: parameters, decodable: ResponseData<GenerateTokenOnlineResponse>.self) {
             completion($0.result)
         }
+    }
 
+    func postLogout(completionHandler: @escaping (Result<Data?, AFError>) -> Void) {
+        let url = Endpoints.logout.url
+
+        fetchHeadersForDeviceRegistration { response in
+            switch response {
+            case let .success(headers):
+                self.requestWithToken(url: url, method: .post, headers: headers) { response in
+                    switch response.result {
+                    case .success:
+                        KeychainHelper.standard.delete(key: .accessToken)
+                    case .failure:
+                        if let data = response.data {
+                            let json = String(data: data, encoding: .utf8)
+                            print("Failure Response: \(String(describing: json))")
+                        }
+                    }
+                    completionHandler(response.result)
+                }
+            case let .failure(error):
+                print(error)
+                completionHandler(.failure(error.asAFError(orFailWith: "Error fetching FCM token")))
+            }
+        }
     }
 }
 
@@ -366,6 +390,28 @@ extension RequestFunction {
             AF.request(url, method: method, parameters: parameters, headers: headers)
                 .validate()
                 .responseDecodable(of: decodable) { response in
+                    completionHandler(response)
+                }
+        }
+    }
+
+    private func requestWithToken(
+        url: String,
+        method: HTTPMethod = .get,
+        parameters: Dictionary<String, Any>? = nil,
+        headers: HTTPHeaders = [],
+        completionHandler: @escaping (DataResponse<Data?, AFError>) -> Void) {
+        AuthManager.shared.withValidToken { token in
+            var generalHeaders: HTTPHeaders = [
+                "Authorization": "Bearer \(token)",
+                "Accept": "application/json",
+            ]
+            for header in headers {
+                generalHeaders.add(header)
+            }
+            AF.request(url, method: method, parameters: parameters, headers: headers)
+                .validate()
+                .response { response in
                     completionHandler(response)
                 }
         }

@@ -48,6 +48,13 @@ class TabBarViewController: UITabBarController {
             case let .failure(error):
                 print(error)
                 print("failed to login")
+                if error.responseCode == 401 {
+                    KeychainHelper.standard.delete(key: .accessToken)
+                    let loginVC = LoginViewController()
+                    let navLogin = UINavigationController(rootViewController: loginVC)
+                    navLogin.modalPresentationStyle = .fullScreen
+                    present(navLogin, animated: true, completion: nil)
+                }
             }
         }
     }

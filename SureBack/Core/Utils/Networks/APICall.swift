@@ -17,6 +17,7 @@ protocol Endpoint {
 
 enum Endpoints: Endpoint {
     case login
+    case logout
     case preRegister
     case register
     case getAccount
@@ -39,6 +40,8 @@ enum Endpoints: Endpoint {
         switch self {
         case .login:
             return "\(API.baseUrl)/api/auth/login"
+        case .logout:
+            return "\(API.baseUrl)/api/auth/logout"
         case .preRegister:
             return "\(API.baseUrl)/api/auth/register/instagram-otp"
         case .register:

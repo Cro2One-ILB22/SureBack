@@ -63,6 +63,9 @@ class CustomerDashboardViewController: UIViewController {
 
     @objc func redeemTokenTapped() {
         print("redeem token tapped")
+        let submitStoryVC = SubmitStoryViewController()
+        submitStoryVC.title = "Submit Story"
+        navigationController?.pushViewController(submitStoryVC, animated: true)
     }
 
     @objc func seeAllMerchantTapped() {

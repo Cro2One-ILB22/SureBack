@@ -55,6 +55,36 @@ class RequestFunction {
         }
     }
 
+    func postLogout(completionHandler: @escaping (Result<Data?, AFError>) -> Void) {
+        let url = Endpoints.logout.url
+
+        fetchHeadersForDeviceRegistration { response in
+            switch response {
+            case let .success(headers):
+                self.requestWithToken(url: url, method: .post) { response in
+                    switch response.result {
+                    case .success:
+                        do {
+                            KeychainHelper.standard.delete(key: .accessToken)
+                            //                            try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
+                        } catch {
+                            print(error)
+                        }
+                    case .failure:
+                        if let data = response.data {
+                            let json = String(data: data, encoding: .utf8)
+                            print("Failure Response: \(String(describing: json))")
+                        }
+                    }
+                    completionHandler(response.result)
+                }
+            case let .failure(error):
+                print(error)
+                completionHandler(.failure(error.asAFError(orFailWith: "Error fetching FCM token")))
+            }
+        }
+    }
+
     func preRegister(name: String, email: String, password: String, role: String, username: String, completion: @escaping (RequestInstagramOTPResponse?, AFError?) -> Void) {
         let url = Endpoints.preRegister.url
         let body: [String: Any] = [
@@ -346,31 +376,6 @@ extension RequestFunction {
 
         requestWithToken(url: url, parameters: parameters, decodable: ResponseData<GenerateTokenOnlineResponse>.self) {
             completion($0.result)
-        }
-    }
-
-    func postLogout(completionHandler: @escaping (Result<Data?, AFError>) -> Void) {
-        let url = Endpoints.logout.url
-
-        fetchHeadersForDeviceRegistration { response in
-            switch response {
-            case let .success(headers):
-                self.requestWithToken(url: url, method: .post, headers: headers) { response in
-                    switch response.result {
-                    case .success:
-                        KeychainHelper.standard.delete(key: .accessToken)
-                    case .failure:
-                        if let data = response.data {
-                            let json = String(data: data, encoding: .utf8)
-                            print("Failure Response: \(String(describing: json))")
-                        }
-                    }
-                    completionHandler(response.result)
-                }
-            case let .failure(error):
-                print(error)
-                completionHandler(.failure(error.asAFError(orFailWith: "Error fetching FCM token")))
-            }
         }
     }
 }

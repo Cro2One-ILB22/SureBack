@@ -17,12 +17,14 @@ protocol Endpoint {
 
 enum Endpoints: Endpoint {
     case login
+    case logout
     case preRegister
     case register
     case getAccount
     case getProfileIG
     case getUserIG
     case generateToken
+    case scanQr
     case toStoryIG
     case redeemToken
     case updateUser
@@ -31,11 +33,15 @@ enum Endpoints: Endpoint {
     case getListMerchant
     case getListTransaction
     case approveOrRejectStory
+    case submitStory
+    case getToken
 
     public var url: String {
         switch self {
         case .login:
             return "\(API.baseUrl)/api/auth/login"
+        case .logout:
+            return "\(API.baseUrl)/api/auth/logout"
         case .preRegister:
             return "\(API.baseUrl)/api/auth/register/instagram-otp"
         case .register:
@@ -64,6 +70,12 @@ enum Endpoints: Endpoint {
             return "\(API.baseUrl)/api/transaction"
         case .approveOrRejectStory:
             return "\(API.baseUrl)/api/ig/story/approval"
+        case .scanQr:
+            return "\(API.baseUrl)/api/ig/purchase/qr"
+        case .submitStory:
+            return "\(API.baseUrl)/api/ig/story/submit"
+        case .getToken:
+            return "\(API.baseUrl)/api/ig/token"
         }
     }
 }

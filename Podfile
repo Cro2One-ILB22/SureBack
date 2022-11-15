@@ -9,6 +9,7 @@ target 'SureBack' do
   pod 'FirebaseCore'
   pod 'FirebaseAnalytics'
   pod 'FirebaseMessaging'
+  pod 'SDWebImage'
 
   # Pods for SureBack
 

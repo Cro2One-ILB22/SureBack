@@ -19,7 +19,7 @@ struct ResultStoryIG: Codable {
     let imageURL: String
     let videoURL, musicMetadata: String?
     let storyURL: String
-    let submittedAt: Int?
+    let submittedAt: String?
 
     enum CodingKeys: String, CodingKey {
         case id

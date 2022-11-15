@@ -12,8 +12,6 @@ struct MerchantDetailResponse: Codable {
     let cashbackPercent: Float?
     let cashbackLimit, dailyTokenLimit: Int?
     let isActiveGeneratingToken: Bool
-    let outstandingCoins, exchangedCoins: Int
-    let updatedAt: String?
     let todaysTokenCount: Int
 
     enum CodingKeys: String, CodingKey {
@@ -21,9 +19,6 @@ struct MerchantDetailResponse: Codable {
         case cashbackLimit = "cashback_limit"
         case dailyTokenLimit = "daily_token_limit"
         case isActiveGeneratingToken = "is_active_generating_token"
-        case outstandingCoins = "outstanding_coins"
-        case exchangedCoins = "exchanged_coins"
-        case updatedAt = "updated_at"
         case todaysTokenCount = "todays_token_count"
     }
 }

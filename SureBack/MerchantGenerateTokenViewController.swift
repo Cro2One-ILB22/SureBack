@@ -89,7 +89,7 @@ class MerchantGenerateTokenViewController: UIViewController, SendDataDelegate {
             let jsonData = stringJSON.data(using: .utf8)!
             var dataQr: QRData = try! JSONDecoder().decode(QRData.self, from: jsonData)
 
-            request.postGenerateTokenOffline(customerId: dataQr.customerID, purchaseAmount: totalPurchase) { data in
+            request.postGenerateTokenOffline(customerId: dataQr.customerID, purchaseAmount: totalPurchase, isRequestingToken: 0) { data in
                 print(data)
                 switch data {
                 case .success:

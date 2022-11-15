@@ -12,7 +12,6 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-
     let gcmMessageIDKey = "gcm.Message_ID"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -41,9 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().delegate = self
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        let viewController = MerchantDashboardViewController()
+        let viewController = IsLoginViewController()
         let nav = UINavigationController(rootViewController: viewController)
-        window?.rootViewController = TabBarViewController()
+        window?.rootViewController = nav
         window?.makeKeyAndVisible()
 
         return true

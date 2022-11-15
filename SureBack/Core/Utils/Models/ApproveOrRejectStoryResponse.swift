@@ -13,7 +13,7 @@ struct ApproveOrRejectStoryResponse: Codable {
     let imageURI, videoURI, instagramStoryStatus: String?
     let approvalStatus: Int?
     let submittedAt, note: String?
-    let createdAt, updatedAt: String
+    let createdAt, updatedAt: String?
     let storyURL: String?
     let customer: UserInfoResponse?
 

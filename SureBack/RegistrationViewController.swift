@@ -93,6 +93,13 @@ class RegistrationViewController: UIViewController {
         button.layer.cornerRadius = 10
         return button
     }()
+    private let roleSegmentedControl: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl(items: ["customer", "seller"])
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        return segmentedControl
+    }()
     private let loadingIndicator: UIActivityIndicatorView = {
         let loading = UIActivityIndicatorView()
         loading.style = .gray
@@ -108,6 +115,7 @@ class RegistrationViewController: UIViewController {
         setupAlreadyHaveAccount()
         setupButton()
         setupLoadingIndicator()
+        setupRoleSegmentedControl()
         signUpButton.addTarget(self, action: #selector(signUpTapped), for: .touchUpInside)
         toSignInLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(signInTapped)))
         nameField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
@@ -124,8 +132,10 @@ class RegistrationViewController: UIViewController {
         guard let email = emaillField.text, !email.isEmpty else {return}
         guard let password = passwordField.text, !password.isEmpty else {return}
         guard let confirmPass = confirmPasswordField.text, !confirmPass.isEmpty else {return}
+        guard let role = roleSegmentedControl.titleForSegment(at: roleSegmentedControl.selectedSegmentIndex) else {return}
+        print(role)
         let request = RequestFunction()
-        request.preRegister(name: name, email: email, password: password, role: "merchant", username: usernameIG) { result, error  in
+        request.preRegister(name: name, email: email, password: password, role: role, username: usernameIG) { result, error  in
             if error != nil {
                 self.loadingIndicator.stopAnimating()
                 self.loadingIndicator.isHidden = true
@@ -140,7 +150,7 @@ class RegistrationViewController: UIViewController {
                 name: name,
                 usernameIG: usernameIG,
                 email: email,
-                role: "merchant",
+                role: role,
                 password: password)
             confirmRegistVC.responseOTP = result
             confirmRegistVC.dataRegister = dataRegister
@@ -165,7 +175,9 @@ class RegistrationViewController: UIViewController {
         }
     }
     @objc func signInTapped() {
-        print("Sign in tapped")
+        let loginVC = LoginViewController()
+        navigationController?.pushViewController(loginVC, animated: true)
+        self.navigationController?.isNavigationBarHidden = true
     }
 }
 
@@ -208,5 +220,10 @@ extension RegistrationViewController {
         view.addSubview(loadingIndicator)
         loadingIndicator.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
         loadingIndicator.setCenterYAnchorConstraint(equalTo: view.centerYAnchor)
+    }
+    private func setupRoleSegmentedControl() {
+        view.addSubview(roleSegmentedControl)
+        roleSegmentedControl.setTopAnchorConstraint(equalTo: haveAnAccountLabel.bottomAnchor, constant: 10)
+        roleSegmentedControl.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
     }
 }

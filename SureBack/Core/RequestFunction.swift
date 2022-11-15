@@ -10,6 +10,7 @@ import FirebaseMessaging
 import Foundation
 
 // MARK: Auth
+
 class RequestFunction {
     private var accessToken: String {
         do {
@@ -24,7 +25,7 @@ class RequestFunction {
         let url = Endpoints.login.url
         let body: [String: String] = [
             "email": email,
-            "password": password
+            "password": password,
         ]
 
         fetchHeadersForDeviceRegistration { response in
@@ -36,6 +37,36 @@ class RequestFunction {
                         do {
                             KeychainHelper.standard.delete(key: .accessToken)
                             try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
+                        } catch {
+                            print(error)
+                        }
+                    case .failure:
+                        if let data = response.data {
+                            let json = String(data: data, encoding: .utf8)
+                            print("Failure Response: \(String(describing: json))")
+                        }
+                    }
+                    completionHandler(response.result)
+                }
+            case let .failure(error):
+                print(error)
+                completionHandler(.failure(error.asAFError(orFailWith: "Error fetching FCM token")))
+            }
+        }
+    }
+
+    func postLogout(completionHandler: @escaping (Result<Data?, AFError>) -> Void) {
+        let url = Endpoints.logout.url
+
+        fetchHeadersForDeviceRegistration { response in
+            switch response {
+            case let .success(headers):
+                self.requestWithToken(url: url, method: .post) { response in
+                    switch response.result {
+                    case .success:
+                        do {
+                            KeychainHelper.standard.delete(key: .accessToken)
+                            //                            try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
                         } catch {
                             print(error)
                         }
@@ -83,7 +114,7 @@ class RequestFunction {
             "email": email,
             "password": password,
             "role": role,
-            "username": username
+            "username": username,
         ]
         fetchHeadersForDeviceRegistration { response in
             switch response {
@@ -134,6 +165,7 @@ extension RequestFunction {
 }
 
 // MARK: Partner
+
 extension RequestFunction {
     func updatePartnerCashbackPercent(cashbackPercent: Float, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
         let url = Endpoints.updateMerchantDetail.url
@@ -198,8 +230,8 @@ extension RequestFunction {
         }
     }
 
-    func submitStory(storyId: Int, instagtamStoryId: Int) {
-        let url = Endpoints.register.url
+    func submitStory(storyId: Int, instagtamStoryId: Int, completion: @escaping (Result<Data?, AFError>) -> Void) {
+        let url = Endpoints.submitStory.url
         let body: [String: Int] = [
             "story_id": storyId,
             "instagram_story_id": instagtamStoryId,
@@ -209,12 +241,17 @@ extension RequestFunction {
             "Accept": "application/json",
         ]
         AF.request(url, method: .post, parameters: body, headers: headers)
+            .validate()
             .response { response in
+                completion(response.result)
                 switch response.result {
-                case let .success(data):
-                    print(data)
+                case .success:
+                    break
                 case let .failure(error):
-                    print(error)
+                    if let data = response.data {
+                        let json = String(data: data, encoding: .utf8)
+                        print("Failure Response: \(String(describing: json))")
+                    }
                 }
             }
     }
@@ -230,26 +267,49 @@ extension RequestFunction {
         }
     }
 
-    func postGenerateTokenOffline(customerId: Int, purchaseAmount: Int, completion: @escaping (Result<GenerateTokenOfflineResponse, AFError>) -> Void) {
-        let url = Endpoints.generateToken.url
+    func postGenerateTokenOffline(customerId: Int, purchaseAmount: Int, isRequestingToken: Int, completion: @escaping (Result<ScanQrResponse, AFError>) -> Void) {
+        let url = Endpoints.scanQr.url
         let body: [String: Int] = [
             "customer_id": customerId,
             "purchase_amount": purchaseAmount,
+            "is_requesting_for_token": isRequestingToken,
         ]
 
-        requestWithToken(url: url, method: .post, parameters: body, decodable: GenerateTokenOfflineResponse.self) {
-            completion($0.result)
+        requestWithToken(url: url, method: .post, parameters: body, decodable: ScanQrResponse.self) {
+            response in
+            completion(response.result)
+            switch response.result {
+            case .success:
+                break
+            case let .failure(error):
+                if let data = response.data {
+                    let json = String(data: data, encoding: .utf8)
+                    print("Failure Response: \(String(describing: json))")
+                }
+            }
         }
     }
 
-    func redeemToken(token: String, completion: @escaping (Result<GenerateTokenOfflineResponse, AFError>) -> Void) {
+    func redeemToken(token: String, completion: @escaping (Result<Token, AFError>) -> Void) {
         let url = Endpoints.redeemToken.url
         let body: [String: String] = [
             "token": token,
         ]
 
-        requestWithToken(url: url, method: .post, parameters: body, decodable: GenerateTokenOfflineResponse.self) {
-            completion($0.result)
+        requestWithToken(url: url, method: .post, parameters: body, decodable: Token.self) {
+            //            completion($0.result)
+            response in
+            completion(response.result)
+            switch response.result {
+            case .success:
+                break
+            case let .failure(error):
+                //                print(error.localizedDescription)
+                if let data = response.data {
+                    let json = String(data: data, encoding: .utf8)
+                    print("Failure Response: \(String(describing: json))")
+                }
+            }
         }
     }
 
@@ -282,26 +342,39 @@ extension RequestFunction {
 }
 
 extension RequestFunction {
-    func getListCustomer(completion: @escaping (Result<ListCustomerResponse, AFError>) -> Void) {
+    func getListCustomer(completion: @escaping (Result<ResponseData<UserInfoResponse>, AFError>) -> Void) {
         let url = Endpoints.getListCustomer.url
 
-        requestWithToken(url: url, decodable: ListCustomerResponse.self) {
+        requestWithToken(url: url, decodable: ResponseData<UserInfoResponse>.self) {
             completion($0.result)
         }
     }
 
-    func getListMerchant(completion: @escaping (Result<ListMerchantResponse, AFError>) -> Void) {
+    func getListMerchant(completion: @escaping (Result<ResponseData<UserInfoResponse>, AFError>) -> Void) {
         let url = Endpoints.getListMerchant.url
 
-        requestWithToken(url: url, decodable: ListMerchantResponse.self) {
+        requestWithToken(url: url, decodable: ResponseData<UserInfoResponse>.self) {
             completion($0.result)
         }
     }
 
-    func getListTransaction(completion: @escaping (Result<ListTransactionResponse, AFError>) -> Void) {
+    func getListTransaction(completion: @escaping (Result<ResponseData<Transaction>, AFError>) -> Void) {
         let url = Endpoints.getListTransaction.url
 
-        requestWithToken(url: url, decodable: ListTransactionResponse.self) {
+        requestWithToken(url: url, decodable: ResponseData<Transaction>.self) {
+            completion($0.result)
+        }
+    }
+
+    func getListToken(expired: Int, submitted: Int, redeemed: Int, completion: @escaping (Result<ResponseData<GenerateTokenOnlineResponse>, AFError>) -> Void) {
+        let url = Endpoints.getToken.url
+        let parameters: [String: Int] = [
+            "expired": expired,
+            "submitted": submitted,
+            "redeemed": redeemed,
+        ]
+
+        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<GenerateTokenOnlineResponse>.self) {
             completion($0.result)
         }
     }
@@ -322,6 +395,28 @@ extension RequestFunction {
             AF.request(url, method: method, parameters: parameters, headers: headers)
                 .validate()
                 .responseDecodable(of: decodable) { response in
+                    completionHandler(response)
+                }
+        }
+    }
+
+    private func requestWithToken(
+        url: String,
+        method: HTTPMethod = .get,
+        parameters: Dictionary<String, Any>? = nil,
+        headers: HTTPHeaders = [],
+        completionHandler: @escaping (DataResponse<Data?, AFError>) -> Void) {
+        AuthManager.shared.withValidToken { token in
+            var generalHeaders: HTTPHeaders = [
+                "Authorization": "Bearer \(token)",
+                "Accept": "application/json",
+            ]
+            for header in headers {
+                generalHeaders.add(header)
+            }
+            AF.request(url, method: method, parameters: parameters, headers: headers)
+                .validate()
+                .response { response in
                     completionHandler(response)
                 }
         }

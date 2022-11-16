@@ -26,6 +26,8 @@
 		165121FB29244B7C00DBC0AE /* CustomerDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165121FA29244B7C00DBC0AE /* CustomerDashboardViewController.swift */; };
 		165121FD2924501000DBC0AE /* MerchantProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165121FC2924501000DBC0AE /* MerchantProfileViewController.swift */; };
 		165122012924CE2600DBC0AE /* CardFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165122002924CE2600DBC0AE /* CardFieldView.swift */; };
+		165122052925853E00DBC0AE /* NotificationsResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165122042925853E00DBC0AE /* NotificationsResponses.swift */; };
+		16512207292587C800DBC0AE /* MerchantDetailStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16512206292587C800DBC0AE /* MerchantDetailStoryViewController.swift */; };
 		16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */; };
 		16930E3F290FBB27003DFEBE /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3E290FBB27003DFEBE /* AuthResponse.swift */; };
 		1694878829104CE70088821C /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694878729104CE70088821C /* KeychainHelper.swift */; };
@@ -113,6 +115,8 @@
 		165121FA29244B7C00DBC0AE /* CustomerDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerDashboardViewController.swift; sourceTree = "<group>"; };
 		165121FC2924501000DBC0AE /* MerchantProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantProfileViewController.swift; sourceTree = "<group>"; };
 		165122002924CE2600DBC0AE /* CardFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFieldView.swift; sourceTree = "<group>"; };
+		165122042925853E00DBC0AE /* NotificationsResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsResponses.swift; sourceTree = "<group>"; };
+		16512206292587C800DBC0AE /* MerchantDetailStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailStoryViewController.swift; sourceTree = "<group>"; };
 		16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInstagramOTPResponse.swift; sourceTree = "<group>"; };
 		16930E3E290FBB27003DFEBE /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		1694878729104CE70088821C /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
@@ -334,6 +338,7 @@
 				16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */,
 				AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */,
 				AC59F88A291F8117000F8345 /* Token.swift */,
+				165122042925853E00DBC0AE /* NotificationsResponses.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -344,6 +349,7 @@
 				165121FE2924CDF300DBC0AE /* MerchantProfile */,
 				AC59F88E29205480000F8345 /* Customer */,
 				16BD91A0291D52280010731E /* MerchantDashboard */,
+				16512206292587C800DBC0AE /* MerchantDetailStoryViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -731,6 +737,7 @@
 				165122012924CE2600DBC0AE /* CardFieldView.swift in Sources */,
 				16BD919E291C58860010731E /* UIScreen+Ext.swift in Sources */,
 				16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */,
+				16512207292587C800DBC0AE /* MerchantDetailStoryViewController.swift in Sources */,
 				119B765A2906976E00530C80 /* ViewController.swift in Sources */,
 				ACE5CDA82912716B00D08177 /* ScanQrResponse.swift in Sources */,
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,
@@ -759,6 +766,7 @@
 				1694878829104CE70088821C /* KeychainHelper.swift in Sources */,
 				ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */,
 				AC3BCEB92921E5F9009BFB05 /* HeaderSubmitStoryView.swift in Sources */,
+				165122052925853E00DBC0AE /* NotificationsResponses.swift in Sources */,
 				165121FD2924501000DBC0AE /* MerchantProfileViewController.swift in Sources */,
 				AC59F89429206137000F8345 /* ItemCustomerHistoryTableViewCell.swift in Sources */,
 				16BD91AD291E93270010731E /* MerchantDashboardViewController.swift in Sources */,

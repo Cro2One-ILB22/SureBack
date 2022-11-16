@@ -66,7 +66,7 @@ class RequestFunction {
                     case .success:
                         do {
                             KeychainHelper.standard.delete(key: .accessToken)
-                            //                            try KeychainHelper.standard.save(key: .accessToken, value: data.accessToken)
+                            print(res)
                         } catch {
                             print(error)
                         }
@@ -376,6 +376,17 @@ extension RequestFunction {
 
         requestWithToken(url: url, parameters: parameters, decodable: ResponseData<GenerateTokenOnlineResponse>.self) {
             completion($0.result)
+        }
+    }
+    func getNotifications(completionHandler: @escaping (NotificationsResponses) -> Void) {
+        let url = Endpoints.getNotifications.url
+        requestWithToken(url: url, decodable: NotificationsResponses.self) { response in
+            switch(response.result) {
+            case .success(let data):
+                completionHandler(data)
+            case.failure(let error):
+                print(error)
+            }
         }
     }
 }

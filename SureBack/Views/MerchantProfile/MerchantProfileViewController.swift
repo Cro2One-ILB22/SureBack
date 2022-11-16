@@ -64,18 +64,33 @@ class MerchantProfileViewController: UIViewController {
         button.setTitle("Logout", for: .normal)
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 10
+        button.clipsToBounds = true
         return button
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        view.backgroundColor = .white
         setupLayout()
         getMerchantProfile()
+        logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
+    }
+    @objc func logout() {
+        print("tapped")
+        let rf = RequestFunction()
+        rf.postLogout { result in
+            switch(result) {
+            case.success(let data):
+                guard let data = data else {return}
+                print("Berhasil",data)
+            case.failure(let error):
+                print(error)
+            }
+        }
     }
     private func getMerchantProfile() {
         let rf = RequestFunction()
         KeychainHelper.standard.delete(key: .accessToken)
-        try! KeychainHelper.standard.save(key: .accessToken, value: "80|jDbqVX9wVGQptMjnnEKB0ptAkHChP5DCfu50cQK2")
+        try! KeychainHelper.standard.save(key: .accessToken, value: "87|9FvXdz7yQTeyJ2sk5IDxgi3FiqrtBCyeF33Kj8bU")
         rf.getUserInfo { result in
             switch(result) {
             case .success(let data):
@@ -182,5 +197,6 @@ extension MerchantProfileViewController {
         logoutButton.setTopAnchorConstraint(equalTo: cashbackLimitMethodCardField.bottomAnchor, constant: 20)
         logoutButton.setLeftAnchorConstraint(equalTo: contentView.leftAnchor, constant: 20)
         logoutButton.setRightAnchorConstraint(equalTo: contentView.rightAnchor, constant: -20)
+        logoutButton.setBottomAnchorConstraint(equalTo: contentView.bottomAnchor, constant: -20)
     }
 }

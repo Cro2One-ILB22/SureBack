@@ -23,6 +23,9 @@
 		1619BB2E2919D9DC00085B74 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB2D2919D9DC00085B74 /* UIView+Ext.swift */; };
 		1619BB302919FCF700085B74 /* ConfirmRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB2F2919FCF700085B74 /* ConfirmRegistrationViewController.swift */; };
 		1619BB32291B500300085B74 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB31291B500300085B74 /* UIViewController+Ext.swift */; };
+		165121FB29244B7C00DBC0AE /* CustomerDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165121FA29244B7C00DBC0AE /* CustomerDashboardViewController.swift */; };
+		165121FD2924501000DBC0AE /* MerchantProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165121FC2924501000DBC0AE /* MerchantProfileViewController.swift */; };
+		165122012924CE2600DBC0AE /* CardFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165122002924CE2600DBC0AE /* CardFieldView.swift */; };
 		16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */; };
 		16930E3F290FBB27003DFEBE /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16930E3E290FBB27003DFEBE /* AuthResponse.swift */; };
 		1694878829104CE70088821C /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694878729104CE70088821C /* KeychainHelper.swift */; };
@@ -39,7 +42,6 @@
 		9CCB778BAEA00AE5C43FB920 /* Pods_SureBack_SureBackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */; };
 		AC00FA35290A5D3600B6347D /* ScanQrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */; };
 		AC04BD80290995AD00635147 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04BD7F290995AD00635147 /* Function.swift */; };
-		AC12F573291BF21D0096CB5A /* CustomerDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC12F572291BF21D0096CB5A /* CustomerDashboardViewController.swift */; };
 		AC12F575291C29E10096CB5A /* ItemMerchantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC12F574291C29E10096CB5A /* ItemMerchantTableViewCell.swift */; };
 		AC12F579291D3FBB0096CB5A /* CustomerHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC12F578291D3FBB0096CB5A /* CustomerHistoryViewController.swift */; };
 		AC1A6CBB291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */; };
@@ -108,6 +110,9 @@
 		1619BB2D2919D9DC00085B74 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		1619BB2F2919FCF700085B74 /* ConfirmRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationViewController.swift; sourceTree = "<group>"; };
 		1619BB31291B500300085B74 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		165121FA29244B7C00DBC0AE /* CustomerDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerDashboardViewController.swift; sourceTree = "<group>"; };
+		165121FC2924501000DBC0AE /* MerchantProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantProfileViewController.swift; sourceTree = "<group>"; };
+		165122002924CE2600DBC0AE /* CardFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFieldView.swift; sourceTree = "<group>"; };
 		16930E3C290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInstagramOTPResponse.swift; sourceTree = "<group>"; };
 		16930E3E290FBB27003DFEBE /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		1694878729104CE70088821C /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
@@ -129,7 +134,6 @@
 		A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBackTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQrViewController.swift; sourceTree = "<group>"; };
 		AC04BD7F290995AD00635147 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
-		AC12F572291BF21D0096CB5A /* CustomerDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDashboardViewController.swift; sourceTree = "<group>"; };
 		AC12F574291C29E10096CB5A /* ItemMerchantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMerchantTableViewCell.swift; sourceTree = "<group>"; };
 		AC12F578291D3FBB0096CB5A /* CustomerHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerHistoryViewController.swift; sourceTree = "<group>"; };
 		AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantGenerateTokenViewController.swift; sourceTree = "<group>"; };
@@ -238,7 +242,6 @@
 				1619BB2F2919FCF700085B74 /* ConfirmRegistrationViewController.swift */,
 				AC22879329182E8E00397ED0 /* ShowQRViewController.swift */,
 				AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */,
-				AC12F572291BF21D0096CB5A /* CustomerDashboardViewController.swift */,
 				AC59F88C29202888000F8345 /* IsLoginViewController.swift */,
 			);
 			path = SureBack;
@@ -299,6 +302,23 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		165121FE2924CDF300DBC0AE /* MerchantProfile */ = {
+			isa = PBXGroup;
+			children = (
+				165121FF2924CDFE00DBC0AE /* Components */,
+				165121FC2924501000DBC0AE /* MerchantProfileViewController.swift */,
+			);
+			path = MerchantProfile;
+			sourceTree = "<group>";
+		};
+		165121FF2924CDFE00DBC0AE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				165122002924CE2600DBC0AE /* CardFieldView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		16930E39290FB2D0003DFEBE /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,6 +341,7 @@
 		16BD919F291D521D0010731E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				165121FE2924CDF300DBC0AE /* MerchantProfile */,
 				AC59F88E29205480000F8345 /* Customer */,
 				16BD91A0291D52280010731E /* MerchantDashboard */,
 			);
@@ -351,8 +372,8 @@
 		AC2AC1B8291F391400E9F8A7 /* CustomerDashboard */ = {
 			isa = PBXGroup;
 			children = (
-				AC12F572291BF21D0096CB5A /* CustomerDashboardViewController.swift */,
 				AC2AC1B9291F399400E9F8A7 /* Components */,
+				165121FA29244B7C00DBC0AE /* CustomerDashboardViewController.swift */,
 			);
 			path = CustomerDashboard;
 			sourceTree = "<group>";
@@ -707,6 +728,7 @@
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
 				ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */,
 				ACE5CDB029127E6200D08177 /* ResponseData.swift in Sources */,
+				165122012924CE2600DBC0AE /* CardFieldView.swift in Sources */,
 				16BD919E291C58860010731E /* UIScreen+Ext.swift in Sources */,
 				16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */,
 				119B765A2906976E00530C80 /* ViewController.swift in Sources */,
@@ -720,6 +742,7 @@
 				AC59F88D29202888000F8345 /* IsLoginViewController.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
 				AC8AF8DB2922FA8700227BDE /* SubmitStoryTableViewCell.swift in Sources */,
+				165121FB29244B7C00DBC0AE /* CustomerDashboardViewController.swift in Sources */,
 				AC59F892292057CE000F8345 /* HeaderCustomerHistoryView.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
 				AC22879429182E8E00397ED0 /* ShowQRViewController.swift in Sources */,
@@ -732,11 +755,11 @@
 				AC12F579291D3FBB0096CB5A /* CustomerHistoryViewController.swift in Sources */,
 				1619BB2B2919B74800085B74 /* RegistrationViewController.swift in Sources */,
 				AC00FA35290A5D3600B6347D /* ScanQrViewController.swift in Sources */,
-				AC12F573291BF21D0096CB5A /* CustomerDashboardViewController.swift in Sources */,
 				AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */,
 				1694878829104CE70088821C /* KeychainHelper.swift in Sources */,
 				ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */,
 				AC3BCEB92921E5F9009BFB05 /* HeaderSubmitStoryView.swift in Sources */,
+				165121FD2924501000DBC0AE /* MerchantProfileViewController.swift in Sources */,
 				AC59F89429206137000F8345 /* ItemCustomerHistoryTableViewCell.swift in Sources */,
 				16BD91AD291E93270010731E /* MerchantDashboardViewController.swift in Sources */,
 				AC59F88B291F8117000F8345 /* Token.swift in Sources */,

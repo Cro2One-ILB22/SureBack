@@ -85,9 +85,13 @@
       "size" : "76x76"
     },
     {
+      "filename" : "1024.png",
       "idiom" : "universal",
       "platform" : "ios",
-      "filename" : "40.png",
+      "scale" : "1x",
+      "size" : "1024x1024"
+    },
+    {
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
@@ -231,9 +235,6 @@
       "size" : "83.5x83.5"
     },
     {
-      "idiom" : "universal",
-      "platform" : "ios",
-      "filename" : "1024.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
@@ -425,6 +426,14 @@
       "idiom" : "watch-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
+    },
+    {
+      "filename" : "40.png",
+      "idiom" : "universal",
+      "platform" : "ios",
+      "scale" : "2x",
+      "size" : "20x20",
+      "unassigned" : true
     }
   ],
   "info" : {

@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: - Transaction
+
 struct Transaction: Codable {
     let id, amount: Int
     let resultDescription: JSONNull?
@@ -33,13 +34,26 @@ enum AccountingEntry: String, Codable {
 }
 
 enum Category: String, Codable {
-    case purchase = "purchase"
+    case purchase
+    case deposit
+    case cashback
+    case withdrawal
+    case story
+    case coinExchange = "coin_exchange"
 }
 
 enum PaymentInstrument: String, Codable {
-    case other = "other"
+    case other
 }
 
 enum Status: String, Codable {
-    case success = "success"
+    case created
+    case pending
+    case processing
+    case success
+    case failed
+    case cancelled
+    case refunded
+    case expired
+    case rejected
 }

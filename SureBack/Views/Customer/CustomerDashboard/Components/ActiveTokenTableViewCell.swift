@@ -1,0 +1,70 @@
+//
+//  ActiveTokenTableViewCell.swift
+//  SureBack
+//
+//  Created by Ditha Nurcahya Avianty on 16/11/22.
+//
+
+import UIKit
+
+class RedeemButton: UIButton {
+    var data: GenerateTokenOnlineResponse?
+}
+
+class ActiveTokenTableViewCell: UITableViewCell {
+    var delegate: UIViewToController?
+    var activateTokenData = [GenerateTokenOnlineResponse]()
+    static let id = "ActiveTokenTableViewCell"
+    private let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: UIScreen.screenWidth - 40, height: 100)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        collectionView.register(ItemActiveTokenCollectionViewCell.self, forCellWithReuseIdentifier: ItemActiveTokenCollectionViewCell.id)
+        return collectionView
+    }()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(collectionView)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        collectionView.frame = contentView.bounds
+    }
+}
+
+extension ActiveTokenTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemActiveTokenCollectionViewCell.id, for: indexPath) as? ItemActiveTokenCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.backgroundColor = .lightGray
+        cell.tokenMerchantNameLabel.text = activateTokenData[indexPath.row].merchant.name
+        cell.redeemButton.tag = indexPath.row
+        print("indexpathrow: \(indexPath.row)")
+        cell.redeemButton.addTarget(self, action: #selector(redeemTokenTapped), for: .touchUpInside)
+
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("count: \(activateTokenData.count)")
+        return activateTokenData.count
+    }
+
+    @objc func redeemTokenTapped(sender: UIButton) {
+        print("redeem token tapped")
+        print("nomor cell: \(sender.tag)")
+        delegate?.didTapButton(data: activateTokenData[sender.tag])
+    }
+}

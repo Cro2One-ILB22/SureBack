@@ -1,5 +1,5 @@
 //
-//  ActiveTokenCardView.swift
+//  ItemActiveTokenCollectionViewCell.swift
 //  SureBack
 //
 //  Created by Ditha Nurcahya Avianty on 12/11/22.
@@ -7,9 +7,11 @@
 
 import UIKit
 
-class ActiveTokenCardView: UIView {
+class ItemActiveTokenCollectionViewCell: UICollectionViewCell {
 
-    lazy var expireLabel: UILabel = {
+    static let id = "ItemActiveTokenCollectionViewCell"
+
+    let expireLabel: UILabel = {
         let label = UILabel()
         label.text = "Expires in"
         label.font = UIFont.systemFont(ofSize: 15)
@@ -18,7 +20,7 @@ class ActiveTokenCardView: UIView {
         return label
     }()
 
-    lazy var tokenMerchantNameLabel: UILabel = {
+    var tokenMerchantNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Merchant Name"
         label.font = UIFont.systemFont(ofSize: 15)
@@ -27,7 +29,7 @@ class ActiveTokenCardView: UIView {
         return label
     }()
 
-    lazy var timerLabel: UILabel = {
+    var timerLabel: UILabel = {
         let label = UILabel()
         label.text = "Timer"
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -36,7 +38,7 @@ class ActiveTokenCardView: UIView {
         return label
     }()
 
-    lazy var redeemButton: UIButton = {
+    var redeemButton: UIButton = {
         let button = UIButton()
         button.setTitle("Redeem", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -48,6 +50,7 @@ class ActiveTokenCardView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        layer.cornerRadius = 30
         setupView()
     }
 

@@ -8,7 +8,6 @@
 import UIKit
 
 class HeaderSubmitStoryView: UIView {
-
     lazy var tokenLabel: UILabel = {
         let label = UILabel()
         label.text = "Token Details"
@@ -109,21 +108,24 @@ class HeaderSubmitStoryView: UIView {
         stackView0.axis = .horizontal
         stackView0.distribution = .equalSpacing
         stackView0.alignment = .fill
+        stackView0.spacing = 200
         stackView0.translatesAutoresizingMaskIntoConstraints = false
 
         let stackView1 = UIStackView(arrangedSubviews: [dateLabel, dateNameLabel])
         stackView1.axis = .horizontal
         stackView1.distribution = .equalSpacing
         stackView1.alignment = .fill
+        stackView1.spacing = 200
         stackView1.translatesAutoresizingMaskIntoConstraints = false
 
         let stackView2 = UIStackView(arrangedSubviews: [purchaseLabel, purchaseNameLabel])
         stackView2.axis = .horizontal
         stackView2.distribution = .equalSpacing
         stackView2.alignment = .fill
+        stackView2.spacing = 200
         stackView2.translatesAutoresizingMaskIntoConstraints = false
 
-        let stackViewHeader = UIStackView(arrangedSubviews: [tokenLabel, tokenIdLabel, stackView0, stackView1, stackView2])
+        let stackViewHeader = UIStackView(arrangedSubviews: [tokenLabel, tokenIdLabel])
         stackViewHeader.axis = .vertical
         stackViewHeader.distribution = .equalSpacing
         stackViewHeader.alignment = .fill
@@ -132,11 +134,19 @@ class HeaderSubmitStoryView: UIView {
         stackViewHeader.setTopAnchorConstraint(equalTo: topAnchor, constant: 20)
         stackViewHeader.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
 
+        let stackViewHeader2 = UIStackView(arrangedSubviews: [stackView0, stackView1, stackView2])
+        stackViewHeader2.axis = .vertical
+        stackViewHeader2.distribution = .equalSpacing
+        stackViewHeader2.alignment = .fill
+        stackViewHeader2.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stackViewHeader2)
+        stackViewHeader2.setTopAnchorConstraint(equalTo: stackViewHeader.topAnchor, constant: 40)
+        stackViewHeader2.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
+
         addSubview(storyLabel)
-        storyLabel.setTopAnchorConstraint(equalTo: stackViewHeader.bottomAnchor, constant: 20)
+        storyLabel.setTopAnchorConstraint(equalTo: stackViewHeader2.bottomAnchor, constant: 20)
         storyLabel.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
         storyLabel.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
         storyLabel.setBottomAnchorConstraint(equalTo: bottomAnchor, constant: -20)
     }
-
 }

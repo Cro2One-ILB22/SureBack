@@ -8,6 +8,8 @@
 import UIKit
 
 class SubmitStoryViewController: UIViewController {
+    var tokenData: GenerateTokenOnlineResponse?
+
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(SubmitStoryTableViewCell.self, forCellReuseIdentifier: SubmitStoryTableViewCell.id)
@@ -19,7 +21,29 @@ class SubmitStoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+
+        guard let tokenData = tokenData, let storyID = tokenData.story?.id else {
+            return
+        }
+
         let headerView = HeaderSubmitStoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 180))
+        headerView.tokenIdLabel.text = String(tokenData.id)
+        headerView.merchantNameLabel.text = tokenData.merchant.name
+
+        // string to date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let date = dateFormatter.date(from: tokenData.createdAt)
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        let dateString = dateFormatter.string(from: date!)
+
+        // date to string
+        let dateToString = DateFormatter()
+        dateToString.dateFormat = "dd/MM/YY"
+
+        headerView.dateNameLabel.text = dateString
+        headerView.purchaseNameLabel.text = String(tokenData.purchase.purchaseAmount)
+        print("Story ID: \(storyID)")
         setupTableView()
         tableView.delegate = self
         tableView.dataSource = self

@@ -358,10 +358,13 @@ extension RequestFunction {
         }
     }
 
-    func getListTransaction(completion: @escaping (Result<ResponseData<Transaction>, AFError>) -> Void) {
+    func getListTransaction(merchantId: Int, completion: @escaping (Result<ResponseData<Transaction>, AFError>) -> Void) {
         let url = Endpoints.getListTransaction.url
+        let parameters: [String: Int] = [
+            "merchant": merchantId,
+        ]
 
-        requestWithToken(url: url, decodable: ResponseData<Transaction>.self) {
+        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<Transaction>.self) {
             completion($0.result)
         }
     }

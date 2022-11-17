@@ -14,6 +14,7 @@ struct GenerateTokenOnlineResponse: Codable {
     let id: Int
     let merchant: UserInfoResponse
     let purchase: Purchase
+    let story: ApproveOrRejectStoryResponse?
 
     enum CodingKeys: String, CodingKey {
         case code
@@ -21,7 +22,7 @@ struct GenerateTokenOnlineResponse: Codable {
         case expiresAt = "expires_at"
         case updatedAt = "updated_at"
         case createdAt = "created_at"
-        case id, merchant, purchase
+        case id, merchant, purchase, story
     }
 }
 

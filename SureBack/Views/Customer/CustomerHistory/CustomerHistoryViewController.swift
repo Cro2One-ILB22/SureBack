@@ -8,6 +8,7 @@
 import UIKit
 
 class CustomerHistoryViewController: UIViewController {
+    let request = RequestFunction()
     var user: UserInfoResponse?
     var merchantData: UserInfoResponse?
 
@@ -28,14 +29,33 @@ class CustomerHistoryViewController: UIViewController {
             return
         }
 
+        request.getListTransaction(merchantId: merchantData.id) { data in
+            switch data {
+            case let .success(result):
+                do {
+                    print("result data transactiom: \(result.data)")
+
+                } catch let error as NSError {
+                    print(error.description)
+                }
+            case let .failure(error):
+                print(error)
+                print("failed to get list transaction in merchant \(merchantData.name)")
+            }
+        }
+
         view.addSubview(headerView)
         headerView.merchantLabel.text = merchantData.name
-        setupTableView()
+        headerView.redeemButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(redeemButtonTapped)))
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableHeaderView = headerView
         tableView.tableFooterView = footerView
         setupTableView()
+    }
+
+    @objc func redeemButtonTapped(sender: UITapGestureRecognizer) {
+        print("redeem button tapped")
     }
 }
 

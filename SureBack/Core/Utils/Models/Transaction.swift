@@ -31,10 +31,11 @@ struct Transaction: Codable {
 
 enum AccountingEntry: String, Codable {
     case c = "C"
+    case d = "D"
 }
 
 enum Category: String, Codable {
-    case purchase
+    case purchase 
     case deposit
     case cashback
     case withdrawal
@@ -43,6 +44,8 @@ enum Category: String, Codable {
 }
 
 enum PaymentInstrument: String, Codable {
+    case coins
+    case balance
     case other
 }
 

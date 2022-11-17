@@ -9,8 +9,12 @@ import UIKit
 
 class CustomerHistoryViewController: UIViewController {
     let request = RequestFunction()
+
     var user: UserInfoResponse?
     var merchantData: UserInfoResponse?
+    var transactionData = [Transaction]()
+
+//    var totalRewardsRedeem = 0
 
     let headerView = HeaderCustomerHistoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 130))
     let footerView = FooterCustomerHistoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 50))
@@ -33,8 +37,18 @@ class CustomerHistoryViewController: UIViewController {
             switch data {
             case let .success(result):
                 do {
+                    self.view.addSubview(self.headerView)
+                    self.headerView.merchantLabel.text = self.merchantData?.name
+                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.redeemButtonTapped))
+                    self.headerView.redeemButton.addGestureRecognizer(tapGesture)
+                    self.tableView.delegate = self
+                    self.tableView.dataSource = self
+                    self.tableView.tableHeaderView = self.headerView
+                    self.tableView.tableFooterView = self.footerView
+                    self.setupTableView()
                     print("result data transactiom: \(result.data)")
-
+                    self.transactionData = result.data
+                    self.tableView.reloadData()
                 } catch let error as NSError {
                     print(error.description)
                 }
@@ -44,14 +58,7 @@ class CustomerHistoryViewController: UIViewController {
             }
         }
 
-        view.addSubview(headerView)
-        headerView.merchantLabel.text = merchantData.name
-        headerView.redeemButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(redeemButtonTapped)))
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableHeaderView = headerView
-        tableView.tableFooterView = footerView
-        setupTableView()
+
     }
 
     @objc func redeemButtonTapped(sender: UITapGestureRecognizer) {
@@ -72,11 +79,14 @@ extension CustomerHistoryViewController {
 
 extension CustomerHistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return transactionData.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemCustomerHistoryTableViewCell.id, for: indexPath) as? ItemCustomerHistoryTableViewCell else { return UITableViewCell() }
+
+        cell.statusLabel.text = transactionData[indexPath.row].category.rawValue
+        cell.coinsLabel.text = String(transactionData[indexPath.row].amount)
 
         return cell
     }

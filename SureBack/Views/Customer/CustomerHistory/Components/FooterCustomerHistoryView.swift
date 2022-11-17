@@ -8,6 +8,9 @@
 import UIKit
 
 class FooterCustomerHistoryView: UIView {
+
+    static var id = "FooterCustomerHistoryView"
+
     lazy var totalRedeemLabel: UILabel = {
         let label = UILabel()
         label.text = "Total Rewards\nRedeem"
@@ -43,8 +46,6 @@ class FooterCustomerHistoryView: UIView {
         addSubview(stackView)
         totalLabel.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
         stackView.setTopAnchorConstraint(equalTo: topAnchor, constant: 5)
-//        stackView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 10)
-//        stackView.setCenterYAnchorConstraint(equalTo: centerYAnchor)
         stackView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
     }
 }

@@ -35,7 +35,7 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
         return label
     }()
 
-    lazy var coinsabel: UILabel = {
+    lazy var coinsLabel: UILabel = {
         let label = UILabel()
         label.text = "+ 2000 coins"
         label.textAlignment = .left
@@ -76,9 +76,9 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
     }
 
     func setupCoinsLabel() {
-        addSubview(coinsabel)
-        coinsabel.translatesAutoresizingMaskIntoConstraints = false
-        coinsabel.setCenterYAnchorConstraint(equalTo: centerYAnchor)
-        coinsabel.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
+        addSubview(coinsLabel)
+        coinsLabel.translatesAutoresizingMaskIntoConstraints = false
+        coinsLabel.setCenterYAnchorConstraint(equalTo: centerYAnchor)
+        coinsLabel.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
     }
 }

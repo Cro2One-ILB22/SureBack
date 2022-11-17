@@ -75,6 +75,7 @@
 		ACE5CDB029127E6200D08177 /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAF29127E6200D08177 /* ResponseData.swift */; };
 		ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE8C3582916267800BEA778 /* LoginViewController.swift */; };
 		ACE8C35B2916D60700BEA778 /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE8C35A2916D60700BEA778 /* DummyViewController.swift */; };
+		ACF6441E2925DF2900A6AD10 /* CustomerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF6441D2925DF2900A6AD10 /* CustomerProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +174,7 @@
 		ACE5CDAF29127E6200D08177 /* ResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData.swift; sourceTree = "<group>"; };
 		ACE8C3582916267800BEA778 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ACE8C35A2916D60700BEA778 /* DummyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
+		ACF6441D2925DF2900A6AD10 /* CustomerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerProfileViewController.swift; sourceTree = "<group>"; };
 		BB6F53CE101281D823C272BB /* Pods_SureBack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -415,6 +417,7 @@
 		AC59F88E29205480000F8345 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
+				ACF6441C2925DF0E00A6AD10 /* CustomerProfile */,
 				AC3BCEBA2921F8A0009BFB05 /* SubmitStory */,
 				AC59F88F292056E8000F8345 /* CustomerHistory */,
 				AC2AC1B8291F391400E9F8A7 /* CustomerDashboard */,
@@ -456,6 +459,14 @@
 				AC3BCEB82921E5F9009BFB05 /* HeaderSubmitStoryView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		ACF6441C2925DF0E00A6AD10 /* CustomerProfile */ = {
+			isa = PBXGroup;
+			children = (
+				ACF6441D2925DF2900A6AD10 /* CustomerProfileViewController.swift */,
+			);
+			path = CustomerProfile;
 			sourceTree = "<group>";
 		};
 		D3D0951AA4B7EF45A5C42768 /* Pods */ = {
@@ -782,8 +793,8 @@
 				1619BB2B2919B74800085B74 /* RegistrationViewController.swift in Sources */,
 				AC00FA35290A5D3600B6347D /* ScanQrViewController.swift in Sources */,
 				AC886E852924CD7B007F1E41 /* ActiveTokenTableViewCell.swift in Sources */,
-				AC12F573291BF21D0096CB5A /* CustomerDashboardViewController.swift in Sources */,
 				AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */,
+				ACF6441E2925DF2900A6AD10 /* CustomerProfileViewController.swift in Sources */,
 				1694878829104CE70088821C /* KeychainHelper.swift in Sources */,
 				ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */,
 				AC3BCEB92921E5F9009BFB05 /* HeaderSubmitStoryView.swift in Sources */,

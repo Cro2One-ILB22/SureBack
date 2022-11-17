@@ -14,8 +14,6 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
     var merchantData = [UserInfoResponse]()
     var activeTokenData = [GenerateTokenOnlineResponse]()
 
-    var sectionHead = ["Token", "Recommended"]
-
     var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(ActiveTokenTableViewCell.self, forCellReuseIdentifier: ActiveTokenTableViewCell.id)
@@ -35,7 +33,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
                 do {
                     self.merchantData = result.data
                     self.tableView.reloadData()
-//                    self.setupView()
+                    //                    self.setupView()
                 } catch let error as NSError {
                     print(error.description)
                 }
@@ -108,7 +106,7 @@ extension CustomerDashboardViewController {
 extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 1
+            return activeTokenData.count == 0 ? 0 : 1
         } else {
             print("token count: \(activeTokenData.count))")
             print("merchant count: \(merchantData.count))")
@@ -155,15 +153,22 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionHead.count
+        return 2
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionHeader") as! SectionDashboardHeader // swiftlint:disable:this force_cast
+
         if section == 0 {
             view.seeAllMerchantButton.isHidden = true
+            view.merchantLabel.text = "Token"
+            if activeTokenData.count == 0 {
+                return nil
+            }
+        } else {
+            view.merchantLabel.text = "Recommended"
+            view.seeAllMerchantButton.isHidden = false
         }
-        view.merchantLabel.text = sectionHead[section]
         view.seeAllMerchantButton.addTarget(self, action: #selector(seeAllMerchantTapped), for: .touchUpInside)
         return view
     }

@@ -78,9 +78,9 @@ extension MerchantDashboardViewController {
     }
 }
 
-// #if DEBUG
-// import SwiftUI
-// struct UIKitPreviewProvider: UIViewControllerRepresentable {
+//#if DEBUG
+//import SwiftUI
+//struct UIKitPreviewProvider: UIViewControllerRepresentable {
 //    typealias UIViewControllerType = UIViewController
 //    private let viewController: UIViewController
 //    init (vc: UIViewControllerType) {
@@ -91,11 +91,11 @@ extension MerchantDashboardViewController {
 //    }
 //    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
 //    }
-// }
-// @available(iOS 13.0, *)
-// struct VC_Previews: PreviewProvider {
+//}
+//@available(iOS 13.0, *)
+//struct VC_Previews: PreviewProvider {
 //    static var previews: some View {
 //        UIKitPreviewProvider(vc: MerchantDashboardViewController(nibName: nil, bundle: nil))
 //    }
-// }
-// #endif
+//}
+//#endif

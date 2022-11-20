@@ -71,7 +71,7 @@
 		ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */; };
 		ACE5CDA82912716B00D08177 /* ScanQrResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA72912716B00D08177 /* ScanQrResponse.swift */; };
 		ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */; };
-		ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */; };
+		ACE5CDAC2912722800D08177 /* ResultStoryIG.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAB2912722800D08177 /* ResultStoryIG.swift */; };
 		ACE5CDB029127E6200D08177 /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAF29127E6200D08177 /* ResponseData.swift */; };
 		ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE8C3582916267800BEA778 /* LoginViewController.swift */; };
 		ACE8C35B2916D60700BEA778 /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE8C35A2916D60700BEA778 /* DummyViewController.swift */; };
@@ -170,7 +170,7 @@
 		ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateTokenOnlineResponse.swift; sourceTree = "<group>"; };
 		ACE5CDA72912716B00D08177 /* ScanQrResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQrResponse.swift; sourceTree = "<group>"; };
 		ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIGResponse.swift; sourceTree = "<group>"; };
-		ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionStoryIGResponse.swift; sourceTree = "<group>"; };
+		ACE5CDAB2912722800D08177 /* ResultStoryIG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStoryIG.swift; sourceTree = "<group>"; };
 		ACE5CDAF29127E6200D08177 /* ResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData.swift; sourceTree = "<group>"; };
 		ACE8C3582916267800BEA778 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ACE8C35A2916D60700BEA778 /* DummyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
@@ -341,7 +341,7 @@
 				ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */,
 				ACE5CDA72912716B00D08177 /* ScanQrResponse.swift */,
 				ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */,
-				ACE5CDAB2912722800D08177 /* MentionStoryIGResponse.swift */,
+				ACE5CDAB2912722800D08177 /* ResultStoryIG.swift */,
 				ACE5CDAF29127E6200D08177 /* ResponseData.swift */,
 				ACDD097929128F1E00309FBC /* Transaction.swift */,
 				16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */,
@@ -355,8 +355,8 @@
 		16BD919F291D521D0010731E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				165121FE2924CDF300DBC0AE /* MerchantProfile */,
 				AC59F88E29205480000F8345 /* Customer */,
+				165121FE2924CDF300DBC0AE /* MerchantProfile */,
 				16BD91A0291D52280010731E /* MerchantDashboard */,
 				16512206292587C800DBC0AE /* MerchantDetailStoryViewController.swift */,
 			);
@@ -417,10 +417,10 @@
 		AC59F88E29205480000F8345 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
-				ACF6441C2925DF0E00A6AD10 /* CustomerProfile */,
-				AC3BCEBA2921F8A0009BFB05 /* SubmitStory */,
-				AC59F88F292056E8000F8345 /* CustomerHistory */,
 				AC2AC1B8291F391400E9F8A7 /* CustomerDashboard */,
+				ACF6441C2925DF0E00A6AD10 /* CustomerProfile */,
+				AC59F88F292056E8000F8345 /* CustomerHistory */,
+				AC3BCEBA2921F8A0009BFB05 /* SubmitStory */,
 			);
 			path = Customer;
 			sourceTree = "<group>";
@@ -796,7 +796,7 @@
 				AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */,
 				ACF6441E2925DF2900A6AD10 /* CustomerProfileViewController.swift in Sources */,
 				1694878829104CE70088821C /* KeychainHelper.swift in Sources */,
-				ACE5CDAC2912722800D08177 /* MentionStoryIGResponse.swift in Sources */,
+				ACE5CDAC2912722800D08177 /* ResultStoryIG.swift in Sources */,
 				AC3BCEB92921E5F9009BFB05 /* HeaderSubmitStoryView.swift in Sources */,
 				165122052925853E00DBC0AE /* NotificationsResponses.swift in Sources */,
 				165121FD2924501000DBC0AE /* MerchantProfileViewController.swift in Sources */,

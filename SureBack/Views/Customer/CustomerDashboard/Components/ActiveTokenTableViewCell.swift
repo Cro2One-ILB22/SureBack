@@ -12,23 +12,42 @@ class RedeemButton: UIButton {
 }
 
 class ActiveTokenTableViewCell: UITableViewCell {
-    var delegate: UIViewToController?
-    var activateTokenData = [GenerateTokenOnlineResponse]()
+
     static let id = "ActiveTokenTableViewCell"
+
+    var delegate: UIViewToController?
+    var activateTokenData = [GenerateTokenOnlineResponse]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    var user: UserInfoResponse!
+
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: UIScreen.screenWidth - 40, height: 100)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isPagingEnabled = true
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         collectionView.register(ItemActiveTokenCollectionViewCell.self, forCellWithReuseIdentifier: ItemActiveTokenCollectionViewCell.id)
         return collectionView
     }()
 
+    let pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.translatesAutoresizingMaskIntoConstraints = false
+        return pc
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(collectionView)
+        contentView.addSubview(pageControl)
+        pageControl.setCenterXAnchorConstraint(equalTo: contentView.centerXAnchor)
+        pageControl.setBottomAnchorConstraint(equalTo: collectionView.bottomAnchor)
+
         collectionView.delegate = self
         collectionView.dataSource = self
     }
@@ -51,20 +70,25 @@ extension ActiveTokenTableViewCell: UICollectionViewDataSource, UICollectionView
         cell.backgroundColor = .lightGray
         cell.tokenMerchantNameLabel.text = activateTokenData[indexPath.row].merchant.name
         cell.redeemButton.tag = indexPath.row
-        print("indexpathrow: \(indexPath.row)")
         cell.redeemButton.addTarget(self, action: #selector(redeemTokenTapped), for: .touchUpInside)
 
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("count: \(activateTokenData.count)")
+        pageControl.numberOfPages = activateTokenData.count
         return activateTokenData.count
     }
 
-    @objc func redeemTokenTapped(sender: UIButton) {
-        print("redeem token tapped")
-        print("nomor cell: \(sender.tag)")
-        delegate?.didTapButton(data: activateTokenData[sender.tag])
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let witdh = scrollView.frame.width - (scrollView.contentInset.left*2)
+        let index = scrollView.contentOffset.x / witdh
+        let roundedIndex = round(index)
+        self.pageControl.currentPage = Int(roundedIndex)
     }
+
+    @objc func redeemTokenTapped(sender: UIButton) {
+        delegate?.didRedeemTapButton(data: activateTokenData[sender.tag], user: user)
+    }
+
 }

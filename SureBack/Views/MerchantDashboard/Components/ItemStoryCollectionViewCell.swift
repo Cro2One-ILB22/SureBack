@@ -11,23 +11,24 @@ class ItemStoryCollectionViewCell: UICollectionViewCell {
     static let id = "ItemStoryCollectionViewCell"
     let userImageProfile: UIImageView = {
         let image = UIImageView()
+        image.layer.cornerRadius = 20
+        image.clipsToBounds = true
         image.image = UIImage(named: "person.crop.circle")
         return image
     }()
     let usernameIG: UILabel = {
        let label = UILabel()
-        label.text = "Username"
         return label
     }()
     let userFollower: UILabel = {
        let label = UILabel()
-        label.text = "Follower"
         return label
     }()
     let userImageStory: UIImageView = {
        let image = UIImageView()
         image.image = UIImage(named: "person.crop.circle")
-        image.layer.cornerRadius = 30
+        image.layer.cornerRadius = 20
+        image.clipsToBounds = true
         return image
     }()
     override init(frame: CGRect) {

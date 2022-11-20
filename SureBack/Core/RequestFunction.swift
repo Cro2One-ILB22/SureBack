@@ -328,13 +328,13 @@ extension RequestFunction {
         }
     }
 
-    func getStoryIG(storyId: Int, completion: @escaping (Result<MentionStoryIGResponse, AFError>) -> Void) {
+    func getStoryIG(storyId: Int, completion: @escaping (Result<ResponseData<ResultStoryIG>, AFError>) -> Void) {
         let url = Endpoints.toStoryIG.url
         let parameters: [String: Int] = [
             "story_id": storyId,
         ]
 
-        requestWithToken(url: url, parameters: parameters, decodable: MentionStoryIGResponse.self) {
+        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<ResultStoryIG>.self) {
             completion($0.result)
         }
     }
@@ -380,13 +380,14 @@ extension RequestFunction {
             completion($0.result)
         }
     }
+
     func getNotifications(completionHandler: @escaping (NotificationsResponses) -> Void) {
         let url = Endpoints.getNotifications.url
         requestWithToken(url: url, decodable: NotificationsResponses.self) { response in
-            switch(response.result) {
-            case .success(let data):
+            switch response.result {
+            case let .success(data):
                 completionHandler(data)
-            case.failure(let error):
+            case let .failure(error):
                 print(error)
             }
         }

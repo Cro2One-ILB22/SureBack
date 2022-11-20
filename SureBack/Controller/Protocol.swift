@@ -6,5 +6,5 @@
 //
 
 protocol UIViewToController {
-    func didTapButton(data: GenerateTokenOnlineResponse)
+    func didRedeemTapButton(data: GenerateTokenOnlineResponse, user: UserInfoResponse)
 }

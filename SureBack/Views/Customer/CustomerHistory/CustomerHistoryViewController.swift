@@ -12,9 +12,11 @@ class CustomerHistoryViewController: UIViewController {
 
     var user: UserInfoResponse?
     var merchantData: UserInfoResponse?
-    var transactionData = [Transaction]()
-
-//    var totalRewardsRedeem = 0
+    var transactionData = [Transaction]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     let headerView = HeaderCustomerHistoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 130))
     let footerView = FooterCustomerHistoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 50))
@@ -33,22 +35,23 @@ class CustomerHistoryViewController: UIViewController {
             return
         }
 
+        self.view.addSubview(self.headerView)
+        self.headerView.merchantLabel.text = self.merchantData?.name
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.redeemButtonTapped))
+        self.headerView.redeemButton.addGestureRecognizer(tapGesture)
+        self.headerView.loyaltCoinsLabel.text = "\(self.merchantData?.coins?[0].outstanding ?? 0) Loyalty Coins"
+        self.footerView.totalLabel.text = String(self.merchantData?.coins?[0].allTimeReward ?? 0)
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.tableHeaderView = self.headerView
+        self.setupTableView()
+
         request.getListTransaction(merchantId: merchantData.id) { data in
             switch data {
             case let .success(result):
                 do {
-                    self.view.addSubview(self.headerView)
-                    self.headerView.merchantLabel.text = self.merchantData?.name
-                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.redeemButtonTapped))
-                    self.headerView.redeemButton.addGestureRecognizer(tapGesture)
-                    self.tableView.delegate = self
-                    self.tableView.dataSource = self
-                    self.tableView.tableHeaderView = self.headerView
                     self.tableView.tableFooterView = self.footerView
-                    self.setupTableView()
-                    print("result data transactiom: \(result.data)")
                     self.transactionData = result.data
-                    self.tableView.reloadData()
                 } catch let error as NSError {
                     print(error.description)
                 }
@@ -57,8 +60,6 @@ class CustomerHistoryViewController: UIViewController {
                 print("failed to get list transaction in merchant \(merchantData.name)")
             }
         }
-
-
     }
 
     @objc func redeemButtonTapped(sender: UITapGestureRecognizer) {
@@ -79,14 +80,27 @@ extension CustomerHistoryViewController {
 
 extension CustomerHistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return transactionData.count ?? 0
+        return transactionData.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemCustomerHistoryTableViewCell.id, for: indexPath) as? ItemCustomerHistoryTableViewCell else { return UITableViewCell() }
 
-        cell.statusLabel.text = transactionData[indexPath.row].category.rawValue
+        // string to date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let date = dateFormatter.date(from: transactionData[indexPath.row].updatedAt)
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        let dateString = dateFormatter.string(from: date!)
+
+        // date to string
+        let dateToString = DateFormatter()
+        dateToString.dateFormat = "dd/MM/YY"
+
+        cell.categoryLabel.text = transactionData[indexPath.row].category.rawValue
+        cell.statusLabel.text = transactionData[indexPath.row].status.rawValue
         cell.coinsLabel.text = String(transactionData[indexPath.row].amount)
+        cell.dateLabel.text = dateString
 
         return cell
     }

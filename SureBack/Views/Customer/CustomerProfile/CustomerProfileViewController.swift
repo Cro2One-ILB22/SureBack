@@ -19,7 +19,7 @@ class CustomerProfileViewController: UIViewController {
     var profileImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
-        image.layer.cornerRadius = 10
+        image.layer.cornerRadius = 50
         image.clipsToBounds = true
         return image
     }()

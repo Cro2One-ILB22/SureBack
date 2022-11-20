@@ -22,7 +22,15 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "Direview"
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.font = UIFont.boldSystemFont(ofSize: 17)
+        return label
+    }()
+
+    lazy var categoryLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Success"
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
 
@@ -64,7 +72,7 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
     }
 
     func setupLabel() {
-        let stackView = UIStackView(arrangedSubviews: [statusLabel, dateLabel])
+        let stackView = UIStackView(arrangedSubviews: [statusLabel, categoryLabel ,dateLabel])
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.alignment = .fill

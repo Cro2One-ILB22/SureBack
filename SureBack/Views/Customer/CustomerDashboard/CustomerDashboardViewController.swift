@@ -11,8 +11,17 @@ import UIKit
 class CustomerDashboardViewController: UIViewController, UIViewToController {
     let request = RequestFunction()
     var user: UserInfoResponse!
-    var merchantData = [UserInfoResponse]()
-    var activeTokenData = [GenerateTokenOnlineResponse]()
+    var merchantData = [UserInfoResponse]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+
+    var activeTokenData = [GenerateTokenOnlineResponse]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -32,8 +41,6 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
             case let .success(result):
                 do {
                     self.merchantData = result.data
-                    self.tableView.reloadData()
-                    //                    self.setupView()
                 } catch let error as NSError {
                     print(error.description)
                 }
@@ -48,9 +55,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
             case let .success(result):
                 do {
                     print("result data count: \(result.data.count)")
-
                     self.activeTokenData = result.data
-                    self.tableView.reloadData()
                     self.setupView()
 //                    let headerView = HeaderCustomerDashboardView(count: result.data.count, activeTokenData: result.data, frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: height))
                     let headerView = HeaderCustomerDashboardView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: 50))
@@ -65,11 +70,11 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         }
     }
 
-    func didTapButton(data: GenerateTokenOnlineResponse) {
-        print("redeem token tapped")
+    func didRedeemTapButton(data: GenerateTokenOnlineResponse, user: UserInfoResponse) {
         let submitStoryVC = SubmitStoryViewController()
         submitStoryVC.title = "Submit Story"
         submitStoryVC.tokenData = data
+        submitStoryVC.user = user
         navigationController?.pushViewController(submitStoryVC, animated: true)
     }
 
@@ -108,8 +113,6 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         if section == 0 {
             return activeTokenData.count == 0 ? 0 : 1
         } else {
-            print("token count: \(activeTokenData.count))")
-            print("merchant count: \(merchantData.count))")
             return merchantData.count
         }
     }
@@ -121,6 +124,7 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
             cell.backgroundColor = .red
             cell.delegate = self
             cell.activateTokenData = activeTokenData
+            cell.user = user
             return cell
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemMerchantTableViewCell.id, for: indexPath) as? ItemMerchantTableViewCell else { return UITableViewCell() }

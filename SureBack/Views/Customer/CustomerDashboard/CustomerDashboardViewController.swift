@@ -32,6 +32,10 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         return table
     }()
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -50,16 +54,18 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
             }
         }
 
+        let headerView = HeaderCustomerDashboardView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: 50))
+        self.setupView2(headerView: headerView)
+
         request.getListToken(expired: 0, submitted: 0, redeemed: 1) { data in
             switch data {
             case let .success(result):
                 do {
                     print("result data count: \(result.data.count)")
                     self.activeTokenData = result.data
-                    self.setupView()
 //                    let headerView = HeaderCustomerDashboardView(count: result.data.count, activeTokenData: result.data, frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: height))
-                    let headerView = HeaderCustomerDashboardView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: 50))
-                    self.setupView2(headerView: headerView)
+//                    let headerView = HeaderCustomerDashboardView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: 50))
+//                    self.setupView2(headerView: headerView)
                 } catch let error as NSError {
                     print(error.description)
                 }
@@ -68,9 +74,11 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
                 print("failed to get active token")
             }
         }
+
+        self.setupView()
     }
 
-    func didRedeemTapButton(data: GenerateTokenOnlineResponse, user: UserInfoResponse) {
+    func didToRedeemTapButton(data: GenerateTokenOnlineResponse, user: UserInfoResponse) {
         let submitStoryVC = SubmitStoryViewController()
         submitStoryVC.title = "Submit Story"
         submitStoryVC.tokenData = data

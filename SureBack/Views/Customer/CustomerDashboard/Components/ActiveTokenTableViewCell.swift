@@ -7,10 +7,6 @@
 
 import UIKit
 
-class RedeemButton: UIButton {
-    var data: GenerateTokenOnlineResponse?
-}
-
 class ActiveTokenTableViewCell: UITableViewCell {
 
     static let id = "ActiveTokenTableViewCell"
@@ -70,12 +66,15 @@ extension ActiveTokenTableViewCell: UICollectionViewDataSource, UICollectionView
         cell.backgroundColor = .lightGray
         cell.tokenMerchantNameLabel.text = activateTokenData[indexPath.row].merchant.name
         cell.redeemButton.tag = indexPath.row
-        cell.redeemButton.addTarget(self, action: #selector(redeemTokenTapped), for: .touchUpInside)
+        cell.redeemButton.addTarget(self, action: #selector(toRedeemTokenTapped), for: .touchUpInside)
 
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if activateTokenData.count == 1 {
+            pageControl.isHidden = true
+        }
         pageControl.numberOfPages = activateTokenData.count
         return activateTokenData.count
     }
@@ -87,8 +86,8 @@ extension ActiveTokenTableViewCell: UICollectionViewDataSource, UICollectionView
         self.pageControl.currentPage = Int(roundedIndex)
     }
 
-    @objc func redeemTokenTapped(sender: UIButton) {
-        delegate?.didRedeemTapButton(data: activateTokenData[sender.tag], user: user)
+    @objc func toRedeemTokenTapped(sender: UIButton) {
+        delegate?.didToRedeemTapButton(data: activateTokenData[sender.tag], user: user)
     }
 
 }

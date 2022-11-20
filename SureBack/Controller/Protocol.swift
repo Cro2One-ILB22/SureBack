@@ -6,5 +6,22 @@
 //
 
 protocol UIViewToController {
-    func didRedeemTapButton(data: GenerateTokenOnlineResponse, user: UserInfoResponse)
+    func didToRedeemTapButton(data: GenerateTokenOnlineResponse, user: UserInfoResponse)
+}
+
+extension UIViewToController {
+    func didToRedeemTapButton(data: GenerateTokenOnlineResponse, user: UserInfoResponse) {
+    }
+}
+
+protocol SendDataDelegate: AnyObject {
+    func passData(data: String)
+    func passData(data: Int)
+}
+
+extension SendDataDelegate {
+    func passData(data: String){
+    }
+    func passData(data: Int){
+    }
 }

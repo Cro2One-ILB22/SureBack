@@ -7,21 +7,21 @@
 
 import UIKit
 
-class SubmitStoryViewController: UIViewController {
+class SubmitStoryViewController: UIViewController, SendDataDelegate {
     let request = RequestFunction()
     var user: UserInfoResponse?
     var tokenData: GenerateTokenOnlineResponse?
-    var storyData = [ResultStoryIG]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-
     var userIgInfo: ProfileIGResponse? {
         didSet {
             tableView.reloadData()
         }
     }
+    var storyData = [ResultStoryIG]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    var igStoryId: Int?
 
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -34,16 +34,24 @@ class SubmitStoryViewController: UIViewController {
     let footerView = UIView()
     let doneButton = UIButton()
 
+    func passData(data: Int) {
+        igStoryId = data
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        tabBarController?.tabBar.isHidden = true
+
+        let redeemButton = UIBarButtonItem(title: "Redeem", style: .done, target: self, action: #selector(submitStoryTapped))
+        navigationItem.rightBarButtonItem  = redeemButton
 
         guard let tokenData = tokenData, let storyID = tokenData.story?.id else {
             return
         }
 
-        let headerView = HeaderSubmitStoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 180))
-        headerView.tokenIdLabel.text = String(tokenData.id)
+        let headerView = HeaderSubmitStoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 240))
+        headerView.tokenIdNameLabel.text = String(tokenData.id)
         headerView.merchantNameLabel.text = tokenData.merchant.name
 
         // string to date
@@ -152,6 +160,38 @@ class SubmitStoryViewController: UIViewController {
 
     @objc func submitStoryTapped() {
         print("submit story button tapped")
+
+        guard let storyId = tokenData?.story?.id, let igStoryId = igStoryId else {
+
+            let okActionBtn = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            let alert = UIAlertController(title: "Failed to Submit", message: "Choose Story First", preferredStyle: .alert)
+            alert.addAction(okActionBtn)
+            self.present(alert, animated: true)
+
+            return
+        }
+
+//        request submit story
+//        request.submitStory(storyId: storyId, instagtamStoryId: igStoryId) { data in
+//            switch data {
+//            case let .success(result):
+//                print(result)
+//                print("success submit story")
+//            case let .failure(error):
+//                print(error)
+//                print("failed to submit story")
+//            }
+//        }
+
+        print("storyid: \(storyId)")
+        print("ig story id: \(igStoryId)")
+
+        let okActionBtn = UIAlertAction(title: "Ok", style: .default, handler: {_ in
+              self.navigationController?.popViewController(animated: true)
+        })
+        let alert = UIAlertController(title: "Success", message: "Success Submit Story", preferredStyle: .alert)
+        alert.addAction(okActionBtn)
+        self.present(alert, animated: true)
     }
 }
 
@@ -166,31 +206,13 @@ extension SubmitStoryViewController: UITableViewDelegate, UITableViewDataSource 
         cell.storyData = storyData
         cell.user = user
         cell.userIgInfo = userIgInfo
+        cell.delegate = self
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 500
-    }
-
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        doneButton.setTitle("Redeem", for: .normal)
-        doneButton.backgroundColor = .systemBlue
-        doneButton.layer.cornerRadius = 10.0
-        doneButton.addTarget(self, action: #selector(submitStoryTapped), for: .touchUpInside)
-        footerView.addSubview(doneButton)
-
-        doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.setCenterXAnchorConstraint(equalTo: footerView.centerXAnchor)
-        doneButton.setCenterYAnchorConstraint(equalTo: footerView.centerYAnchor)
-        doneButton.setWidthAnchorConstraint(equalToConstant: 100)
-
-        return footerView
-    }
-
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 60
     }
 }
 

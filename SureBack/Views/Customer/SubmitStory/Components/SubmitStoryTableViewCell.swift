@@ -17,10 +17,12 @@ class SubmitStoryTableViewCell: UITableViewCell {
         }
     }
 
+    weak var delegate: SendDataDelegate?
+
     var user: UserInfoResponse?
     var userIgInfo: ProfileIGResponse?
 
-    var selectedStoryIndex = Int()
+    var selectedStoryIndex = -1
 
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -72,6 +74,7 @@ extension SubmitStoryTableViewCell: UICollectionViewDataSource, UICollectionView
             options: .progressiveLoad,
             completed: nil
         )
+//        delegate?.passData(data: storyData[indexPath.row].id)
 
         return cell
     }
@@ -81,10 +84,9 @@ extension SubmitStoryTableViewCell: UICollectionViewDataSource, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selected = indexPath.row
-        print(selected)
         selectedStoryIndex = indexPath.row
-
+        print("did select story \(storyData[indexPath.row].id)")
+        delegate?.passData(data: storyData[indexPath.row].id)
         self.collectionView.reloadData()
     }
 }

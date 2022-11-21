@@ -66,7 +66,6 @@ class RequestFunction {
                     case .success:
                         do {
                             KeychainHelper.standard.delete(key: .accessToken)
-                            print(res)
                         } catch {
                             print(error)
                         }

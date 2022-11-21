@@ -35,9 +35,9 @@ class HeaderCustomerHistoryView: UIView {
         return label
     }()
 
-    lazy var redeemButton: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 30
+    lazy var redeemButton: UIButton = {
+        let view = UIButton()
+        view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -64,6 +64,9 @@ class HeaderCustomerHistoryView: UIView {
         super.init(frame: frame)
         setupLabel()
         addSubview(redeemButton)
+        redeemButton.setWidthAnchorConstraint(equalToConstant: 150)
+        redeemButton.setCenterXAnchorConstraint(equalTo: centerXAnchor)
+        redeemButton.setTopAnchorConstraint(equalTo: locationLabel.bottomAnchor, constant: 5)
         setupButton()
     }
 

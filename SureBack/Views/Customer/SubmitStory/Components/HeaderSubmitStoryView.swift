@@ -8,6 +8,23 @@
 import UIKit
 
 class HeaderSubmitStoryView: UIView {
+    lazy var expireLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Expires in"
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    lazy var timerLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Timer"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     lazy var tokenLabel: UILabel = {
         let label = UILabel()
@@ -20,7 +37,16 @@ class HeaderSubmitStoryView: UIView {
 
     lazy var tokenIdLabel: UILabel = {
         let label = UILabel()
-        label.text = "TOKEN ID 1748694736284869"
+        label.text = "TOKEN ID"
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    lazy var tokenIdNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "1748694736284869"
         label.font = UIFont.systemFont(ofSize: 15)
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -99,44 +125,58 @@ class HeaderSubmitStoryView: UIView {
     }
 
     func setupHeaderView() {
-        addSubview(tokenLabel)
-        tokenLabel.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
-        addSubview(tokenIdLabel)
-        tokenIdLabel.setTopAnchorConstraint(equalTo: tokenLabel.bottomAnchor, constant: 10)
-        tokenIdLabel.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
+        let stackTimer = UIStackView(arrangedSubviews: [expireLabel, timerLabel])
+        stackTimer.axis = .vertical
+        stackTimer.distribution = .equalSpacing
+        stackTimer.alignment = .fill
+        stackTimer.translatesAutoresizingMaskIntoConstraints = false
 
-        let stackView0 = UIStackView(arrangedSubviews: [merchantLabel, merchantNameLabel])
-        stackView0.axis = .horizontal
-        stackView0.distribution = .equalSpacing
-        stackView0.alignment = .fill
-        stackView0.translatesAutoresizingMaskIntoConstraints = false
+        let stackTokenId = UIStackView(arrangedSubviews: [tokenIdLabel, tokenIdNameLabel])
+        stackTokenId.axis = .horizontal
+        stackTokenId.distribution = .equalSpacing
+        stackTokenId.alignment = .fill
+        stackTokenId.spacing = 250
+        stackTokenId.translatesAutoresizingMaskIntoConstraints = false
 
-        let stackView1 = UIStackView(arrangedSubviews: [dateLabel, dateNameLabel])
-        stackView1.axis = .horizontal
-        stackView1.distribution = .equalSpacing
-        stackView1.alignment = .fill
-        stackView1.translatesAutoresizingMaskIntoConstraints = false
+        let stackMerchant = UIStackView(arrangedSubviews: [merchantLabel, merchantNameLabel])
+        stackMerchant.axis = .horizontal
+        stackMerchant.distribution = .equalSpacing
+        stackMerchant.alignment = .fill
+        stackMerchant.spacing = 250
+        stackMerchant.translatesAutoresizingMaskIntoConstraints = false
 
-        let stackView2 = UIStackView(arrangedSubviews: [purchaseLabel, purchaseNameLabel])
-        stackView2.axis = .horizontal
-        stackView2.distribution = .equalSpacing
-        stackView2.alignment = .fill
-        stackView2.translatesAutoresizingMaskIntoConstraints = false
+        let stackDate = UIStackView(arrangedSubviews: [dateLabel, dateNameLabel])
+        stackDate.axis = .horizontal
+        stackDate.distribution = .equalSpacing
+        stackDate.alignment = .fill
+        stackDate.spacing = 250
+        stackDate.translatesAutoresizingMaskIntoConstraints = false
 
-        let stackViewHeader = UIStackView(arrangedSubviews: [tokenLabel, tokenIdLabel, stackView0, stackView1, stackView2])
-        stackViewHeader.axis = .vertical
-        stackViewHeader.distribution = .equalSpacing
-        stackViewHeader.alignment = .fill
-        stackViewHeader.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(stackViewHeader)
-        stackViewHeader.setTopAnchorConstraint(equalTo: topAnchor, constant: 20)
-        stackViewHeader.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
+        let stackPurchase = UIStackView(arrangedSubviews: [purchaseLabel, purchaseNameLabel])
+        stackPurchase.axis = .horizontal
+        stackPurchase.distribution = .equalSpacing
+        stackPurchase.alignment = .fill
+        stackPurchase.spacing = 250
+        stackPurchase.translatesAutoresizingMaskIntoConstraints = false
+
+        let stackViewTokenDetails = UIStackView(arrangedSubviews: [tokenLabel, stackTokenId, stackMerchant, stackDate, stackPurchase])
+        stackViewTokenDetails.axis = .vertical
+        stackViewTokenDetails.distribution = .equalSpacing
+        stackViewTokenDetails.alignment = .fill
+        stackViewTokenDetails.translatesAutoresizingMaskIntoConstraints = false
+
+        let stackView = UIStackView(arrangedSubviews: [stackTimer, stackViewTokenDetails])
+        stackView.axis = .vertical
+        stackView.spacing = 15
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stackView)
+        stackView.setTopAnchorConstraint(equalTo: topAnchor, constant: 20)
+        stackView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
 
         addSubview(storyLabel)
-        storyLabel.setTopAnchorConstraint(equalTo: stackViewHeader.bottomAnchor, constant: 20)
+        storyLabel.setTopAnchorConstraint(equalTo: stackView.bottomAnchor, constant: 20)
         storyLabel.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
         storyLabel.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
         storyLabel.setBottomAnchorConstraint(equalTo: bottomAnchor, constant: -20)
     }
-
 }

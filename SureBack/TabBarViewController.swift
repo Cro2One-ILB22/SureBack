@@ -23,23 +23,28 @@ class TabBarViewController: UITabBarController {
                     print("login success")
 
                     let qrVC = ViewController()
-                    let profileVC = ViewController()
                     let navQR = UINavigationController(rootViewController: qrVC)
-                    let navProfile = UINavigationController(rootViewController: profileVC)
                     navQR.tabBarItem = UITabBarItem(title: "QR", image: UIImage(named: "qrcode.viewfinder"), tag: 1)
-                    navProfile.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "person.crop.circle"), tag: 1)
 
                     if user.roles![1] == "customer" {
                         let dashboardVC = CustomerDashboardViewController()
                         dashboardVC.user = user
                         let navDashboard = UINavigationController(rootViewController: dashboardVC)
                         navDashboard.tabBarItem = UITabBarItem(title: "Dashboard", image: UIImage(named: "list.dash.header.rectangle"), tag: 1)
+                        let profileVC = CustomerProfileViewController()
+                        profileVC.user = user
+                        let navProfile = UINavigationController(rootViewController: profileVC)
+                        navProfile.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "person.crop.circle"), tag: 1)
                         setViewControllers([navDashboard, navQR, navProfile], animated: false)
                     } else {
                         let dashboardVC = MerchantDashboardViewController()
                         dashboardVC.user = user
                         let navDashboard = UINavigationController(rootViewController: dashboardVC)
                         navDashboard.tabBarItem = UITabBarItem(title: "Dashboard", image: UIImage(named: "list.dash.header.rectangle"), tag: 1)
+                        let profileVC = MerchantProfileViewController()
+//                        profileVC.user = user
+                        let navProfile = UINavigationController(rootViewController: profileVC)
+                        navProfile.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "person.crop.circle"), tag: 1)
                         setViewControllers([navDashboard, navQR, navProfile], animated: false)
                     }
                 } catch let error as NSError {

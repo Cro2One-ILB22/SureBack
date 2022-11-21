@@ -8,18 +8,33 @@
 import SDWebImage
 import UIKit
 
-class CustomerDashboardViewController: UIViewController {
+class CustomerDashboardViewController: UIViewController, UIViewToController {
     let request = RequestFunction()
     var user: UserInfoResponse!
-    var merchantData = [UserInfoResponse]()
-    var activeTokenData = [GenerateTokenOnlineResponse]()
+    var merchantData = [UserInfoResponse]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+
+    var activeTokenData = [GenerateTokenOnlineResponse]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
+        table.register(ActiveTokenTableViewCell.self, forCellReuseIdentifier: ActiveTokenTableViewCell.id)
         table.register(ItemMerchantTableViewCell.self, forCellReuseIdentifier: ItemMerchantTableViewCell.id)
         table.backgroundColor = .white
+        table.separatorColor = .clear
         return table
     }()
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +45,6 @@ class CustomerDashboardViewController: UIViewController {
             case let .success(result):
                 do {
                     self.merchantData = result.data
-                    self.tableView.reloadData()
-                    self.setupView()
                 } catch let error as NSError {
                     print(error.description)
                 }
@@ -41,16 +54,18 @@ class CustomerDashboardViewController: UIViewController {
             }
         }
 
+        let headerView = HeaderCustomerDashboardView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: 50))
+        self.setupView2(headerView: headerView)
+
         request.getListToken(expired: 0, submitted: 0, redeemed: 1) { data in
             switch data {
             case let .success(result):
                 do {
-                    print(result.data.count)
-//                    self.activeTokenData = result.data
-
-                    let height = result.data.count > 0 ? 270 : 150
-                    let headerView = HeaderCustomerDashboardView(count: result.data.count, activeTokenData: result.data, frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: height))
-                    self.setupView2(headerView: headerView)
+                    print("result data count: \(result.data.count)")
+                    self.activeTokenData = result.data
+//                    let headerView = HeaderCustomerDashboardView(count: result.data.count, activeTokenData: result.data, frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: height))
+//                    let headerView = HeaderCustomerDashboardView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: 50))
+//                    self.setupView2(headerView: headerView)
                 } catch let error as NSError {
                     print(error.description)
                 }
@@ -59,12 +74,15 @@ class CustomerDashboardViewController: UIViewController {
                 print("failed to get active token")
             }
         }
+
+        self.setupView()
     }
 
-    @objc func redeemTokenTapped() {
-        print("redeem token tapped")
+    func didToRedeemTapButton(data: GenerateTokenOnlineResponse, user: UserInfoResponse) {
         let submitStoryVC = SubmitStoryViewController()
         submitStoryVC.title = "Submit Story"
+        submitStoryVC.tokenData = data
+        submitStoryVC.user = user
         navigationController?.pushViewController(submitStoryVC, animated: true)
     }
 
@@ -82,11 +100,10 @@ extension CustomerDashboardViewController {
 
     private func setupView2(headerView: HeaderCustomerDashboardView) {
         view.addSubview(headerView)
-        headerView.profileLabel.text = "Hi, \(user.name)!"
-        headerView.totalCoinsLabel.text = " \(user.coins![0].outstanding)"
+        headerView.profileLabel.text = "Hi, @\(user.instagramUsername)!"
+        headerView.totalCoinsLabel.text = " \(user.coins![0].outstanding) Loyalty Coins"
         tableView.tableHeaderView = headerView
-        headerView.activeTokenCard.redeemButton.addTarget(self, action: #selector(redeemTokenTapped), for: .touchUpInside)
-        headerView.seeAllMerchantButton.addTarget(self, action: #selector(seeAllMerchantTapped), for: .touchUpInside)
+        tableView.register(SectionDashboardHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
     }
 
     private func setupTableView() {
@@ -101,22 +118,35 @@ extension CustomerDashboardViewController {
 
 extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return merchantData.count
+        if section == 0 {
+            return activeTokenData.count == 0 ? 0 : 1
+        } else {
+            return merchantData.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemMerchantTableViewCell.id, for: indexPath) as? ItemMerchantTableViewCell else { return UITableViewCell() }
+        switch indexPath.section {
+        case 0:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ActiveTokenTableViewCell.id, for: indexPath) as? ActiveTokenTableViewCell else { return UITableViewCell() }
+            cell.backgroundColor = .red
+            cell.delegate = self
+            cell.activateTokenData = activeTokenData
+            cell.user = user
+            return cell
+        default:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemMerchantTableViewCell.id, for: indexPath) as? ItemMerchantTableViewCell else { return UITableViewCell() }
 
-        cell.merchantImage.sd_setImage(
-            with: URL(string: merchantData[indexPath.row].profilePicture),
-            placeholderImage: UIImage(named: "system.photo"),
-            options: .progressiveLoad,
-            completed: nil
-        )
-        cell.merchantNameLabel.text = merchantData[indexPath.row].name
-        cell.merchantTodayTokenLabel.text = "\(merchantData[indexPath.row].merchantDetail!.todaysTokenCount) visit"
-//        cell.merchantTagLabel.text = merchantData[indexPath.row].merchantTag
-        return cell
+            cell.merchantImage.sd_setImage(
+                with: URL(string: merchantData[indexPath.row].profilePicture),
+                placeholderImage: UIImage(named: "system.photo"),
+                options: .progressiveLoad,
+                completed: nil
+            )
+            cell.merchantNameLabel.text = merchantData[indexPath.row].name
+            cell.merchantTodayTokenLabel.text = "\(merchantData[indexPath.row].merchantDetail!.todaysTokenCount) visit"
+            return cell
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -132,5 +162,26 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         merchantDetailVC.user = user
         merchantDetailVC.merchantData = merchantData[indexPath.row]
         navigationController?.pushViewController(merchantDetailVC, animated: true)
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionHeader") as! SectionDashboardHeader // swiftlint:disable:this force_cast
+
+        if section == 0 {
+            view.seeAllMerchantButton.isHidden = true
+            view.merchantLabel.text = "Token"
+            if activeTokenData.count == 0 {
+                return nil
+            }
+        } else {
+            view.merchantLabel.text = "Recommended"
+            view.seeAllMerchantButton.isHidden = false
+        }
+        view.seeAllMerchantButton.addTarget(self, action: #selector(seeAllMerchantTapped), for: .touchUpInside)
+        return view
     }
 }

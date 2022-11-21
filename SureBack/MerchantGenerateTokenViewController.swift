@@ -8,10 +8,6 @@
 import Foundation
 import UIKit
 
-protocol SendDataDelegate: AnyObject {
-    func passData(data: String)
-}
-
 class MerchantGenerateTokenViewController: UIViewController, SendDataDelegate {
     let request = RequestFunction()
 

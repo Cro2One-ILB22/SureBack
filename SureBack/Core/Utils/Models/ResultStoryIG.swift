@@ -1,5 +1,5 @@
 //
-//  MentionStoryIGResponse.swift
+//  ResultStoryIG.swift
 //  SureBack
 //
 //  Created by Ditha Nurcahya Avianty on 02/11/22.
@@ -7,12 +7,7 @@
 
 import Foundation
 
-struct MentionStoryIGResponse: Codable {
-    let results: [ResultStoryIG]
-}
-
 // MARK: - ResultStoryIG
-
 struct ResultStoryIG: Codable {
     let id: Int
     let takenAt, expiringAt, mediaType: Int

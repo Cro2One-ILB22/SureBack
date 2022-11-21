@@ -75,15 +75,23 @@ class MerchantProfileViewController: UIViewController {
         logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
     }
     @objc func logout() {
-        print("tapped")
-        let rf = RequestFunction()
-        rf.postLogout { result in
-            switch(result) {
-            case.success(let data):
-                guard let data = data else {return}
-                print("Berhasil",data)
-            case.failure(let error):
-                print(error)
+        print("Logout tapped")
+        let request = RequestFunction()
+        request.postLogout { data in
+            switch data {
+            case let .success:
+                do {
+                    print("logout success")
+                    let loginVC = LoginViewController()
+                    let navLogin = UINavigationController(rootViewController: loginVC)
+                    navLogin.modalPresentationStyle = .fullScreen
+                    self.present(navLogin, animated: true, completion: nil)
+                    self.showAlert(title: "Success", message: "Success Log Out", action: "Ok")
+                } catch let error as NSError {
+                    print(error.description)
+                }
+            case .failure:
+                break
             }
         }
     }

@@ -22,7 +22,15 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "Direview"
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.font = UIFont.boldSystemFont(ofSize: 17)
+        return label
+    }()
+
+    lazy var categoryLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Success"
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
 
@@ -35,7 +43,7 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
         return label
     }()
 
-    lazy var coinsabel: UILabel = {
+    lazy var coinsLabel: UILabel = {
         let label = UILabel()
         label.text = "+ 2000 coins"
         label.textAlignment = .left
@@ -64,7 +72,7 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
     }
 
     func setupLabel() {
-        let stackView = UIStackView(arrangedSubviews: [statusLabel, dateLabel])
+        let stackView = UIStackView(arrangedSubviews: [statusLabel, categoryLabel ,dateLabel])
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.alignment = .fill
@@ -76,9 +84,9 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
     }
 
     func setupCoinsLabel() {
-        addSubview(coinsabel)
-        coinsabel.translatesAutoresizingMaskIntoConstraints = false
-        coinsabel.setCenterYAnchorConstraint(equalTo: centerYAnchor)
-        coinsabel.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
+        addSubview(coinsLabel)
+        coinsLabel.translatesAutoresizingMaskIntoConstraints = false
+        coinsLabel.setCenterYAnchorConstraint(equalTo: centerYAnchor)
+        coinsLabel.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
     }
 }

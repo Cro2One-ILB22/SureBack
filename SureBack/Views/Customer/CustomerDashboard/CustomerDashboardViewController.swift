@@ -9,6 +9,7 @@ import SDWebImage
 import UIKit
 
 class CustomerDashboardViewController: UIViewController, UIViewToController {
+    let locationManager = CLLocationManager()
     let request = RequestFunction()
     var user: UserInfoResponse!
     var merchantData = [UserInfoResponse]() {
@@ -38,6 +39,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        initAndStartUpdatingLocation()
         view.backgroundColor = .white
 
         request.getListMerchant { data in
@@ -188,5 +190,26 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         }
         view.seeAllMerchantButton.addTarget(self, action: #selector(seeAllMerchantTapped), for: .touchUpInside)
         return view
+    }
+}
+
+import CoreLocation
+
+extension CustomerDashboardViewController: CLLocationManagerDelegate {
+    func initAndStartUpdatingLocation() {
+        DispatchQueue.global(qos: .utility).async {
+            self.locationManager.requestWhenInUseAuthorization()
+            if CLLocationManager.locationServicesEnabled() {
+                self.locationManager.delegate = self
+                self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                self.locationManager.startUpdatingLocation()
+            }
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue)")
+        self.locationManager.stopUpdatingLocation()
     }
 }

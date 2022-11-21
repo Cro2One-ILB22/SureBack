@@ -985,6 +985,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To be able to Scan QR Code, you must allow the use of the camera.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We’ll use this to personalize your app experience”";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -1020,6 +1021,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To be able to Scan QR Code, you must allow the use of the camera.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We’ll use this to personalize your app experience”";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

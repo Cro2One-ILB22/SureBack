@@ -30,6 +30,7 @@ class CustomerHistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        tabBarController?.tabBar.isHidden = true
 
         guard let user = user, let merchantData = merchantData else {
             return

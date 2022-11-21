@@ -55,6 +55,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         }
 
         let headerView = HeaderCustomerDashboardView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: 50))
+        headerView.notifButton.addTarget(self, action: #selector(notifButtonTapped), for: .touchUpInside)
         self.setupView2(headerView: headerView)
 
         request.getListToken(expired: 0, submitted: 0, redeemed: 1) { data in
@@ -84,6 +85,10 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         submitStoryVC.tokenData = data
         submitStoryVC.user = user
         navigationController?.pushViewController(submitStoryVC, animated: true)
+    }
+
+    @objc func notifButtonTapped() {
+        print("notif button tapped")
     }
 
     @objc func seeAllMerchantTapped() {
@@ -144,7 +149,7 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
                 completed: nil
             )
             cell.merchantNameLabel.text = merchantData[indexPath.row].name
-            cell.merchantTodayTokenLabel.text = "\(merchantData[indexPath.row].merchantDetail!.todaysTokenCount) visit"
+            cell.totalCoinsLabel.text = "\(merchantData[indexPath.row].balance) loyalty coins"
             return cell
         }
     }

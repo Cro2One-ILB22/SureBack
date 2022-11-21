@@ -36,26 +36,20 @@ class HeaderCustomerDashboardView: UIView {
         return label
     }()
 
-    private let merchantLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Merchant"
-        label.font = UIFont.boldSystemFont(ofSize: 17)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    let seeAllMerchantButton: UIButton = {
+    let notifButton: UIButton = {
         let button = UIButton()
-        button.setTitle("See All", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setImage(UIImage(named: "system.bell.fill"), for: .normal)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 15
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.setWidthAnchorConstraint(equalToConstant: 30)
+        button.setHeightAnchorConstraint(equalToConstant: 30)
         return button
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupProfileLabel()
-        setupProfile2Label()
+        setupHeaderView()
     }
 
     required init?(coder: NSCoder) {
@@ -64,44 +58,27 @@ class HeaderCustomerDashboardView: UIView {
 }
 
 extension HeaderCustomerDashboardView {
-    private func setupProfileLabel() {
-        addSubview(profileLabel)
-        profileLabel.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
-    }
-
-    private func setupProfile2Label() {
+    private func setupHeaderView() {
         let stackView = UIStackView(arrangedSubviews: [levelButton, totalCoinsLabel])
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(stackView)
-        stackView.setTopAnchorConstraint(equalTo: profileLabel.bottomAnchor, constant: 5)
-        stackView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
-    }
 
-    private func setupMerchantLabel() {
-        let stackView = UIStackView(arrangedSubviews: [merchantLabel, seeAllMerchantButton])
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(stackView)
-        stackView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
-        stackView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
-        stackView.setBottomAnchorConstraint(equalTo: bottomAnchor, constant: -10)
-    }
+        let stackViewAll = UIStackView(arrangedSubviews: [profileLabel, stackView])
+        stackViewAll.axis = .vertical
+        stackViewAll.distribution = .equalSpacing
+        stackViewAll.alignment = .fill
+        stackViewAll.spacing = 5
+        stackViewAll.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stackViewAll)
+        stackViewAll.setTopAnchorConstraint(equalTo: topAnchor, constant: 5)
+        stackViewAll.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
 
-    private func deactiveToken() {
-        let stackView = UIStackView(arrangedSubviews: [merchantLabel, seeAllMerchantButton])
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(stackView)
-        stackView.setTopAnchorConstraint(equalTo: levelButton.bottomAnchor, constant: 20)
-        stackView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
-        stackView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
-        stackView.setBottomAnchorConstraint(equalTo: bottomAnchor, constant: -20)
+        addSubview(notifButton)
+        notifButton.setTopAnchorConstraint(equalTo: safeAreaLayoutGuide.topAnchor)
+        notifButton.setTrailingAnchorConstraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20)
+//        notifButton.setHeightAnchorConstraint(equalToConstant: 50)
+
     }
 }

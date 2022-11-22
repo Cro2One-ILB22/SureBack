@@ -26,7 +26,7 @@ class ItemMerchantTableViewCell: UITableViewCell {
         return label
     }()
 
-    lazy var merchantTodayTokenLabel: UILabel = {
+    lazy var totalCoinsLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 15)
@@ -63,7 +63,7 @@ class ItemMerchantTableViewCell: UITableViewCell {
     }
 
     func setupLabel() {
-        let stackView = UIStackView(arrangedSubviews: [merchantNameLabel, merchantTodayTokenLabel])
+        let stackView = UIStackView(arrangedSubviews: [merchantNameLabel, totalCoinsLabel])
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.alignment = .fill

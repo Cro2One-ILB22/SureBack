@@ -9,6 +9,7 @@ import SDWebImage
 import UIKit
 
 class CustomerDashboardViewController: UIViewController, UIViewToController {
+    let locationManager = CLLocationManager()
     let request = RequestFunction()
     var user: UserInfoResponse!
     var merchantData = [UserInfoResponse]() {
@@ -38,6 +39,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        initAndStartUpdatingLocation()
         view.backgroundColor = .white
 
         request.getListMerchant { data in
@@ -55,6 +57,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         }
 
         let headerView = HeaderCustomerDashboardView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: 50))
+        headerView.notifButton.addTarget(self, action: #selector(notifButtonTapped), for: .touchUpInside)
         self.setupView2(headerView: headerView)
 
         request.getListToken(expired: 0, submitted: 0, redeemed: 1) { data in
@@ -84,6 +87,10 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         submitStoryVC.tokenData = data
         submitStoryVC.user = user
         navigationController?.pushViewController(submitStoryVC, animated: true)
+    }
+
+    @objc func notifButtonTapped() {
+        print("notif button tapped")
     }
 
     @objc func seeAllMerchantTapped() {
@@ -144,7 +151,7 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
                 completed: nil
             )
             cell.merchantNameLabel.text = merchantData[indexPath.row].name
-            cell.merchantTodayTokenLabel.text = "\(merchantData[indexPath.row].merchantDetail!.todaysTokenCount) visit"
+            cell.totalCoinsLabel.text = "\(merchantData[indexPath.row].balance) loyalty coins"
             return cell
         }
     }
@@ -183,5 +190,26 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         }
         view.seeAllMerchantButton.addTarget(self, action: #selector(seeAllMerchantTapped), for: .touchUpInside)
         return view
+    }
+}
+
+import CoreLocation
+
+extension CustomerDashboardViewController: CLLocationManagerDelegate {
+    func initAndStartUpdatingLocation() {
+        DispatchQueue.global(qos: .utility).async {
+            self.locationManager.requestWhenInUseAuthorization()
+            if CLLocationManager.locationServicesEnabled() {
+                self.locationManager.delegate = self
+                self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                self.locationManager.startUpdatingLocation()
+            }
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue)")
+        self.locationManager.stopUpdatingLocation()
     }
 }

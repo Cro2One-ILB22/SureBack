@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct NotificationsResponses: Codable {
+class NotificationsResponses: Codable {
     let currentPage: Int
     let data: [NotificationData]
     let firstPageURL: String
     let from: Int?
     let lastPage: Int
     let lastPageURL: String
-    let links: [Link]
+    let links: [LinkResponses]
     let nextPageURL: Int?
     let path: String
     let perPage: Int
@@ -38,7 +38,7 @@ struct NotificationsResponses: Codable {
     }
 }
 
-struct NotificationData: Codable {
+class NotificationData: Codable {
     let id: Int
     let title, body: String
     let isRead: Bool
@@ -50,10 +50,4 @@ struct NotificationData: Codable {
         case createdAt = "created_at"
         case category
     }
-}
-
-struct Link: Codable {
-    let url: String?
-    let label: String
-    let active: Bool
 }

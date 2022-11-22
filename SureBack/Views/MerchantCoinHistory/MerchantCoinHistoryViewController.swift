@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: BELOM SELESAI
 class MerchantCoinHistoryViewController: UIViewController {
 
     private let outstandingCoinCard: DetailCoinHistoryCardView = {

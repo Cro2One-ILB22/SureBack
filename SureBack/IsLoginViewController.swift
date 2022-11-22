@@ -15,6 +15,9 @@ class IsLoginViewController: UIViewController {
         view.backgroundColor = .white
 
         if AuthManager.shared.isSignedIn {
+            KeychainHelper.standard.delete(key: .accessToken)
+            print("Ada tokennya? : ",AuthManager.shared.isSignedIn)
+//            print("Isi tokennya : ", try! KeychainHelper.standard.read(key: .accessToken))
             self.navigationController?.pushViewController(TabBarViewController(), animated: true)
             self.navigationController?.isNavigationBarHidden = true
         } else {

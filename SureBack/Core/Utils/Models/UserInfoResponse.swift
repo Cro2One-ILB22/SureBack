@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - UserInfoResponse
 
-struct UserInfoResponse: Codable {
+class UserInfoResponse: Codable {
     let id: Int
     let name: String
     let profilePicture: String

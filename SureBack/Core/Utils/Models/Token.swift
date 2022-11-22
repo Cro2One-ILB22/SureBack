@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Token
-struct Token: Codable {
+class Token: Codable {
     let id: Int
     let code: String
     let instagramID: Int

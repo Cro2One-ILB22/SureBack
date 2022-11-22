@@ -392,6 +392,17 @@ extension RequestFunction {
             }
         }
     }
+    func getMyStory(completionHandler: @escaping (MyStoryResponses) -> Void) {
+        let url = Endpoints.getMyStory.url
+        requestWithToken(url: url, decodable: MyStoryResponses.self) { response in
+            switch response.result {
+            case .success(let data):
+                completionHandler(data)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 extension RequestFunction {

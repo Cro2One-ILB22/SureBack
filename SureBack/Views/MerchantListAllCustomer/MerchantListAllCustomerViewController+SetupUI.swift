@@ -11,7 +11,6 @@ extension MerchantListAllCustomerViewController {
     public func setupLayout() {
         setupCustomSegmentedControl()
         setupWaitingView()
-        setupHistoryView()
     }
     private func setupWaitingView() {
         view.addSubview(waitingView)
@@ -20,14 +19,22 @@ extension MerchantListAllCustomerViewController {
         waitingView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor)
         waitingView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor)
         waitingView.setBottomAnchorConstraint(equalTo: view.bottomAnchor)
+        let waitingVC = WaitingViewController()
+        self.addChild(waitingVC)
+        waitingVC.view.frame = self.waitingView.bounds
+        waitingView.addSubview(waitingVC.view)
     }
-    private func setupHistoryView() {
+    func setupHistoryView() {
         view.addSubview(historyView)
         historyView.translatesAutoresizingMaskIntoConstraints = false
         historyView.setTopAnchorConstraint(equalTo: customSegmentedControl.bottomAnchor)
         historyView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor)
         historyView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor)
         historyView.setBottomAnchorConstraint(equalTo: view.bottomAnchor)
+        let historyVC = HistoryViewController()
+        self.addChild(historyVC)
+        historyVC.view.frame = self.historyView.bounds
+        historyView.addSubview(historyVC.view)
     }
     private func setupCustomSegmentedControl() {
         view.addSubview(customSegmentedControl)

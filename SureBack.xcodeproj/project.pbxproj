@@ -20,7 +20,7 @@
 		1603EFE0292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603EFDF292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift */; };
 		1603EFE2292B1D6800EC5485 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603EFE1292B1D6800EC5485 /* CustomSegmentedControl.swift */; };
 		1603EFE6292B2F3300EC5485 /* ItemCustomerStoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603EFE5292B2F3300EC5485 /* ItemCustomerStoryTableCell.swift */; };
-		1603EFE8292B494700EC5485 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603EFE7292B494700EC5485 /* WaitingView.swift */; };
+		1603EFE8292B494700EC5485 /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603EFE7292B494700EC5485 /* WaitingViewController.swift */; };
 		1619BB272918B5E800085B74 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB262918B5E800085B74 /* AuthManager.swift */; };
 		1619BB292919082700085B74 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB282919082700085B74 /* TabBarViewController.swift */; };
 		1619BB2B2919B74800085B74 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB2A2919B74800085B74 /* RegistrationViewController.swift */; };
@@ -45,10 +45,16 @@
 		169FCD41292C85E6009CBAB2 /* PurchaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD40292C85E6009CBAB2 /* PurchaseResponse.swift */; };
 		169FCD43292C8A33009CBAB2 /* LinkResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD42292C8A33009CBAB2 /* LinkResponses.swift */; };
 		169FCD45292C8CAA009CBAB2 /* MerchantListAllCustomerViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD44292C8CAA009CBAB2 /* MerchantListAllCustomerViewController+SetupUI.swift */; };
-		169FCD47292CA30E009CBAB2 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD46292CA30E009CBAB2 /* HistoryView.swift */; };
+		169FCD47292CA30E009CBAB2 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD46292CA30E009CBAB2 /* HistoryViewController.swift */; };
+		169FCD4A292CC063009CBAB2 /* WaitingViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD49292CC063009CBAB2 /* WaitingViewController+SetupUI.swift */; };
+		169FCD4C292CC172009CBAB2 /* UIActivityIndicatorView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD4B292CC172009CBAB2 /* UIActivityIndicatorView+Ext.swift */; };
+		169FCD4F292CC302009CBAB2 /* ItemCustomerStoryTableCell+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD4E292CC302009CBAB2 /* ItemCustomerStoryTableCell+SetupUI.swift */; };
+		169FCD52292CC4F9009CBAB2 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD51292CC4F9009CBAB2 /* ImageDownloader.swift */; };
+		169FCD55292CC5E7009CBAB2 /* HistoryViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD54292CC5E7009CBAB2 /* HistoryViewController+SetupUI.swift */; };
+		169FCD59292DBEA4009CBAB2 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD58292DBEA4009CBAB2 /* UIColor+Ext.swift */; };
+		169FCD5B292DD655009CBAB2 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD5A292DD655009CBAB2 /* String+Ext.swift */; };
 		16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */; };
 		16BD919E291C58860010731E /* UIScreen+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD919D291C58860010731E /* UIScreen+Ext.swift */; };
-		16BD91A3291D52610010731E /* CoinHistoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91A2291D52610010731E /* CoinHistoryCardView.swift */; };
 		16BD91A5291D527C0010731E /* BussinesStatusCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91A4291D527C0010731E /* BussinesStatusCardView.swift */; };
 		16BD91A7291D52E30010731E /* StoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91A6291D52E30010731E /* StoryTableViewCell.swift */; };
 		16BD91A9291D534C0010731E /* HeaderMerchantDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91A8291D534C0010731E /* HeaderMerchantDashboardView.swift */; };
@@ -128,7 +134,7 @@
 		1603EFDF292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantListAllCustomerViewController.swift; sourceTree = "<group>"; };
 		1603EFE1292B1D6800EC5485 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		1603EFE5292B2F3300EC5485 /* ItemCustomerStoryTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCustomerStoryTableCell.swift; sourceTree = "<group>"; };
-		1603EFE7292B494700EC5485 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
+		1603EFE7292B494700EC5485 /* WaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingViewController.swift; sourceTree = "<group>"; };
 		1619BB262918B5E800085B74 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		1619BB282919082700085B74 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		1619BB2A2919B74800085B74 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -153,10 +159,16 @@
 		169FCD40292C85E6009CBAB2 /* PurchaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseResponse.swift; sourceTree = "<group>"; };
 		169FCD42292C8A33009CBAB2 /* LinkResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkResponses.swift; sourceTree = "<group>"; };
 		169FCD44292C8CAA009CBAB2 /* MerchantListAllCustomerViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MerchantListAllCustomerViewController+SetupUI.swift"; sourceTree = "<group>"; };
-		169FCD46292CA30E009CBAB2 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		169FCD46292CA30E009CBAB2 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		169FCD49292CC063009CBAB2 /* WaitingViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WaitingViewController+SetupUI.swift"; sourceTree = "<group>"; };
+		169FCD4B292CC172009CBAB2 /* UIActivityIndicatorView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Ext.swift"; sourceTree = "<group>"; };
+		169FCD4E292CC302009CBAB2 /* ItemCustomerStoryTableCell+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemCustomerStoryTableCell+SetupUI.swift"; sourceTree = "<group>"; };
+		169FCD51292CC4F9009CBAB2 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
+		169FCD54292CC5E7009CBAB2 /* HistoryViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoryViewController+SetupUI.swift"; sourceTree = "<group>"; };
+		169FCD58292DBEA4009CBAB2 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		169FCD5A292DD655009CBAB2 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveOrRejectStoryResponse.swift; sourceTree = "<group>"; };
 		16BD919D291C58860010731E /* UIScreen+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Ext.swift"; sourceTree = "<group>"; };
-		16BD91A2291D52610010731E /* CoinHistoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinHistoryCardView.swift; sourceTree = "<group>"; };
 		16BD91A4291D527C0010731E /* BussinesStatusCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BussinesStatusCardView.swift; sourceTree = "<group>"; };
 		16BD91A6291D52E30010731E /* StoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTableViewCell.swift; sourceTree = "<group>"; };
 		16BD91A8291D534C0010731E /* HeaderMerchantDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMerchantDashboardView.swift; sourceTree = "<group>"; };
@@ -263,6 +275,7 @@
 		119B76542906976E00530C80 /* SureBack */ = {
 			isa = PBXGroup;
 			children = (
+				169FCD50292CC4E5009CBAB2 /* Service */,
 				AC886E8129246FEA007F1E41 /* Controller */,
 				16BD919F291D521D0010731E /* Views */,
 				1619BB2C2919D9C600085B74 /* Extension */,
@@ -270,7 +283,6 @@
 				ACC1C0F829141D71003E2FD8 /* SureBack.entitlements */,
 				11B2DD2B2907CF490065E98D /* Core */,
 				119B76552906976E00530C80 /* AppDelegate.swift */,
-				1619BB262918B5E800085B74 /* AuthManager.swift */,
 				119B76592906976E00530C80 /* ViewController.swift */,
 				119B765E2906976F00530C80 /* Assets.xcassets */,
 				119B76602906976F00530C80 /* LaunchScreen.storyboard */,
@@ -352,6 +364,9 @@
 				1619BB31291B500300085B74 /* UIViewController+Ext.swift */,
 				16BD919D291C58860010731E /* UIScreen+Ext.swift */,
 				169FCD3B292C4C36009CBAB2 /* UITableView+Ext.swift */,
+				169FCD4B292CC172009CBAB2 /* UIActivityIndicatorView+Ext.swift */,
+				169FCD58292DBEA4009CBAB2 /* UIColor+Ext.swift */,
+				169FCD5A292DD655009CBAB2 /* String+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -435,12 +450,48 @@
 		169FCD3D292C80AF009CBAB2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				169FCD4D292CC2E3009CBAB2 /* Cell */,
+				169FCD53292CC578009CBAB2 /* HistoryViewController */,
+				169FCD48292CC04C009CBAB2 /* WaitingViewController */,
 				1603EFE1292B1D6800EC5485 /* CustomSegmentedControl.swift */,
-				1603EFE7292B494700EC5485 /* WaitingView.swift */,
-				169FCD46292CA30E009CBAB2 /* HistoryView.swift */,
-				1603EFE5292B2F3300EC5485 /* ItemCustomerStoryTableCell.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		169FCD48292CC04C009CBAB2 /* WaitingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1603EFE7292B494700EC5485 /* WaitingViewController.swift */,
+				169FCD49292CC063009CBAB2 /* WaitingViewController+SetupUI.swift */,
+			);
+			path = WaitingViewController;
+			sourceTree = "<group>";
+		};
+		169FCD4D292CC2E3009CBAB2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				1603EFE5292B2F3300EC5485 /* ItemCustomerStoryTableCell.swift */,
+				169FCD4E292CC302009CBAB2 /* ItemCustomerStoryTableCell+SetupUI.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		169FCD50292CC4E5009CBAB2 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				169FCD51292CC4F9009CBAB2 /* ImageDownloader.swift */,
+				1619BB262918B5E800085B74 /* AuthManager.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		169FCD53292CC578009CBAB2 /* HistoryViewController */ = {
+			isa = PBXGroup;
+			children = (
+				169FCD46292CA30E009CBAB2 /* HistoryViewController.swift */,
+				169FCD54292CC5E7009CBAB2 /* HistoryViewController+SetupUI.swift */,
+			);
+			path = HistoryViewController;
 			sourceTree = "<group>";
 		};
 		16BD919F291D521D0010731E /* Views */ = {
@@ -459,8 +510,8 @@
 		16BD91A0291D52280010731E /* MerchantDashboard */ = {
 			isa = PBXGroup;
 			children = (
-				16BD91AC291E93270010731E /* MerchantDashboardViewController.swift */,
 				16BD91A1291D52380010731E /* Components */,
+				16BD91AC291E93270010731E /* MerchantDashboardViewController.swift */,
 			);
 			path = MerchantDashboard;
 			sourceTree = "<group>";
@@ -468,7 +519,6 @@
 		16BD91A1291D52380010731E /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				16BD91A2291D52610010731E /* CoinHistoryCardView.swift */,
 				16BD91A4291D527C0010731E /* BussinesStatusCardView.swift */,
 				16BD91A6291D52E30010731E /* StoryTableViewCell.swift */,
 				16BD91A8291D534C0010731E /* HeaderMerchantDashboardView.swift */,
@@ -848,12 +898,13 @@
 				169FCD3C292C4C36009CBAB2 /* UITableView+Ext.swift in Sources */,
 				1651220B2925BE2C00DBC0AE /* HeaderMerchantDetailStoryView.swift in Sources */,
 				1619BB272918B5E800085B74 /* AuthManager.swift in Sources */,
-				169FCD47292CA30E009CBAB2 /* HistoryView.swift in Sources */,
+				169FCD47292CA30E009CBAB2 /* HistoryViewController.swift in Sources */,
 				16BD91AB291E88790010731E /* ItemStoryCollectionViewCell.swift in Sources */,
 				1619BB292919082700085B74 /* TabBarViewController.swift in Sources */,
 				16BD91A5291D527C0010731E /* BussinesStatusCardView.swift in Sources */,
 				ACE8C35B2916D60700BEA778 /* DummyViewController.swift in Sources */,
 				ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */,
+				169FCD55292CC5E7009CBAB2 /* HistoryViewController+SetupUI.swift in Sources */,
 				AC59F885291F50B5000F8345 /* HeaderCustomerDashboardView.swift in Sources */,
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
 				ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */,
@@ -873,6 +924,7 @@
 				165122122927377600DBC0AE /* MerchantCoinHistoryViewController.swift in Sources */,
 				1619BB32291B500300085B74 /* UIViewController+Ext.swift in Sources */,
 				AC8AF8D92922F98D00227BDE /* SubmitStoryViewController.swift in Sources */,
+				169FCD52292CC4F9009CBAB2 /* ImageDownloader.swift in Sources */,
 				ACDD097A29128F1E00309FBC /* Transaction.swift in Sources */,
 				1619BB2E2919D9DC00085B74 /* UIView+Ext.swift in Sources */,
 				1651220D2926C6F600DBC0AE /* ListCustomerStoryTableViewCell.swift in Sources */,
@@ -891,7 +943,7 @@
 				16BD91A7291D52E30010731E /* StoryTableViewCell.swift in Sources */,
 				119B76562906976E00530C80 /* AppDelegate.swift in Sources */,
 				16BD91A9291D534C0010731E /* HeaderMerchantDashboardView.swift in Sources */,
-				16BD91A3291D52610010731E /* CoinHistoryCardView.swift in Sources */,
+				169FCD4A292CC063009CBAB2 /* WaitingViewController+SetupUI.swift in Sources */,
 				ACE5CDA42912704800D08177 /* UserInfoResponse.swift in Sources */,
 				AC12F579291D3FBB0096CB5A /* CustomerHistoryViewController.swift in Sources */,
 				1619BB2B2919B74800085B74 /* RegistrationViewController.swift in Sources */,
@@ -901,6 +953,7 @@
 				ACF6441E2925DF2900A6AD10 /* CustomerProfileViewController.swift in Sources */,
 				1603EFE6292B2F3300EC5485 /* ItemCustomerStoryTableCell.swift in Sources */,
 				1694878829104CE70088821C /* KeychainHelper.swift in Sources */,
+				169FCD4F292CC302009CBAB2 /* ItemCustomerStoryTableCell+SetupUI.swift in Sources */,
 				ACE5CDAC2912722800D08177 /* ResultStoryIG.swift in Sources */,
 				AC3BCEB92921E5F9009BFB05 /* HeaderSubmitStoryView.swift in Sources */,
 				165122052925853E00DBC0AE /* NotificationsResponses.swift in Sources */,
@@ -908,7 +961,9 @@
 				AC59F89429206137000F8345 /* ItemCustomerHistoryTableViewCell.swift in Sources */,
 				16BD91AD291E93270010731E /* MerchantDashboardViewController.swift in Sources */,
 				AC59F88B291F8117000F8345 /* Token.swift in Sources */,
+				169FCD59292DBEA4009CBAB2 /* UIColor+Ext.swift in Sources */,
 				169FCD43292C8A33009CBAB2 /* LinkResponses.swift in Sources */,
+				169FCD4C292CC172009CBAB2 /* UIActivityIndicatorView+Ext.swift in Sources */,
 				16930E3D290FB8C7003DFEBE /* RequestInstagramOTPResponse.swift in Sources */,
 				AC12F575291C29E10096CB5A /* ItemMerchantTableViewCell.swift in Sources */,
 				AC3FEDCE290834EA0011202E /* JSONNull.swift in Sources */,
@@ -916,8 +971,9 @@
 				169FCD45292C8CAA009CBAB2 /* MerchantListAllCustomerViewController+SetupUI.swift in Sources */,
 				AC1A6CBB291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift in Sources */,
 				11B2DD2F2907CF760065E98D /* APICall.swift in Sources */,
-				1603EFE8292B494700EC5485 /* WaitingView.swift in Sources */,
+				1603EFE8292B494700EC5485 /* WaitingViewController.swift in Sources */,
 				AC22879A2918521F00397ED0 /* LoggedInViewController.swift in Sources */,
+				169FCD5B292DD655009CBAB2 /* String+Ext.swift in Sources */,
 				AC2AC1BD291F3C5B00E9F8A7 /* ItemActiveTokenCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

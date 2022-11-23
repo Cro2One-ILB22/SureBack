@@ -17,15 +17,17 @@ class ItemStoryCollectionViewCell: UICollectionViewCell {
         return image
     }()
     let usernameIG: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
+        label.text = "asaddadasafakjasnfkjabfkaboabofbasobfosbfosbobfsiobosafb"
         return label
     }()
     let userFollower: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
+        label.text = "asaddadasafakjasnfkjabfkaboabofbasobfosbfosbobfsiobosafb"
         return label
     }()
     let userImageStory: UIImageView = {
-       let image = UIImageView()
+        let image = UIImageView()
         image.image = UIImage(named: "person.crop.circle")
         image.layer.cornerRadius = 20
         image.clipsToBounds = true
@@ -33,7 +35,10 @@ class ItemStoryCollectionViewCell: UICollectionViewCell {
     }()
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layer.cornerRadius = 30
+        layer.cornerRadius = 10
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.gray.cgColor
+        backgroundColor = .gray
         setupConstraint()
     }
     required init?(coder: NSCoder) {

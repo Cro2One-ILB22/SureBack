@@ -13,29 +13,14 @@ class MerchantListAllCustomerViewController: UIViewController {
         codeSegmented.backgroundColor = .clear
         return codeSegmented
     }()
-    let waitingView: WaitingView = {
-        let segmented = WaitingView()
-        return segmented
-    }()
-    let historyView: HistoryView = {
-        let segmented = HistoryView()
-        return segmented
-    }()
+    let waitingView: UIView = UIView()
+    var historyView: UIView = UIView()
+    var isFirstTimeOpenHistory = true
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.waitingView.tableView.isHidden = true
         setupLayout()
         showHistoryView(false)
-        getMyStory()
-    }
-    func getMyStory() {
-        let rf = RequestFunction()
-        rf.getMyStory { data in
-            self.waitingView.listUserStory = data.data
-            self.waitingView.tableView.reloadData()
-            self.waitingView.tableView.isHidden = false
-        }
     }
     private func showHistoryView(_ isShowing: Bool) {
         self.waitingView.isHidden = isShowing
@@ -45,14 +30,17 @@ class MerchantListAllCustomerViewController: UIViewController {
 
 extension MerchantListAllCustomerViewController: CustomSegmentedControlDelegate {
     func change(to index: Int) {
-        print("change to", index)
         switch(index) {
         case 0:
             showHistoryView(false)
         case 1:
+            if isFirstTimeOpenHistory {
+                isFirstTimeOpenHistory = false
+                setupHistoryView()
+            }
             showHistoryView(true)
         default:
-            break
+            return
         }
     }
 }

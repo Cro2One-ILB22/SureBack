@@ -1,13 +1,13 @@
 //
-//  HistoryView.swift
+//  SegmentedControlView.swift
 //  SureBack
 //
-//  Created by Tubagus Adhitya Permana on 22/11/22.
+//  Created by Tubagus Adhitya Permana on 21/11/22.
 //
 
 import UIKit
 
-class HistoryView: UIView {
+class WaitingViewController: UIViewController {
     var listUserStory: [MyStoryData] = []
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .plain)
@@ -23,19 +23,35 @@ class HistoryView: UIView {
         search.sizeToFit()
         return search
     }()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    lazy var loadingIndicator: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.style = .gray
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.isHidden = true
+        return loading
+    }()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
-        setupSearch()
-        setupTableView()
+        loadingIndicator.show(true)
+        getWaitingStoryCustomer()
+        setupLayout()
     }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private func getWaitingStoryCustomer() {
+//        try! KeychainHelper.standard.save(key: .accessToken, value: "158|aZv8kOUYRdqVtYFA7yCScXbqybST2oMaostKG4Pb")
+        let rf = RequestFunction()
+        rf.getMyStory(submitted: true) { data in
+            self.listUserStory = data.data
+            self.tableView.reloadData()
+            self.tableView.isHidden = false
+            self.loadingIndicator.show(false)
+        }
     }
 }
 
-extension HistoryView: UITableViewDataSource, UITableViewDelegate {
+extension WaitingViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         if listUserStory.count == 0 {
             self.tableView.setEmptyMessage(
@@ -52,6 +68,7 @@ extension HistoryView: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemCustomerStoryTableCell.id, for: indexPath) as? ItemCustomerStoryTableCell else {return UITableViewCell()}
+        cell.isHistory = false
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -65,23 +82,5 @@ extension HistoryView: UITableViewDataSource, UITableViewDelegate {
         footer.backgroundColor = .clear
         footer.isOpaque = false
         return footer
-    }
-}
-
-extension HistoryView {
-    private func setupSearch() {
-        addSubview(searchBar)
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.setTopAnchorConstraint(equalTo: topAnchor, constant: 10)
-        searchBar.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 16)
-        searchBar.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -16)
-    }
-    private func setupTableView() {
-        addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.setTopAnchorConstraint(equalTo: searchBar.bottomAnchor)
-        tableView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 16)
-        tableView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -16)
-        tableView.setBottomAnchorConstraint(equalTo: bottomAnchor)
     }
 }

@@ -34,6 +34,8 @@ final class AuthManager {
     public func withValidToken(completion: @escaping (String) -> Void) {
         if let token = accessToken {
             completion(token)
+        } else {
+            print("token is nil")
         }
     }
 }

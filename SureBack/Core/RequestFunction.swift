@@ -164,7 +164,6 @@ extension RequestFunction {
 }
 
 // MARK: Partner
-
 extension RequestFunction {
     func updatePartnerCashbackPercent(cashbackPercent: Float, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
         let url = Endpoints.updateMerchantDetail.url
@@ -211,7 +210,6 @@ extension RequestFunction {
 }
 
 // MARK: Instagram
-
 extension RequestFunction {
     func approveStory(_ isApproved: Bool, id: Int, completionHandler: @escaping (_ data: ApproveOrRejectStoryResponse) -> Void) {
         let url = Endpoints.approveOrRejectStory.url
@@ -392,14 +390,25 @@ extension RequestFunction {
             }
         }
     }
-    func getMyStory(completionHandler: @escaping (MyStoryResponses) -> Void) {
+    func getMyStory(customer: Int? = nil,
+                    expired: Bool? = nil,
+                    submitted: Bool? = nil,
+                    approved: Bool? = nil,
+                    completionHandler: @escaping (MyStoryResponses) -> Void) {
         let url = Endpoints.getMyStory.url
-        requestWithToken(url: url, decodable: MyStoryResponses.self) { response in
+        var parameters: [String: Any?] = [:]
+        parameters["customer"] = customer
+        parameters["expired"] = expired
+        parameters["submitted"] = submitted
+        parameters["approved"] = approved
+        requestWithToken(url: url,
+                         parameters: parameters as Dictionary<String, Any>,
+                         decodable: MyStoryResponses.self) { response in
             switch response.result {
             case .success(let data):
                 completionHandler(data)
             case .failure(let error):
-                print(error)
+                print("Errornya bos", error)
             }
         }
     }

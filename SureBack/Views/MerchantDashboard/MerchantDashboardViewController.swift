@@ -21,26 +21,13 @@ class MerchantDashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        let headerView = HeaderMerchantDashboardView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 450))
+        navigationItem.title = "Hi, bestie"
+        let headerView = HeaderMerchantDashboardView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 250))
         setupTableView()
-        headerView.businessStatusCard.switchButton.addTarget(self, action: #selector(switchStateDidChange), for: .valueChanged)
-        headerView.seeAllCoinHistoryButton.addTarget(self, action: #selector(seeAllCoinHistory), for: .touchUpInside)
         headerView.seeAllCustomersButton.addTarget(self, action: #selector(seeAllCustomers), for: .touchUpInside)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableHeaderView = headerView
-    }
-
-    @objc func switchStateDidChange(_ sender: UISwitch!) {
-        if sender.isOn {
-            print("State is now on")
-        } else {
-            print("State is now off")
-        }
-    }
-
-    @objc func seeAllCoinHistory() {
-        print("See all coin history tapped")
     }
 
     @objc func seeAllCustomers() {
@@ -77,25 +64,3 @@ extension MerchantDashboardViewController {
         tableView.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     }
 }
-
-//#if DEBUG
-//import SwiftUI
-//struct UIKitPreviewProvider: UIViewControllerRepresentable {
-//    typealias UIViewControllerType = UIViewController
-//    private let viewController: UIViewController
-//    init (vc: UIViewControllerType) {
-//        viewController = vc
-//    }
-//    func makeUIViewController(context: Context) -> UIViewController {
-//        return viewController
-//    }
-//    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-//    }
-//}
-//@available(iOS 13.0, *)
-//struct VC_Previews: PreviewProvider {
-//    static var previews: some View {
-//        UIKitPreviewProvider(vc: MerchantDashboardViewController(nibName: nil, bundle: nil))
-//    }
-//}
-//#endif

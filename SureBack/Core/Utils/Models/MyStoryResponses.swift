@@ -9,14 +9,16 @@ struct MyStoryResponses: Codable {
     let currentPage: Int
     let data: [MyStoryData]
     let firstPageURL: String
-    let from, lastPage: Int
+    let from: Int?
+    let lastPage: Int
     let lastPageURL: String
     let links: [MyStoryLink]
     let nextPageURL: Int?
     let path: String
     let perPage: Int
     let prevPageURL: Int?
-    let to, total: Int
+    let to: Int?
+    let total: Int
 
     enum CodingKeys: String, CodingKey {
         case currentPage = "current_page"
@@ -38,12 +40,14 @@ struct MyStoryData: Codable {
     let id: Int
     let instagramStoryID: Int?
     let instagramID: Int
-    let imageURI, videoURI, instagramStoryStatus, approvalStatus: String?
+    let imageURI, videoURI, instagramStoryStatus: String?
+    let approvalStatus: Int?
     let note, expiringAt, submittedAt, assessedAt: String?
     let inspectedAt: String?
     let createdAt, updatedAt: String
     let storyURL: String?
     let token: MyStoryToken
+    let customer: MyStoryCustomer
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -62,6 +66,7 @@ struct MyStoryData: Codable {
         case updatedAt = "updated_at"
         case storyURL = "story_url"
         case token
+        case customer
     }
 }
 // MARK: - Token
@@ -75,3 +80,6 @@ class MyStoryPurchase: PurchaseResponse {}
 
 // MARK: - Link
 class MyStoryLink: LinkResponses {}
+
+// MARK: - Customer
+class MyStoryCustomer: UserInfoResponse {}

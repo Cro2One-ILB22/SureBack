@@ -1,14 +1,14 @@
 //
-//  SegmentedControlView.swift
+//  HistoryView.swift
 //  SureBack
 //
-//  Created by Tubagus Adhitya Permana on 21/11/22.
+//  Created by Tubagus Adhitya Permana on 22/11/22.
 //
 
 import UIKit
 
-class WaitingView: UIView {
-    var listUserStory: [MyStoryData] = []
+class HistoryViewController: UIViewController {
+    var listHistoryStoryCustomer: [MyStoryData] = []
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .plain)
         table.register(ItemCustomerStoryTableCell.self, forCellReuseIdentifier: ItemCustomerStoryTableCell.id)
@@ -23,21 +23,36 @@ class WaitingView: UIView {
         search.sizeToFit()
         return search
     }()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    lazy var loadingIndicator: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.style = .gray
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.isHidden = true
+        return loading
+    }()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
-        setupSearch()
-        setupTableView()
+        loadingIndicator.show(true)
+        setupLayout()
+        getHistoryStoryCustomer()
     }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private func getHistoryStoryCustomer() {
+        let rf = RequestFunction()
+        rf.getMyStory(expired: true) { data in
+            self.listHistoryStoryCustomer = data.data
+            self.tableView.reloadData()
+            self.tableView.isHidden = false
+            self.loadingIndicator.show(false)
+        }
     }
 }
 
-extension WaitingView: UITableViewDataSource, UITableViewDelegate {
+extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        if listUserStory.count == 0 {
+        if listHistoryStoryCustomer.count == 0 {
             self.tableView.setEmptyMessage(
                 image: UIImage(named: "empty.customers")!,
                 title: "Empty Customer",
@@ -45,13 +60,16 @@ extension WaitingView: UITableViewDataSource, UITableViewDelegate {
         } else {
             self.tableView.restore()
         }
-        return listUserStory.count
+        return listHistoryStoryCustomer.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemCustomerStoryTableCell.id, for: indexPath) as? ItemCustomerStoryTableCell else {return UITableViewCell()}
+        let data = listHistoryStoryCustomer[indexPath.row]
+        cell.isHistory = true
+        cell.setCellWithValueOf(data)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -65,23 +83,5 @@ extension WaitingView: UITableViewDataSource, UITableViewDelegate {
         footer.backgroundColor = .clear
         footer.isOpaque = false
         return footer
-    }
-}
-
-extension WaitingView {
-    private func setupSearch() {
-        addSubview(searchBar)
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.setTopAnchorConstraint(equalTo: topAnchor, constant: 10)
-        searchBar.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 16)
-        searchBar.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -16)
-    }
-    private func setupTableView() {
-        addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.setTopAnchorConstraint(equalTo: searchBar.bottomAnchor)
-        tableView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 16)
-        tableView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -16)
-        tableView.setBottomAnchorConstraint(equalTo: bottomAnchor)
     }
 }

@@ -42,7 +42,8 @@ struct MyStoryData: Codable {
     let instagramID: Int
     let imageURI, videoURI, instagramStoryStatus: String?
     let approvalStatus: Int?
-    let note, expiringAt, submittedAt, assessedAt: String?
+    let note, submittedAt, assessedAt: String?
+    let expiringAt: Int?
     let inspectedAt: String?
     let createdAt, updatedAt: String
     let storyURL: String?
@@ -56,7 +57,7 @@ struct MyStoryData: Codable {
         case imageURI = "image_uri"
         case videoURI = "video_uri"
         case instagramStoryStatus = "instagram_story_status"
-        case approvalStatus = "approval_status"
+        case approvalStatus
         case note
         case expiringAt = "expiring_at"
         case submittedAt = "submitted_at"

@@ -6,9 +6,6 @@
 //
 
 import UIKit
-protocol CustomSegmentedControlDelegate: AnyObject {
-    func change(to index: Int)
-}
 
 class CustomSegmentedControl: UIView {
     private var buttonTitles: [String]!

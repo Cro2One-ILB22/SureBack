@@ -12,17 +12,20 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
     static let id = "ItemCustomerHistoryTableViewCell"
 
     lazy var statusImage: UIImageView = {
-        let merchantImage = UIImageView()
-        merchantImage.contentMode = .scaleAspectFill
-        merchantImage.clipsToBounds = true
-        return merchantImage
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        image.layer.cornerRadius = 15
+        image.setWidthAnchorConstraint(equalToConstant: 30)
+        image.setHeightAnchorConstraint(equalToConstant: 30)
+        return image
     }()
 
     lazy var statusLabel: UILabel = {
         let label = UILabel()
         label.text = "Direview"
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 17)
         return label
     }()
 
@@ -72,7 +75,7 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
     }
 
     func setupLabel() {
-        let stackView = UIStackView(arrangedSubviews: [statusLabel, categoryLabel ,dateLabel])
+        let stackView = UIStackView(arrangedSubviews: [statusLabel, dateLabel])
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.alignment = .fill

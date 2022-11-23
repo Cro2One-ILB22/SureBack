@@ -355,11 +355,23 @@ extension RequestFunction {
         }
     }
 
-    func getListTransaction(merchantId: Int, completion: @escaping (Result<ResponseData<Transaction>, AFError>) -> Void) {
+    func getListTransaction(merchantId: Int? = nil, accountingEntry: String? = nil, status: String? = nil, category: String? = nil, completion: @escaping (Result<ResponseData<Transaction>, AFError>) -> Void) {
         let url = Endpoints.getListTransaction.url
-        let parameters: [String: Int] = [
-            "merchant": merchantId,
-        ]
+
+        var parameters: [String: Any] = [:]
+
+        if merchantId != nil {
+            parameters["merchant_id"] = merchantId
+        }
+        if accountingEntry != nil {
+            parameters["accounting_entry"] = accountingEntry
+        }
+        if status != nil {
+            parameters["status"] = status
+        }
+        if category != nil {
+            parameters["category"] = category
+        }
 
         requestWithToken(url: url, parameters: parameters, decodable: ResponseData<Transaction>.self) {
             completion($0.result)
@@ -410,6 +422,32 @@ extension RequestFunction {
             case .failure(let error):
                 print("Errornya bos", error)
             }
+        }
+    }
+    
+    func getMyStoryCustomer(customerId: Int? = nil, expired: Int? = nil, submitted: Int? = nil, approved: Int? = nil, assessed: Int? = nil, completionHandler: @escaping (Result<ResponseData<MyStoryData>, AFError>) -> Void) {
+        let url = Endpoints.getMyStory.url
+
+        var parameters: [String: Int] = [:]
+
+        if customerId != nil {
+            parameters["customer_id"] = customerId
+        }
+        if expired != nil {
+            parameters["expired"] = expired
+        }
+        if submitted != nil {
+            parameters["submitted"] = submitted
+        }
+        if approved != nil {
+            parameters["approved"] = approved
+        }
+        if assessed != nil {
+            parameters["assessed"] = assessed
+        }
+
+        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<MyStoryData>.self) { response in
+            completionHandler(response.result)
         }
     }
 }

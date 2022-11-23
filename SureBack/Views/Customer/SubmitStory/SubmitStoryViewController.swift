@@ -50,9 +50,9 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
             return
         }
 
-        let headerView = HeaderSubmitStoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 240))
-        headerView.tokenIdNameLabel.text = String(tokenData.id)
-        headerView.merchantNameLabel.text = tokenData.merchant.name
+        let headerView = HeaderSubmitStoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 280))
+        headerView.tokenIdValueLabel.text = String(tokenData.id)
+        headerView.merchantNameValueLabel.text = tokenData.merchant.name
 
         // string to date
         let dateFormatter = DateFormatter()
@@ -65,8 +65,8 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         let dateToString = DateFormatter()
         dateToString.dateFormat = "dd/MM/YY"
 
-        headerView.dateNameLabel.text = dateString
-        headerView.purchaseNameLabel.text = String(tokenData.purchase.purchaseAmount)
+        headerView.dateValueLabel.text = dateString
+        headerView.purchaseValueLabel.text = String(tokenData.purchase.purchaseAmount)
         print("Story ID: \(storyID)")
 
         tableView.delegate = self
@@ -212,7 +212,7 @@ extension SubmitStoryViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 500
+        return 400
     }
 }
 

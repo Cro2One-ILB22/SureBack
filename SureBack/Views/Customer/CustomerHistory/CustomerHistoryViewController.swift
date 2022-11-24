@@ -28,8 +28,13 @@ class CustomerHistoryViewController: UIViewController {
 
     var user: UserInfoResponse?
     var merchantData: UserInfoResponse?
+    var tokenData: GenerateTokenOnlineResponse?
 
     let request = RequestFunction()
+
+    var countdown: DateComponents {
+        return Calendar.current.dateComponents([.day, .hour, .minute, .second], from: Date(), to: self.tokenData?.expiresAt.stringToDate() ?? Date())
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +48,13 @@ class CustomerHistoryViewController: UIViewController {
         guard let user = user, let merchantData = merchantData else {
             return
         }
+
+        if tokenData == nil {
+            headerView.timerLabel.isHidden = true
+            headerView.redeemLabel.isHidden = true
+        }
+
+        runCountdown()
         getCoinHistoryData(user: user, merchantData: merchantData)
         getTokenStatusData(merchantData: merchantData)
     }
@@ -112,6 +124,20 @@ class CustomerHistoryViewController: UIViewController {
     private func showCoinHistoryView(_ isShowing: Bool) {
         tokenStatusView.isHidden = isShowing
         coinHistoryView.isHidden = !isShowing
+    }
+
+    // MARK: Timer
+    func runCountdown() {
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
+
+    @objc func updateTimer() {
+        let countdown = self.countdown
+        let hours = countdown.hour!
+        let minutes = countdown.minute!
+        let seconds = countdown.second!
+
+        self.headerView.timerLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }
 

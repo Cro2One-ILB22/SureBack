@@ -175,6 +175,12 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         merchantDetailVC.title = "Merchant"
         merchantDetailVC.user = user
         merchantDetailVC.merchantData = merchantData[indexPath.row]
+        for i in activeTokenData {
+            if i.merchant.id == merchantData[indexPath.row].id {
+                merchantDetailVC.tokenData = i
+                break
+            }
+        }
         navigationController?.pushViewController(merchantDetailVC, animated: true)
     }
 

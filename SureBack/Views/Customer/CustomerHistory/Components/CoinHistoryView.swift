@@ -8,8 +8,7 @@
 import UIKit
 
 class CoinHistoryView: UIView {
-    var transactionData: [Transaction] = []
-    {
+    var transactionData: [Transaction] = [] {
         didSet {
             tableView.reloadData()
             print(transactionData)
@@ -35,7 +34,6 @@ class CoinHistoryView: UIView {
         tableView.dataSource = self
         setupTableView()
 
-
         tableView.reloadData()
     }
 
@@ -52,18 +50,14 @@ extension CoinHistoryView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemCustomerHistoryTableViewCell.id, for: indexPath) as? ItemCustomerHistoryTableViewCell else { return UITableViewCell() }
 
-        // string to date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let date = dateFormatter.date(from: transactionData[indexPath.row].updatedAt)
-        dateFormatter.dateFormat = "dd MMM yyyy"
-        let dateString = dateFormatter.string(from: date!)
+        cell.totalPurchaseLabel.isHidden = true
+        cell.dateLabel.text = transactionData[indexPath.row].createdAt.formatTodMMMyyy()
 
-        // date to string
-        let dateToString = DateFormatter()
-        dateToString.dateFormat = "dd/MM/YY"
+        if transactionData[indexPath.row].createdAt.stringToDate() < Date() {
+            print(transactionData[indexPath.row].createdAt.stringToDate())
+            print("datena: \(Date())")
 
-        cell.dateLabel.text = dateString
+        }
 
         switch transactionData[indexPath.row].accountingEntry {
         case .c:
@@ -75,8 +69,6 @@ extension CoinHistoryView: UITableViewDataSource, UITableViewDelegate {
             cell.statusLabel.text = "Coins Used"
             cell.coinsLabel.text = "-\(transactionData[indexPath.row].amount) coins"
         }
-        
-
         return cell
     }
 }

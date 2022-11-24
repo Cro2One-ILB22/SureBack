@@ -164,6 +164,7 @@ extension RequestFunction {
 }
 
 // MARK: Partner
+
 extension RequestFunction {
     func updatePartnerCashbackPercent(cashbackPercent: Float, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
         let url = Endpoints.updateMerchantDetail.url
@@ -210,6 +211,7 @@ extension RequestFunction {
 }
 
 // MARK: Instagram
+
 extension RequestFunction {
     func approveStory(_ isApproved: Bool, id: Int, completionHandler: @escaping (_ data: ApproveOrRejectStoryResponse) -> Void) {
         let url = Endpoints.approveOrRejectStory.url
@@ -402,6 +404,7 @@ extension RequestFunction {
             }
         }
     }
+
     func getMyStory(customer: Int? = nil,
                     expired: Bool? = nil,
                     submitted: Bool? = nil,
@@ -417,34 +420,29 @@ extension RequestFunction {
                          parameters: parameters as Dictionary<String, Any>,
                          decodable: MyStoryResponses.self) { response in
             switch response.result {
-            case .success(let data):
+            case let .success(data):
                 completionHandler(data)
-            case .failure(let error):
+            case let .failure(error):
                 print("Errornya bos", error)
             }
         }
     }
-    
-    func getMyStoryCustomer(customerId: Int? = nil, expired: Int? = nil, submitted: Int? = nil, approved: Int? = nil, assessed: Int? = nil, completionHandler: @escaping (Result<ResponseData<MyStoryData>, AFError>) -> Void) {
+
+    // MARK: ntar digabung sm yg diatas
+
+    func getMyStoryCustomer(customerId: Int? = nil, merchantId: Int? = nil, customerName: String? = nil, merchantName: String? = nil, expired: Int? = nil, submitted: Int? = nil, approved: Int? = nil, assessed: Int? = nil, completionHandler: @escaping (Result<ResponseData<MyStoryData>, AFError>) -> Void) {
         let url = Endpoints.getMyStory.url
 
-        var parameters: [String: Int] = [:]
+        var parameters: [String: Any?] = [:]
 
-        if customerId != nil {
-            parameters["customer_id"] = customerId
-        }
-        if expired != nil {
-            parameters["expired"] = expired
-        }
-        if submitted != nil {
-            parameters["submitted"] = submitted
-        }
-        if approved != nil {
-            parameters["approved"] = approved
-        }
-        if assessed != nil {
-            parameters["assessed"] = assessed
-        }
+        parameters["customer_id"] = customerId
+        parameters["merchant_id"] = merchantId
+        parameters["customer_name"] = customerName
+        parameters["merchant_name"] = merchantName
+        parameters["expired"] = expired
+        parameters["submitted"] = submitted
+        parameters["approved"] = approved
+        parameters["assessed"] = assessed
 
         requestWithToken(url: url, parameters: parameters, decodable: ResponseData<MyStoryData>.self) { response in
             completionHandler(response.result)

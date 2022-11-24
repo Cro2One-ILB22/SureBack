@@ -54,18 +54,7 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         headerView.tokenIdValueLabel.text = String(tokenData.id)
         headerView.merchantNameValueLabel.text = tokenData.merchant.name
 
-        // string to date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let date = dateFormatter.date(from: tokenData.createdAt)
-        dateFormatter.dateFormat = "dd MMM yyyy"
-        let dateString = dateFormatter.string(from: date!)
-
-        // date to string
-        let dateToString = DateFormatter()
-        dateToString.dateFormat = "dd/MM/YY"
-
-        headerView.dateValueLabel.text = dateString
+        headerView.dateValueLabel.text = tokenData.createdAt.formatTodMMMyyyhmma()
         headerView.purchaseValueLabel.text = String(tokenData.purchase.purchaseAmount)
         print("Story ID: \(storyID)")
 

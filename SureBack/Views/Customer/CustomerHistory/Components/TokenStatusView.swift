@@ -8,8 +8,7 @@
 import UIKit
 
 class TokenStatusView: UIView {
-    var transactionData: [MyStoryData] = []
-    {
+    var transactionData: [MyStoryData] = [] {
         didSet {
             tableView.reloadData()
             print(transactionData)
@@ -22,6 +21,7 @@ class TokenStatusView: UIView {
             }
         }
     }
+
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .plain)
         table.register(ItemCustomerHistoryTableViewCell.self, forCellReuseIdentifier: ItemCustomerHistoryTableViewCell.id)
@@ -51,21 +51,24 @@ extension TokenStatusView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemCustomerHistoryTableViewCell.id, for: indexPath) as? ItemCustomerHistoryTableViewCell else { return UITableViewCell() }
 
-        // string to date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let date = dateFormatter.date(from: transactionData[indexPath.row].updatedAt)
-        dateFormatter.dateFormat = "dd MMM yyyy"
-        let dateString = dateFormatter.string(from: date!)
+        cell.dateLabel.text = transactionData[indexPath.row].updatedAt.formatTodMMMyyy()
 
-        // date to string
-        let dateToString = DateFormatter()
-        dateToString.dateFormat = "dd/MM/YY"
-
-        cell.dateLabel.text = dateString
-
-        cell.statusImage.image = UIImage(named: "arrow.down.left.circle.fill")?.sd_tintedImage(with: .green)
-        cell.statusLabel.text = "\(transactionData[indexPath.row].approvalStatus)"
+        if transactionData[indexPath.row].submittedAt == nil {
+            cell.statusImage.image = UIImage(named: "multiply.circle.fill.red")?.sd_tintedImage(with: .red)
+            cell.statusLabel.text = "Token Expired"
+        } else {
+            switch transactionData[indexPath.row].approvalStatus {
+            case 0:
+                cell.statusImage.image = UIImage(named: "multiply.circle.fill.red")?.sd_tintedImage(with: .red)
+                cell.statusLabel.text = "Story Rejected"
+            case 1:
+                cell.statusImage.image = UIImage(named: "checkmark.circle.fill")?.sd_tintedImage(with: .green)
+                cell.statusLabel.text = "Story Accepted"
+            default:
+                break
+            }
+        }
+        
         cell.coinsLabel.text = "Rp\(transactionData[indexPath.row].token.purchase.purchaseAmount)"
 
         return cell

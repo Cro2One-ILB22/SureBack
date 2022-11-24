@@ -42,7 +42,7 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
         label.text = "13 November 2022"
         label.textColor = .systemGray
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.font = UIFont.italicSystemFont(ofSize: 12)
         return label
     }()
 
@@ -51,6 +51,15 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
         label.text = "+ 2000 coins"
         label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 17)
+        return label
+    }()
+
+    lazy var totalPurchaseLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Total Purchase"
+        label.textColor = .systemGray
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 12)
         return label
     }()
 
@@ -87,9 +96,13 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
     }
 
     func setupCoinsLabel() {
-        addSubview(coinsLabel)
-        coinsLabel.translatesAutoresizingMaskIntoConstraints = false
-        coinsLabel.setCenterYAnchorConstraint(equalTo: centerYAnchor)
-        coinsLabel.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
+        let stackView = UIStackView(arrangedSubviews: [coinsLabel, totalPurchaseLabel])
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stackView)
+        stackView.setCenterYAnchorConstraint(equalTo: centerYAnchor)
+        stackView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
     }
 }

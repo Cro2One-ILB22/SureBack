@@ -156,48 +156,6 @@ class HeaderSubmitStoryView: UIView {
         stackTokenDetails.isLayoutMarginsRelativeArrangement = true
         stackTokenDetails.translatesAutoresizingMaskIntoConstraints = false
 
-//        let stackTokenId = UIStackView(arrangedSubviews: [tokenIdLabel, tokenIdValueLabel])
-//        stackTokenId.axis = .horizontal
-//        stackTokenId.distribution = .equalSpacing
-//        stackTokenId.alignment = .fill
-////        stackTokenId.spacing = 250
-//        stackTokenId.translatesAutoresizingMaskIntoConstraints = false
-//
-//        let stackMerchant = UIStackView(arrangedSubviews: [merchantNameLabel, merchantNameValueLabel])
-//        stackMerchant.axis = .horizontal
-//        stackMerchant.distribution = .equalSpacing
-//        stackMerchant.alignment = .fill
-////        stackMerchant.spacing = 250
-//        stackMerchant.translatesAutoresizingMaskIntoConstraints = false
-//
-//        let stackDate = UIStackView(arrangedSubviews: [dateLabel, dateValueLabel])
-//        stackDate.axis = .horizontal
-//        stackDate.distribution = .equalSpacing
-//        stackDate.alignment = .fill
-////        stackDate.spacing = 250
-//        stackDate.translatesAutoresizingMaskIntoConstraints = false
-//
-//        let stackPurchase = UIStackView(arrangedSubviews: [purchaseLabel, purchaseValueLabel])
-//        stackPurchase.axis = .horizontal
-//        stackPurchase.distribution = .equalSpacing
-//        stackPurchase.alignment = .fill
-////        stackPurchase.spacing = 250
-//        stackPurchase.translatesAutoresizingMaskIntoConstraints = false
-
-//        let stackViewTokenDetails = UIStackView(arrangedSubviews: [tokenLabel, stackTokenId, stackMerchant, stackDate, stackPurchase])
-//        stackViewTokenDetails.axis = .vertical
-//        stackViewTokenDetails.distribution = .equalSpacing
-//        stackViewTokenDetails.alignment = .fill
-//        stackViewTokenDetails.translatesAutoresizingMaskIntoConstraints = false
-//
-//        let stackView = UIStackView(arrangedSubviews: [stackTimer, stackViewTokenDetails])
-//        stackView.axis = .vertical
-//        stackView.spacing = 15
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        addSubview(stackView)
-//        stackView.setTopAnchorConstraint(equalTo: topAnchor, constant: 20)
-//        stackView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
-
         let stackView = UIStackView(arrangedSubviews: [stackTimer, tokenLabel, stackTokenDetails])
         stackView.axis = .vertical
         stackView.spacing = 15

@@ -40,17 +40,29 @@ class CustomerHistoryViewController: UIViewController {
         setupHeaderValue()
         showCoinHistoryView(false)
 
-        getCoinHistoryData()
-
         guard let user = user, let merchantData = merchantData else {
             return
         }
+        getCoinHistoryData(user: user, merchantData: merchantData)
+        getTokenStatusData(merchantData: merchantData)
+    }
 
-        request.getMyStoryCustomer(expired: 0) { data in
+    func getTokenStatusData(merchantData: UserInfoResponse) {
+        request.getMyStoryCustomer(merchantId: merchantData.id) { data in
             switch data {
             case let .success(result):
                 do {
-                    self.tokenStatusView.transactionData = result.data
+                    for i in result.data {
+                        if i.submittedAt == nil {
+                            if i.token.expiresAt.stringToDate() < Date() {
+                                self.tokenStatusView.transactionData.append(i)
+                            }
+                        } else {
+                            if i.instagramStoryStatus == "validated"{
+                                self.tokenStatusView.transactionData.append(i)
+                            }
+                        }
+                    }
                 } catch let error as NSError {
                     print(error.description)
                 }
@@ -59,17 +71,13 @@ class CustomerHistoryViewController: UIViewController {
                 print("failed to get list token status in merchant \(merchantData.name)")
             }
         }
-
     }
 
-    func getCoinHistoryData(){
-        guard let user = user, let merchantData = merchantData else {
-            return
-        }
-
+    func getCoinHistoryData(user: UserInfoResponse, merchantData: UserInfoResponse) {
         request.getListTransaction(merchantId: merchantData.id, status: "success") { data in
             switch data {
             case let .success(result):
+                print("coin balance data: \(result)")
                 do {
                     print(result.data)
                     self.coinHistoryView.transactionData = result.data

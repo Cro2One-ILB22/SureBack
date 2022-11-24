@@ -57,7 +57,7 @@ struct MyStoryData: Codable {
         case imageURI = "image_uri"
         case videoURI = "video_uri"
         case instagramStoryStatus = "instagram_story_status"
-        case approvalStatus
+        case approvalStatus = "approval_status"
         case note
         case expiringAt = "expiring_at"
         case submittedAt = "submitted_at"

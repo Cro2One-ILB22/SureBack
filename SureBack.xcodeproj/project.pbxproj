@@ -67,6 +67,9 @@
 		AC04BD80290995AD00635147 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04BD7F290995AD00635147 /* Function.swift */; };
 		AC12F575291C29E10096CB5A /* ItemMerchantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC12F574291C29E10096CB5A /* ItemMerchantTableViewCell.swift */; };
 		AC1A6CBB291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */; };
+		AC1C1C3D292F4A5400863A87 /* CustomerQrCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1C1C3C292F4A5400863A87 /* CustomerQrCodeViewController.swift */; };
+		AC1C1C40292F56DE00863A87 /* CustomerQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1C1C3F292F56DE00863A87 /* CustomerQRView.swift */; };
+		AC1C1C42292F7AC300863A87 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1C1C41292F7AC300863A87 /* Date+Ext.swift */; };
 		AC22879429182E8E00397ED0 /* ShowQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC22879329182E8E00397ED0 /* ShowQRViewController.swift */; };
 		AC22879A2918521F00397ED0 /* LoggedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2287992918521F00397ED0 /* LoggedInViewController.swift */; };
 		AC2AC1BD291F3C5B00E9F8A7 /* ItemActiveTokenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2AC1BC291F3C5B00E9F8A7 /* ItemActiveTokenCollectionViewCell.swift */; };
@@ -188,6 +191,9 @@
 		AC04BD7F290995AD00635147 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		AC12F574291C29E10096CB5A /* ItemMerchantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMerchantTableViewCell.swift; sourceTree = "<group>"; };
 		AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantGenerateTokenViewController.swift; sourceTree = "<group>"; };
+		AC1C1C3C292F4A5400863A87 /* CustomerQrCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQrCodeViewController.swift; sourceTree = "<group>"; };
+		AC1C1C3F292F56DE00863A87 /* CustomerQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQRView.swift; sourceTree = "<group>"; };
+		AC1C1C41292F7AC300863A87 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		AC22879329182E8E00397ED0 /* ShowQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowQRViewController.swift; sourceTree = "<group>"; };
 		AC2287992918521F00397ED0 /* LoggedInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInViewController.swift; sourceTree = "<group>"; };
 		AC2AC1BC291F3C5B00E9F8A7 /* ItemActiveTokenCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemActiveTokenCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -371,6 +377,7 @@
 				169FCD4B292CC172009CBAB2 /* UIActivityIndicatorView+Ext.swift */,
 				169FCD58292DBEA4009CBAB2 /* UIColor+Ext.swift */,
 				169FCD5A292DD655009CBAB2 /* String+Ext.swift */,
+				AC1C1C41292F7AC300863A87 /* Date+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -531,6 +538,23 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		AC1C1C3B292F487C00863A87 /* CustomerQrCode */ = {
+			isa = PBXGroup;
+			children = (
+				AC1C1C3E292F56C800863A87 /* Component */,
+				AC1C1C3C292F4A5400863A87 /* CustomerQrCodeViewController.swift */,
+			);
+			path = CustomerQrCode;
+			sourceTree = "<group>";
+		};
+		AC1C1C3E292F56C800863A87 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				AC1C1C3F292F56DE00863A87 /* CustomerQRView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		AC2AC1B8291F391400E9F8A7 /* CustomerDashboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -564,6 +588,7 @@
 		AC59F88E29205480000F8345 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
+				AC1C1C3B292F487C00863A87 /* CustomerQrCode */,
 				AC2AC1B8291F391400E9F8A7 /* CustomerDashboard */,
 				ACA270AE292D6331008712D5 /* CustomerListAllMerchant */,
 				ACF6441C2925DF0E00A6AD10 /* CustomerProfile */,
@@ -925,8 +950,10 @@
 				ACE5CDB029127E6200D08177 /* ResponseData.swift in Sources */,
 				165122012924CE2600DBC0AE /* CardFieldView.swift in Sources */,
 				16512215292737EC00DBC0AE /* DetailCoinHistoryCardView.swift in Sources */,
+				AC1C1C40292F56DE00863A87 /* CustomerQRView.swift in Sources */,
 				169FCD3F292C849D009CBAB2 /* MyStoryResponses.swift in Sources */,
 				16BD919E291C58860010731E /* UIScreen+Ext.swift in Sources */,
+				AC1C1C42292F7AC300863A87 /* Date+Ext.swift in Sources */,
 				16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */,
 				ACA270A9292CD02C008712D5 /* CustomerHistoryViewController.swift in Sources */,
 				16512207292587C800DBC0AE /* MerchantDetailStoryViewController.swift in Sources */,
@@ -940,6 +967,7 @@
 				165122122927377600DBC0AE /* MerchantCoinHistoryViewController.swift in Sources */,
 				1619BB32291B500300085B74 /* UIViewController+Ext.swift in Sources */,
 				AC8AF8D92922F98D00227BDE /* SubmitStoryViewController.swift in Sources */,
+				AC1C1C3D292F4A5400863A87 /* CustomerQrCodeViewController.swift in Sources */,
 				169FCD52292CC4F9009CBAB2 /* ImageDownloader.swift in Sources */,
 				ACDD097A29128F1E00309FBC /* Transaction.swift in Sources */,
 				1619BB2E2919D9DC00085B74 /* UIView+Ext.swift in Sources */,

@@ -99,6 +99,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         allMerchantVC.title = "All Merchant"
         allMerchantVC.user = user
         allMerchantVC.merchantData = merchantData
+        allMerchantVC.activeTokenData = activeTokenData
         navigationController?.pushViewController(allMerchantVC, animated: true)
     }
 }

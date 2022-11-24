@@ -10,6 +10,7 @@ import UIKit
 class CustomerListAllMerchantViewController: UIViewController {
     var user: UserInfoResponse?
     var merchantData = [UserInfoResponse]()
+    var activeTokenData = [GenerateTokenOnlineResponse]()
 
     lazy var searchBar: UISearchBar = {
         let search = UISearchBar()
@@ -73,6 +74,12 @@ extension CustomerListAllMerchantViewController: UITableViewDelegate, UITableVie
         merchantDetailVC.title = "Merchant"
         merchantDetailVC.user = user
         merchantDetailVC.merchantData = merchantData[indexPath.row]
+        for i in activeTokenData {
+            if i.merchant.id == merchantData[indexPath.row].id {
+                merchantDetailVC.tokenData = i
+                break
+            }
+        }
         navigationController?.pushViewController(merchantDetailVC, animated: true)
     }
 }

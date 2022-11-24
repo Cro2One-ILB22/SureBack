@@ -10,6 +10,7 @@ target 'SureBack' do
   pod 'FirebaseAnalytics'
   pod 'FirebaseMessaging'
   pod 'SDWebImage'
+  pod 'PusherSwift'
 
   # Pods for SureBack
 

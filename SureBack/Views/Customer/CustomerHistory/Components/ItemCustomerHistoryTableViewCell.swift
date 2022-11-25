@@ -12,17 +12,20 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
     static let id = "ItemCustomerHistoryTableViewCell"
 
     lazy var statusImage: UIImageView = {
-        let merchantImage = UIImageView()
-        merchantImage.contentMode = .scaleAspectFill
-        merchantImage.clipsToBounds = true
-        return merchantImage
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        image.layer.cornerRadius = 15
+        image.setWidthAnchorConstraint(equalToConstant: 30)
+        image.setHeightAnchorConstraint(equalToConstant: 30)
+        return image
     }()
 
     lazy var statusLabel: UILabel = {
         let label = UILabel()
         label.text = "Direview"
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 17)
         return label
     }()
 
@@ -39,7 +42,7 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
         label.text = "13 November 2022"
         label.textColor = .systemGray
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.font = UIFont.italicSystemFont(ofSize: 12)
         return label
     }()
 
@@ -48,6 +51,15 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
         label.text = "+ 2000 coins"
         label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 17)
+        return label
+    }()
+
+    lazy var totalPurchaseLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Total Purchase"
+        label.textColor = .systemGray
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 12)
         return label
     }()
 
@@ -72,7 +84,7 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
     }
 
     func setupLabel() {
-        let stackView = UIStackView(arrangedSubviews: [statusLabel, categoryLabel ,dateLabel])
+        let stackView = UIStackView(arrangedSubviews: [statusLabel, dateLabel])
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.alignment = .fill
@@ -84,9 +96,13 @@ class ItemCustomerHistoryTableViewCell: UITableViewCell {
     }
 
     func setupCoinsLabel() {
-        addSubview(coinsLabel)
-        coinsLabel.translatesAutoresizingMaskIntoConstraints = false
-        coinsLabel.setCenterYAnchorConstraint(equalTo: centerYAnchor)
-        coinsLabel.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
+        let stackView = UIStackView(arrangedSubviews: [coinsLabel, totalPurchaseLabel])
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stackView)
+        stackView.setCenterYAnchorConstraint(equalTo: centerYAnchor)
+        stackView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
     }
 }

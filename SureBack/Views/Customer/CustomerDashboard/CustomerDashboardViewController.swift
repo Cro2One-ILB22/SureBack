@@ -95,6 +95,12 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
 
     @objc func seeAllMerchantTapped() {
         print("see All Merchant tapped")
+        let allMerchantVC = CustomerListAllMerchantViewController()
+        allMerchantVC.title = "All Merchant"
+        allMerchantVC.user = user
+        allMerchantVC.merchantData = merchantData
+        allMerchantVC.activeTokenData = activeTokenData
+        navigationController?.pushViewController(allMerchantVC, animated: true)
     }
 }
 
@@ -108,7 +114,7 @@ extension CustomerDashboardViewController {
     private func setupView2(headerView: HeaderCustomerDashboardView) {
         view.addSubview(headerView)
         headerView.profileLabel.text = "Hi, @\(user.instagramUsername)!"
-        headerView.totalCoinsLabel.text = " \(user.coins![0].outstanding) Loyalty Coins"
+        headerView.totalCoinsLabel.text = " \(user.coins![0].outstanding)"
         tableView.tableHeaderView = headerView
         tableView.register(SectionDashboardHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
     }
@@ -128,7 +134,7 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         if section == 0 {
             return activeTokenData.count == 0 ? 0 : 1
         } else {
-            return merchantData.count
+            return merchantData.count > 5 ? 5 : merchantData.count
         }
     }
 
@@ -144,6 +150,8 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemMerchantTableViewCell.id, for: indexPath) as? ItemMerchantTableViewCell else { return UITableViewCell() }
 
+            cell.selectionStyle = .none
+
             cell.merchantImage.sd_setImage(
                 with: URL(string: merchantData[indexPath.row].profilePicture),
                 placeholderImage: UIImage(named: "system.photo"),
@@ -151,7 +159,7 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
                 completed: nil
             )
             cell.merchantNameLabel.text = merchantData[indexPath.row].name
-            cell.totalCoinsLabel.text = "\(merchantData[indexPath.row].balance) loyalty coins"
+            cell.totalCoinsLabel.text = "\(merchantData[indexPath.row].balance) coin(s)"
             return cell
         }
     }
@@ -168,6 +176,12 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         merchantDetailVC.title = "Merchant"
         merchantDetailVC.user = user
         merchantDetailVC.merchantData = merchantData[indexPath.row]
+        for i in activeTokenData {
+            if i.merchant.id == merchantData[indexPath.row].id {
+                merchantDetailVC.tokenData = i
+                break
+            }
+        }
         navigationController?.pushViewController(merchantDetailVC, animated: true)
     }
 

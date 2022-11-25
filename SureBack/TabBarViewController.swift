@@ -22,15 +22,17 @@ class TabBarViewController: UITabBarController {
                     self.user = result
                     print("login success")
 
-                    let qrVC = ViewController()
-                    let navQR = UINavigationController(rootViewController: qrVC)
-                    navQR.tabBarItem = UITabBarItem(title: "QR", image: UIImage(named: "qrcode.viewfinder"), tag: 1)
-
                     if user.roles![1] == "customer" {
                         let dashboardVC = CustomerDashboardViewController()
                         dashboardVC.user = user
                         let navDashboard = UINavigationController(rootViewController: dashboardVC)
                         navDashboard.tabBarItem = UITabBarItem(title: "Dashboard", image: UIImage(named: "list.dash.header.rectangle"), tag: 1)
+
+                        let qrVC = CustomerQrCodeViewController()
+                        qrVC.user = user
+                        let navQR = UINavigationController(rootViewController: qrVC)
+                        navQR.tabBarItem = UITabBarItem(title: "QR", image: UIImage(named: "qrcode.viewfinder"), tag: 1)
+
                         let profileVC = CustomerProfileViewController()
                         profileVC.user = user
                         let navProfile = UINavigationController(rootViewController: profileVC)
@@ -41,6 +43,12 @@ class TabBarViewController: UITabBarController {
                         dashboardVC.user = user
                         let navDashboard = UINavigationController(rootViewController: dashboardVC)
                         navDashboard.tabBarItem = UITabBarItem(title: "Dashboard", image: UIImage(named: "list.dash.header.rectangle"), tag: 1)
+
+                        let qrVC = ViewController()
+//                        qrVC.user = user
+                        let navQR = UINavigationController(rootViewController: qrVC)
+                        navQR.tabBarItem = UITabBarItem(title: "QR", image: UIImage(named: "qrcode.viewfinder"), tag: 1)
+
                         let profileVC = MerchantProfileViewController()
 //                        profileVC.user = user
                         let navProfile = UINavigationController(rootViewController: profileVC)

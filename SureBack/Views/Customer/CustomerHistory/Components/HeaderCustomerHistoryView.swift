@@ -11,28 +11,61 @@ class HeaderCustomerHistoryView: UIView {
     lazy var merchantLabel: UILabel = {
         let label = UILabel()
         label.text = "Merchant Name"
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont.boldSystemFont(ofSize: 28)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    lazy var profileImage: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFill
+        image.layer.cornerRadius = 10
+        image.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: 50, height: 50))
+        image.clipsToBounds = true
+        return image
+    }()
+
+    lazy var loyaltCoinsValueLabel: UILabel = {
+        let label = UILabel()
+        label.text = "50"
+        label.font = UIFont.systemFont(ofSize: 34)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     lazy var loyaltCoinsLabel: UILabel = {
         let label = UILabel()
-        label.text = "50 Loyalty Coins"
-        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.text = "Coin(s)"
+        label.font = UIFont.systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    lazy var locationLabel: UILabel = {
+    lazy var lockImage: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFill
+        image.layer.cornerRadius = 8
+        image.clipsToBounds = true
+        return image
+    }()
+
+    lazy var statusLabel: UILabel = {
         let label = UILabel()
-        label.text = "Location"
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
-        label.sizeToFit()
+        label.text = "Status \nAvailable"
         label.font = UIFont.systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+
+    lazy var descStatusButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("i", for: .normal)
+        button.backgroundColor = .lightGray
+        button.layer.cornerRadius = 8
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setWidthAnchorConstraint(equalToConstant: 15)
+        button.setHeightAnchorConstraint(equalToConstant: 15)
+        return button
     }()
 
     lazy var redeemButton: UIButton = {
@@ -42,19 +75,17 @@ class HeaderCustomerHistoryView: UIView {
         return view
     }()
 
-    lazy var timerLabel: UIView = {
+    lazy var timerLabel: UILabel = {
         let label = UILabel()
         label.text = "Timer"
-        label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    lazy var redeemLabel: UIView = {
+    lazy var redeemLabel: UILabel = {
         let label = UILabel()
         label.text = "Redeem Token"
-        label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -62,40 +93,74 @@ class HeaderCustomerHistoryView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLabel()
-        addSubview(redeemButton)
-        redeemButton.setWidthAnchorConstraint(equalToConstant: 150)
-        redeemButton.setCenterXAnchorConstraint(equalTo: centerXAnchor)
-        redeemButton.setTopAnchorConstraint(equalTo: locationLabel.bottomAnchor, constant: 5)
-        setupButton()
+        setupHeaderView()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
-    func setupLabel() {
-        let stackView = UIStackView(arrangedSubviews: [merchantLabel, loyaltCoinsLabel, locationLabel])
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(stackView)
-        stackView.setTopAnchorConstraint(equalTo: topAnchor, constant: 20)
-        stackView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 25)
-    }
+extension HeaderCustomerHistoryView {
+    func setupHeaderView() {
 
-    func setupButton() {
-        let stackView = UIStackView(arrangedSubviews: [timerLabel, redeemLabel])
-        stackView.backgroundColor = .systemBlue
-        stackView.layer.cornerRadius = 10
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        redeemButton.addSubview(stackView)
-        stackView.setWidthAnchorConstraint(equalToConstant: 150)
-        stackView.setCenterXAnchorConstraint(equalTo: centerXAnchor)
-        stackView.setTopAnchorConstraint(equalTo: locationLabel.bottomAnchor, constant: 5)
+        let stackLoyaltyCoins = UIStackView(arrangedSubviews: [loyaltCoinsValueLabel, loyaltCoinsLabel])
+        stackLoyaltyCoins.axis = .vertical
+        stackLoyaltyCoins.distribution = .fill
+        stackLoyaltyCoins.alignment = .trailing
+        stackLoyaltyCoins.translatesAutoresizingMaskIntoConstraints = false
+
+        let stackImageCoins = UIStackView(arrangedSubviews: [profileImage, stackLoyaltyCoins])
+        stackImageCoins.axis = .horizontal
+        stackImageCoins.distribution = .equalSpacing
+        stackImageCoins.translatesAutoresizingMaskIntoConstraints = false
+
+        profileImage.setWidthAnchorConstraint(equalToConstant: 80)
+        profileImage.setHeightAnchorConstraint(equalToConstant: 80)
+
+        let stackRedeemButton = UIStackView(arrangedSubviews: [timerLabel, redeemLabel])
+        stackRedeemButton.backgroundColor = .lightGray
+        stackRedeemButton.axis = .vertical
+        stackRedeemButton.distribution = .equalSpacing
+        stackRedeemButton.alignment = .center
+        stackRedeemButton.translatesAutoresizingMaskIntoConstraints = false
+
+        let stackStatus = UIStackView(arrangedSubviews: [lockImage, statusLabel, descStatusButton])
+        stackStatus.axis = .horizontal
+        stackStatus.distribution = .equalSpacing
+        stackStatus.spacing = 10
+        stackStatus.translatesAutoresizingMaskIntoConstraints = false
+
+        let stackStatusRedeem = UIStackView(arrangedSubviews: [stackStatus, stackRedeemButton])
+        stackStatusRedeem.axis = .horizontal
+        stackStatusRedeem.distribution = .equalSpacing
+        stackStatusRedeem.spacing = 10
+        stackStatusRedeem.alignment = .trailing
+        stackStatusRedeem.translatesAutoresizingMaskIntoConstraints = false
+
+        let stackViewAll = UIStackView(arrangedSubviews: [merchantLabel, stackImageCoins, stackStatusRedeem])
+        stackViewAll.backgroundColor = .systemBlue
+        stackViewAll.layer.cornerRadius = 10
+        stackViewAll.axis = .vertical
+        stackViewAll.distribution = .equalSpacing
+        stackViewAll.spacing = 10
+        stackViewAll.alignment = .leading
+        stackViewAll.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stackViewAll)
+        stackViewAll.setWidthAnchorConstraint(equalToConstant: UIScreen.screenWidth - 40)
+        stackViewAll.setTopAnchorConstraint(equalTo: topAnchor, constant: 10)
+        stackViewAll.setCenterXAnchorConstraint(equalTo: centerXAnchor)
+
+        merchantLabel.setLeadingAnchorConstraint(equalTo: stackViewAll.leadingAnchor, constant: 10)
+        stackLoyaltyCoins.setTrailingAnchorConstraint(equalTo: stackViewAll.trailingAnchor, constant: -10)
+
+        stackStatus.setLeadingAnchorConstraint(equalTo: stackViewAll.leadingAnchor, constant: 150)
+        stackStatus.setTrailingAnchorConstraint(equalTo: stackRedeemButton.leadingAnchor, constant: -20)
+        stackStatus.setBottomAnchorConstraint(equalTo: stackViewAll.bottomAnchor, constant: -20)
+
+        stackRedeemButton.setTrailingAnchorConstraint(equalTo: stackViewAll.trailingAnchor, constant: -10)
+        stackRedeemButton.setBottomAnchorConstraint(equalTo: stackViewAll.bottomAnchor, constant: -10)
+
+        stackStatusRedeem.setBottomAnchorConstraint(equalTo: stackViewAll.bottomAnchor, constant: -10)
     }
 }

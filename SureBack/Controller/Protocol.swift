@@ -20,8 +20,13 @@ protocol SendDataDelegate: AnyObject {
 }
 
 extension SendDataDelegate {
-    func passData(data: String){
+    func passData(data: String) {
     }
-    func passData(data: Int){
+
+    func passData(data: Int) {
     }
+}
+
+protocol CustomSegmentedControlDelegate: AnyObject {
+    func change(to index: Int)
 }

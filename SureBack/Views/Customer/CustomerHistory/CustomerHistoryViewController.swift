@@ -8,101 +8,191 @@
 import UIKit
 
 class CustomerHistoryViewController: UIViewController {
-    let request = RequestFunction()
+    let headerView = HeaderCustomerHistoryView(frame: CGRect(x: 0, y: 64, width: UIScreen.screenWidth, height: 200))
+
+    let customSegmentedControl: CustomSegmentedControl = {
+        let codeSegmented = CustomSegmentedControl(frame: CGRect(x: 0, y: 200, width: UIScreen.screenWidth, height: 50), buttonTitle: ["Token Status History", "Coin Balance History"])
+        codeSegmented.backgroundColor = .clear
+        return codeSegmented
+    }()
+
+    var tokenStatusView: TokenStatusView = {
+        let segmented = TokenStatusView()
+        return segmented
+    }()
+
+    let coinHistoryView: CoinHistoryView = {
+        let segmented = CoinHistoryView()
+        return segmented
+    }()
 
     var user: UserInfoResponse?
     var merchantData: UserInfoResponse?
-    var transactionData = [Transaction]() {
-        didSet {
-            tableView.reloadData()
-        }
+    var tokenData: GenerateTokenOnlineResponse?
+
+    let request = RequestFunction()
+
+    var countdown: DateComponents {
+        return Calendar.current.dateComponents([.day, .hour, .minute, .second], from: Date(), to: self.tokenData?.expiresAt.stringToDate() ?? Date())
     }
-
-    let headerView = HeaderCustomerHistoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 130))
-    let footerView = FooterCustomerHistoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 50))
-
-    var tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
-        table.register(ItemCustomerHistoryTableViewCell.self, forCellReuseIdentifier: ItemCustomerHistoryTableViewCell.id)
-        return table
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         tabBarController?.tabBar.isHidden = true
 
+        setupLayout()
+        setupHeaderValue()
+        showCoinHistoryView(false)
+
         guard let user = user, let merchantData = merchantData else {
             return
         }
 
-        self.view.addSubview(self.headerView)
-        self.headerView.merchantLabel.text = self.merchantData?.name
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.redeemButtonTapped))
-        self.headerView.redeemButton.addGestureRecognizer(tapGesture)
-        self.headerView.loyaltCoinsLabel.text = "\(self.merchantData?.coins?[0].outstanding ?? 0) Loyalty Coins"
-        self.footerView.totalLabel.text = String(self.merchantData?.coins?[0].allTimeReward ?? 0)
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.tableHeaderView = self.headerView
-        self.setupTableView()
+        if tokenData == nil {
+            headerView.timerLabel.isHidden = true
+            headerView.redeemLabel.isHidden = true
+        }
 
-        request.getListTransaction(merchantId: merchantData.id) { data in
+        runCountdown()
+        getCoinHistoryData(user: user, merchantData: merchantData)
+        getTokenStatusData(merchantData: merchantData)
+    }
+
+    func getTokenStatusData(merchantData: UserInfoResponse) {
+        request.getMyStoryCustomer(merchantId: merchantData.id) { data in
             switch data {
             case let .success(result):
                 do {
-                    self.tableView.tableFooterView = self.footerView
-                    self.transactionData = result.data
+                    for i in result.data {
+                        if i.submittedAt == nil {
+                            if i.token.expiresAt.stringToDate() < Date() {
+                                self.tokenStatusView.transactionData.append(i)
+                            }
+                        } else {
+                            if i.instagramStoryStatus == "validated"{
+                                self.tokenStatusView.transactionData.append(i)
+                            }
+                        }
+                    }
                 } catch let error as NSError {
                     print(error.description)
                 }
             case let .failure(error):
                 print(error)
-                print("failed to get list transaction in merchant \(merchantData.name)")
+                print("failed to get list token status in merchant \(merchantData.name)")
             }
         }
+    }
+
+    func getCoinHistoryData(user: UserInfoResponse, merchantData: UserInfoResponse) {
+        request.getListTransaction(merchantId: merchantData.id, status: "success") { data in
+            switch data {
+            case let .success(result):
+                print("coin balance data: \(result)")
+                do {
+                    print(result.data)
+                    self.coinHistoryView.transactionData = result.data
+                } catch let error as NSError {
+                    print(error.description)
+                }
+            case let .failure(error):
+                print(error)
+                print("failed to get list coins balance in merchant \(merchantData.name)")
+            }
+        }
+    }
+
+    func setupHeaderValue() {
+        headerView.profileImage.sd_setImage(
+            with: URL(string: merchantData?.profilePicture ?? ""),
+            placeholderImage: UIImage(named: "person.crop.circle"),
+            options: .progressiveLoad,
+            completed: nil
+        )
+        headerView.merchantLabel.text = merchantData?.name
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(redeemButtonTapped))
+        headerView.redeemButton.addGestureRecognizer(tapGesture)
+        headerView.loyaltCoinsValueLabel.text = "\(merchantData?.coins?[0].outstanding ?? 0)"
+        headerView.lockImage.image = UIImage(named: "system.photo")
     }
 
     @objc func redeemButtonTapped(sender: UITapGestureRecognizer) {
         print("redeem button tapped")
     }
+
+    private func showCoinHistoryView(_ isShowing: Bool) {
+        tokenStatusView.isHidden = isShowing
+        coinHistoryView.isHidden = !isShowing
+    }
+
+    // MARK: Timer
+    func runCountdown() {
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
+
+    @objc func updateTimer() {
+        let countdown = self.countdown
+        let hours = countdown.hour!
+        let minutes = countdown.minute!
+        let seconds = countdown.second!
+
+        self.headerView.timerLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+}
+
+extension CustomerHistoryViewController: CustomSegmentedControlDelegate {
+    func change(to index: Int) {
+        print("change to", index)
+        switch index {
+        case 0:
+            showCoinHistoryView(false)
+        case 1:
+            showCoinHistoryView(true)
+        default:
+            break
+        }
+    }
 }
 
 extension CustomerHistoryViewController {
-    private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        tableView.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
-        tableView.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        tableView.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-    }
-}
-
-extension CustomerHistoryViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return transactionData.count
+    public func setupLayout() {
+        setupHeaderView()
+        setupCustomSegmentedControl()
+        setupTokenStatusView()
+        setupCoinHistoryView()
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemCustomerHistoryTableViewCell.id, for: indexPath) as? ItemCustomerHistoryTableViewCell else { return UITableViewCell() }
+    private func setupHeaderView() {
+        view.addSubview(headerView)
+//        headerView.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100)
+    }
 
-        // string to date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let date = dateFormatter.date(from: transactionData[indexPath.row].updatedAt)
-        dateFormatter.dateFormat = "dd MMM yyyy"
-        let dateString = dateFormatter.string(from: date!)
+    private func setupTokenStatusView() {
+        view.addSubview(tokenStatusView)
+        tokenStatusView.translatesAutoresizingMaskIntoConstraints = false
+        tokenStatusView.setTopAnchorConstraint(equalTo: customSegmentedControl.bottomAnchor)
+        tokenStatusView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor)
+        tokenStatusView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor)
+        tokenStatusView.setBottomAnchorConstraint(equalTo: view.bottomAnchor)
+    }
 
-        // date to string
-        let dateToString = DateFormatter()
-        dateToString.dateFormat = "dd/MM/YY"
+    private func setupCoinHistoryView() {
+        view.addSubview(coinHistoryView)
+        coinHistoryView.translatesAutoresizingMaskIntoConstraints = false
+        coinHistoryView.setTopAnchorConstraint(equalTo: customSegmentedControl.bottomAnchor)
+        coinHistoryView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor)
+        coinHistoryView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor)
+        coinHistoryView.setBottomAnchorConstraint(equalTo: view.bottomAnchor)
+    }
 
-        cell.categoryLabel.text = transactionData[indexPath.row].category.rawValue
-        cell.statusLabel.text = transactionData[indexPath.row].status.rawValue
-        cell.coinsLabel.text = String(transactionData[indexPath.row].amount)
-        cell.dateLabel.text = dateString
-
-        return cell
+    private func setupCustomSegmentedControl() {
+        view.addSubview(customSegmentedControl)
+        customSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        customSegmentedControl.setTopAnchorConstraint(equalTo: headerView.bottomAnchor)
+        customSegmentedControl.setLeadingAnchorConstraint(equalTo: view.leadingAnchor)
+        customSegmentedControl.setTrailingAnchorConstraint(equalTo: view.trailingAnchor)
+        customSegmentedControl.setHeightAnchorConstraint(equalToConstant: 50)
+        customSegmentedControl.delegate = self
     }
 }

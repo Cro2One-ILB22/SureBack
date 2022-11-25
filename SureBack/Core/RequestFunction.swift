@@ -164,6 +164,7 @@ extension RequestFunction {
 }
 
 // MARK: Partner
+
 extension RequestFunction {
     func updatePartnerCashbackPercent(cashbackPercent: Float, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
         let url = Endpoints.updateMerchantDetail.url
@@ -210,6 +211,7 @@ extension RequestFunction {
 }
 
 // MARK: Instagram
+
 extension RequestFunction {
     func approveStory(_ isApproved: Bool, id: Int, completionHandler: @escaping (_ data: ApproveOrRejectStoryResponse) -> Void) {
         let url = Endpoints.approveOrRejectStory.url
@@ -354,13 +356,25 @@ extension RequestFunction {
             completion($0.result)
         }
     }
-    
-    func getListTransaction(merchantId: Int, completion: @escaping (Result<ResponseData<Transaction>, AFError>) -> Void) {
+
+    func getListTransaction(merchantId: Int? = nil, accountingEntry: String? = nil, status: String? = nil, category: String? = nil, completion: @escaping (Result<ResponseData<Transaction>, AFError>) -> Void) {
         let url = Endpoints.getListTransaction.url
-        let parameters: [String: Int] = [
-            "merchant": merchantId,
-        ]
-        
+
+        var parameters: [String: Any] = [:]
+
+        if merchantId != nil {
+            parameters["merchant_id"] = merchantId
+        }
+        if accountingEntry != nil {
+            parameters["accounting_entry"] = accountingEntry
+        }
+        if status != nil {
+            parameters["status"] = status
+        }
+        if category != nil {
+            parameters["category"] = category
+        }
+
         requestWithToken(url: url, parameters: parameters, decodable: ResponseData<Transaction>.self) {
             completion($0.result)
         }
@@ -413,11 +427,32 @@ extension RequestFunction {
                          parameters: parameters as Dictionary<String, Any>,
                          decodable: MyStoryResponses.self) { response in
             switch response.result {
-            case .success(let data):
+            case let .success(data):
                 completionHandler(data)
-            case .failure(let error):
+            case let .failure(error):
                 print("Errornya bos", error)
             }
+        }
+    }
+
+    // MARK: ntar digabung sm yg diatas
+
+    func getMyStoryCustomer(customerId: Int? = nil, merchantId: Int? = nil, customerName: String? = nil, merchantName: String? = nil, expired: Int? = nil, submitted: Int? = nil, approved: Int? = nil, assessed: Int? = nil, completionHandler: @escaping (Result<ResponseData<MyStoryData>, AFError>) -> Void) {
+        let url = Endpoints.getMyStory.url
+
+        var parameters: [String: Any?] = [:]
+
+        parameters["customer_id"] = customerId
+        parameters["merchant_id"] = merchantId
+        parameters["customer_name"] = customerName
+        parameters["merchant_name"] = merchantName
+        parameters["expired"] = expired
+        parameters["submitted"] = submitted
+        parameters["approved"] = approved
+        parameters["assessed"] = assessed
+
+        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<MyStoryData>.self) { response in
+            completionHandler(response.result)
         }
     }
 }

@@ -67,6 +67,7 @@ extension ActiveTokenTableViewCell: UICollectionViewDataSource, UICollectionView
         cell.tokenMerchantNameLabel.text = activateTokenData[indexPath.row].merchant.name
         cell.redeemButton.tag = indexPath.row
         cell.redeemButton.addTarget(self, action: #selector(toRedeemTokenTapped), for: .touchUpInside)
+        cell.expireAt = activateTokenData[indexPath.row].expiresAt.stringToDate()
 
         return cell
     }
@@ -89,5 +90,4 @@ extension ActiveTokenTableViewCell: UICollectionViewDataSource, UICollectionView
     @objc func toRedeemTokenTapped(sender: UIButton) {
         delegate?.didToRedeemTapButton(data: activateTokenData[sender.tag], user: user)
     }
-
 }

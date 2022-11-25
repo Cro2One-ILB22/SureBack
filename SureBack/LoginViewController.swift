@@ -124,7 +124,7 @@ class LoginViewController: UIViewController {
             case .success:
                 self.navigationController?.pushViewController(TabBarViewController(), animated: true)
                 self.navigationController?.isNavigationBarHidden = true
-                self.showAlert(title: "Success", message: "Success Log In", action: "Ok")
+//                self.showAlert(title: "Success", message: "Success Log In", action: "Ok")
             case .failure:
                 print("Failed to Login")
                 self.showAlert(title: "Wrong Email or Password", message: "Please try again", action: "Ok")

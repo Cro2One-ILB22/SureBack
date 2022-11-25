@@ -48,16 +48,37 @@ class ItemActiveTokenCollectionViewCell: UICollectionViewCell {
         return button
     }()
 
+    lazy var expireAt: Date = {
+        return Date()
+    }()
+
+    var countdown: DateComponents {
+        return Calendar.current.dateComponents([.day, .hour, .minute, .second], from: Date(), to: self.expireAt)
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.cornerRadius = 30
         setupView()
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Timer
+    @objc func updateTimer() {
+        let countdown = self.countdown
+        let hours = countdown.hour!
+        let minutes = countdown.minute!
+        let seconds = countdown.second!
+
+        self.timerLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+}
+
+extension ItemActiveTokenCollectionViewCell {
     private func setupView() {
         backgroundColor = .lightGray
         layer.cornerRadius = 30

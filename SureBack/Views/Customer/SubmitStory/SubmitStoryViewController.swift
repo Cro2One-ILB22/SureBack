@@ -31,8 +31,13 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         return table
     }()
 
+    let headerView = HeaderSubmitStoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 280))
     let footerView = UIView()
     let doneButton = UIButton()
+
+    var countdown: DateComponents {
+        return Calendar.current.dateComponents([.day, .hour, .minute, .second], from: Date(), to: self.tokenData?.expiresAt.stringToDate() ?? Date())
+    }
 
     func passData(data: Int) {
         igStoryId = data
@@ -50,23 +55,11 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
             return
         }
 
-        let headerView = HeaderSubmitStoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 240))
-        headerView.tokenIdNameLabel.text = String(tokenData.id)
-        headerView.merchantNameLabel.text = tokenData.merchant.name
-
-        // string to date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let date = dateFormatter.date(from: tokenData.createdAt)
-        dateFormatter.dateFormat = "dd MMM yyyy"
-        let dateString = dateFormatter.string(from: date!)
-
-        // date to string
-        let dateToString = DateFormatter()
-        dateToString.dateFormat = "dd/MM/YY"
-
-        headerView.dateNameLabel.text = dateString
-        headerView.purchaseNameLabel.text = String(tokenData.purchase.purchaseAmount)
+        headerView.tokenIdValueLabel.text = String(tokenData.id)
+        headerView.merchantNameValueLabel.text = tokenData.merchant.name
+        headerView.dateValueLabel.text = tokenData.createdAt.formatTodMMMyyyhmma()
+        headerView.purchaseValueLabel.text = String(tokenData.purchase.purchaseAmount)
+        runCountdown()
         print("Story ID: \(storyID)")
 
         tableView.delegate = self
@@ -158,6 +151,20 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         }
     }
 
+    // MARK: Timer
+    func runCountdown() {
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
+
+    @objc func updateTimer() {
+        let countdown = self.countdown
+        let hours = countdown.hour!
+        let minutes = countdown.minute!
+        let seconds = countdown.second!
+
+        self.headerView.timerLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+
     @objc func submitStoryTapped() {
         print("submit story button tapped")
 
@@ -212,7 +219,7 @@ extension SubmitStoryViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 500
+        return 400
     }
 }
 

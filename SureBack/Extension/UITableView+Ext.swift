@@ -8,7 +8,12 @@
 import UIKit
 
 extension UITableView {
-    func setEmptyMessage(image: UIImage, title: String, message: String) {
+    func setEmptyMessage(
+        image: UIImage,
+        title: String,
+        message: String,
+        centerYAnchorConstant: CGFloat = 0
+    ) {
         let emptyView = UIView(frame: CGRect(x: self.center.x, y: self.center.y, width: self.bounds.size.width, height: self.bounds.size.height))
         let imageEmpty = UIImageView()
         let titleLabel = UILabel()
@@ -23,9 +28,9 @@ extension UITableView {
         emptyView.addSubview(imageEmpty)
         emptyView.addSubview(titleLabel)
         emptyView.addSubview(messageLabel)
-        imageEmpty.setWidthAnchorConstraint(equalToConstant: 50)
-        imageEmpty.setHeightAnchorConstraint(equalToConstant: 50)
-        imageEmpty.setCenterYAnchorConstraint(equalTo: emptyView.centerYAnchor, constant: -70)
+//        imageEmpty.setWidthAnchorConstraint(equalToConstant: 50)
+//        imageEmpty.setHeightAnchorConstraint(equalToConstant: 50)
+        imageEmpty.setCenterYAnchorConstraint(equalTo: emptyView.centerYAnchor, constant: centerYAnchorConstant)
         imageEmpty.setCenterXAnchorConstraint(equalTo: emptyView.centerXAnchor)
         titleLabel.setTopAnchorConstraint(equalTo: imageEmpty.bottomAnchor, constant: 5)
         titleLabel.setLeftAnchorConstraint(equalTo: emptyView.leftAnchor, constant: 20)

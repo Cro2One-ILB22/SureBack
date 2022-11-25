@@ -48,7 +48,7 @@ class ItemCustomerStoryTableCell: UITableViewCell {
     public func setCellWithValueOf(_ data: MyStoryData) {
         updateUI(imagePath: data.customer.profilePicture,
                  usernameInstagram: data.customer.instagramUsername,
-                 dateCreated: data.createdAt.formatTodMMMyyyhmma(),
+                 dateCreated: data.createdAt,
                  historyStatus: "Approve")
     }
     private func updateUI(imagePath: String, usernameInstagram: String, dateCreated: String, historyStatus: String? = nil) {

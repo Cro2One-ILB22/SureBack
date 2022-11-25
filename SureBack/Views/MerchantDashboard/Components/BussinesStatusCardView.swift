@@ -11,18 +11,23 @@ class BussinesStatusCardView: UIView {
     lazy var label: UILabel = {
        let label = UILabel()
         label.text = "Total tokens today"
+        label.font = .systemFont(ofSize: 15)
+        label.textColor = .osloGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     lazy var totalTokenLabel: UILabel = {
        let label = UILabel()
         label.text = "0 Token"
+        label.font = .systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     lazy var outstandingCoinLabel: UILabel = {
        let label = UILabel()
         label.text = "Outstanding Coins"
+        label.font = .systemFont(ofSize: 15)
+        label.textColor = .osloGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -30,12 +35,15 @@ class BussinesStatusCardView: UIView {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.text = "0"
+        label.font = .boldSystemFont(ofSize: 22)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     lazy var exchangedCoinLabel: UILabel = {
        let label = UILabel()
         label.text = "Exchanged Coins"
+        label.font = .systemFont(ofSize: 15)
+        label.textColor = .osloGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -43,6 +51,7 @@ class BussinesStatusCardView: UIView {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.text = "0"
+        label.font = .boldSystemFont(ofSize: 22)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -77,13 +86,13 @@ class BussinesStatusCardView: UIView {
         
         let separator = UIView()
         separator.widthAnchor.constraint(equalToConstant: 1).isActive = true
-        separator.backgroundColor = .black
+        separator.backgroundColor = .osloGray
         
         let stackViewCoins = UIStackView(arrangedSubviews: [outstandingStackView, separator, exchangedStackView])
         stackViewCoins.axis = .horizontal
         stackViewCoins.distribution = .equalSpacing
         stackViewCoins.alignment = .fill
-        stackViewCoins.backgroundColor = .systemGreen
+        stackViewCoins.backgroundColor = .tealishGreenWithOpacity
         stackViewCoins.layer.cornerRadius = 10
         stackViewCoins.translatesAutoresizingMaskIntoConstraints = false
         stackViewCoins.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)

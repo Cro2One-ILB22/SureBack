@@ -32,22 +32,32 @@ class WaitingViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.isHidden = true
+        searchBar.delegate = self
+        showLoadingIndicator(true)
         tableView.delegate = self
         tableView.dataSource = self
-        loadingIndicator.show(true)
         getWaitingStoryCustomer()
         setupLayout()
     }
-    private func getWaitingStoryCustomer() {
+    private func getWaitingStoryCustomer(search customerName: String = "") {
 //        try! KeychainHelper.standard.save(key: .accessToken, value: "158|aZv8kOUYRdqVtYFA7yCScXbqybST2oMaostKG4Pb")
         let rf = RequestFunction()
-        rf.getMyStory(submitted: true) { data in
+        rf.getCustomerStory(submitted: true, searchCustomerByName: customerName) { data in
             self.listUserStory = data.data
             self.tableView.reloadData()
-            self.tableView.isHidden = false
-            self.loadingIndicator.show(false)
+            self.showLoadingIndicator(false)
         }
+    }
+    private func showLoadingIndicator(_ isShow: Bool) {
+        self.tableView.isHidden = isShow
+        loadingIndicator.show(isShow)
+    }
+}
+
+extension WaitingViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        showLoadingIndicator(true)
+        getWaitingStoryCustomer(search: searchText)
     }
 }
 
@@ -57,7 +67,9 @@ extension WaitingViewController: UITableViewDataSource, UITableViewDelegate {
             self.tableView.setEmptyMessage(
                 image: UIImage(named: "empty.customers")!,
                 title: "Empty Customer",
-                message: "No customers mentioned you at this time. Don't worry, Let's find them!")
+                message: "No customers mentioned you at this time. Don't worry, Let's find them!",
+                centerYAnchorConstant: -70
+            )
         } else {
             self.tableView.restore()
         }

@@ -60,6 +60,7 @@ extension SubmitStoryTableViewCell: UICollectionViewDataSource, UICollectionView
             return collectionView.dequeueReusableCell(withReuseIdentifier: ItemStoryCollectionViewCell.id, for: indexPath) as! UICollectionViewCell // swiftlint:disable:this force_cast
         }
         cell.backgroundColor = selectedStoryIndex == indexPath.row ? .systemBlue : .lightGray
+        cell.userImageProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.userImageProfile.sd_setImage(
             with: URL(string: user.profilePicture),
             placeholderImage: UIImage(named: "person.crop.circle"),
@@ -68,8 +69,9 @@ extension SubmitStoryTableViewCell: UICollectionViewDataSource, UICollectionView
         )
         cell.usernameIG.text = user.instagramUsername
         cell.userFollower.text = "\(userIgInfo.followerCount) Followers"
+        cell.userImageStory.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.userImageStory.sd_setImage(
-            with: URL(string: storyData[indexPath.row].imageURL ?? ""),
+            with: URL(string: storyData[indexPath.row].imageURL),
             placeholderImage: UIImage(named: "system.photo"),
             options: .progressiveLoad,
             completed: nil
@@ -80,7 +82,7 @@ extension SubmitStoryTableViewCell: UICollectionViewDataSource, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return storyData.count ?? 0
+        return storyData.count
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.6.1)
+  - AutoEquatable (2.4)
   - FirebaseAnalytics (10.1.0):
     - FirebaseAnalytics/AdIdSupport (= 10.1.0)
     - FirebaseCore (~> 10.0)
@@ -91,6 +92,12 @@ PODS:
     - ReachabilitySwift (~> 5.0)
     - Starscream (~> 3.1)
   - ReachabilitySwift (5.0.0)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
   - SDWebImage (5.14.0):
     - SDWebImage/Core (= 5.14.0)
   - SDWebImage/Core (5.14.0)
@@ -99,16 +106,20 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - AutoEquatable
   - FirebaseAnalytics
   - FirebaseCore
   - FirebaseMessaging
   - PusherSwift
+  - RxCocoa
+  - RxSwift
   - SDWebImage
   - SwiftLint
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - AutoEquatable
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseCoreInternal
@@ -121,12 +132,16 @@ SPEC REPOS:
     - PromisesObjC
     - PusherSwift
     - ReachabilitySwift
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - SDWebImage
     - Starscream
     - SwiftLint
 
 SPEC CHECKSUMS:
   Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
+  AutoEquatable: b92d573a0e0c03fcf23e23c8268e824e55cf8bc4
   FirebaseAnalytics: 24cb27b52b2e11ad5013528195b4ca0755dec960
   FirebaseCore: 55e7ae35991ccca4db03ff8d8df6ed5f17a3e4c7
   FirebaseCoreInternal: 96d75228e10fd369564da51bd898414eb0f54df5
@@ -139,10 +154,13 @@ SPEC CHECKSUMS:
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   PusherSwift: 8f18b7beaf383e0475607ab6a3f89f477637fb21
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SDWebImage: 9e391cf38577742f501055dca17e4987f6713fe1
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftLint: 32ee33ded0636d0905ef6911b2b67bbaeeedafa5
 
-PODFILE CHECKSUM: 7807ea14dc0fc572ce0ac6b596a1460845b8259d
+PODFILE CHECKSUM: c4a7e1eb0db01b2dff5681b4f50f19cb08dfbad3
 
 COCOAPODS: 1.11.3

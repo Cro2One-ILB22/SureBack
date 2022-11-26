@@ -11,6 +11,9 @@ target 'SureBack' do
   pod 'FirebaseMessaging'
   pod 'SDWebImage'
   pod 'PusherSwift'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'AutoEquatable'
 
   # Pods for SureBack
 

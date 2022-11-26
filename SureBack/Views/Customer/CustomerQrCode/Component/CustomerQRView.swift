@@ -38,7 +38,6 @@ class CustomerQRView: UIView {
     lazy var qrImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
-//        image.image = UIImage(named: "AppIcon")
         image.layer.cornerRadius = 8
         image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false

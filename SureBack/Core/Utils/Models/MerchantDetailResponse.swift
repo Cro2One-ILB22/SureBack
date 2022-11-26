@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import AutoEquatable
 
 // MARK: - MerchantDetailResponse
-struct MerchantDetailResponse: Codable {
+struct MerchantDetailResponse: Codable, AutoEquatable {
     let cashbackPercent: Float?
     let cashbackLimit, dailyTokenLimit: Int?
     let isActiveGeneratingToken: Bool

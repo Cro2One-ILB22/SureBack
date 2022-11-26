@@ -5,42 +5,56 @@
 //  Created by Tubagus Adhitya Permana on 07/11/22.
 //
 
+import RxCocoa
+import RxSwift
 import UIKit
 
 class TabBarViewController: UITabBarController {
     let request = RequestFunction()
-    var user: UserInfoResponse!
+
+    let viewModel = UserViewModel.shared
+
+    var disposeBag = DisposeBag()
+
+    var dashboardVC: CustomerDashboardViewController?
+    var qrVC: CustomerQrCodeViewController?
+    var profileVC: CustomerProfileViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
 
+        // proses nonton perubahan seperti didSet
+        viewModel.userSubject.subscribe(onNext: { user in // onNext : kalo update, next
+            self.dashboardVC?.user = user
+            self.qrVC?.user = user
+        }).disposed(by: disposeBag)
+
         request.getUserInfo { [self] data in
             switch data {
             case let .success(result):
                 do {
-                    self.user = result
+                    viewModel.userSubject.onNext(result)
                     print("login success")
 
-                    if user.roles![1] == "customer" {
-                        let dashboardVC = CustomerDashboardViewController()
-                        dashboardVC.user = user
-                        let navDashboard = UINavigationController(rootViewController: dashboardVC)
+                    if viewModel.user?.roles![1] == "customer" {
+                        dashboardVC = CustomerDashboardViewController()
+                        dashboardVC?.user = viewModel.user
+                        let navDashboard = UINavigationController(rootViewController: dashboardVC!)
                         navDashboard.tabBarItem = UITabBarItem(title: "Dashboard", image: UIImage(named: "list.dash.header.rectangle"), tag: 1)
 
-                        let qrVC = CustomerQrCodeViewController()
-                        qrVC.user = user
-                        let navQR = UINavigationController(rootViewController: qrVC)
+                        qrVC = CustomerQrCodeViewController()
+                        qrVC?.user = viewModel.user
+                        let navQR = UINavigationController(rootViewController: qrVC!)
                         navQR.tabBarItem = UITabBarItem(title: "QR", image: UIImage(named: "qrcode.viewfinder"), tag: 1)
 
-                        let profileVC = CustomerProfileViewController()
-                        profileVC.user = user
-                        let navProfile = UINavigationController(rootViewController: profileVC)
+                        profileVC = CustomerProfileViewController()
+                        let navProfile = UINavigationController(rootViewController: profileVC!)
                         navProfile.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "person.crop.circle"), tag: 1)
                         setViewControllers([navDashboard, navQR, navProfile], animated: false)
                     } else {
                         let dashboardVC = MerchantDashboardViewController()
-                        dashboardVC.user = user
+                        dashboardVC.user = viewModel.user
                         let navDashboard = UINavigationController(rootViewController: dashboardVC)
                         navDashboard.tabBarItem = UITabBarItem(title: "Dashboard", image: UIImage(named: "list.dash.header.rectangle"), tag: 1)
 
@@ -71,4 +85,13 @@ class TabBarViewController: UITabBarController {
             }
         }
     }
+
+//    init() {
+//        super.init(nibName: nil, bundle: nil)
+//        self.user = viewModel.user
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
 }

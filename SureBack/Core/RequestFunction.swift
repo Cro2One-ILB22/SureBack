@@ -147,17 +147,27 @@ class RequestFunction {
 // MARK: User
 
 extension RequestFunction {
-    func updateUser(name: String, completionHandler: @escaping (_ data: UserInfoResponse) -> Void) {
+    func updateUser(name: String? = nil, email: String? = nil, completionHandler: @escaping (_ data: UserInfoResponse) -> Void) {
         let url = Endpoints.updateUser.url
-        let body: [String: String] = [
-            "name": name,
-        ]
+        var body: [String: String] = [:]
+
+        if name != nil {
+            body["name"] = name
+        }
+        if email != nil {
+            body["email"] = email
+        }
+
         requestWithToken(url: url, method: .put, parameters: body, decodable: UserInfoResponse.self) { response in
             switch response.result {
             case let .success(data):
                 completionHandler(data)
             case let .failure(error):
-                print(error)
+//                print(error)
+                if let data = response.data {
+                    let json = String(data: data, encoding: .utf8)
+                    print("Failure Response: \(String(describing: json))")
+                }
             }
         }
     }

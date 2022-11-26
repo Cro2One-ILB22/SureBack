@@ -22,7 +22,6 @@ protocol SendDataDelegate: AnyObject {
 extension SendDataDelegate {
     func passData(data: String) {
     }
-
     func passData(data: Int) {
     }
 }

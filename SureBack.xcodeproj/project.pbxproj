@@ -53,6 +53,9 @@
 		169FCD55292CC5E7009CBAB2 /* HistoryViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD54292CC5E7009CBAB2 /* HistoryViewController+SetupUI.swift */; };
 		169FCD59292DBEA4009CBAB2 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD58292DBEA4009CBAB2 /* UIColor+Ext.swift */; };
 		169FCD5B292DD655009CBAB2 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD5A292DD655009CBAB2 /* String+Ext.swift */; };
+		169FCD5D292E0A9E009CBAB2 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD5C292E0A9E009CBAB2 /* UIImageView+Ext.swift */; };
+		169FCD5F292E1935009CBAB2 /* MerchantDashboardViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD5E292E1935009CBAB2 /* MerchantDashboardViewController+SetupUI.swift */; };
+		169FCD62292F09F2009CBAB2 /* ConfirmRegistrationViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD61292F09F2009CBAB2 /* ConfirmRegistrationViewController+SetupUI.swift */; };
 		16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */; };
 		16BD919E291C58860010731E /* UIScreen+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD919D291C58860010731E /* UIScreen+Ext.swift */; };
 		16BD91A5291D527C0010731E /* BussinesStatusCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91A4291D527C0010731E /* BussinesStatusCardView.swift */; };
@@ -177,6 +180,9 @@
 		169FCD54292CC5E7009CBAB2 /* HistoryViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoryViewController+SetupUI.swift"; sourceTree = "<group>"; };
 		169FCD58292DBEA4009CBAB2 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		169FCD5A292DD655009CBAB2 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		169FCD5C292E0A9E009CBAB2 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
+		169FCD5E292E1935009CBAB2 /* MerchantDashboardViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MerchantDashboardViewController+SetupUI.swift"; sourceTree = "<group>"; };
+		169FCD61292F09F2009CBAB2 /* ConfirmRegistrationViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConfirmRegistrationViewController+SetupUI.swift"; sourceTree = "<group>"; };
 		16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveOrRejectStoryResponse.swift; sourceTree = "<group>"; };
 		16BD919D291C58860010731E /* UIScreen+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Ext.swift"; sourceTree = "<group>"; };
 		16BD91A4291D527C0010731E /* BussinesStatusCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BussinesStatusCardView.swift; sourceTree = "<group>"; };
@@ -314,7 +320,6 @@
 				1619BB282919082700085B74 /* TabBarViewController.swift */,
 				1619BB2A2919B74800085B74 /* RegistrationViewController.swift */,
 				AC2287992918521F00397ED0 /* LoggedInViewController.swift */,
-				1619BB2F2919FCF700085B74 /* ConfirmRegistrationViewController.swift */,
 				AC22879329182E8E00397ED0 /* ShowQRViewController.swift */,
 				AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */,
 				AC59F88C29202888000F8345 /* IsLoginViewController.swift */,
@@ -387,6 +392,7 @@
 				169FCD4B292CC172009CBAB2 /* UIActivityIndicatorView+Ext.swift */,
 				169FCD58292DBEA4009CBAB2 /* UIColor+Ext.swift */,
 				169FCD5A292DD655009CBAB2 /* String+Ext.swift */,
+				169FCD5C292E0A9E009CBAB2 /* UIImageView+Ext.swift */,
 				AC1C1C41292F7AC300863A87 /* Date+Ext.swift */,
 			);
 			path = Extension;
@@ -515,11 +521,21 @@
 			path = HistoryViewController;
 			sourceTree = "<group>";
 		};
+		169FCD60292F03F9009CBAB2 /* ConfirmRegistration */ = {
+			isa = PBXGroup;
+			children = (
+				1619BB2F2919FCF700085B74 /* ConfirmRegistrationViewController.swift */,
+				169FCD61292F09F2009CBAB2 /* ConfirmRegistrationViewController+SetupUI.swift */,
+			);
+			path = ConfirmRegistration;
+			sourceTree = "<group>";
+		};
 		16BD919F291D521D0010731E /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				AC24AA422931EF2C0050A086 /* General */,
 				AC24AA4529323E570050A086 /* TransactionDetail */,
+				169FCD60292F03F9009CBAB2 /* ConfirmRegistration */,
 				AC59F88E29205480000F8345 /* Customer */,
 				1603EFDE292B059200EC5485 /* MerchantListAllCustomer */,
 				165122102927373900DBC0AE /* MerchantCoinHistory */,
@@ -535,6 +551,7 @@
 			children = (
 				16BD91A1291D52380010731E /* Components */,
 				16BD91AC291E93270010731E /* MerchantDashboardViewController.swift */,
+				169FCD5E292E1935009CBAB2 /* MerchantDashboardViewController+SetupUI.swift */,
 			);
 			path = MerchantDashboard;
 			sourceTree = "<group>";
@@ -987,6 +1004,7 @@
 				AC59F885291F50B5000F8345 /* HeaderCustomerDashboardView.swift in Sources */,
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
 				ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */,
+				169FCD62292F09F2009CBAB2 /* ConfirmRegistrationViewController+SetupUI.swift in Sources */,
 				ACE5CDB029127E6200D08177 /* ResponseData.swift in Sources */,
 				165122012924CE2600DBC0AE /* CardFieldView.swift in Sources */,
 				16512215292737EC00DBC0AE /* DetailCoinHistoryCardView.swift in Sources */,
@@ -1002,6 +1020,7 @@
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,
 				1651220F2926C71700DBC0AE /* ItemCustomerStoryCollectionCell.swift in Sources */,
 				1603EFE0292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift in Sources */,
+				169FCD5F292E1935009CBAB2 /* MerchantDashboardViewController+SetupUI.swift in Sources */,
 				1619BB302919FCF700085B74 /* ConfirmRegistrationViewController.swift in Sources */,
 				ACA270B0292D636B008712D5 /* CustomerListAllMerchantViewController.swift in Sources */,
 				165122122927377600DBC0AE /* MerchantCoinHistoryViewController.swift in Sources */,
@@ -1029,6 +1048,7 @@
 				16BD91A7291D52E30010731E /* StoryTableViewCell.swift in Sources */,
 				119B76562906976E00530C80 /* AppDelegate.swift in Sources */,
 				16BD91A9291D534C0010731E /* HeaderMerchantDashboardView.swift in Sources */,
+				169FCD5D292E0A9E009CBAB2 /* UIImageView+Ext.swift in Sources */,
 				ACA270AD292D4B11008712D5 /* CoinHistoryView.swift in Sources */,
 				169FCD4A292CC063009CBAB2 /* WaitingViewController+SetupUI.swift in Sources */,
 				ACE5CDA42912704800D08177 /* UserInfoResponse.swift in Sources */,

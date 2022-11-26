@@ -22,13 +22,13 @@ class HeaderMerchantDashboardView: UIView {
     let seeAllCustomersButton: UIButton = {
        let button = UIButton()
         button.setTitle("See All", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.tealishGreen, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        backgroundColor = .porcelain
         setupBussinesStatusCard()
         setupCustomersLabel()
     }
@@ -43,7 +43,7 @@ extension HeaderMerchantDashboardView {
         businessStatusCard.setTopAnchorConstraint(equalTo: topAnchor, constant: 20)
         businessStatusCard.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
         businessStatusCard.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
-        businessStatusCard.setHeightAnchorConstraint(equalToConstant: 170)
+        businessStatusCard.setHeightAnchorConstraint(equalToConstant: 144)
         businessStatusCard.setWidthAnchorConstraint(equalToConstant: UIScreen.screenWidth)
     }
     private func setupCustomersLabel() {

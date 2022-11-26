@@ -10,9 +10,10 @@ import UIKit
 extension UIColor {
     static let softPeach = UIColor(rgb: 0xffFCECEB) // Kyk pink
     static let titanWhite = UIColor(rgb: 0xffE7F1FB) // Biru ke putih"an
-    static let tealishGreenWithOpacity = UIColor(rgb: 0xff2CD76D).withAlphaComponent(14.0) // Ijo ke putih"an
-    static let tealishGreen = UIColor(rgb: 0xff2CD76D).withAlphaComponent(14.0) // Ijo
-    static let olseGray = UIColor(rgb: 0xff8A8C8F) // abu-abu
+    static let tealishGreenWithOpacity = UIColor(rgb: 0xff2CD76D).withAlphaComponent(0.14) // Ijo ke putih"an
+    static let tealishGreen = UIColor(rgb: 0xff2CD76D) // Ijo
+    static let osloGray = UIColor(rgb: 0xff8A8C8F) // abu-abu keputihan
+    static let porcelain = UIColor(rgb: 0xffF2F2F7) // putih ke abu abuan
 }
 
 extension UIColor {

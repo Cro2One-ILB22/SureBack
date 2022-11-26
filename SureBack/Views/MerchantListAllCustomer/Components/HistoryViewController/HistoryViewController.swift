@@ -32,21 +32,33 @@ class HistoryViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.isHidden = true
+        showLoadingIndicator(true)
         tableView.delegate = self
         tableView.dataSource = self
-        loadingIndicator.show(true)
+        searchBar.delegate = self
         setupLayout()
         getHistoryStoryCustomer()
     }
-    private func getHistoryStoryCustomer() {
+    private func getHistoryStoryCustomer(search searchedName: String = "") {
         let rf = RequestFunction()
-        rf.getMyStory(expired: true) { data in
+//        let customerName: String? = searchedName != "" ? searchedName : nil
+        rf.getCustomerStory(expired: true) { data in
+            print("Datanya", data.data)
             self.listHistoryStoryCustomer = data.data
             self.tableView.reloadData()
-            self.tableView.isHidden = false
-            self.loadingIndicator.show(false)
+            self.showLoadingIndicator(false)
         }
+    }
+    private func showLoadingIndicator(_ isShow: Bool) {
+        self.tableView.isHidden = isShow
+        loadingIndicator.show(isShow)
+    }
+}
+
+extension HistoryViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        showLoadingIndicator(true)
+        getHistoryStoryCustomer(search: searchText.lowercased())
     }
 }
 
@@ -56,7 +68,9 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
             self.tableView.setEmptyMessage(
                 image: UIImage(named: "empty.customers")!,
                 title: "Empty Customer",
-                message: "No customers mentioned you at this time. Don't worry, Let's find them!")
+                message: "No customers mentioned you at this time. Don't worry, Let's find them!",
+                centerYAnchorConstant: -70
+            )
         } else {
             self.tableView.restore()
         }

@@ -12,12 +12,10 @@ class MerchantCoinHistoryViewController: UIViewController {
 
     private let outstandingCoinCard: DetailCoinHistoryCardView = {
        let card = DetailCoinHistoryCardView()
-        card.titleCoin.text = "Outstanding coins"
         return card
     }()
     private let exchangedCoinCard: DetailCoinHistoryCardView = {
        let card = DetailCoinHistoryCardView()
-        card.titleCoin.text = "Exchanged coins"
         return card
     }()
     override func viewDidLoad() {
@@ -26,16 +24,16 @@ class MerchantCoinHistoryViewController: UIViewController {
 
         view.addSubview(outstandingCoinCard)
         outstandingCoinCard.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
-        outstandingCoinCard.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 20)
-        outstandingCoinCard.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -20)
-        outstandingCoinCard.setHeightAnchorConstraint(equalToConstant: 150)
+        outstandingCoinCard.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 16)
+        outstandingCoinCard.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -16)
+        outstandingCoinCard.setHeightAnchorConstraint(equalToConstant: 80)
         outstandingCoinCard.setWidthAnchorConstraint(equalToConstant: UIScreen.screenWidth)
         
         view.addSubview(exchangedCoinCard)
         exchangedCoinCard.setTopAnchorConstraint(equalTo: outstandingCoinCard.bottomAnchor, constant: 20)
-        exchangedCoinCard.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 20)
-        exchangedCoinCard.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -20)
-        exchangedCoinCard.setHeightAnchorConstraint(equalToConstant: 150)
+        exchangedCoinCard.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 16)
+        exchangedCoinCard.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -16)
+        exchangedCoinCard.setHeightAnchorConstraint(equalToConstant: 80)
         exchangedCoinCard.setWidthAnchorConstraint(equalToConstant: UIScreen.screenWidth)
     }
 }

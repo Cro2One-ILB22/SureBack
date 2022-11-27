@@ -11,7 +11,7 @@ import SDWebImage
 class CustomerListAllMerchantViewController: UIViewController {
     var user: UserInfoResponse?
     var merchantData = [UserInfoResponse]()
-    var activeTokenData = [GenerateTokenOnlineResponse]()
+    var activeTokenData = [Token]()
 
     lazy var searchBar: UISearchBar = {
         let search = UISearchBar()

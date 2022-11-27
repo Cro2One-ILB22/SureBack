@@ -16,8 +16,8 @@ class HeaderCustomerHistoryView: UIView {
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.heightAnchor.constraint(equalToConstant: 180).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: UIScreen.screenWidth - 40).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: UIScreen.screenWidth - 20).isActive = true
         return imageView
     }()
 
@@ -37,6 +37,15 @@ class HeaderCustomerHistoryView: UIView {
         return label
     }()
 
+    lazy var openLinkButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "chevron.right"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setWidthAnchorConstraint(equalToConstant: 12)
+        button.setHeightAnchorConstraint(equalToConstant: 22)
+        return button
+    }()
+
     lazy var profileImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
@@ -50,8 +59,8 @@ class HeaderCustomerHistoryView: UIView {
 
     lazy var bgProfileImageView: UIView = {
         let view = UIView()
-//        view.backgroundColor = .green
-//        view.setWidthAnchorConstraint(equalToConstant: 70)
+        view.backgroundColor = UIColor.tealishGreen
+        view.layer.cornerRadius = 10
         return view
     }()
 
@@ -87,6 +96,7 @@ class HeaderCustomerHistoryView: UIView {
         image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 15
         image.clipsToBounds = true
+        image.image = UIImage(named: "lock.status.unavailable")
         image.setWidthAnchorConstraint(equalToConstant: 30)
         image.setHeightAnchorConstraint(equalToConstant: 30)
         return image
@@ -94,8 +104,10 @@ class HeaderCustomerHistoryView: UIView {
 
     lazy var statusLabel: UILabel = {
         let label = UILabel()
-        label.text = "Status \nAvailable"
+        label.text = "Status"
         label.font = UIFont.systemFont(ofSize: 15)
+        label.numberOfLines = 0
+//        label.lineBreakMode = .byWordWrapping
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -155,8 +167,19 @@ extension HeaderCustomerHistoryView {
         stackProfile.translatesAutoresizingMaskIntoConstraints = false
 
         // Stack 2
-        bgProfileImageView.addSubview(profileImage)
-        profileImage.translatesAutoresizingMaskIntoConstraints = false
+        let stack2 = UIStackView(arrangedSubviews: [profileImage, openLinkButton])
+        stack2.axis = .horizontal
+        stack2.spacing = 5
+        stack2.distribution = .fill
+        stack2.alignment = .center
+        stack2.translatesAutoresizingMaskIntoConstraints = false
+
+
+        bgProfileImageView.addSubview(stack2)
+        stack2.setCenterYAnchorConstraint(equalTo: bgProfileImageView.centerYAnchor)
+        stack2.setCenterXAnchorConstraint(equalTo: bgProfileImageView.centerXAnchor)
+//        profileImage.translatesAutoresizingMaskIntoConstraints = false
+        bgProfileImageView.setWidthAnchorConstraint(equalToConstant: 80)
 
         let stackCoinsLabel = UIStackView(arrangedSubviews: [loyaltCoinsLabel, coinImage])
         stackCoinsLabel.axis = .horizontal
@@ -172,13 +195,15 @@ extension HeaderCustomerHistoryView {
 
         let stackImageCoins = UIStackView(arrangedSubviews: [bgProfileImageView, stackCoins])
         stackImageCoins.axis = .horizontal
+//        stackImageCoins.distribution = .fillProportionally
+        stackImageCoins.spacing = 180
         stackImageCoins.translatesAutoresizingMaskIntoConstraints = false
 
         // Stack 3
         let stackStatus = UIStackView(arrangedSubviews: [lockImage, statusLabel])
         stackStatus.axis = .horizontal
         stackStatus.spacing = 5
-        stackStatus.distribution = .equalSpacing
+        stackStatus.distribution = .fill
         stackStatus.translatesAutoresizingMaskIntoConstraints = false
 
         stackRedeemButton = UIStackView(arrangedSubviews: [timerLabel, redeemLabel])
@@ -195,7 +220,6 @@ extension HeaderCustomerHistoryView {
         stackStatusRedeem.translatesAutoresizingMaskIntoConstraints = false
 
         let contentView = UIView()
-        contentView.backgroundColor = .systemBlue
         addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.setWidthAnchorConstraint(equalToConstant: UIScreen.screenWidth - 40)
@@ -204,12 +228,14 @@ extension HeaderCustomerHistoryView {
         contentView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 10)
         contentView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -10)
 
+        contentView.addSubview(image)
 
         // Stack All
         let stackViewAll = UIStackView(arrangedSubviews: [stackProfile, stackImageCoins, stackStatusRedeem])
         stackViewAll.layer.cornerRadius = 10
         stackViewAll.axis = .vertical
         stackViewAll.distribution = .equalSpacing
+        stackViewAll.spacing = 5
         stackViewAll.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(stackViewAll)
         stackViewAll.setWidthAnchorConstraint(equalToConstant: UIScreen.screenWidth - 40)

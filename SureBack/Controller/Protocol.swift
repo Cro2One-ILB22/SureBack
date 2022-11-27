@@ -6,11 +6,11 @@
 //
 
 protocol UIViewToController {
-    func didToRedeemTapButton(data: GenerateTokenOnlineResponse, user: UserInfoResponse)
+    func didToRedeemTapButton(data: Token, user: UserInfoResponse)
 }
 
 extension UIViewToController {
-    func didToRedeemTapButton(data: GenerateTokenOnlineResponse, user: UserInfoResponse) {
+    func didToRedeemTapButton(data: Token, user: UserInfoResponse) {
     }
 }
 

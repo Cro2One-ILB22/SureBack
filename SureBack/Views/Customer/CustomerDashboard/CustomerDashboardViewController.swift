@@ -18,7 +18,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         }
     }
 
-    var activeTokenData = [GenerateTokenOnlineResponse]() {
+    var activeTokenData = [Token]() {
         didSet {
             tableView.reloadData()
         }
@@ -49,6 +49,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         super.viewDidLoad()
         initAndStartUpdatingLocation()
         view.backgroundColor = .white
+        setupLoadingIndicator()
 
         tableView.isHidden = true
         loadingIndicator.show(true)
@@ -94,7 +95,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         self.setupView()
     }
 
-    func didToRedeemTapButton(data: GenerateTokenOnlineResponse, user: UserInfoResponse) {
+    func didToRedeemTapButton(data: Token, user: UserInfoResponse) {
         let submitStoryVC = SubmitStoryViewController()
         submitStoryVC.title = "Submit Story"
         submitStoryVC.tokenData = data
@@ -104,6 +105,10 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
 
     @objc func notifButtonTapped() {
         print("notif button tapped")
+        let notifVC = CustomerNotificationViewController()
+        notifVC.title = "Token Notification"
+        notifVC.user = user
+        navigationController?.pushViewController(notifVC, animated: true)
     }
 
     @objc func seeAllMerchantTapped() {
@@ -114,31 +119,6 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         allMerchantVC.merchantData = merchantData
         allMerchantVC.activeTokenData = activeTokenData
         navigationController?.pushViewController(allMerchantVC, animated: true)
-    }
-}
-
-extension CustomerDashboardViewController {
-    private func setupView() {
-        setupTableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-
-    private func setupView2(headerView: HeaderCustomerDashboardView) {
-        view.addSubview(headerView)
-        headerView.profileLabel.text = "Hi, @\(user.instagramUsername)!"
-        headerView.totalCoinsLabel.text = " \(user.coins![0].outstanding)"
-        tableView.tableHeaderView = headerView
-        tableView.register(SectionDashboardHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
-    }
-
-    private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        tableView.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
-        tableView.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        tableView.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     }
 }
 
@@ -218,6 +198,37 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         }
         view.seeAllMerchantButton.addTarget(self, action: #selector(seeAllMerchantTapped), for: .touchUpInside)
         return view
+    }
+}
+
+extension CustomerDashboardViewController {
+    private func setupView() {
+        setupTableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+
+    private func setupLoadingIndicator() {
+        view.addSubview(loadingIndicator)
+        loadingIndicator.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
+        loadingIndicator.setCenterYAnchorConstraint(equalTo: view.centerYAnchor)
+    }
+
+    private func setupView2(headerView: HeaderCustomerDashboardView) {
+        view.addSubview(headerView)
+        headerView.profileLabel.text = "Hi, @\(user.instagramUsername)!"
+        headerView.totalCoinsLabel.text = " \(user.coins![0].outstanding)"
+        tableView.tableHeaderView = headerView
+        tableView.register(SectionDashboardHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
+    }
+
+    private func setupTableView() {
+        view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        tableView.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+        tableView.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        tableView.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     }
 }
 

@@ -72,7 +72,7 @@ class ItemMerchantTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10))
     }
 
     func setupImage() {
@@ -97,8 +97,8 @@ class ItemMerchantTableViewCell: UITableViewCell {
         stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
-        stackView.setTopAnchorConstraint(equalTo: topAnchor, constant: 10)
-        stackView.setLeadingAnchorConstraint(equalTo: merchantImage.trailingAnchor, constant: 30)
+        stackView.setTopAnchorConstraint(equalTo: topAnchor, constant: 15)
+        stackView.setLeadingAnchorConstraint(equalTo: merchantImage.trailingAnchor, constant: 20)
     }
 
     func setupTag() {

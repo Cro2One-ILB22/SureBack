@@ -48,7 +48,7 @@ class HeaderCustomerDashboardView: UIView {
 
     let notifButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "system.bell.fill"), for: .normal)
+        button.setImage(UIImage(named: "bell.circle.fill.green"), for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 15
         button.translatesAutoresizingMaskIntoConstraints = false

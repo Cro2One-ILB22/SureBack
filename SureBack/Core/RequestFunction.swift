@@ -163,7 +163,6 @@ extension RequestFunction {
             case let .success(data):
                 completionHandler(data)
             case let .failure(error):
-//                print(error)
                 if let data = response.data {
                     let json = String(data: data, encoding: .utf8)
                     print("Failure Response: \(String(describing: json))")
@@ -390,16 +389,27 @@ extension RequestFunction {
         }
     }
     
-    func getListToken(expired: Int, submitted: Int, redeemed: Int, completion: @escaping (Result<ResponseData<GenerateTokenOnlineResponse>, AFError>) -> Void) {
+    func getListToken(expired: Int? = nil, submitted: Int? = nil, redeemed: Int? = nil, completion: @escaping (Result<ResponseData<Token>, AFError>) -> Void) {
         let url = Endpoints.getToken.url
-        let parameters: [String: Int] = [
-            "expired": expired,
-            "submitted": submitted,
-            "redeemed": redeemed,
-        ]
-        
-        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<GenerateTokenOnlineResponse>.self) {
-            completion($0.result)
+        var parameters: [String: Any] = [:]
+        if expired != nil {
+            parameters["expired"] = expired
+        }
+        if submitted != nil {
+            parameters["submitted"] = submitted
+        }
+        if redeemed != nil {
+            parameters["redeemed"] = redeemed
+        }
+        parameters["order_by"] = "updated_at"
+
+        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<Token>.self){ response in
+            completion(response.result)
+            if let data = response.data {
+                let json = String(data: data, encoding: .utf8)
+                print("Failure Response: \(String(describing: json))")
+            }
+
         }
     }
     

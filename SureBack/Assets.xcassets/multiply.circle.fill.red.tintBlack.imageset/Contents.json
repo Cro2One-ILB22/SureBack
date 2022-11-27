@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "multiply.circle.fill.red.tintBlack.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "bell.fill@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

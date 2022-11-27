@@ -17,6 +17,7 @@
 		119B76792906976F00530C80 /* SureBackUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119B76782906976F00530C80 /* SureBackUITestsLaunchTests.swift */; };
 		119B76862906979B00530C80 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 119B76852906979B00530C80 /* .gitignore */; };
 		11B2DD2F2907CF760065E98D /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2DD2E2907CF760065E98D /* APICall.swift */; };
+		11CC9559292FB5B00038E766 /* PusherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CC9558292FB5B00038E766 /* PusherService.swift */; };
 		1603EFE0292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603EFDF292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift */; };
 		1603EFE2292B1D6800EC5485 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603EFE1292B1D6800EC5485 /* CustomSegmentedControl.swift */; };
 		1603EFE6292B2F3300EC5485 /* ItemCustomerStoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603EFE5292B2F3300EC5485 /* ItemCustomerStoryTableCell.swift */; };
@@ -518,6 +519,7 @@
 				169FCD51292CC4F9009CBAB2 /* ImageDownloader.swift */,
 				1619BB262918B5E800085B74 /* AuthManager.swift */,
 				AC24AA4829327F480050A086 /* UserViewModel.swift */,
+				11CC9558292FB5B00038E766 /* PusherService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1035,6 +1037,7 @@
 				16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */,
 				ACA270A9292CD02C008712D5 /* CustomerHistoryViewController.swift in Sources */,
 				16512207292587C800DBC0AE /* MerchantDetailStoryViewController.swift in Sources */,
+				11CC9559292FB5B00038E766 /* PusherService.swift in Sources */,
 				119B765A2906976E00530C80 /* ViewController.swift in Sources */,
 				ACE5CDA82912716B00D08177 /* ScanQrResponse.swift in Sources */,
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,

@@ -60,6 +60,9 @@ class MerchantDashboardViewController: UIViewController {
 }
 
 extension MerchantDashboardViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if listCustomerStory.count == 0 {
             self.tableView.setEmptyMessage(

@@ -41,8 +41,7 @@ class HistoryViewController: UIViewController {
     }
     private func getHistoryStoryCustomer(search searchedName: String = "") {
         let rf = RequestFunction()
-//        let customerName: String? = searchedName != "" ? searchedName : nil
-        rf.getCustomerStory(expired: true) { data in
+        rf.getCustomerStory(expired: true, searchCustomerByName: searchedName) { data in
             print("Datanya", data.data)
             self.listHistoryStoryCustomer = data.data
             self.tableView.reloadData()

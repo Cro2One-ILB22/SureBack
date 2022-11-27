@@ -433,13 +433,13 @@ extension RequestFunction {
                           searchMerchantByName merchantName: String? = nil,
                           searchMerchantById merchantId: Int? = nil,
                           completionHandler: @escaping (MyStoryResponses) -> Void) {
-        let url = Endpoints.getMyStory.url + "?customer_name=dit"
-        var parameters: [String: Any?] = [:]
+        let url = Endpoints.getMyStory.url
+        var parameters: [String: Any] = [:]
         parameters["expired"] = expired
         parameters["submitted"] = submitted
         parameters["approved"] = approved
         parameters["assessed"] = assessed
-        parameters["customer_name"] = nil
+        parameters["customer_name"] = ""
         parameters["customer_id"] = customerId
         parameters["merchant_name"] = merchantName
         parameters["merchant_id"] = merchantId

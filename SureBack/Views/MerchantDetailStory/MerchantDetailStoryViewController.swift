@@ -8,44 +8,66 @@
 import UIKit
 
 class MerchantDetailStoryViewController: UIViewController {
-    private let tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
-        table.register(ListCustomerStoryTableViewCell.self, forCellReuseIdentifier: ListCustomerStoryTableViewCell.id)
-        table.backgroundColor = .white
-        table.separatorColor = UIColor.clear
-        return table
+    let scrollView = UIScrollView()
+    let contentView = UIView()
+    private let headerView: HeaderMerchantDetailStoryView = {
+       let view = HeaderMerchantDetailStoryView()
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.osloGray.cgColor
+        return view
+    }()
+    private let storyCardView: ItemCustomerStoryCollectionCell = {
+       let view = ItemCustomerStoryCollectionCell()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 8
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.osloGray.cgColor
+        return view
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        let headerView = HeaderMerchantDetailStoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 120))
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableHeaderView = headerView
-        setupTableView()
-    }
-}
-
-extension MerchantDetailStoryViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ListCustomerStoryTableViewCell.id, for: indexPath) as? ListCustomerStoryTableViewCell else { return UITableViewCell() }
-        return cell
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 600
+        view.backgroundColor = .porcelain
+        setupLayout()
     }
 }
 
 extension MerchantDetailStoryViewController {
-    private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        tableView.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
-        tableView.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        tableView.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+    private func setupLayout() {
+        setupScrollView()
+        setupHeader()
+        setupStoryCard()
+    }
+    func setupScrollView() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        scrollView.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
+        scrollView.setWidthAnchorConstraint(equalTo: view.widthAnchor)
+        scrollView.setTopAnchorConstraint(equalTo: view.topAnchor)
+        scrollView.setBottomAnchorConstraint(equalTo: view.bottomAnchor)
+        contentView.setCenterXAnchorConstraint(equalTo: scrollView.centerXAnchor)
+        contentView.setWidthAnchorConstraint(equalTo: scrollView.widthAnchor)
+        contentView.setTopAnchorConstraint(equalTo: scrollView.topAnchor)
+        contentView.setBottomAnchorConstraint(equalTo: scrollView.bottomAnchor)
+    }
+    private func setupHeader() {
+        contentView.addSubview(headerView)
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.setWidthAnchorConstraint(equalToConstant: 100)
+        headerView.setHeightAnchorConstraint(equalToConstant: 111)
+        headerView.setTopAnchorConstraint(equalTo: contentView.topAnchor)
+        headerView.setLeadingAnchorConstraint(equalTo: contentView.leadingAnchor)
+        headerView.setTrailingAnchorConstraint(equalTo: contentView.trailingAnchor)
+    }
+    private func setupStoryCard() {
+        contentView.addSubview(storyCardView)
+        storyCardView.translatesAutoresizingMaskIntoConstraints = false
+        storyCardView.setWidthAnchorConstraint(equalToConstant: 300)
+        storyCardView.setHeightAnchorConstraint(equalToConstant: 580)
+        storyCardView.setTopAnchorConstraint(equalTo: headerView.bottomAnchor, constant: 20)
+        storyCardView.setLeadingAnchorConstraint(equalTo: contentView.leadingAnchor, constant: 40)
+        storyCardView.setTrailingAnchorConstraint(equalTo: contentView.trailingAnchor, constant: -40)
+        storyCardView.setBottomAnchorConstraint(equalTo: contentView.bottomAnchor, constant: -20)
     }
 }

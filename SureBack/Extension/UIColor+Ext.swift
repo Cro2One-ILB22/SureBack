@@ -14,6 +14,7 @@ extension UIColor {
     static let tealishGreen = UIColor(rgb: 0xff2CD76D) // Ijo
     static let osloGray = UIColor(rgb: 0xff8A8C8F) // abu-abu keputihan
     static let porcelain = UIColor(rgb: 0xffF2F2F7) // putih ke abu abuan
+    static let iceBerg = UIColor(rgb: 0xffD9F7E7) // hijau muda keputihan
 }
 
 extension UIColor {

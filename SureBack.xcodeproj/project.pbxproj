@@ -63,6 +63,11 @@
 		16BD91A9291D534C0010731E /* HeaderMerchantDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91A8291D534C0010731E /* HeaderMerchantDashboardView.swift */; };
 		16BD91AB291E88790010731E /* ItemStoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91AA291E88790010731E /* ItemStoryCollectionViewCell.swift */; };
 		16BD91AD291E93270010731E /* MerchantDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91AC291E93270010731E /* MerchantDashboardViewController.swift */; };
+		16C004222933578B008F5D0D /* HeaderCoinHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C004212933578B008F5D0D /* HeaderCoinHistoryView.swift */; };
+		16C0042429335D02008F5D0D /* MerchantCoinHistoryViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0042329335D02008F5D0D /* MerchantCoinHistoryViewController+SetupUI.swift */; };
+		16C0042629335DDD008F5D0D /* SectionMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0042529335DDD008F5D0D /* SectionMonth.swift */; };
+		16C0042929340766008F5D0D /* MerchantGenerateTokenFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0042829340766008F5D0D /* MerchantGenerateTokenFormViewController.swift */; };
+		16C0042B293412A9008F5D0D /* MerchantGenerateTokenFormViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0042A293412A9008F5D0D /* MerchantGenerateTokenFormViewController+SetupUI.swift */; };
 		2DDDD70EABE69B42303C1AED /* Pods_SureBackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */; };
 		8A2D3CC34125394E06212A07 /* Pods_SureBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6F53CE101281D823C272BB /* Pods_SureBack.framework */; };
 		9CCB778BAEA00AE5C43FB920 /* Pods_SureBack_SureBackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */; };
@@ -74,7 +79,6 @@
 		AC1C1C40292F56DE00863A87 /* CustomerQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1C1C3F292F56DE00863A87 /* CustomerQRView.swift */; };
 		AC1C1C42292F7AC300863A87 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1C1C41292F7AC300863A87 /* Date+Ext.swift */; };
 		AC22879429182E8E00397ED0 /* ShowQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC22879329182E8E00397ED0 /* ShowQRViewController.swift */; };
-		AC22879A2918521F00397ED0 /* LoggedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2287992918521F00397ED0 /* LoggedInViewController.swift */; };
 		AC24AA3F2931E5590050A086 /* SettingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC24AA3E2931E5590050A086 /* SettingCardView.swift */; };
 		AC24AA412931EE3A0050A086 /* CustomerEditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC24AA402931EE3A0050A086 /* CustomerEditProfileViewController.swift */; };
 		AC24AA442931EF440050A086 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC24AA432931EF440050A086 /* CustomTextField.swift */; };
@@ -190,6 +194,11 @@
 		16BD91A8291D534C0010731E /* HeaderMerchantDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMerchantDashboardView.swift; sourceTree = "<group>"; };
 		16BD91AA291E88790010731E /* ItemStoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		16BD91AC291E93270010731E /* MerchantDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MerchantDashboardViewController.swift; sourceTree = "<group>"; };
+		16C004212933578B008F5D0D /* HeaderCoinHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCoinHistoryView.swift; sourceTree = "<group>"; };
+		16C0042329335D02008F5D0D /* MerchantCoinHistoryViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MerchantCoinHistoryViewController+SetupUI.swift"; sourceTree = "<group>"; };
+		16C0042529335DDD008F5D0D /* SectionMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionMonth.swift; sourceTree = "<group>"; };
+		16C0042829340766008F5D0D /* MerchantGenerateTokenFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantGenerateTokenFormViewController.swift; sourceTree = "<group>"; };
+		16C0042A293412A9008F5D0D /* MerchantGenerateTokenFormViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MerchantGenerateTokenFormViewController+SetupUI.swift"; sourceTree = "<group>"; };
 		3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack_SureBackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FB4E7EBF11E0E918FCC83A /* Pods-SureBack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBack.release.xcconfig"; path = "Target Support Files/Pods-SureBack/Pods-SureBack.release.xcconfig"; sourceTree = "<group>"; };
 		5F47E67A5BE033AB27E63DDB /* Pods-SureBackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBackTests.debug.xcconfig"; path = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -206,7 +215,6 @@
 		AC1C1C3F292F56DE00863A87 /* CustomerQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQRView.swift; sourceTree = "<group>"; };
 		AC1C1C41292F7AC300863A87 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		AC22879329182E8E00397ED0 /* ShowQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowQRViewController.swift; sourceTree = "<group>"; };
-		AC2287992918521F00397ED0 /* LoggedInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInViewController.swift; sourceTree = "<group>"; };
 		AC24AA3E2931E5590050A086 /* SettingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCardView.swift; sourceTree = "<group>"; };
 		AC24AA402931EE3A0050A086 /* CustomerEditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerEditProfileViewController.swift; sourceTree = "<group>"; };
 		AC24AA432931EF440050A086 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -319,7 +327,6 @@
 				ACE8C3582916267800BEA778 /* LoginViewController.swift */,
 				1619BB282919082700085B74 /* TabBarViewController.swift */,
 				1619BB2A2919B74800085B74 /* RegistrationViewController.swift */,
-				AC2287992918521F00397ED0 /* LoggedInViewController.swift */,
 				AC22879329182E8E00397ED0 /* ShowQRViewController.swift */,
 				AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */,
 				AC59F88C29202888000F8345 /* IsLoginViewController.swift */,
@@ -439,6 +446,7 @@
 			children = (
 				165122132927377E00DBC0AE /* Components */,
 				165122112927377600DBC0AE /* MerchantCoinHistoryViewController.swift */,
+				16C0042329335D02008F5D0D /* MerchantCoinHistoryViewController+SetupUI.swift */,
 			);
 			path = MerchantCoinHistory;
 			sourceTree = "<group>";
@@ -447,6 +455,8 @@
 			isa = PBXGroup;
 			children = (
 				16512214292737EC00DBC0AE /* DetailCoinHistoryCardView.swift */,
+				16C004212933578B008F5D0D /* HeaderCoinHistoryView.swift */,
+				16C0042529335DDD008F5D0D /* SectionMonth.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -533,6 +543,7 @@
 		16BD919F291D521D0010731E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				16C0042729340745008F5D0D /* MerchantGenerateTokenForm */,
 				AC24AA422931EF2C0050A086 /* General */,
 				AC24AA4529323E570050A086 /* TransactionDetail */,
 				169FCD60292F03F9009CBAB2 /* ConfirmRegistration */,
@@ -565,6 +576,15 @@
 				16BD91AA291E88790010731E /* ItemStoryCollectionViewCell.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		16C0042729340745008F5D0D /* MerchantGenerateTokenForm */ = {
+			isa = PBXGroup;
+			children = (
+				16C0042829340766008F5D0D /* MerchantGenerateTokenFormViewController.swift */,
+				16C0042A293412A9008F5D0D /* MerchantGenerateTokenFormViewController+SetupUI.swift */,
+			);
+			path = MerchantGenerateTokenForm;
 			sourceTree = "<group>";
 		};
 		AC1C1C3B292F487C00863A87 /* CustomerQrCode */ = {
@@ -1018,6 +1038,7 @@
 				119B765A2906976E00530C80 /* ViewController.swift in Sources */,
 				ACE5CDA82912716B00D08177 /* ScanQrResponse.swift in Sources */,
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,
+				16C0042429335D02008F5D0D /* MerchantCoinHistoryViewController+SetupUI.swift in Sources */,
 				1651220F2926C71700DBC0AE /* ItemCustomerStoryCollectionCell.swift in Sources */,
 				1603EFE0292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift in Sources */,
 				169FCD5F292E1935009CBAB2 /* MerchantDashboardViewController+SetupUI.swift in Sources */,
@@ -1031,10 +1052,12 @@
 				ACDD097A29128F1E00309FBC /* Transaction.swift in Sources */,
 				1619BB2E2919D9DC00085B74 /* UIView+Ext.swift in Sources */,
 				1651220D2926C6F600DBC0AE /* ListCustomerStoryTableViewCell.swift in Sources */,
+				16C0042B293412A9008F5D0D /* MerchantGenerateTokenFormViewController+SetupUI.swift in Sources */,
 				AC24AA442931EF440050A086 /* CustomTextField.swift in Sources */,
 				AC59F88D29202888000F8345 /* IsLoginViewController.swift in Sources */,
 				1603EFE2292B1D6800EC5485 /* CustomSegmentedControl.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
+				16C004222933578B008F5D0D /* HeaderCoinHistoryView.swift in Sources */,
 				AC24AA4929327F480050A086 /* UserViewModel.swift in Sources */,
 				AC8AF8DB2922FA8700227BDE /* SubmitStoryTableViewCell.swift in Sources */,
 				165121FB29244B7C00DBC0AE /* CustomerDashboardViewController.swift in Sources */,
@@ -1068,6 +1091,7 @@
 				AC59F89429206137000F8345 /* ItemCustomerHistoryTableViewCell.swift in Sources */,
 				16BD91AD291E93270010731E /* MerchantDashboardViewController.swift in Sources */,
 				AC59F88B291F8117000F8345 /* Token.swift in Sources */,
+				16C0042629335DDD008F5D0D /* SectionMonth.swift in Sources */,
 				169FCD59292DBEA4009CBAB2 /* UIColor+Ext.swift in Sources */,
 				169FCD43292C8A33009CBAB2 /* LinkResponses.swift in Sources */,
 				169FCD4C292CC172009CBAB2 /* UIActivityIndicatorView+Ext.swift in Sources */,
@@ -1076,11 +1100,11 @@
 				AC3FEDCE290834EA0011202E /* JSONNull.swift in Sources */,
 				16930E3F290FBB27003DFEBE /* AuthResponse.swift in Sources */,
 				169FCD45292C8CAA009CBAB2 /* MerchantListAllCustomerViewController+SetupUI.swift in Sources */,
+				16C0042929340766008F5D0D /* MerchantGenerateTokenFormViewController.swift in Sources */,
 				AC24AA4729323E9F0050A086 /* TransactionDetailViewController.swift in Sources */,
 				AC1A6CBB291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift in Sources */,
 				11B2DD2F2907CF760065E98D /* APICall.swift in Sources */,
 				1603EFE8292B494700EC5485 /* WaitingViewController.swift in Sources */,
-				AC22879A2918521F00397ED0 /* LoggedInViewController.swift in Sources */,
 				169FCD5B292DD655009CBAB2 /* String+Ext.swift in Sources */,
 				AC2AC1BD291F3C5B00E9F8A7 /* ItemActiveTokenCollectionViewCell.swift in Sources */,
 			);

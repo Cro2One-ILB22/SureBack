@@ -33,6 +33,14 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         return table
     }()
 
+    lazy var loadingIndicator: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.style = .gray
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.isHidden = true
+        return loading
+    }()
+
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -42,11 +50,16 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         initAndStartUpdatingLocation()
         view.backgroundColor = .white
 
+        tableView.isHidden = true
+        loadingIndicator.show(true)
+
         request.getListMerchant { data in
             switch data {
             case let .success(result):
                 do {
                     self.merchantData = result.data
+                    self.tableView.isHidden = false
+                    self.loadingIndicator.show(false)
                 } catch let error as NSError {
                     print(error.description)
                 }
@@ -152,6 +165,7 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
 
             cell.selectionStyle = .none
 
+            cell.merchantImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.merchantImage.sd_setImage(
                 with: URL(string: merchantData[indexPath.row].profilePicture),
                 placeholderImage: UIImage(named: "system.photo"),

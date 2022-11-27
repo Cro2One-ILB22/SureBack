@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CustomerHistoryViewController: UIViewController {
+//    let headerView = HeaderCustomerHistoryView(frame: CGRect(x: 0, y: 90, width: UIScreen.screenWidth, height: 200))
     let headerView = HeaderCustomerHistoryView(frame: CGRect(x: 0, y: 64, width: UIScreen.screenWidth, height: 200))
 
     let customSegmentedControl: CustomSegmentedControl = {
@@ -42,7 +44,7 @@ class CustomerHistoryViewController: UIViewController {
         tabBarController?.tabBar.isHidden = true
 
         setupLayout()
-        setupHeaderValue()
+        configureHeader()
         showCoinHistoryView(false)
 
         guard let user = user, let merchantData = merchantData else {
@@ -103,22 +105,29 @@ class CustomerHistoryViewController: UIViewController {
         }
     }
 
-    func setupHeaderValue() {
+    func configureHeader() {
+        headerView.profileImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         headerView.profileImage.sd_setImage(
             with: URL(string: merchantData?.profilePicture ?? ""),
             placeholderImage: UIImage(named: "person.crop.circle"),
             options: .progressiveLoad,
             completed: nil
         )
+        headerView.userNameLabel.text = "\(user?.name ?? "") @"
         headerView.merchantLabel.text = merchantData?.name
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(redeemButtonTapped))
-        headerView.redeemButton.addGestureRecognizer(tapGesture)
+        headerView.stackRedeemButton.addGestureRecognizer(tapGesture)
         headerView.loyaltCoinsValueLabel.text = "\(merchantData?.coins?[0].outstanding ?? 0)"
         headerView.lockImage.image = UIImage(named: "system.photo")
     }
 
     @objc func redeemButtonTapped(sender: UITapGestureRecognizer) {
         print("redeem button tapped")
+        let submitStoryVC = SubmitStoryViewController()
+        submitStoryVC.title = "Submit Story"
+        submitStoryVC.tokenData = tokenData
+        submitStoryVC.user = user
+        navigationController?.pushViewController(submitStoryVC, animated: true)
     }
 
     private func showCoinHistoryView(_ isShowing: Bool) {
@@ -165,7 +174,7 @@ extension CustomerHistoryViewController {
 
     private func setupHeaderView() {
         view.addSubview(headerView)
-//        headerView.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100)
+//        headerView.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200)
     }
 
     private func setupTokenStatusView() {

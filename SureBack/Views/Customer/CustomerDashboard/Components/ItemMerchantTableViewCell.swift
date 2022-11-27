@@ -28,7 +28,7 @@ class ItemMerchantTableViewCell: UITableViewCell {
 
     lazy var coinImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "AppIcon")
+        image.image = UIImage(named: "loyalty.coin")
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.layer.cornerRadius = 10

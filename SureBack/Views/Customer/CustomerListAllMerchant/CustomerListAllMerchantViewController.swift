@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CustomerListAllMerchantViewController: UIViewController {
     var user: UserInfoResponse?
@@ -54,6 +55,7 @@ extension CustomerListAllMerchantViewController: UITableViewDelegate, UITableVie
 
         cell.selectionStyle = .none
 
+        cell.merchantImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.merchantImage.sd_setImage(
             with: URL(string: merchantData[indexPath.row].profilePicture),
             placeholderImage: UIImage(named: "system.photo"),

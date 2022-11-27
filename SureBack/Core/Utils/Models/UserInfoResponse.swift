@@ -6,18 +6,19 @@
 //
 
 import Foundation
+import AutoEquatable
 
 // MARK: - UserInfoResponse
 
-class UserInfoResponse: Codable {
+class UserInfoResponse: Codable, AutoEquatable {
     let id: Int
-    let name: String
-    let profilePicture: String
+    var name: String
+    var profilePicture: String
     let instagramID: Int
-    let instagramUsername: String
-    let balance: Int
-    let email: String
-    let emailVerifiedAt: String?
+    var instagramUsername: String
+    var balance: Int
+    var email: String
+    var emailVerifiedAt: String?
     let createdAt, updatedAt: String?
     let roles: [String]?
     let merchantDetail: MerchantDetailResponse?
@@ -40,7 +41,7 @@ class UserInfoResponse: Codable {
 
 // MARK: - Coin
 
-struct Coin: Codable {
+struct Coin: Codable, AutoEquatable {
     let allTimeReward, outstanding, exchanged: Int
     let coinType, updatedAt: String
 

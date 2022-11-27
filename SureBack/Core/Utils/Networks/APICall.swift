@@ -16,6 +16,7 @@ protocol Endpoint {
 }
 
 enum Endpoints: Endpoint {
+    case broadcastingAuth
     case login
     case logout
     case preRegister
@@ -40,6 +41,8 @@ enum Endpoints: Endpoint {
 
     public var url: String {
         switch self {
+        case .broadcastingAuth:
+            return "\(API.baseUrl)/broadcasting/auth"
         case .login:
             return "\(API.baseUrl)/api/auth/login"
         case .logout:

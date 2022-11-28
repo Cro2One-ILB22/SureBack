@@ -1,13 +1,16 @@
 //
-//  CoinHistoryView.swift
+//  CoinHistoryViewController.swift
 //  SureBack
 //
-//  Created by Ditha Nurcahya Avianty on 23/11/22.
+//  Created by Ditha Nurcahya Avianty on 28/11/22.
 //
 
 import UIKit
 
-class CoinHistoryView: UIView {
+class CoinHistoryViewController: UIViewController {
+    let request = RequestFunction()
+    var merchantData: UserInfoResponse?
+
     var transactionData: [Transaction] = [] {
         didSet {
             tableView.reloadData()
@@ -17,10 +20,12 @@ class CoinHistoryView: UIView {
                 self.tableView.setEmptyMessage(
                     image: UIImage(named: "empty.merchant")!,
                     title: "Empty",
-                    message: "You don’t have any record with us.\nDon’t you want to visit us?")
+                    message: "You don’t have any record with us.\nDon’t you want to visit us?",
+                    centerYAnchorConstant: -50)
             }
         }
     }
+
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .plain)
         table.register(ItemCustomerHistoryTableViewCell.self, forCellReuseIdentifier: ItemCustomerHistoryTableViewCell.id)
@@ -28,21 +33,50 @@ class CoinHistoryView: UIView {
         return table
     }()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    lazy var loadingIndicator: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.style = .gray
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        return loading
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        setupTableView()
 
-        tableView.reloadData()
+        tableView.isHidden = true
+        loadingIndicator.startAnimating()
+        loadingIndicator.isHidden = false
+
+        guard let merchantData = merchantData else { return }
+        getCoinHistoryData(merchantData: merchantData)
+        setupTableView()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func getCoinHistoryData(merchantData: UserInfoResponse) {
+        request.getListTransaction(merchantId: merchantData.id, status: "success") { data in
+            switch data {
+            case let .success(result):
+                print("coin balance data: \(result)")
+                do {
+                    print(result.data)
+                    self.transactionData = result.data
+                    self.tableView.isHidden = false
+                    self.loadingIndicator.stopAnimating()
+                    self.loadingIndicator.isHidden = true
+                } catch let error as NSError {
+                    print(error.description)
+                }
+            case let .failure(error):
+                print(error)
+                print("failed to get list coins balance in merchant \(merchantData.name)")
+            }
+        }
     }
 }
 
-extension CoinHistoryView: UITableViewDataSource, UITableViewDelegate {
+extension CoinHistoryViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return transactionData.count
     }
@@ -56,7 +90,6 @@ extension CoinHistoryView: UITableViewDataSource, UITableViewDelegate {
         if transactionData[indexPath.row].createdAt.stringToDate() < Date() {
             print(transactionData[indexPath.row].createdAt.stringToDate())
             print("datena: \(Date())")
-
         }
 
         switch transactionData[indexPath.row].accountingEntry {
@@ -73,13 +106,13 @@ extension CoinHistoryView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension CoinHistoryView {
+extension CoinHistoryViewController {
     private func setupTableView() {
-        addSubview(tableView)
+        view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.setTopAnchorConstraint(equalTo: topAnchor, constant: 10)
-        tableView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 16)
-        tableView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -16)
-        tableView.setBottomAnchorConstraint(equalTo: bottomAnchor)
+        tableView.setTopAnchorConstraint(equalTo: view.topAnchor, constant: 10)
+        tableView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 16)
+        tableView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -16)
+        tableView.setBottomAnchorConstraint(equalTo: view.bottomAnchor)
     }
 }

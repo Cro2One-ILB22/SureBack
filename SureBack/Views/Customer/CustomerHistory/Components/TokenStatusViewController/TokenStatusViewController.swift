@@ -1,13 +1,16 @@
 //
-//  TokenStatusView.swift
+//  TokenStatusViewController.swift
 //  SureBack
 //
-//  Created by Ditha Nurcahya Avianty on 22/11/22.
+//  Created by Ditha Nurcahya Avianty on 28/11/22.
 //
 
 import UIKit
 
-class TokenStatusView: UIView {
+class TokenStatusViewController: UIViewController {
+    let request = RequestFunction()
+    var merchantData: UserInfoResponse?
+
     var transactionData: [MyStoryData] = [] {
         didSet {
             tableView.reloadData()
@@ -17,8 +20,8 @@ class TokenStatusView: UIView {
                 self.tableView.setEmptyMessage(
                     image: UIImage(named: "empty.merchant")!,
                     title: "Empty",
-                    message: "You don’t have any record with us.\nDon’t you want to visit us?")
-//                self.showLoadingIndicator(true)
+                    message: "You don’t have any record with us.\nDon’t you want to visit us?",
+                    centerYAnchorConstant: -50)
             }
         }
     }
@@ -38,27 +41,51 @@ class TokenStatusView: UIView {
         return loading
     }()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        //TODO: not hiding
-//        showLoadingIndicator(false)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+
+        tableView.isHidden = true
+        loadingIndicator.startAnimating()
+        loadingIndicator.isHidden = false
+
+        guard let merchantData = merchantData else { return }
+        getTokenStatusData(merchantData: merchantData)
         setupLayout()
-        tableView.reloadData()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    private func showLoadingIndicator(_ isShow: Bool) {
-        self.tableView.isHidden = isShow
-        loadingIndicator.show(isShow)
+    func getTokenStatusData(merchantData: UserInfoResponse) {
+        request.getMyStoryCustomer(merchantId: merchantData.id) { data in
+            switch data {
+            case let .success(result):
+                do {
+                    for i in result.data {
+                        if i.submittedAt == nil {
+                            if i.token.expiresAt.stringToDate() < Date() {
+                                self.transactionData.append(i)
+                            }
+                        } else {
+                            if i.instagramStoryStatus == "validated" {
+                                self.transactionData.append(i)
+                            }
+                        }
+                    }
+                    self.tableView.isHidden = false
+                    self.loadingIndicator.stopAnimating()
+                    self.loadingIndicator.isHidden = true
+                } catch let error as NSError {
+                    print(error.description)
+                }
+            case let .failure(error):
+                print(error)
+                print("failed to get list token status in merchant \(merchantData.name)")
+            }
+        }
     }
 }
 
-extension TokenStatusView: UITableViewDataSource, UITableViewDelegate {
+extension TokenStatusViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return transactionData.count
     }
@@ -83,33 +110,34 @@ extension TokenStatusView: UITableViewDataSource, UITableViewDelegate {
                 break
             }
         }
-        
+
         cell.coinsLabel.text = "Rp\(transactionData[indexPath.row].token.purchase.purchaseAmount)"
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         
     }
 }
 
-extension TokenStatusView {
+extension TokenStatusViewController {
     private func setupLayout() {
-//        setupLoadingIndicator()
+        setupLoadingIndicator()
         setupTableView()
     }
+
     private func setupLoadingIndicator() {
-        addSubview(loadingIndicator)
-        loadingIndicator.setCenterXAnchorConstraint(equalTo: centerXAnchor)
-        loadingIndicator.setCenterYAnchorConstraint(equalTo: centerYAnchor)
+        view.addSubview(loadingIndicator)
+        loadingIndicator.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
+        loadingIndicator.setCenterYAnchorConstraint(equalTo: view.centerYAnchor)
     }
+
     private func setupTableView() {
-        addSubview(tableView)
+        view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.setTopAnchorConstraint(equalTo: topAnchor, constant: 10)
-        tableView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 16)
-        tableView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -16)
-        tableView.setBottomAnchorConstraint(equalTo: bottomAnchor)
+        tableView.setTopAnchorConstraint(equalTo: view.topAnchor, constant: 10)
+        tableView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 16)
+        tableView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -16)
+        tableView.setBottomAnchorConstraint(equalTo: view.bottomAnchor)
     }
 }

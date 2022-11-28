@@ -9,8 +9,7 @@ import UIKit
 import SDWebImage
 
 class CustomerHistoryViewController: UIViewController {
-//    let headerView = HeaderCustomerHistoryView(frame: CGRect(x: 0, y: 90, width: UIScreen.screenWidth, height: 200))
-    let headerView = HeaderCustomerHistoryView(frame: CGRect(x: 0, y: 64, width: UIScreen.screenWidth, height: 220))
+    let headerView = HeaderCustomerHistoryView()
 
     let customSegmentedControl: CustomSegmentedControl = {
         let codeSegmented = CustomSegmentedControl(frame: CGRect(x: 0, y: 200, width: UIScreen.screenWidth, height: 50), buttonTitle: ["Token Status History", "Coin Balance History"])
@@ -18,15 +17,9 @@ class CustomerHistoryViewController: UIViewController {
         return codeSegmented
     }()
 
-    var tokenStatusView: TokenStatusView = {
-        let segmented = TokenStatusView()
-        return segmented
-    }()
-
-    let coinHistoryView: CoinHistoryView = {
-        let segmented = CoinHistoryView()
-        return segmented
-    }()
+    var tokenStatusView: UIView = UIView()
+    var coinHistoryView: UIView = UIView()
+    var isFirstTimeOpenCoinHistory = true
 
     var user: UserInfoResponse?
     var merchantData: UserInfoResponse?
@@ -57,52 +50,6 @@ class CustomerHistoryViewController: UIViewController {
         }
 
         runCountdown()
-        getCoinHistoryData(user: user, merchantData: merchantData)
-        getTokenStatusData(merchantData: merchantData)
-    }
-
-    func getTokenStatusData(merchantData: UserInfoResponse) {
-        request.getMyStoryCustomer(merchantId: merchantData.id) { data in
-            switch data {
-            case let .success(result):
-                do {
-                    for i in result.data {
-                        if i.submittedAt == nil {
-                            if i.token.expiresAt.stringToDate() < Date() {
-                                self.tokenStatusView.transactionData.append(i)
-                            }
-                        } else {
-                            if i.instagramStoryStatus == "validated"{
-                                self.tokenStatusView.transactionData.append(i)
-                            }
-                        }
-                    }
-                } catch let error as NSError {
-                    print(error.description)
-                }
-            case let .failure(error):
-                print(error)
-                print("failed to get list token status in merchant \(merchantData.name)")
-            }
-        }
-    }
-
-    func getCoinHistoryData(user: UserInfoResponse, merchantData: UserInfoResponse) {
-        request.getListTransaction(merchantId: merchantData.id, status: "success") { data in
-            switch data {
-            case let .success(result):
-                print("coin balance data: \(result)")
-                do {
-                    print(result.data)
-                    self.coinHistoryView.transactionData = result.data
-                } catch let error as NSError {
-                    print(error.description)
-                }
-            case let .failure(error):
-                print(error)
-                print("failed to get list coins balance in merchant \(merchantData.name)")
-            }
-        }
     }
 
     func configureHeader() {
@@ -157,11 +104,14 @@ class CustomerHistoryViewController: UIViewController {
 
 extension CustomerHistoryViewController: CustomSegmentedControlDelegate {
     func change(to index: Int) {
-        print("change to", index)
         switch index {
         case 0:
             showCoinHistoryView(false)
         case 1:
+            if isFirstTimeOpenCoinHistory {
+                isFirstTimeOpenCoinHistory = false
+                setupCoinHistoryView()
+            }
             showCoinHistoryView(true)
         default:
             break
@@ -174,12 +124,12 @@ extension CustomerHistoryViewController {
         setupHeaderView()
         setupCustomSegmentedControl()
         setupTokenStatusView()
-        setupCoinHistoryView()
     }
 
     private func setupHeaderView() {
         view.addSubview(headerView)
-//        headerView.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200)
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
     }
 
     private func setupTokenStatusView() {
@@ -189,6 +139,11 @@ extension CustomerHistoryViewController {
         tokenStatusView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor)
         tokenStatusView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor)
         tokenStatusView.setBottomAnchorConstraint(equalTo: view.bottomAnchor)
+        let tokenStatusVC = TokenStatusViewController()
+        self.addChild(tokenStatusVC)
+        tokenStatusVC.merchantData = merchantData
+        tokenStatusVC.view.frame = self.tokenStatusView.bounds
+        tokenStatusView.addSubview(tokenStatusVC.view)
     }
 
     private func setupCoinHistoryView() {
@@ -198,6 +153,11 @@ extension CustomerHistoryViewController {
         coinHistoryView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor)
         coinHistoryView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor)
         coinHistoryView.setBottomAnchorConstraint(equalTo: view.bottomAnchor)
+        let coinHistoryVC = CoinHistoryViewController()
+        self.addChild(coinHistoryVC)
+        coinHistoryVC.merchantData = merchantData
+        coinHistoryVC.view.frame = self.coinHistoryView.bounds
+        coinHistoryView.addSubview(coinHistoryVC.view)
     }
 
     private func setupCustomSegmentedControl() {

@@ -149,7 +149,7 @@ class HeaderCustomerHistoryView: UIView {
     }()
 
     override init(frame: CGRect) {
-        super.init(frame: frame)
+        super.init(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 220))
         setupHeaderView()
     }
 
@@ -196,7 +196,7 @@ extension HeaderCustomerHistoryView {
         let stackImageCoins = UIStackView(arrangedSubviews: [bgProfileImageView, stackCoins])
         stackImageCoins.axis = .horizontal
 //        stackImageCoins.distribution = .fillProportionally
-        stackImageCoins.spacing = 180
+        stackImageCoins.spacing = 170
         stackImageCoins.translatesAutoresizingMaskIntoConstraints = false
 
         // Stack 3
@@ -238,12 +238,12 @@ extension HeaderCustomerHistoryView {
         stackViewAll.spacing = 5
         stackViewAll.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(stackViewAll)
-        stackViewAll.setWidthAnchorConstraint(equalToConstant: UIScreen.screenWidth - 40)
+//        stackViewAll.setWidthAnchorConstraint(equalToConstant: UIScreen.screenWidth - 20)
         stackViewAll.setTopAnchorConstraint(equalTo: contentView.topAnchor, constant: 10)
-        stackViewAll.setCenterXAnchorConstraint(equalTo: contentView.centerXAnchor)
-        stackViewAll.setCenterYAnchorConstraint(equalTo: contentView.centerYAnchor)
+//        stackViewAll.setCenterXAnchorConstraint(equalTo: contentView.centerXAnchor)
+//        stackViewAll.setCenterYAnchorConstraint(equalTo: contentView.centerYAnchor)
         stackViewAll.setBottomAnchorConstraint(equalTo: contentView.bottomAnchor, constant: -10)
         stackViewAll.setLeadingAnchorConstraint(equalTo: contentView.leadingAnchor, constant: 10)
-        stackViewAll.setTrailingAnchorConstraint(equalTo: contentView.trailingAnchor, constant: -10)
+        stackViewAll.setTrailingAnchorConstraint(equalTo: contentView.trailingAnchor, constant: 10)
     }
 }

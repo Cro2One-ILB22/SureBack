@@ -106,7 +106,7 @@ class RequestFunction {
             }
     }
 
-    func register(name: String, email: String, password: String, role: String, username: String, completion: @escaping (AuthResponse?, AFError?) -> Void) {
+    func register(name: String, email: String, password: String, role: String, username: String, instagramToDM: String, completion: @escaping (AuthResponse?, AFError?) -> Void) {
         let url = Endpoints.register.url
         let body: [String: Any] = [
             "name": name,
@@ -114,6 +114,7 @@ class RequestFunction {
             "password": password,
             "role": role,
             "username": username,
+            "instagram_to_dm": instagramToDM,
         ]
         fetchHeadersForDeviceRegistration { response in
             switch response {

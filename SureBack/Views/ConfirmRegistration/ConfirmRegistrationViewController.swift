@@ -109,7 +109,8 @@ extension ConfirmRegistrationViewController {
     }
     @objc func goToSurebackAccount() {
         print("go to tapped")
-        UIApplication.shared.open(URL(string: "https://www.instagram.com/sureback.id/?hl=id")!)
+        guard let responseOTP = responseOTP else { return }
+        UIApplication.shared.open(URL(string: "https://www.instagram.com/\(responseOTP.instagramToDM)/?hl=id")!)
     }
     @objc func checkOtp() {
         print("Tapped")
@@ -118,13 +119,15 @@ extension ConfirmRegistrationViewController {
         guard let email = dataRegister?.email, !email.isEmpty else {return}
         guard let password = dataRegister?.password, !password.isEmpty else {return}
         guard let role = dataRegister?.role, !role.isEmpty else {return}
+        guard let responseOTP = responseOTP else { return }
         let request = RequestFunction()
         request.register(
             name: name,
             email: email,
             password: password,
             role: role,
-            username: usernameIG) { data, error in
+            username: usernameIG,
+            instagramToDM: responseOTP.instagramToDM) { data, error in
                 if error != nil {
                     self.showAlert(title: "Error", message: error?.localizedDescription ?? "", action: "Okey")
                     return

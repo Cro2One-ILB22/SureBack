@@ -103,20 +103,42 @@ extension TokenStatusViewController: UITableViewDataSource, UITableViewDelegate 
             case 0:
                 cell.statusImage.image = UIImage(named: "multiply.circle.fill.red")?.sd_tintedImage(with: .red)
                 cell.statusLabel.text = "Story Rejected"
+
             case 1:
                 cell.statusImage.image = UIImage(named: "checkmark.circle.fill")?.sd_tintedImage(with: .green)
-                cell.statusLabel.text = "Story Accepted"
+                cell.statusLabel.text = "Story Approved"
             default:
                 break
             }
         }
 
-        cell.coinsLabel.text = "Rp\(transactionData[indexPath.row].token.purchase.purchaseAmount)"
+        cell.coinsLabel.text = "Rp\(String(transactionData[indexPath.row].token.purchase?.purchaseAmount ?? 0))"
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        var status = ""
+
+        if transactionData[indexPath.row].submittedAt == nil {
+            status = "expired"
+        } else {
+            switch transactionData[indexPath.row].approvalStatus {
+            case 0:
+                status = "rejected"
+            case 1:
+                status = "approved"
+            default:
+                break
+            }
+        }
+
+        let transactionDetailVC = TransactionDetailViewController()
+        transactionDetailVC.title = "Token Status History Detail"
+        transactionDetailVC.configureToken(transactionData[indexPath.row], status: status)
+        navigationController?.pushViewController(transactionDetailVC, animated: true)
+
     }
 }
 

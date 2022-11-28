@@ -14,6 +14,7 @@ struct Transaction: Codable {
     let resultDescription: JSONNull?
     let accountingEntry: AccountingEntry
     let createdAt, updatedAt: String
+    let purchase: PurchaseResponse?
     let status: Status
     let category: Category
     let paymentInstrument: PaymentInstrument
@@ -24,7 +25,7 @@ struct Transaction: Codable {
         case accountingEntry = "accounting_entry"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case status, category
+        case status, category, purchase
         case paymentInstrument = "payment_instrument"
     }
 }

@@ -76,7 +76,7 @@ class SectionNotifHeader: UITableViewHeaderFooterView {
         }
 
         if status == "approved" || status == "rejected" {
-            dateLabel.text = statusHistory.last?.timestamp?.formatTodMMMyyy2()
+            dateLabel.text = statusHistory.last?.timestamp?.formatTodMMMyyyStory()
         } else {
             dateLabel.text = statusHistory.last?.timestamp?.formatTodMMMyyy()
         }

@@ -51,7 +51,7 @@ class CoinHistoryViewController: UIViewController {
 
         guard let merchantData = merchantData else { return }
         getCoinHistoryData(merchantData: merchantData)
-        setupTableView()
+        setupLayout()
     }
 
     func getCoinHistoryData(merchantData: UserInfoResponse) {
@@ -87,11 +87,6 @@ extension CoinHistoryViewController: UITableViewDataSource, UITableViewDelegate 
         cell.totalPurchaseLabel.isHidden = true
         cell.dateLabel.text = transactionData[indexPath.row].createdAt.formatTodMMMyyy()
 
-        if transactionData[indexPath.row].createdAt.stringToDate() < Date() {
-            print(transactionData[indexPath.row].createdAt.stringToDate())
-            print("datena: \(Date())")
-        }
-
         switch transactionData[indexPath.row].accountingEntry {
         case .c:
             cell.statusImage.image = UIImage(named: "arrow.down.left.circle.fill")?.sd_tintedImage(with: .green)
@@ -104,9 +99,26 @@ extension CoinHistoryViewController: UITableViewDataSource, UITableViewDelegate 
         }
         return cell
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let transactionDetailVC = TransactionDetailViewController()
+        transactionDetailVC.title = "Coin Balance History Detail"
+        transactionDetailVC.configureCoin(transactionData[indexPath.row])
+        navigationController?.pushViewController(transactionDetailVC, animated: true)
+
+    }
 }
 
 extension CoinHistoryViewController {
+    private func setupLayout() {
+        setupLoadingIndicator()
+        setupTableView()
+    }
+    private func setupLoadingIndicator() {
+        view.addSubview(loadingIndicator)
+        loadingIndicator.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
+        loadingIndicator.setCenterYAnchorConstraint(equalTo: view.centerYAnchor)
+    }
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false

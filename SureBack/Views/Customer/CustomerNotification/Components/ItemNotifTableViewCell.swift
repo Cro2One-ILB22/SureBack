@@ -8,7 +8,6 @@
 import UIKit
 
 class ItemNotifTableViewCell: UITableViewCell {
-
     static let id = "ItemNotifTableViewCell"
 
     lazy var statusImage: UIImageView = {
@@ -69,7 +68,7 @@ class ItemNotifTableViewCell: UITableViewCell {
             break
         }
 
-        guard let timestamp = data.timestamp else {return}
+        guard let timestamp = data.timestamp else { return }
 
         switch data.status {
         case .expired:
@@ -84,16 +83,16 @@ class ItemNotifTableViewCell: UITableViewCell {
             secondDetailLabel.text = "24 Hours of Waiting Period"
         case .approved:
             statusLabel.text = "Story Approved"
-            firstDetailLabel.text = timestamp.formatTodMMMyyy2()
-            secondDetailLabel.text = "\(allData.tokenHistoryData.tokenCashback?.amount ?? 0) coins credited to your balance"
+            firstDetailLabel.text = timestamp.formatTodMMMyyyStory()
+            secondDetailLabel.text = "\(allData.tokenHistoryData.tokenCashback.amount) coins credited to your balance"
         case .rejected:
             statusLabel.text = "Story Rejected"
-            firstDetailLabel.text = data.timestamp?.formatTodMMMyyy2()
+            firstDetailLabel.text = data.timestamp?.formatTodMMMyyyStory()
             secondDetailLabel.text = "Reason: \(allData.tokenHistoryData.rejectedReason ?? "-")"
         case .redeemed:
             statusLabel.text = "Token Issued"
             firstDetailLabel.text = "Post Story & Redeem - \(timestamp.formatTodMMMyyy())"
-            secondDetailLabel.text = "Total Purchase: Rp\(allData.tokenHistoryData.purchase.purchaseAmount)"
+            secondDetailLabel.text = "Total Purchase: Rp\(String(allData.tokenHistoryData.purchase?.purchaseAmount ?? 0))"
         default:
             break
         }
@@ -115,5 +114,4 @@ class ItemNotifTableViewCell: UITableViewCell {
         stackView.setTopAnchorConstraint(equalTo: topAnchor, constant: 10)
         stackView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
     }
-
 }

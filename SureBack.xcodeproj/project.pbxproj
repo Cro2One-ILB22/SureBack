@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1101ABBE2906AE8200F15996 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1101ABBD2906AE8200F15996 /* .swiftlint.yml */; };
 		115EBDAD2933F8A100069F83 /* PurchasePusherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115EBDAC2933F8A100069F83 /* PurchasePusherService.swift */; };
-		115EBDB42934391600069F83 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115EBDB32934391600069F83 /* TransactionDetailViewController.swift */; };
 		119B76562906976E00530C80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119B76552906976E00530C80 /* AppDelegate.swift */; };
 		119B765A2906976E00530C80 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119B76592906976E00530C80 /* ViewController.swift */; };
 		119B765F2906976F00530C80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 119B765E2906976F00530C80 /* Assets.xcassets */; };
@@ -114,10 +113,10 @@
 		ACCE1075293420DD00C2CB45 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE1074293420DD00C2CB45 /* TransactionDetailViewController.swift */; };
 		ACCE107A29343A7F00C2CB45 /* TokenStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE107929343A7F00C2CB45 /* TokenStatusViewController.swift */; };
 		ACCE107C29343FFE00C2CB45 /* CoinHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE107B29343FFE00C2CB45 /* CoinHistoryViewController.swift */; };
+		ACCE107E293464FE00C2CB45 /* ItemSubmitStoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE107D293464FE00C2CB45 /* ItemSubmitStoryCollectionViewCell.swift */; };
 		ACDD097A29128F1E00309FBC /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD097929128F1E00309FBC /* Transaction.swift */; };
 		ACE5CDA42912704800D08177 /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA32912704800D08177 /* UserInfoResponse.swift */; };
 		ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */; };
-		ACE5CDA82912716B00D08177 /* ScanQrResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA72912716B00D08177 /* ScanQrResponse.swift */; };
 		ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */; };
 		ACE5CDAC2912722800D08177 /* ResultStoryIG.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAB2912722800D08177 /* ResultStoryIG.swift */; };
 		ACE5CDB029127E6200D08177 /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAF29127E6200D08177 /* ResponseData.swift */; };
@@ -146,7 +145,6 @@
 /* Begin PBXFileReference section */
 		1101ABBD2906AE8200F15996 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		115EBDAC2933F8A100069F83 /* PurchasePusherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasePusherService.swift; sourceTree = "<group>"; };
-		115EBDB32934391600069F83 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
 		119B76522906976E00530C80 /* SureBack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SureBack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		119B76552906976E00530C80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		119B76592906976E00530C80 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -261,10 +259,10 @@
 		ACCE1074293420DD00C2CB45 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
 		ACCE107929343A7F00C2CB45 /* TokenStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStatusViewController.swift; sourceTree = "<group>"; };
 		ACCE107B29343FFE00C2CB45 /* CoinHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinHistoryViewController.swift; sourceTree = "<group>"; };
+		ACCE107D293464FE00C2CB45 /* ItemSubmitStoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSubmitStoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		ACDD097929128F1E00309FBC /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		ACE5CDA32912704800D08177 /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
 		ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateTokenOnlineResponse.swift; sourceTree = "<group>"; };
-		ACE5CDA72912716B00D08177 /* ScanQrResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQrResponse.swift; sourceTree = "<group>"; };
 		ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIGResponse.swift; sourceTree = "<group>"; };
 		ACE5CDAB2912722800D08177 /* ResultStoryIG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStoryIG.swift; sourceTree = "<group>"; };
 		ACE5CDAF29127E6200D08177 /* ResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData.swift; sourceTree = "<group>"; };
@@ -302,14 +300,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		115EBDB22934391600069F83 /* TransactionDetail */ = {
-			isa = PBXGroup;
-			children = (
-				115EBDB32934391600069F83 /* TransactionDetailViewController.swift */,
-			);
-			path = TransactionDetail;
-			sourceTree = "<group>";
-		};
 		119B76492906976E00530C80 = {
 			isa = PBXGroup;
 			children = (
@@ -496,7 +486,6 @@
 				16930E3E290FBB27003DFEBE /* AuthResponse.swift */,
 				ACE5CDA32912704800D08177 /* UserInfoResponse.swift */,
 				ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */,
-				ACE5CDA72912716B00D08177 /* ScanQrResponse.swift */,
 				ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */,
 				ACE5CDAB2912722800D08177 /* ResultStoryIG.swift */,
 				ACE5CDAF29127E6200D08177 /* ResponseData.swift */,
@@ -732,6 +721,7 @@
 			children = (
 				AC8AF8DA2922FA8700227BDE /* SubmitStoryTableViewCell.swift */,
 				AC3BCEB82921E5F9009BFB05 /* HeaderSubmitStoryView.swift */,
+				ACCE107D293464FE00C2CB45 /* ItemSubmitStoryCollectionViewCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1114,15 +1104,15 @@
 				16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */,
 				ACA270A9292CD02C008712D5 /* CustomerHistoryViewController.swift in Sources */,
 				16512207292587C800DBC0AE /* MerchantDetailStoryViewController.swift in Sources */,
-				11CC9559292FB5B00038E766 /* (null) in Sources */,
+				11CC9559292FB5B00038E766 /* PusherService.swift in Sources */,
 				119B765A2906976E00530C80 /* ViewController.swift in Sources */,
 				11CB603E293381D800C66F39 /* QRScanPurchase.swift in Sources */,
-				ACE5CDA82912716B00D08177 /* ScanQrResponse.swift in Sources */,
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,
 				16C0042429335D02008F5D0D /* MerchantCoinHistoryViewController+SetupUI.swift in Sources */,
 				1651220F2926C71700DBC0AE /* ItemCustomerStoryCollectionCell.swift in Sources */,
 				ACCE106E2933A94F00C2CB45 /* ItemNotifTableViewCell.swift in Sources */,
 				1603EFE0292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift in Sources */,
+				ACCE107E293464FE00C2CB45 /* ItemSubmitStoryCollectionViewCell.swift in Sources */,
 				115EBDAD2933F8A100069F83 /* PurchasePusherService.swift in Sources */,
 				169FCD5F292E1935009CBAB2 /* MerchantDashboardViewController+SetupUI.swift in Sources */,
 				11CB603A293378A800C66F39 /* QRScanRequest.swift in Sources */,

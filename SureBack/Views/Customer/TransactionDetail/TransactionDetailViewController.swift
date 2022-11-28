@@ -8,7 +8,6 @@
 import UIKit
 
 class TransactionDetailViewController: UIViewController {
-
     lazy var statusImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "multiply.circle.fill.red")
@@ -22,7 +21,9 @@ class TransactionDetailViewController: UIViewController {
     lazy var transactionStatusLabel: UILabel = {
         let label = UILabel()
         label.text = "Token Expired"
+        label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 22)
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -32,6 +33,7 @@ class TransactionDetailViewController: UIViewController {
         label.text = "12"
         label.font = UIFont.italicSystemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
+
         return label
     }()
 
@@ -42,6 +44,7 @@ class TransactionDetailViewController: UIViewController {
         label.textColor = .gray
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.setWidthAnchorConstraint(equalToConstant: 110)
         return label
     }()
 
@@ -61,6 +64,7 @@ class TransactionDetailViewController: UIViewController {
         label.textColor = .gray
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.setWidthAnchorConstraint(equalToConstant: 110)
         return label
     }()
 
@@ -80,6 +84,7 @@ class TransactionDetailViewController: UIViewController {
         label.textColor = .gray
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.setWidthAnchorConstraint(equalToConstant: 110)
         return label
     }()
 
@@ -99,6 +104,7 @@ class TransactionDetailViewController: UIViewController {
         label.textColor = .gray
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.setWidthAnchorConstraint(equalToConstant: 110)
         return label
     }()
 
@@ -118,6 +124,7 @@ class TransactionDetailViewController: UIViewController {
         label.textColor = .gray
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.setWidthAnchorConstraint(equalToConstant: 110)
         return label
     }()
 
@@ -137,6 +144,7 @@ class TransactionDetailViewController: UIViewController {
         label.textColor = .gray
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.setWidthAnchorConstraint(equalToConstant: 110)
         return label
     }()
 
@@ -156,39 +164,51 @@ class TransactionDetailViewController: UIViewController {
         label.textColor = .gray
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.setWidthAnchorConstraint(equalToConstant: 110)
         return label
     }()
 
     lazy var reasonValue: UILabel = {
         let label = UILabel()
-        label.text = "Foto tidak sesuai"
+        label.text = "Foto tidak sesuai Foto tidak sesuai Foto tidak sesuai Foto tidak sesuai"
         label.font = UIFont.systemFont(ofSize: 15)
+        label.numberOfLines = 0
+        label.textAlignment = .justified
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupLayout()
     }
+
+    func configureToken(_ data: MyStoryData) {
+    }
+
+    func configureCoin(_ data: Transaction) {
+    }
 }
 
 extension TransactionDetailViewController {
     private func setupLayout() {
+        setTitleStatus()
+        setupStackDetail()
+    }
+    private func setTitleStatus() {
         let stackTransactionStatus = UIStackView(arrangedSubviews: [statusImageView, transactionStatusLabel])
         stackTransactionStatus.axis = .horizontal
         stackTransactionStatus.alignment = .center
-        stackTransactionStatus.distribution = .equalSpacing
+        stackTransactionStatus.distribution = .fill
         stackTransactionStatus.spacing = 5
         stackTransactionStatus.translatesAutoresizingMaskIntoConstraints = false
 
         let stackTransactionTitle = UIStackView(arrangedSubviews: [stackTransactionStatus, transactionIdLabel])
         stackTransactionTitle.axis = .vertical
         stackTransactionTitle.alignment = .center
-        stackTransactionTitle.distribution = .equalSpacing
+        stackTransactionTitle.distribution = .fill
         stackTransactionTitle.spacing = 5
         stackTransactionTitle.translatesAutoresizingMaskIntoConstraints = false
 
@@ -196,35 +216,124 @@ extension TransactionDetailViewController {
         stackTransactionTitle.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
         stackTransactionTitle.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
         stackTransactionTitle.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        stackTransactionTitle.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
+    }
 
-        let stackLabel = UIStackView(arrangedSubviews: [merchantNameLabel, purchaseDateLabel, totalPurchaseLabel, percentageLabel, coinLabel, expiredDateLabel, reasonLabel])
-        stackLabel.axis = .vertical
-        stackLabel.distribution = .equalSpacing
-        stackLabel.alignment = .fill
-        stackLabel.spacing = 5
-        stackLabel.translatesAutoresizingMaskIntoConstraints = false
+    private func setupStackDetail() {
+        let stack1 = setupMerchant()
+        let stack2 = setupPurchaseDate()
+        let stack3 = setupTotalPurchase()
+        let stack4 = setupPercentage()
+        let stack5 = setupCoin()
+        let stack6 = setupExpiredDate()
+        let stack7 = setupReason()
 
-        let stackValue = UIStackView(arrangedSubviews: [merchantNameValue, purchaseDateValue, totalPurchaseValue, percentageValue, coinValue, expiredDateValue, reasonValue])
-        stackValue.axis = .vertical
-        stackValue.distribution = .equalSpacing
-        stackValue.alignment = .fill
-        stackValue.spacing = 5
-        stackValue.translatesAutoresizingMaskIntoConstraints = false
+        let stackView = UIStackView(arrangedSubviews: [stack1, stack2, stack3, stack4, stack5, stack6, stack7])
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.backgroundColor = .white
+        stackView.layer.borderWidth = 1
+        stackView.layer.borderColor = UIColor.gray.cgColor
+        stackView.layer.cornerRadius = 10
+        stackView.layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stackView)
+        stackView.setTopAnchorConstraint(equalTo: transactionIdLabel.bottomAnchor, constant: 20)
+        stackView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 20)
+        stackView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -20)
+    }
 
-        let stackDetails = UIStackView(arrangedSubviews: [stackLabel, stackValue])
-        stackDetails.backgroundColor = .white
-        stackDetails.layer.borderWidth = 1
-        stackDetails.layer.borderColor = UIColor.gray.cgColor
-        stackDetails.layer.cornerRadius = 10
-        stackDetails.axis = .horizontal
-        stackDetails.spacing = 30
-        stackDetails.layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-        stackDetails.isLayoutMarginsRelativeArrangement = true
-        stackDetails.translatesAutoresizingMaskIntoConstraints = false
+    private func setupMerchant() -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: [merchantNameLabel, merchantNameValue])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .top
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
 
-        view.addSubview(stackDetails)
-        stackDetails.setTopAnchorConstraint(equalTo: stackTransactionTitle.bottomAnchor, constant: 20)
-        stackDetails.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
-        stackDetails.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        return stackView
+    }
+
+    private func setupPurchaseDate() -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: [purchaseDateLabel, purchaseDateValue])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .top
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        return stackView
+    }
+
+    private func setupTotalPurchase() -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: [totalPurchaseLabel, totalPurchaseValue])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .top
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        return stackView
+    }
+
+    private func setupPercentage() -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: [percentageLabel, percentageValue])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .top
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        return stackView
+    }
+
+    private func setupCoin() -> UIStackView {
+        // coin, coin used
+        let coinImage: UIImageView = {
+            let image = UIImageView()
+            image.image = UIImage(named: "loyalty.coin")
+            image.translatesAutoresizingMaskIntoConstraints = false
+            image.setWidthAnchorConstraint(equalToConstant: 20)
+            image.setHeightAnchorConstraint(equalToConstant: 20)
+            return image
+        }()
+        let stackLoyaltyCoin = UIStackView(arrangedSubviews: [coinImage, coinValue])
+        stackLoyaltyCoin.axis = .horizontal
+        stackLoyaltyCoin.distribution = .fill
+        stackLoyaltyCoin.spacing = 10
+
+        let stackView = UIStackView(arrangedSubviews: [coinLabel, stackLoyaltyCoin])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .top
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        return stackView
+    }
+
+    private func setupExpiredDate() -> UIStackView {
+        // expired, rewarded, rejected, payment, redeem date
+        let stackView = UIStackView(arrangedSubviews: [expiredDateLabel, expiredDateValue])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .top
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        return stackView
+    }
+
+    private func setupReason() -> UIStackView {
+        // reason, credited date
+        let stackView = UIStackView(arrangedSubviews: [reasonLabel, reasonValue])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .top
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        return stackView
     }
 }

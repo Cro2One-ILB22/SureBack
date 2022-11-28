@@ -31,13 +31,17 @@ enum Endpoints: Endpoint {
     case updateUser
     case updateMerchantDetail
     case getListCustomer
+    case getCustomerById(Int)
     case getListMerchant
+    case getMerchantById(Int)
     case getListTransaction
     case approveOrRejectStory
     case submitStory
     case getToken
     case getNotifications
     case getMyStory
+    case responseQRPurchase
+    case requestPurchase
 
     public var url: String {
         switch self {
@@ -69,8 +73,12 @@ enum Endpoints: Endpoint {
             return "\(API.baseUrl)/api/user/merchant-detail"
         case .getListCustomer:
             return "\(API.baseUrl)/api/customer"
+        case let .getCustomerById(id):
+            return "\(API.baseUrl)/api/customer/\(id)"
         case .getListMerchant:
             return "\(API.baseUrl)/api/merchant"
+        case let .getMerchantById(id):
+            return "\(API.baseUrl)/api/merchant/\(id)"
         case .getListTransaction:
             return "\(API.baseUrl)/api/transaction"
         case .approveOrRejectStory:
@@ -85,6 +93,10 @@ enum Endpoints: Endpoint {
             return "\(API.baseUrl)/api/user/notification"
         case .getMyStory:
             return "\(API.baseUrl)/api/customer/story"
+        case .responseQRPurchase:
+            return "\(API.baseUrl)/api/broadcasting/qr/response"
+        case .requestPurchase:
+            return "\(API.baseUrl)/api/broadcasting/qr/purchase"
         }
     }
 }

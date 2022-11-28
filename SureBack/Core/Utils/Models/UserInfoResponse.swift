@@ -23,6 +23,7 @@ class UserInfoResponse: Codable, AutoEquatable {
     let roles: [String]?
     let merchantDetail: MerchantDetailResponse?
     let coins: [Coin]?
+    let individualCoins: [Coin]?
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -36,6 +37,7 @@ class UserInfoResponse: Codable, AutoEquatable {
         case roles
         case merchantDetail = "merchant_detail"
         case coins
+        case individualCoins = "individual_coins"
     }
 }
 

@@ -11,6 +11,7 @@ import UIKit
 class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    let apiRequest = RequestFunction()
 
     weak var delegate: SendDataDelegate?
 
@@ -116,12 +117,19 @@ class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             found(userData: stringValue)
         }
-
-        navigationController?.popToRootViewController(animated: true)
     }
 
     func found(userData: String) {
         print("scanQR result: \(userData)")
+        guard let customerId = Int(userData) else { return }
+        apiRequest.responseQRPurchase(customerId: customerId) { [weak self] response in
+            switch response {
+            case .success:
+                self?.navigationController?.pushViewController(MerchantGenerateTokenFormViewController(customerId: customerId), animated: true)
+            case .failure(let failure):
+                print(failure)
+            }
+        }
         delegate?.passData(data: userData)
     }
 

@@ -10,17 +10,19 @@ import UIKit
 class SubmitStoryViewController: UIViewController, SendDataDelegate {
     let request = RequestFunction()
     var user: UserInfoResponse?
-    var tokenData: GenerateTokenOnlineResponse?
+    var tokenData: Token?
     var userIgInfo: ProfileIGResponse? {
         didSet {
             tableView.reloadData()
         }
     }
+
     var storyData = [ResultStoryIG]() {
         didSet {
             tableView.reloadData()
         }
     }
+
     var igStoryId: Int?
 
     private let tableView: UITableView = {
@@ -36,7 +38,7 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
     let doneButton = UIButton()
 
     var countdown: DateComponents {
-        return Calendar.current.dateComponents([.day, .hour, .minute, .second], from: Date(), to: self.tokenData?.expiresAt.stringToDate() ?? Date())
+        return Calendar.current.dateComponents([.day, .hour, .minute, .second], from: Date(), to: tokenData?.expiresAt.stringToDate() ?? Date())
     }
 
     func passData(data: Int) {
@@ -49,7 +51,7 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         tabBarController?.tabBar.isHidden = true
 
         let redeemButton = UIBarButtonItem(title: "Redeem", style: .done, target: self, action: #selector(submitStoryTapped))
-        navigationItem.rightBarButtonItem  = redeemButton
+        navigationItem.rightBarButtonItem = redeemButton
 
         guard let tokenData = tokenData, let storyID = tokenData.story?.id else {
             return
@@ -152,6 +154,7 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
     }
 
     // MARK: Timer
+
     func runCountdown() {
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
@@ -162,18 +165,17 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         let minutes = countdown.minute!
         let seconds = countdown.second!
 
-        self.headerView.timerLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        headerView.timerLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 
     @objc func submitStoryTapped() {
         print("submit story button tapped")
 
         guard let storyId = tokenData?.story?.id, let igStoryId = igStoryId else {
-
             let okActionBtn = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
             let alert = UIAlertController(title: "Failed to Submit", message: "Choose Story First", preferredStyle: .alert)
             alert.addAction(okActionBtn)
-            self.present(alert, animated: true)
+            present(alert, animated: true)
 
             return
         }
@@ -193,12 +195,12 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         print("storyid: \(storyId)")
         print("ig story id: \(igStoryId)")
 
-        let okActionBtn = UIAlertAction(title: "Ok", style: .default, handler: {_ in
-              self.navigationController?.popViewController(animated: true)
+        let okActionBtn = UIAlertAction(title: "Ok", style: .default, handler: { _ in
+            self.navigationController?.popViewController(animated: true)
         })
         let alert = UIAlertController(title: "Success", message: "Success Submit Story", preferredStyle: .alert)
         alert.addAction(okActionBtn)
-        self.present(alert, animated: true)
+        present(alert, animated: true)
     }
 }
 

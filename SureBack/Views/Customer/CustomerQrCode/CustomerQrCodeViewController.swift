@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import PusherSwift
 
 class CustomerQrCodeViewController: UIViewController {
 
+    var purchasePusherService: PurchasePusherSerivce?
     var user: UserInfoResponse?
     let function = Function()
 
@@ -31,6 +33,8 @@ class CustomerQrCodeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        purchasePusherService = PurchasePusherSerivce(delegate: self)
         view.backgroundColor = .white
         setupLabel()
         setupView()
@@ -51,6 +55,20 @@ class CustomerQrCodeViewController: UIViewController {
             print(error.description)
         }
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        guard let user = user else { return }
+        purchasePusherService?.requestQRScan(customerId: user.id) { [weak self] response in
+            self?.purchasePusherService?.pusherService?.disconnect()
+            self?.navigationController?.pushViewController(CustomerPurchaseViewController(merchantId: response.merchantId), animated: true)
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        purchasePusherService?.pusherService?.disconnect()
+    }
 }
 
 extension CustomerQrCodeViewController {
@@ -70,3 +88,5 @@ extension CustomerQrCodeViewController {
 //        qrView.setBottomAnchorConstraint(equalTo: view.bottomAnchor, constant: -20)
     }
 }
+
+extension CustomerQrCodeViewController: PusherDelegate {}

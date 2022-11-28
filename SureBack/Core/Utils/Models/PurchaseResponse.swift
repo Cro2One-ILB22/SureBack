@@ -9,7 +9,7 @@ class PurchaseResponse: Codable {
     let purchaseAmount, paymentAmount: Int
     let updatedAt, createdAt: String
     let id: Int
-    let merchant: UserInfoResponse
+    let merchant: UserInfoResponse?
 
     enum CodingKeys: String, CodingKey {
         case purchaseAmount = "purchase_amount"

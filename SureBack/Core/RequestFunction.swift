@@ -163,7 +163,6 @@ extension RequestFunction {
             case let .success(data):
                 completionHandler(data)
             case let .failure(error):
-//                print(error)
                 if let data = response.data {
                     let json = String(data: data, encoding: .utf8)
                     print("Failure Response: \(String(describing: json))")
@@ -360,12 +359,24 @@ extension RequestFunction {
         }
     }
     
+    func getCustomerById(id: Int, completion: @escaping (Result<UserInfoResponse, AFError>) -> Void) {
+        let url = Endpoints.getCustomerById(id).url
+        
+        requestWithToken(url: url, decodable: UserInfoResponse.self, completionHandler: { completion($0.result) })
+    }
+    
     func getListMerchant(completion: @escaping (Result<ResponseData<UserInfoResponse>, AFError>) -> Void) {
         let url = Endpoints.getListMerchant.url
         
         requestWithToken(url: url, decodable: ResponseData<UserInfoResponse>.self) {
             completion($0.result)
         }
+    }
+    
+    func getMerchantById(id: Int, completion: @escaping (Result<UserInfoResponse, AFError>) -> Void) {
+        let url = Endpoints.getMerchantById(id).url
+        
+        requestWithToken(url: url, decodable: UserInfoResponse.self, completionHandler: { completion($0.result) })
     }
 
     func getListTransaction(merchantId: Int? = nil, accountingEntry: String? = nil, status: String? = nil, category: String? = nil, completion: @escaping (Result<ResponseData<Transaction>, AFError>) -> Void) {
@@ -391,16 +402,27 @@ extension RequestFunction {
         }
     }
     
-    func getListToken(expired: Int, submitted: Int, redeemed: Int, completion: @escaping (Result<ResponseData<GenerateTokenOnlineResponse>, AFError>) -> Void) {
+    func getListToken(expired: Int? = nil, submitted: Int? = nil, redeemed: Int? = nil, completion: @escaping (Result<ResponseData<Token>, AFError>) -> Void) {
         let url = Endpoints.getToken.url
-        let parameters: [String: Int] = [
-            "expired": expired,
-            "submitted": submitted,
-            "redeemed": redeemed,
-        ]
-        
-        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<GenerateTokenOnlineResponse>.self) {
-            completion($0.result)
+        var parameters: [String: Any] = [:]
+        if expired != nil {
+            parameters["expired"] = expired
+        }
+        if submitted != nil {
+            parameters["submitted"] = submitted
+        }
+        if redeemed != nil {
+            parameters["redeemed"] = redeemed
+        }
+        parameters["order_by"] = "updated_at"
+
+        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<Token>.self){ response in
+            completion(response.result)
+            if let data = response.data {
+                let json = String(data: data, encoding: .utf8)
+                print("Failure Response: \(String(describing: json))")
+            }
+
         }
     }
     
@@ -468,6 +490,28 @@ extension RequestFunction {
     }
 }
 
+// MARK: Broadcast
+
+extension RequestFunction {
+    func responseQRPurchase(customerId: Int, completion: @escaping (Result<Data?, AFError>) -> Void) {
+        let url = Endpoints.responseQRPurchase.url
+        let body = ["customer_id": customerId]
+
+        requestWithToken(url: url, method: .post, parameters: body) { completion($0.result) }
+    }
+
+    func requestPurchase(merchantId: Int, usedCoins: Int = 0, isRequestingForToken: Bool = true, completion: @escaping (Result<Data?, AFError>) -> Void) {
+        let url = Endpoints.requestPurchase.url
+        let body: [String: Any] = [
+            "merchant_id": merchantId,
+            "used_coins": usedCoins,
+            "is_requesting_for_token": isRequestingForToken ? 1 : 0,
+        ]
+
+        requestWithToken(url: url, method: .post, parameters: body) { completion($0.result) }
+    }
+}
+
 extension RequestFunction {
     private func requestWithToken<T: Decodable>(
         url: String,
@@ -502,7 +546,7 @@ extension RequestFunction {
                 for header in headers {
                     generalHeaders.add(header)
                 }
-                AF.request(url, method: method, parameters: parameters, headers: headers)
+                AF.request(url, method: method, parameters: parameters, headers: generalHeaders)
                     .validate()
                     .response { response in
                         completionHandler(response)

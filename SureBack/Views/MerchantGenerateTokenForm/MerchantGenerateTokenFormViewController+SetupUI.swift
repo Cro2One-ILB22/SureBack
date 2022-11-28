@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PusherSwift
 
 extension MerchantGenerateTokenFormViewController {
     func setupLayout() {
@@ -90,3 +91,5 @@ extension MerchantGenerateTokenFormViewController {
         return stackview
     }
 }
+
+extension MerchantGenerateTokenFormViewController: PusherDelegate {}

@@ -12,7 +12,7 @@ class ActiveTokenTableViewCell: UITableViewCell {
     static let id = "ActiveTokenTableViewCell"
 
     var delegate: UIViewToController?
-    var activateTokenData = [GenerateTokenOnlineResponse]() {
+    var activateTokenData = [Token]() {
         didSet {
             collectionView.reloadData()
         }

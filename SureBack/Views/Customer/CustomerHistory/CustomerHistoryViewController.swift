@@ -10,7 +10,7 @@ import SDWebImage
 
 class CustomerHistoryViewController: UIViewController {
 //    let headerView = HeaderCustomerHistoryView(frame: CGRect(x: 0, y: 90, width: UIScreen.screenWidth, height: 200))
-    let headerView = HeaderCustomerHistoryView(frame: CGRect(x: 0, y: 64, width: UIScreen.screenWidth, height: 200))
+    let headerView = HeaderCustomerHistoryView(frame: CGRect(x: 0, y: 64, width: UIScreen.screenWidth, height: 220))
 
     let customSegmentedControl: CustomSegmentedControl = {
         let codeSegmented = CustomSegmentedControl(frame: CGRect(x: 0, y: 200, width: UIScreen.screenWidth, height: 50), buttonTitle: ["Token Status History", "Coin Balance History"])
@@ -30,7 +30,7 @@ class CustomerHistoryViewController: UIViewController {
 
     var user: UserInfoResponse?
     var merchantData: UserInfoResponse?
-    var tokenData: GenerateTokenOnlineResponse?
+    var tokenData: Token?
 
     let request = RequestFunction()
 
@@ -118,7 +118,12 @@ class CustomerHistoryViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(redeemButtonTapped))
         headerView.stackRedeemButton.addGestureRecognizer(tapGesture)
         headerView.loyaltCoinsValueLabel.text = "\(merchantData?.coins?[0].outstanding ?? 0)"
-        headerView.lockImage.image = UIImage(named: "system.photo")
+        headerView.openLinkButton.addTarget(self, action: #selector(openLinkTapped), for: .touchUpInside)
+    }
+
+    @objc func openLinkTapped() {
+        guard let username = merchantData?.instagramUsername else {return}
+        UIApplication.shared.open(URL(string: "https://instagram.com/\(username)")!)
     }
 
     @objc func redeemButtonTapped(sender: UITapGestureRecognizer) {

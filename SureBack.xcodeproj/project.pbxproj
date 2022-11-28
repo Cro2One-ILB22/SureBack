@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1101ABBE2906AE8200F15996 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1101ABBD2906AE8200F15996 /* .swiftlint.yml */; };
+		115EBDAD2933F8A100069F83 /* PurchasePusherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115EBDAC2933F8A100069F83 /* PurchasePusherService.swift */; };
+		115EBDB42934391600069F83 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115EBDB32934391600069F83 /* TransactionDetailViewController.swift */; };
 		119B76562906976E00530C80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119B76552906976E00530C80 /* AppDelegate.swift */; };
 		119B765A2906976E00530C80 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119B76592906976E00530C80 /* ViewController.swift */; };
 		119B765F2906976F00530C80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 119B765E2906976F00530C80 /* Assets.xcassets */; };
@@ -17,7 +19,11 @@
 		119B76792906976F00530C80 /* SureBackUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119B76782906976F00530C80 /* SureBackUITestsLaunchTests.swift */; };
 		119B76862906979B00530C80 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 119B76852906979B00530C80 /* .gitignore */; };
 		11B2DD2F2907CF760065E98D /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2DD2E2907CF760065E98D /* APICall.swift */; };
-		11CC9559292FB5B00038E766 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		11CB603A293378A800C66F39 /* QRScanRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CB6039293378A800C66F39 /* QRScanRequest.swift */; };
+		11CB603C29337AD100C66F39 /* QRScanPurchaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CB603B29337AD100C66F39 /* QRScanPurchaseRequest.swift */; };
+		11CB603E293381D800C66F39 /* QRScanPurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CB603D293381D800C66F39 /* QRScanPurchase.swift */; };
+		11CB60422933AEE800C66F39 /* CustomerPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CB60412933AEE800C66F39 /* CustomerPurchaseViewController.swift */; };
+		11CC9559292FB5B00038E766 /* PusherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CC9558292FB5B00038E766 /* PusherService.swift */; };
 		1603EFE0292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603EFDF292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift */; };
 		1603EFE2292B1D6800EC5485 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603EFE1292B1D6800EC5485 /* CustomSegmentedControl.swift */; };
 		1603EFE6292B2F3300EC5485 /* ItemCustomerStoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603EFE5292B2F3300EC5485 /* ItemCustomerStoryTableCell.swift */; };
@@ -85,7 +91,6 @@
 		AC24AA3F2931E5590050A086 /* SettingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC24AA3E2931E5590050A086 /* SettingCardView.swift */; };
 		AC24AA412931EE3A0050A086 /* CustomerEditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC24AA402931EE3A0050A086 /* CustomerEditProfileViewController.swift */; };
 		AC24AA442931EF440050A086 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC24AA432931EF440050A086 /* CustomTextField.swift */; };
-		AC24AA4729323E9F0050A086 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC24AA4629323E9F0050A086 /* TransactionDetailViewController.swift */; };
 		AC24AA4929327F480050A086 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC24AA4829327F480050A086 /* UserViewModel.swift */; };
 		AC2AC1BD291F3C5B00E9F8A7 /* ItemActiveTokenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2AC1BC291F3C5B00E9F8A7 /* ItemActiveTokenCollectionViewCell.swift */; };
 		AC3BCEB92921E5F9009BFB05 /* HeaderSubmitStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3BCEB82921E5F9009BFB05 /* HeaderSubmitStoryView.swift */; };
@@ -107,6 +112,9 @@
 		ACA270AD292D4B11008712D5 /* CoinHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA270AC292D4B11008712D5 /* CoinHistoryView.swift */; };
 		ACA270B0292D636B008712D5 /* CustomerListAllMerchantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA270AF292D636B008712D5 /* CustomerListAllMerchantViewController.swift */; };
 		ACC1C0FA29141E94003E2FD8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */; };
+		ACCE106929337E7E00C2CB45 /* CustomerNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE106829337E7E00C2CB45 /* CustomerNotificationViewController.swift */; };
+		ACCE106B29339DB000C2CB45 /* SectionNotifHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE106A29339DB000C2CB45 /* SectionNotifHeader.swift */; };
+		ACCE106E2933A94F00C2CB45 /* ItemNotifTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE106D2933A94F00C2CB45 /* ItemNotifTableViewCell.swift */; };
 		ACDD097A29128F1E00309FBC /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD097929128F1E00309FBC /* Transaction.swift */; };
 		ACE5CDA42912704800D08177 /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA32912704800D08177 /* UserInfoResponse.swift */; };
 		ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */; };
@@ -138,6 +146,8 @@
 
 /* Begin PBXFileReference section */
 		1101ABBD2906AE8200F15996 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		115EBDAC2933F8A100069F83 /* PurchasePusherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasePusherService.swift; sourceTree = "<group>"; };
+		115EBDB32934391600069F83 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
 		119B76522906976E00530C80 /* SureBack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SureBack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		119B76552906976E00530C80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		119B76592906976E00530C80 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +161,11 @@
 		119B76782906976F00530C80 /* SureBackUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SureBackUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		119B76852906979B00530C80 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		11B2DD2E2907CF760065E98D /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
+		11CB6039293378A800C66F39 /* QRScanRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanRequest.swift; sourceTree = "<group>"; };
+		11CB603B29337AD100C66F39 /* QRScanPurchaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanPurchaseRequest.swift; sourceTree = "<group>"; };
+		11CB603D293381D800C66F39 /* QRScanPurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanPurchase.swift; sourceTree = "<group>"; };
+		11CB60412933AEE800C66F39 /* CustomerPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerPurchaseViewController.swift; sourceTree = "<group>"; };
+		11CC9558292FB5B00038E766 /* PusherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherService.swift; sourceTree = "<group>"; };
 		1603EFDF292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantListAllCustomerViewController.swift; sourceTree = "<group>"; };
 		1603EFE1292B1D6800EC5485 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		1603EFE5292B2F3300EC5485 /* ItemCustomerStoryTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCustomerStoryTableCell.swift; sourceTree = "<group>"; };
@@ -223,7 +238,6 @@
 		AC24AA3E2931E5590050A086 /* SettingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCardView.swift; sourceTree = "<group>"; };
 		AC24AA402931EE3A0050A086 /* CustomerEditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerEditProfileViewController.swift; sourceTree = "<group>"; };
 		AC24AA432931EF440050A086 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
-		AC24AA4629323E9F0050A086 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
 		AC24AA4829327F480050A086 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		AC2AC1BC291F3C5B00E9F8A7 /* ItemActiveTokenCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemActiveTokenCollectionViewCell.swift; sourceTree = "<group>"; };
 		AC3BCEB82921E5F9009BFB05 /* HeaderSubmitStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSubmitStoryView.swift; sourceTree = "<group>"; };
@@ -246,6 +260,9 @@
 		ACA270AF292D636B008712D5 /* CustomerListAllMerchantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListAllMerchantViewController.swift; sourceTree = "<group>"; };
 		ACC1C0F829141D71003E2FD8 /* SureBack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SureBack.entitlements; sourceTree = "<group>"; };
 		ACC1C0F929141E93003E2FD8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ACCE106829337E7E00C2CB45 /* CustomerNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerNotificationViewController.swift; sourceTree = "<group>"; };
+		ACCE106A29339DB000C2CB45 /* SectionNotifHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionNotifHeader.swift; sourceTree = "<group>"; };
+		ACCE106D2933A94F00C2CB45 /* ItemNotifTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNotifTableViewCell.swift; sourceTree = "<group>"; };
 		ACDD097929128F1E00309FBC /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		ACE5CDA32912704800D08177 /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
 		ACE5CDA52912711D00D08177 /* GenerateTokenOnlineResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateTokenOnlineResponse.swift; sourceTree = "<group>"; };
@@ -287,6 +304,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		115EBDB22934391600069F83 /* TransactionDetail */ = {
+			isa = PBXGroup;
+			children = (
+				115EBDB32934391600069F83 /* TransactionDetailViewController.swift */,
+			);
+			path = TransactionDetail;
+			sourceTree = "<group>";
+		};
 		119B76492906976E00530C80 = {
 			isa = PBXGroup;
 			children = (
@@ -484,6 +509,9 @@
 				169FCD3E292C849D009CBAB2 /* MyStoryResponses.swift */,
 				169FCD40292C85E6009CBAB2 /* PurchaseResponse.swift */,
 				169FCD42292C8A33009CBAB2 /* LinkResponses.swift */,
+				11CB6039293378A800C66F39 /* QRScanRequest.swift */,
+				11CB603B29337AD100C66F39 /* QRScanPurchaseRequest.swift */,
+				11CB603D293381D800C66F39 /* QRScanPurchase.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -522,6 +550,8 @@
 				169FCD51292CC4F9009CBAB2 /* ImageDownloader.swift */,
 				1619BB262918B5E800085B74 /* AuthManager.swift */,
 				AC24AA4829327F480050A086 /* UserViewModel.swift */,
+				11CC9558292FB5B00038E766 /* PusherService.swift */,
+				115EBDAC2933F8A100069F83 /* PurchasePusherService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -550,7 +580,6 @@
 				16C0042C29341C99008F5D0D /* MerchantRejectStoryForm */,
 				16C0042729340745008F5D0D /* MerchantGenerateTokenForm */,
 				AC24AA422931EF2C0050A086 /* General */,
-				AC24AA4529323E570050A086 /* TransactionDetail */,
 				169FCD60292F03F9009CBAB2 /* ConfirmRegistration */,
 				AC59F88E29205480000F8345 /* Customer */,
 				1603EFDE292B059200EC5485 /* MerchantListAllCustomer */,
@@ -615,6 +644,7 @@
 			children = (
 				AC1C1C3E292F56C800863A87 /* Component */,
 				AC1C1C3C292F4A5400863A87 /* CustomerQrCodeViewController.swift */,
+				11CB60412933AEE800C66F39 /* CustomerPurchaseViewController.swift */,
 			);
 			path = CustomerQrCode;
 			sourceTree = "<group>";
@@ -642,14 +672,6 @@
 				AC24AA432931EF440050A086 /* CustomTextField.swift */,
 			);
 			path = General;
-			sourceTree = "<group>";
-		};
-		AC24AA4529323E570050A086 /* TransactionDetail */ = {
-			isa = PBXGroup;
-			children = (
-				AC24AA4629323E9F0050A086 /* TransactionDetailViewController.swift */,
-			);
-			path = TransactionDetail;
 			sourceTree = "<group>";
 		};
 		AC2AC1B8291F391400E9F8A7 /* CustomerDashboard */ = {
@@ -685,6 +707,8 @@
 		AC59F88E29205480000F8345 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
+				115EBDB22934391600069F83 /* TransactionDetail */,
+				ACCE106729337E5600C2CB45 /* CustomerNotification */,
 				AC1C1C3B292F487C00863A87 /* CustomerQrCode */,
 				AC2AC1B8291F391400E9F8A7 /* CustomerDashboard */,
 				ACA270AE292D6331008712D5 /* CustomerListAllMerchant */,
@@ -738,6 +762,24 @@
 				ACA270AF292D636B008712D5 /* CustomerListAllMerchantViewController.swift */,
 			);
 			path = CustomerListAllMerchant;
+			sourceTree = "<group>";
+		};
+		ACCE106729337E5600C2CB45 /* CustomerNotification */ = {
+			isa = PBXGroup;
+			children = (
+				ACCE106C29339E8D00C2CB45 /* Components */,
+				ACCE106829337E7E00C2CB45 /* CustomerNotificationViewController.swift */,
+			);
+			path = CustomerNotification;
+			sourceTree = "<group>";
+		};
+		ACCE106C29339E8D00C2CB45 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				ACCE106A29339DB000C2CB45 /* SectionNotifHeader.swift */,
+				ACCE106D2933A94F00C2CB45 /* ItemNotifTableViewCell.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		ACF6441C2925DF0E00A6AD10 /* CustomerProfile */ = {
@@ -1050,6 +1092,7 @@
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
 				ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */,
 				169FCD62292F09F2009CBAB2 /* ConfirmRegistrationViewController+SetupUI.swift in Sources */,
+				ACCE106929337E7E00C2CB45 /* CustomerNotificationViewController.swift in Sources */,
 				ACE5CDB029127E6200D08177 /* ResponseData.swift in Sources */,
 				165122012924CE2600DBC0AE /* CardFieldView.swift in Sources */,
 				16512215292737EC00DBC0AE /* DetailCoinHistoryCardView.swift in Sources */,
@@ -1062,15 +1105,21 @@
 				16512207292587C800DBC0AE /* MerchantDetailStoryViewController.swift in Sources */,
 				11CC9559292FB5B00038E766 /* (null) in Sources */,
 				119B765A2906976E00530C80 /* ViewController.swift in Sources */,
+				11CB603E293381D800C66F39 /* QRScanPurchase.swift in Sources */,
 				ACE5CDA82912716B00D08177 /* ScanQrResponse.swift in Sources */,
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,
 				16C0042429335D02008F5D0D /* MerchantCoinHistoryViewController+SetupUI.swift in Sources */,
 				1651220F2926C71700DBC0AE /* PreviewCustomerStoryView.swift in Sources */,
+				1651220F2926C71700DBC0AE /* ItemCustomerStoryCollectionCell.swift in Sources */,
+				ACCE106E2933A94F00C2CB45 /* ItemNotifTableViewCell.swift in Sources */,
 				1603EFE0292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift in Sources */,
+				115EBDAD2933F8A100069F83 /* PurchasePusherService.swift in Sources */,
 				169FCD5F292E1935009CBAB2 /* MerchantDashboardViewController+SetupUI.swift in Sources */,
+				11CB603A293378A800C66F39 /* QRScanRequest.swift in Sources */,
 				1619BB302919FCF700085B74 /* ConfirmRegistrationViewController.swift in Sources */,
 				ACA270B0292D636B008712D5 /* CustomerListAllMerchantViewController.swift in Sources */,
 				165122122927377600DBC0AE /* MerchantCoinHistoryViewController.swift in Sources */,
+				11CB603C29337AD100C66F39 /* QRScanPurchaseRequest.swift in Sources */,
 				1619BB32291B500300085B74 /* UIViewController+Ext.swift in Sources */,
 				AC8AF8D92922F98D00227BDE /* SubmitStoryViewController.swift in Sources */,
 				AC1C1C3D292F4A5400863A87 /* CustomerQrCodeViewController.swift in Sources */,
@@ -1115,6 +1164,7 @@
 				165121FD2924501000DBC0AE /* MerchantProfileViewController.swift in Sources */,
 				AC24AA412931EE3A0050A086 /* CustomerEditProfileViewController.swift in Sources */,
 				AC59F89429206137000F8345 /* ItemCustomerHistoryTableViewCell.swift in Sources */,
+				115EBDB42934391600069F83 /* TransactionDetailViewController.swift in Sources */,
 				16BD91AD291E93270010731E /* MerchantDashboardViewController.swift in Sources */,
 				AC59F88B291F8117000F8345 /* Token.swift in Sources */,
 				16C0042629335DDD008F5D0D /* SectionMonth.swift in Sources */,
@@ -1127,10 +1177,11 @@
 				16930E3F290FBB27003DFEBE /* AuthResponse.swift in Sources */,
 				169FCD45292C8CAA009CBAB2 /* MerchantListAllCustomerViewController+SetupUI.swift in Sources */,
 				16C0042929340766008F5D0D /* MerchantGenerateTokenFormViewController.swift in Sources */,
-				AC24AA4729323E9F0050A086 /* TransactionDetailViewController.swift in Sources */,
 				AC1A6CBB291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift in Sources */,
 				11B2DD2F2907CF760065E98D /* APICall.swift in Sources */,
 				1603EFE8292B494700EC5485 /* WaitingViewController.swift in Sources */,
+				ACCE106B29339DB000C2CB45 /* SectionNotifHeader.swift in Sources */,
+				11CB60422933AEE800C66F39 /* CustomerPurchaseViewController.swift in Sources */,
 				169FCD5B292DD655009CBAB2 /* String+Ext.swift in Sources */,
 				AC2AC1BD291F3C5B00E9F8A7 /* ItemActiveTokenCollectionViewCell.swift in Sources */,
 			);
@@ -1303,7 +1354,7 @@
 				CODE_SIGN_ENTITLEMENTS = SureBack/SureBack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C8VS35NTZ7;
+				DEVELOPMENT_TEAM = BAFJ582D2S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To be able to Scan QR Code, you must allow the use of the camera.";
@@ -1321,7 +1372,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = cro2one.SureBack;
+				PRODUCT_BUNDLE_IDENTIFIER = mfahmialkautsar.SureBack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

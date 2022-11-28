@@ -26,6 +26,17 @@ extension String {
         return dateFormatter.string(from: date!)
     }
 
+    func formatTodMMMyyy2() -> Self {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = dateFormatter.date(from: self)
+        dateFormatter.dateFormat = "d MMM yyyy"
+        return dateFormatter.string(from: date!)
+    }
+
+    // TODO: add day format
+
     func stringToDate() -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")

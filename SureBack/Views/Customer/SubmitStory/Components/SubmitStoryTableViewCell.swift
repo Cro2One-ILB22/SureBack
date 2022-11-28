@@ -76,7 +76,8 @@ extension SubmitStoryTableViewCell: UICollectionViewDataSource, UICollectionView
             options: .progressiveLoad,
             completed: nil
         )
-//        delegate?.passData(data: storyData[indexPath.row].id)
+
+//        cell.setCellWithValueOf(<#T##data: MyStoryData##MyStoryData#>)
 
         return cell
     }

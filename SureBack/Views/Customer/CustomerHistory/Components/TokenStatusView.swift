@@ -18,6 +18,7 @@ class TokenStatusView: UIView {
                     image: UIImage(named: "empty.merchant")!,
                     title: "Empty",
                     message: "You don’t have any record with us.\nDon’t you want to visit us?")
+//                self.showLoadingIndicator(true)
             }
         }
     }
@@ -29,17 +30,31 @@ class TokenStatusView: UIView {
         return table
     }()
 
+    lazy var loadingIndicator: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.style = .gray
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.isHidden = true
+        return loading
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
+
+        //TODO: not hiding
+//        showLoadingIndicator(false)
         tableView.delegate = self
         tableView.dataSource = self
-        setupTableView()
-
+        setupLayout()
         tableView.reloadData()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    private func showLoadingIndicator(_ isShow: Bool) {
+        self.tableView.isHidden = isShow
+        loadingIndicator.show(isShow)
     }
 }
 
@@ -80,6 +95,15 @@ extension TokenStatusView: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension TokenStatusView {
+    private func setupLayout() {
+//        setupLoadingIndicator()
+        setupTableView()
+    }
+    private func setupLoadingIndicator() {
+        addSubview(loadingIndicator)
+        loadingIndicator.setCenterXAnchorConstraint(equalTo: centerXAnchor)
+        loadingIndicator.setCenterYAnchorConstraint(equalTo: centerYAnchor)
+    }
     private func setupTableView() {
         addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false

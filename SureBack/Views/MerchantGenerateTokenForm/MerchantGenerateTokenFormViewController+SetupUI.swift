@@ -26,35 +26,35 @@ extension MerchantGenerateTokenFormViewController {
         coinTransactionTextLabel.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -20)
     }
     private func setupCustomerName() {
-        let customerNameSV = verticalStackView(views: [customerNameTextLabel, customerNameValueLabel])
+        let customerNameSV = horizontalStackView(views: [customerNameTextLabel, customerNameValueLabel])
         view.addSubview(customerNameSV)
         customerNameSV.setTopAnchorConstraint(equalTo: coinTransactionTextLabel.bottomAnchor, constant: 16)
         customerNameSV.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 20)
         customerNameSV.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -20)
     }
     private func setupPurchaseDate() {
-        let purchaseDateVS = verticalStackView(views: [purchaseDateTextLabel, purchaseDateValueLabel])
+        let purchaseDateVS = horizontalStackView(views: [purchaseDateTextLabel, purchaseDateValueLabel])
         view.addSubview(purchaseDateVS)
         purchaseDateVS.setTopAnchorConstraint(equalTo: customerNameTextLabel.bottomAnchor, constant: 7)
         purchaseDateVS.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 20)
         purchaseDateVS.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -20)
     }
     private func setupPercentage() {
-        let percentageVS = verticalStackView(views: [percentageTextLabel, percentageValueLabel])
+        let percentageVS = horizontalStackView(views: [percentageTextLabel, percentageValueLabel])
         view.addSubview(percentageVS)
         percentageVS.setTopAnchorConstraint(equalTo: purchaseDateTextLabel.bottomAnchor, constant: 7)
         percentageVS.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 20)
         percentageVS.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -20)
     }
     private func setupExpiredDate() {
-        let expiredDateSV = verticalStackView(views: [expiredDateTextLabel, expiredDateValueLabel])
+        let expiredDateSV = horizontalStackView(views: [expiredDateTextLabel, expiredDateValueLabel])
         view.addSubview(expiredDateSV)
         expiredDateSV.setTopAnchorConstraint(equalTo: percentageTextLabel.bottomAnchor, constant: 7)
         expiredDateSV.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 20)
         expiredDateSV.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -20)
     }
     private func setupExchangedCoin() {
-        let exchangedCoinSV = verticalStackView(views: [exchangedCoinTextLabel, exchangedCoinValueLabel])
+        let exchangedCoinSV = horizontalStackView(views: [exchangedCoinTextLabel, exchangedCoinValueLabel])
         view.addSubview(exchangedCoinSV)
         exchangedCoinSV.setTopAnchorConstraint(equalTo: expiredDateTextLabel.bottomAnchor, constant: 30)
         exchangedCoinSV.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 20)
@@ -80,7 +80,7 @@ extension MerchantGenerateTokenFormViewController {
         generateTokenButton.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -20)
         generateTokenButton.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
     }
-    private func verticalStackView(views: [UIView]) -> UIStackView {
+    private func horizontalStackView(views: [UIView]) -> UIStackView {
         let stackview = UIStackView(arrangedSubviews: views)
         stackview.axis = .horizontal
         stackview.distribution = .equalSpacing

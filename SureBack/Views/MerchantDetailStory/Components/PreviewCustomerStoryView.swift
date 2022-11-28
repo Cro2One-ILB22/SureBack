@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ItemCustomerStoryCollectionCell: UIView {
+class PreviewCustomerStoryView: UIView {
     static let id = "ItemCustomerStoryCollectionCell"
     let userImageStory: UIImageView = {
        let image = UIImageView()
@@ -64,23 +64,14 @@ class ItemCustomerStoryCollectionCell: UIView {
         cashbackLabel.setTopAnchorConstraint(equalTo: userImageStory.bottomAnchor, constant: 13)
         cashbackLabel.setLeadingAnchorConstraint(equalTo: cashbackTitleLabel.trailingAnchor, constant: 5)
         
-        let separator = UIView()
-        separator.setWidthAnchorConstraint(equalToConstant: 1)
-        separator.backgroundColor = .osloGray
-        separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.setTopAnchorConstraint(equalTo: topAnchor)
-//        separator.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 5)
-//        separator.setTrailingAnchorConstraint(equalTo: trailingAnchor)
-        
-//        let stackViewButton = UIStackView(arrangedSubviews: [UIView(), rejectButton])
-//        stackViewButton.axis = .horizontal
-//        stackViewButton.distribution = .equalSpacing
-//        stackViewButton.translatesAutoresizingMaskIntoConstraints = false
-//        addSubview(stackViewButton)
-//        stackViewButton.setTopAnchorConstraint(equalTo: cashbackLabel.bottomAnchor, constant: 10)
-//        stackViewButton.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
-//        stackViewButton.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
-//        stackViewButton.setBottomAnchorConstraint(equalTo: bottomAnchor, constant: -20)
-        
+        let stackViewButton = UIStackView(arrangedSubviews: [UIView(), rejectButton])
+        stackViewButton.axis = .horizontal
+        stackViewButton.distribution = .equalSpacing
+        stackViewButton.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stackViewButton)
+        stackViewButton.setTopAnchorConstraint(equalTo: cashbackLabel.bottomAnchor, constant: 10)
+        stackViewButton.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
+        stackViewButton.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
+        stackViewButton.setBottomAnchorConstraint(equalTo: bottomAnchor, constant: -20)
     }
 }

@@ -223,11 +223,12 @@ extension RequestFunction {
 // MARK: Instagram
 
 extension RequestFunction {
-    func approveStory(_ isApproved: Bool, id: Int, completionHandler: @escaping (_ data: ApproveOrRejectStoryResponse) -> Void) {
+    func approveStory(_ isApproved: Bool, id: Int, note: String = "", completionHandler: @escaping (_ data: ApproveOrRejectStoryResponse) -> Void) {
         let url = Endpoints.approveOrRejectStory.url
         let body: [String: Any] = [
             "id": id,
             "approved": isApproved,
+            "note": note
         ]
         requestWithToken(url: url, method: .put, parameters: body, decodable: ApproveOrRejectStoryResponse.self) { response in
             switch response.result {

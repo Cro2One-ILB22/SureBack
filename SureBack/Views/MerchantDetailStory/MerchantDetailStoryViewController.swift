@@ -16,8 +16,8 @@ class MerchantDetailStoryViewController: UIViewController {
         view.layer.borderColor = UIColor.osloGray.cgColor
         return view
     }()
-    private let storyCardView: ItemCustomerStoryCollectionCell = {
-       let view = ItemCustomerStoryCollectionCell()
+    private let storyCardView: PreviewCustomerStoryView = {
+       let view = PreviewCustomerStoryView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 8
         view.layer.borderWidth = 1

@@ -8,14 +8,19 @@
 import UIKit
 
 class HeaderMerchantDetailStoryView: UIView {
+    let loadingIndicatorImageProfile: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.style = .gray
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.isHidden = true
+        return loading
+    }()
     let imageUser: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "AppIcon")
-        image.layer.masksToBounds = false
-        image.contentMode = .scaleAspectFill
         image.layer.borderColor = UIColor.black.cgColor
-        image.layer.cornerRadius = image.frame.height/2
+        image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
+        image.layer.cornerRadius = 20
         return image
     }()
     let nameUser: UILabel = {
@@ -78,6 +83,9 @@ extension HeaderMerchantDetailStoryView {
         imageUser.setWidthAnchorConstraint(equalToConstant: 75)
         imageUser.setHeightAnchorConstraint(equalToConstant: 75)
         imageUser.setBottomAnchorConstraint(equalTo: bottomAnchor, constant: -20)
+        imageUser.addSubview(loadingIndicatorImageProfile)
+        loadingIndicatorImageProfile.setCenterYAnchorConstraint(equalTo: imageUser.centerYAnchor)
+        loadingIndicatorImageProfile.setCenterXAnchorConstraint(equalTo: imageUser.centerXAnchor)
         
         addSubview(nameUser)
         nameUser.translatesAutoresizingMaskIntoConstraints = false

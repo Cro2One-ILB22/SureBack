@@ -23,7 +23,7 @@ extension MerchantRejectStoryFormViewController {
         hStackView.layer.cornerRadius = 10
         hStackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(hStackView)
-        hStackView.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        hStackView.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
         hStackView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 16)
         hStackView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -16)
     }

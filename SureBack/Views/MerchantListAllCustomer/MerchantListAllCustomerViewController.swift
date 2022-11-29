@@ -9,7 +9,7 @@ import UIKit
 
 class MerchantListAllCustomerViewController: UIViewController {
     let customSegmentedControl: CustomSegmentedControl = {
-        let codeSegmented = CustomSegmentedControl(frame: CGRect(x: 0, y: 50, width: UIScreen.screenWidth, height: 50), buttonTitle: ["Waiting", "History"])
+        let codeSegmented = CustomSegmentedControl(frame: .zero, buttonTitle: ["Waiting", "History"])
         codeSegmented.backgroundColor = .clear
         return codeSegmented
     }()
@@ -19,6 +19,7 @@ class MerchantListAllCustomerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        customSegmentedControl.delegate = self
         setupLayout()
         showHistoryView(false)
     }

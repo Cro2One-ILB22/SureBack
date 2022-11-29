@@ -43,6 +43,5 @@ extension MerchantListAllCustomerViewController {
         customSegmentedControl.setLeadingAnchorConstraint(equalTo: view.leadingAnchor)
         customSegmentedControl.setTrailingAnchorConstraint(equalTo: view.trailingAnchor)
         customSegmentedControl.setHeightAnchorConstraint(equalToConstant: 50)
-        customSegmentedControl.delegate = self
     }
 }

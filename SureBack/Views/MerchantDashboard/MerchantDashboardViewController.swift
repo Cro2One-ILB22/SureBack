@@ -27,18 +27,19 @@ class MerchantDashboardViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.tintColor = .systemGreen
         view.backgroundColor = .white
         navigationItem.title = "Hi, bestie"
-        navigationController?.navigationBar.prefersLargeTitles = true
         tableView.isHidden = true
         loadingIndicator.show(true)
         configTableView()
         getCustomerStory()
         setupLayout()
     }
-
     @objc func seeAllCustomers() {
-        print("See all customer tapped")
+        let merchantListAllCustomerVC = MerchantListAllCustomerViewController()
+        merchantListAllCustomerVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(merchantListAllCustomerVC, animated: true)
     }
     private func getCustomerStory() {
         let rf = RequestFunction()
@@ -53,15 +54,30 @@ class MerchantDashboardViewController: UIViewController {
     private func configTableView() {
         let headerView = HeaderMerchantDashboardView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 250))
         headerView.seeAllCustomersButton.addTarget(self, action: #selector(seeAllCustomers), for: .touchUpInside)
+        headerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cardSummaryAction)))
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableHeaderView = headerView
+    }
+    @objc func cardSummaryAction() {
+        let coinHistoryVC = MerchantCoinHistoryViewController()
+        coinHistoryVC.merchant = user?.merchantDetail
+        coinHistoryVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(coinHistoryVC, animated: true)
+    }
+}
+extension MerchantDashboardViewController: StoryTableViewCellCellDelegate {
+    func didSelectItem(with storyData: MyStoryData) {
+        let detailStoryVC = MerchantDetailStoryViewController()
+        detailStoryVC.storyData = storyData
+        detailStoryVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(detailStoryVC, animated: true)
     }
 }
 
 extension MerchantDashboardViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if listCustomerStory.count == 0 {
@@ -79,6 +95,7 @@ extension MerchantDashboardViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: StoryTableViewCell.id, for: indexPath) as? StoryTableViewCell else { return UITableViewCell() }
         cell.listCustomerStory = self.listCustomerStory
+        cell.delegate = self
         return cell
     }
 

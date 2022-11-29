@@ -9,6 +9,7 @@ import UIKit
 
 // MARK: BELOM SELESAI
 class MerchantCoinHistoryViewController: UIViewController {
+    var merchant: MerchantDetailResponse?
     private var listTransaction: [Transaction] = []
     let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)

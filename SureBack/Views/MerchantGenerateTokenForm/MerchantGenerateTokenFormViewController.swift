@@ -163,8 +163,9 @@ class MerchantGenerateTokenFormViewController: UIViewController {
         guard let purchaseRequest = qrScanPurchase?.purchaseRequest else { return }
         guard let purchaseAmount = totalPurchaseField.text, let purchaseAmount = Int(purchaseAmount) else { return }
         self.apiRequest.postGenerateTokenOffline(customerId: self.customerId, purchaseAmount: purchaseAmount, isRequestingToken: purchaseRequest.isRequestingForToken ? 1 : 0) { [weak self] _ in
-
-            self?.navigationController?.pushViewController(DummyViewController(), animated: true)
+            let detailTransactionVC = MerchantTransactionHistoryViewController()
+            self?.present(detailTransactionVC, animated: true)
+//            self?.navigationController?.pushViewController(DummyViewController(), animated: true)
         }
     }
 

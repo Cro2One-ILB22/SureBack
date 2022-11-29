@@ -68,6 +68,7 @@ class BussinesStatusCardView: UIView {
         layer.borderWidth = 1
         layer.cornerRadius = 10
         translatesAutoresizingMaskIntoConstraints = false
+        isUserInteractionEnabled = true
         setupLayout()
     }
     private func setupLayout() {

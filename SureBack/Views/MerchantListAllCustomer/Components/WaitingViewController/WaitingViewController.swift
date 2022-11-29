@@ -61,7 +61,16 @@ extension WaitingViewController: UISearchBarDelegate {
     }
 }
 
-extension WaitingViewController: UITableViewDataSource, UITableViewDelegate {
+extension WaitingViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailStoryVC = MerchantDetailStoryViewController()
+        let storyData = listUserStory[indexPath.row]
+        detailStoryVC.storyData = storyData
+        navigationController?.pushViewController(detailStoryVC, animated: true)
+    }
+}
+
+extension WaitingViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         if listUserStory.count == 0 {
             self.tableView.setEmptyMessage(

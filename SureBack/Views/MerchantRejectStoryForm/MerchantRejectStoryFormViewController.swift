@@ -95,6 +95,7 @@ class MerchantRejectStoryFormViewController: UIViewController {
     }
     @objc func close() {
         print("Tapp")
+        dismiss(animated: true)
     }
     @objc func suggestMessageAction(sender: UIButton) {
         messageField.text = ""

@@ -9,11 +9,25 @@ import UIKit
 
 class ItemStoryCollectionViewCell: UICollectionViewCell {
     static let id = "ItemStoryCollectionViewCell"
+    let loadingIndicatorImageProfile: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.style = .gray
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.isHidden = true
+        return loading
+    }()
+    let loadingIndicatorStory: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.style = .gray
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.isHidden = true
+        return loading
+    }()
     let userImageProfile: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "AppIcon")
         image.contentMode = .scaleAspectFill
-        image.makeRounded()
+        image.clipsToBounds = true
+        image.layer.cornerRadius = 10
         return image
     }()
     let usernameIG: UILabel = {
@@ -24,13 +38,12 @@ class ItemStoryCollectionViewCell: UICollectionViewCell {
     }()
     let userFollower: UILabel = {
         let label = UILabel()
-        label.text = "10 Follower"
+        label.text = "-"
         label.font = .systemFont(ofSize: 11, weight: .semibold)
         return label
     }()
     let userImageStory: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "AppIcon")
         image.layer.cornerRadius = 20
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
@@ -40,23 +53,28 @@ class ItemStoryCollectionViewCell: UICollectionViewCell {
         updateUI(
             profileImagePath: data.customer.profilePicture,
             usernameInstagram: data.customer.instagramUsername,
-            storyImagePath: data.imageURI ?? "")
+            storyImagePath: data.imageURI ?? defaultImage)
     }
     private func updateUI(profileImagePath: String, usernameInstagram: String, storyImagePath: String) {
         layer.cornerRadius = 10
         layer.borderWidth = 1
         layer.borderColor = UIColor.osloGray.cgColor
         backgroundColor = .white
+        loadingIndicatorImageProfile.show(true)
+        loadingIndicatorStory.show(true)
         setupConstraint()
         let imageDownloader = ImageDownloader()
         guard let urlProfile = URL(string: profileImagePath) else {return}
         imageDownloader.downloadImage(url: urlProfile) { imageData in
             self.userImageProfile.image = UIImage(data: imageData)
+            self.loadingIndicatorImageProfile.show(false)
         }
-//        guard let urlStory = URL(string: storyImagePath) else {return}
-//        imageDownloader.downloadImage(url: urlStory) { imageData in
-//            self.userImageStory.image = UIImage(data: imageData)
-//        }
+        guard let urlStory = URL(string: storyImagePath) else {return}
+        imageDownloader.downloadImage(url: urlStory) { imageData in
+            self.userImageStory.image = UIImage(data: imageData)
+            self.loadingIndicatorStory.show(false)
+            self.loadingIndicatorStory.isHidden = true
+        }
         usernameIG.text = "@" + usernameInstagram
         let rf = RequestFunction()
         rf.getProfileIG(username: usernameInstagram) { data in
@@ -75,6 +93,9 @@ class ItemStoryCollectionViewCell: UICollectionViewCell {
         userImageProfile.setLeadingAnchorConstraint(equalTo: contentView.leadingAnchor, constant: 10)
         userImageProfile.setHeightAnchorConstraint(equalToConstant: 32)
         userImageProfile.setWidthAnchorConstraint(equalToConstant: 32)
+        userImageProfile.addSubview(loadingIndicatorImageProfile)
+        loadingIndicatorImageProfile.setCenterXAnchorConstraint(equalTo: userImageProfile.centerXAnchor)
+        loadingIndicatorImageProfile.setCenterYAnchorConstraint(equalTo: userImageProfile.centerYAnchor)
         contentView.addSubview(usernameIG)
         usernameIG.translatesAutoresizingMaskIntoConstraints = false
         usernameIG.setTopAnchorConstraint(equalTo: contentView.topAnchor, constant: 10)
@@ -91,5 +112,8 @@ class ItemStoryCollectionViewCell: UICollectionViewCell {
         userImageStory.setLeadingAnchorConstraint(equalTo: contentView.leadingAnchor, constant: 10)
         userImageStory.setTrailingAnchorConstraint(equalTo: contentView.trailingAnchor, constant: -10)
         userImageStory.setBottomAnchorConstraint(equalTo: contentView.bottomAnchor, constant: -10)
+        userImageStory.addSubview(loadingIndicatorStory)
+        loadingIndicatorStory.setCenterXAnchorConstraint(equalTo: userImageStory.centerXAnchor)
+        loadingIndicatorStory.setCenterYAnchorConstraint(equalTo: userImageStory.centerYAnchor)
     }
 }

@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol StoryTableViewCellCellDelegate: AnyObject {
+    func didSelectItem(with storyData: MyStoryData)
+}
+
 class StoryTableViewCell: UITableViewCell {
     static let id = "StoryTableViewCell"
+    var delegate: StoryTableViewCellCellDelegate?
     public var listCustomerStory: [MyStoryData] = []
     private let collectionView: UICollectionView = {
        let layout = UICollectionViewFlowLayout()
@@ -36,7 +41,14 @@ class StoryTableViewCell: UITableViewCell {
     }
 }
 
-extension StoryTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
+extension StoryTableViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let data = listCustomerStory[indexPath.row]
+        delegate?.didSelectItem(with: data)
+    }
+}
+
+extension StoryTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemStoryCollectionViewCell.id, for: indexPath) as? ItemStoryCollectionViewCell else {
             return UICollectionViewCell()

@@ -452,7 +452,7 @@ extension RequestFunction {
         parameters["submitted"] = submitted
         parameters["approved"] = approved
         parameters["assessed"] = assessed
-        parameters["customer_name"] = ""
+        parameters["customer_name"] = customerName
         parameters["customer_id"] = customerId
         parameters["merchant_name"] = merchantName
         parameters["merchant_id"] = merchantId

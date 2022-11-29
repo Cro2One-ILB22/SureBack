@@ -9,11 +9,19 @@ import UIKit
 
 class PreviewCustomerStoryView: UIView {
     static let id = "ItemCustomerStoryCollectionCell"
+    let loadingIndicatorStory: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.style = .gray
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.isHidden = true
+        return loading
+    }()
     let userImageStory: UIImageView = {
        let image = UIImageView()
         image.image = UIImage(named: "AppIcon")
-        image.layer.cornerRadius = 30
-        image.contentMode = .scaleToFill
+        image.layer.cornerRadius = 20
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
         return image
     }()
     let cashbackTitleLabel: UILabel = {
@@ -53,6 +61,9 @@ class PreviewCustomerStoryView: UIView {
         userImageStory.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
         userImageStory.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
         userImageStory.setHeightAnchorConstraint(equalToConstant: 470)
+        userImageStory.addSubview(loadingIndicatorStory)
+        loadingIndicatorStory.setCenterXAnchorConstraint(equalTo: userImageStory.centerXAnchor)
+        loadingIndicatorStory.setCenterYAnchorConstraint(equalTo: userImageStory.centerYAnchor)
         
         addSubview(cashbackTitleLabel)
         cashbackTitleLabel.translatesAutoresizingMaskIntoConstraints = false

@@ -109,7 +109,7 @@ class CustomerProfileViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
-        viewModel.userSubject.subscribe(onNext: { user in
+        viewModel.userSubject.subscribe(onNext: { _ in
             self.configure()
         }).disposed(by: disposeBag)
 
@@ -118,7 +118,7 @@ class CustomerProfileViewController: UIViewController {
     }
 
     func configure() {
-        guard let user = viewModel.user else {return}
+        guard let user = viewModel.user else { return }
         profileImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         profileImage.sd_setImage(
             with: URL(string: user.profilePicture),

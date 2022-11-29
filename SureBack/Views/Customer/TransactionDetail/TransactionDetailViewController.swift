@@ -130,7 +130,7 @@ class TransactionDetailViewController: UIViewController {
 
     lazy var coinValue: UILabel = {
         let label = UILabel()
-        label.text = "0"
+        label.text = "001"
         label.font = UIFont.systemFont(ofSize: 15)
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -170,7 +170,7 @@ class TransactionDetailViewController: UIViewController {
 
     lazy var reasonValue: UILabel = {
         let label = UILabel()
-        label.text = "Foto tidak sesuai Foto tidak sesuai Foto tidak sesuai Foto tidak sesuai"
+        label.text = "-"
         label.font = UIFont.systemFont(ofSize: 15)
         label.numberOfLines = 0
         label.textAlignment = .justified
@@ -185,10 +185,70 @@ class TransactionDetailViewController: UIViewController {
         setupLayout()
     }
 
-    func configureToken(_ data: MyStoryData) {
+    func configureToken(_ data: MyStoryData, status: String) {
+        switch status {
+        case "expired":
+            statusImageView.image = UIImage(named: "multiply.circle.fill.red.tintBlack")
+            transactionStatusLabel.text = "Token Expired"
+            expiredDateLabel.text = "Expired Date"
+            expiredDateValue.text = data.token.expiresAt.formatTodMMMyyyhmma()
+
+            reasonLabel.isHidden = true
+            reasonValue.isHidden = true
+//            stackField7.isHidden = true
+        case "approved":
+            statusImageView.image = UIImage(named: "checkmark.circle.fill.green")
+            transactionStatusLabel.text = "Story Approved"
+            expiredDateLabel.text = "Rewarded Date"
+            expiredDateValue.text = data.token.approvedAt?.formatTodMMMyyyhmmaStory()
+
+            reasonLabel.isHidden = true
+            reasonValue.isHidden = true
+//            stackField7.isHidden = true
+        case "rejected":
+            statusImageView.image = UIImage(named: "multiply.circle.fill.red.tintBlack")
+            transactionStatusLabel.text = "Story Rejected"
+            expiredDateLabel.text = "Rejected Date"
+            expiredDateValue.text = data.token.rejectedAt?.formatTodMMMyyyhmmaStory()
+            reasonValue.text = data.token.rejectedReason ?? "-"
+        default:
+            break
+        }
+        transactionIdLabel.text = String(data.token.id)
+        merchantNameValue.text = data.token.merchant.name
+        purchaseDateValue.text = data.token.purchase?.createdAt.formatTodMMMyyyhmma()
+        totalPurchaseValue.text = String(data.token.purchase?.purchaseAmount ?? 0)
+        percentageValue.text = "\(data.token.tokenCashback.percent)%"
+        coinValue.text = "\(data.token.tokenCashback.amount)"
     }
 
     func configureCoin(_ data: Transaction) {
+        transactionIdLabel.text = String(data.purchase?.token?.id ?? 0)
+
+        merchantNameValue.text = data.purchase?.merchant?.name
+        purchaseDateValue.text = data.purchase?.createdAt.formatTodMMMyyyhmma()
+        totalPurchaseValue.text = String(data.purchase?.purchaseAmount ?? 0)
+        coinValue.text = String(data.amount ?? 0)
+        switch data.accountingEntry {
+        case .c:
+            statusImageView.image = UIImage(named: "arrow.down.left.circle.fill")?.sd_tintedImage(with: .green)
+            transactionStatusLabel.text = "Reward Credited"
+            percentageValue.text = "\(String(data.purchase?.token?.tokenCashback.percent ?? 0))%"
+            expiredDateLabel.text = "Redeemed Date"
+            expiredDateValue.text = data.purchase?.token?.submittedAt?.formatTodMMMyyyhmma()
+            reasonLabel.text = "Credited Date"
+            reasonValue.text = data.purchase?.token?.approvedAt?.formatTodMMMyyyhmmaStory() ?? data.purchase?.token?.rejectedAt?.formatTodMMMyyyhmmaStory()
+        case .d:
+            statusImageView.image = UIImage(named: "arrow.up.forward.circle.fill")?.sd_tintedImage(with: .red)
+            transactionStatusLabel.text = "Coin Used"
+            percentageLabel.isHidden = true
+            percentageValue.isHidden = true
+            coinLabel.text = "Coin Used"
+            expiredDateLabel.isHidden = true
+            expiredDateValue.isHidden = true
+            reasonLabel.text = "Payment"
+            reasonValue.text = String(data.purchase?.paymentAmount ?? 0)
+        }
     }
 }
 
@@ -197,6 +257,7 @@ extension TransactionDetailViewController {
         setTitleStatus()
         setupStackDetail()
     }
+
     private func setTitleStatus() {
         let stackTransactionStatus = UIStackView(arrangedSubviews: [statusImageView, transactionStatusLabel])
         stackTransactionStatus.axis = .horizontal
@@ -220,15 +281,15 @@ extension TransactionDetailViewController {
     }
 
     private func setupStackDetail() {
-        let stack1 = setupMerchant()
-        let stack2 = setupPurchaseDate()
-        let stack3 = setupTotalPurchase()
-        let stack4 = setupPercentage()
-        let stack5 = setupCoin()
-        let stack6 = setupExpiredDate()
-        let stack7 = setupReason()
+        let stackField1 = setupMerchant()
+        let stackField2 = setupPurchaseDate()
+        let stackField3 = setupTotalPurchase()
+        let stackField4 = setupPercentage()
+        let stackField5 = setupCoin()
+        let stackField6 = setupExpiredDate()
+        let stackField7 = setupReason()
 
-        let stackView = UIStackView(arrangedSubviews: [stack1, stack2, stack3, stack4, stack5, stack6, stack7])
+        let stackView = UIStackView(arrangedSubviews: [stackField1, stackField2, stackField3, stackField4, stackField5, stackField6, stackField7])
         stackView.axis = .vertical
         stackView.spacing = 10
         stackView.backgroundColor = .white

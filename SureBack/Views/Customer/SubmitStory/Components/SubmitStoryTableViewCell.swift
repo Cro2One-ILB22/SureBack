@@ -14,6 +14,9 @@ class SubmitStoryTableViewCell: UITableViewCell {
     var storyData = [ResultStoryIG]() {
         didSet {
             collectionView.reloadData()
+            collectionView.isHidden = false
+            loadingIndicator.stopAnimating()
+            loadingIndicator.isHidden = true
         }
     }
 
@@ -31,14 +34,24 @@ class SubmitStoryTableViewCell: UITableViewCell {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        collectionView.register(ItemStoryCollectionViewCell.self, forCellWithReuseIdentifier: ItemStoryCollectionViewCell.id)
+        collectionView.register(ItemSubmitStoryCollectionViewCell.self, forCellWithReuseIdentifier: ItemSubmitStoryCollectionViewCell.id)
 
         return collectionView
+    }()
+
+    var loadingIndicator: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.style = .gray
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.hidesWhenStopped = true
+        return loading
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .systemBlue
+        collectionView.isHidden = true
+        loadingIndicator.show(true)
         contentView.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -56,8 +69,8 @@ class SubmitStoryTableViewCell: UITableViewCell {
 
 extension SubmitStoryTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemStoryCollectionViewCell.id, for: indexPath) as? ItemStoryCollectionViewCell, let user = user, let userIgInfo = userIgInfo else {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: ItemStoryCollectionViewCell.id, for: indexPath) as! UICollectionViewCell // swiftlint:disable:this force_cast
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemSubmitStoryCollectionViewCell.id, for: indexPath) as? ItemSubmitStoryCollectionViewCell, let user = user, let userIgInfo = userIgInfo else {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: ItemSubmitStoryCollectionViewCell.id, for: indexPath) as! UICollectionViewCell // swiftlint:disable:this force_cast
         }
         cell.backgroundColor = selectedStoryIndex == indexPath.row ? .systemBlue : .lightGray
         cell.userImageProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -76,8 +89,6 @@ extension SubmitStoryTableViewCell: UICollectionViewDataSource, UICollectionView
             options: .progressiveLoad,
             completed: nil
         )
-
-//        cell.setCellWithValueOf(<#T##data: MyStoryData##MyStoryData#>)
 
         return cell
     }

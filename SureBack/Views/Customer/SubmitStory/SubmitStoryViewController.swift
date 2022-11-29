@@ -33,6 +33,14 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         return table
     }()
 
+    var loadingIndicator: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.style = .gray
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.hidesWhenStopped = true
+        return loading
+    }()
+
     let headerView = HeaderSubmitStoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 280))
     let footerView = UIView()
     let doneButton = UIButton()
@@ -60,7 +68,7 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         headerView.tokenIdValueLabel.text = String(tokenData.id)
         headerView.merchantNameValueLabel.text = tokenData.merchant.name
         headerView.dateValueLabel.text = tokenData.createdAt.formatTodMMMyyyhmma()
-        headerView.purchaseValueLabel.text = String(tokenData.purchase.purchaseAmount)
+        headerView.purchaseValueLabel.text = String(tokenData.purchase?.purchaseAmount ?? 0)
         runCountdown()
         print("Story ID: \(storyID)")
 

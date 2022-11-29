@@ -8,6 +8,12 @@
 import UIKit
 
 class TransactionDetailViewController: UIViewController {
+    lazy var coupon: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "coupon")
+        image.contentMode = .scaleAspectFill
+        return image
+    }()
     lazy var statusImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "multiply.circle.fill.red")
@@ -254,8 +260,19 @@ class TransactionDetailViewController: UIViewController {
 
 extension TransactionDetailViewController {
     private func setupLayout() {
+        setupCoupon()
         setTitleStatus()
         setupStackDetail()
+    }
+
+    private func setupCoupon() {
+        view.addSubview(coupon)
+        coupon.translatesAutoresizingMaskIntoConstraints = false
+        coupon.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100)
+        coupon.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
+        coupon.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        coupon.setWidthAnchorConstraint(equalToConstant: 487)
+        coupon.setHeightAnchorConstraint(equalToConstant: 358)
     }
 
     private func setTitleStatus() {
@@ -273,11 +290,11 @@ extension TransactionDetailViewController {
         stackTransactionTitle.spacing = 5
         stackTransactionTitle.translatesAutoresizingMaskIntoConstraints = false
 
-        view.addSubview(stackTransactionTitle)
-        stackTransactionTitle.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
-        stackTransactionTitle.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
-        stackTransactionTitle.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
-        stackTransactionTitle.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
+        coupon.addSubview(stackTransactionTitle)
+        stackTransactionTitle.setTopAnchorConstraint(equalTo: coupon.safeAreaLayoutGuide.topAnchor, constant: 20)
+        stackTransactionTitle.setLeadingAnchorConstraint(equalTo: coupon.safeAreaLayoutGuide.leadingAnchor, constant: 20)
+        stackTransactionTitle.setTrailingAnchorConstraint(equalTo: coupon.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        stackTransactionTitle.setCenterXAnchorConstraint(equalTo: coupon.centerXAnchor)
     }
 
     private func setupStackDetail() {
@@ -292,14 +309,14 @@ extension TransactionDetailViewController {
         let stackView = UIStackView(arrangedSubviews: [stackField1, stackField2, stackField3, stackField4, stackField5, stackField6, stackField7])
         stackView.axis = .vertical
         stackView.spacing = 10
-        stackView.backgroundColor = .white
-        stackView.layer.borderWidth = 1
-        stackView.layer.borderColor = UIColor.gray.cgColor
-        stackView.layer.cornerRadius = 10
+//        stackView.backgroundColor = .white
+//        stackView.layer.borderWidth = 1
+//        stackView.layer.borderColor = UIColor.gray.cgColor
+//        stackView.layer.cornerRadius = 10
         stackView.layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stackView)
+        coupon.addSubview(stackView)
         stackView.setTopAnchorConstraint(equalTo: transactionIdLabel.bottomAnchor, constant: 20)
         stackView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 20)
         stackView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -20)

@@ -8,7 +8,8 @@
 import Foundation
 
 struct API {
-    static let baseUrl: String = ProcessInfo.processInfo.environment["BASE_URL"] ?? "http://localhost:8000"
+//    static let baseUrl: String = ProcessInfo.processInfo.environment["BASE_URL"] ?? "http://localhost:8000"
+    static let baseUrl: String = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String ?? "http://localhost:8000"
 }
 
 protocol Endpoint {

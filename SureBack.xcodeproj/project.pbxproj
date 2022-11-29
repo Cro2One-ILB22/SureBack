@@ -224,6 +224,8 @@
 		16C00435293452BA008F5D0D /* MerchantTransactionHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantTransactionHistoryViewController.swift; sourceTree = "<group>"; };
 		16C0043829345658008F5D0D /* CouponCardTransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCardTransactionHistory.swift; sourceTree = "<group>"; };
 		16C0043B29345886008F5D0D /* CouponCardTransactionHistory+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CouponCardTransactionHistory+SetupUI.swift"; sourceTree = "<group>"; };
+		16C0043D293610E1008F5D0D /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		16C0043E293617F9008F5D0D /* Secrets.example.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.example.xcconfig; sourceTree = "<group>"; };
 		3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack_SureBackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FB4E7EBF11E0E918FCC83A /* Pods-SureBack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBack.release.xcconfig"; path = "Target Support Files/Pods-SureBack/Pods-SureBack.release.xcconfig"; sourceTree = "<group>"; };
 		5F47E67A5BE033AB27E63DDB /* Pods-SureBackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBackTests.debug.xcconfig"; path = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -313,6 +315,8 @@
 		119B76492906976E00530C80 = {
 			isa = PBXGroup;
 			children = (
+				16C0043E293617F9008F5D0D /* Secrets.example.xcconfig */,
+				16C0043D293610E1008F5D0D /* Secrets.xcconfig */,
 				119B76542906976E00530C80 /* SureBack */,
 				119B766B2906976F00530C80 /* SureBackTests */,
 				119B76752906976F00530C80 /* SureBackUITests */,
@@ -1293,6 +1297,7 @@
 /* Begin XCBuildConfiguration section */
 		119B767A2906976F00530C80 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 16C0043D293610E1008F5D0D /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1353,6 +1358,7 @@
 		};
 		119B767B2906976F00530C80 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 16C0043D293610E1008F5D0D /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

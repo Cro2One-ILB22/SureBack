@@ -138,7 +138,7 @@ class RequestFunction {
 
     func getUserInfo(completion: @escaping (Result<UserInfoResponse, AFError>) -> Void) {
         let url = Endpoints.getAccount.url
-
+        
         requestWithToken(url: url, decodable: UserInfoResponse.self) {
             completion($0.result)
         }

@@ -47,7 +47,7 @@ class MerchantDetailStoryViewController: UIViewController {
         storyCardView.loadingIndicatorStory.show(true)
         guard let urlProfile = URL(string: storyData?.customer.profilePicture ?? defaultImage) else {return}
         guard let urlStory = URL(string: storyData?.storyURL ?? defaultImage) else {return}
-        let cashbackAmount = storyData?.token.tokenCashback?.amount ?? 0
+        let cashbackAmount = storyData?.token.tokenCashback.amount ?? 0
         imageDownloader.downloadImage(url: urlProfile) {[weak self] data in
             self?.headerView.loadingIndicatorImageProfile.show(false)
             self?.headerView.imageUser.image = UIImage(data: data)

@@ -29,7 +29,6 @@ class TabBarViewController: UITabBarController {
             self.dashboardVC?.user = user
             self.qrVC?.user = user
         }).disposed(by: disposeBag)
-
         request.getUserInfo { [self] data in
             switch data {
             case let .success(result):
@@ -73,15 +72,24 @@ class TabBarViewController: UITabBarController {
                     print(error.description)
                 }
             case let .failure(error):
-                print(error)
-                print("failed to login")
-                if error.responseCode == 401 {
-                    KeychainHelper.standard.delete(key: .accessToken)
-                    let loginVC = LoginViewController()
-                    let navLogin = UINavigationController(rootViewController: loginVC)
-                    navLogin.modalPresentationStyle = .fullScreen
-                    present(navLogin, animated: true, completion: nil)
-                }
+//                print(error)
+//                print("failed to login")
+//                if error.responseCode == 401 {
+//                    KeychainHelper.standard.delete(key: .accessToken)
+//                    let loginVC = LoginViewController()
+//                    let navLogin = UINavigationController(rootViewController: loginVC)
+//                    navLogin.modalPresentationStyle = .fullScreen
+//                    navigationController?.pushViewController(navLogin, animated: true)
+////                    present(navLogin, animated: true, completion: nil)
+//                }
+                
+                let qrVC = ViewController()
+                qrVC.error = error
+//                        qrVC.user = user
+                let navQR = UINavigationController(rootViewController: qrVC)
+                navQR.tabBarItem = UITabBarItem(title: "QR", image: UIImage(named: "qrcode.viewfinder"), tag: 1)
+                setViewControllers([navQR], animated: false)
+                
             }
         }
     }

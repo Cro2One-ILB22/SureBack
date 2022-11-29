@@ -37,11 +37,11 @@ final class PusherService {
 
         let options = PusherClientOptions(
             authMethod: .authRequestBuilder(authRequestBuilder: AuthRequestBuilder()),
-            host: .cluster(ProcessInfo.processInfo.environment["PUSHER_APP_CLUSTER"] ?? "")
+            host: .cluster(Bundle.main.object(forInfoDictionaryKey: "PUSHER_APP_CLUSTER") as? String ?? "")
         )
 
         pusher = Pusher(
-            key: ProcessInfo.processInfo.environment["PUSHER_APP_KEY"] ?? "",
+            key: Bundle.main.object(forInfoDictionaryKey: "PUSHER_APP_KEY") as? String ?? "",
             options: options
         )
 

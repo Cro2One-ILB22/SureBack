@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
     let request = RequestFunction()
+    var error: AFError?
 
     let buttonScan: UIButton = {
         let button = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
@@ -25,18 +27,29 @@ class ViewController: UIViewController {
         button.setTitle("Logout", for: .normal)
         return button
     }()
+    let label1: UILabel = {
+       let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        navigationItem.title = "Testingg"
-
-        buttonScan.addTarget(self, action: #selector(scanQrButtonAction), for: .touchUpInside)
-        view.addSubview(buttonScan)
-
-        logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
-        view.addSubview(logoutButton)
+//        navigationItem.title = "Testingg"
+//
+//        buttonScan.addTarget(self, action: #selector(scanQrButtonAction), for: .touchUpInside)
+//        view.addSubview(buttonScan)
+//
+//        logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
+//        view.addSubview(logoutButton)
+        view.addSubview(label1)
+        label1.translatesAutoresizingMaskIntoConstraints = false
+        label1.text = "Erronya nih : " + error.debugDescription
+        label1.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        label1.setLeadingAnchorConstraint(equalTo: view.leadingAnchor)
+        label1.setTrailingAnchorConstraint(equalTo: view.trailingAnchor)
     }
 
     @objc func scanQrButtonAction(sender: UIButton!) {

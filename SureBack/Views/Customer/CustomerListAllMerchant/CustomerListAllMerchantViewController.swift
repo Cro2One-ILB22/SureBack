@@ -99,7 +99,7 @@ extension CustomerListAllMerchantViewController: UITableViewDelegate, UITableVie
 
         cell.merchantImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.merchantImage.sd_setImage(
-            with: URL(string: merchantData[indexPath.row].profilePicture),
+            with: URL(string: merchantData[indexPath.row].profilePicture ?? ""),
             placeholderImage: UIImage(named: "system.photo"),
             options: .progressiveLoad,
             completed: nil

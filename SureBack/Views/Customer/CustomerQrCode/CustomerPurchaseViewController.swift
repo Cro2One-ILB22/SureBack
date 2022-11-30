@@ -15,6 +15,17 @@ class CustomerPurchaseViewController: UIViewController {
     let apiRequest = RequestFunction()
     var isTokenActive = true
 
+    let instructionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Please share this code to the merchant to request token."
+        label.numberOfLines = 0
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textAlignment = .justified
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     let balanceLabel: UILabel = {
         let label = UILabel()
         label.text = "Balance"
@@ -135,3 +146,16 @@ class CustomerPurchaseViewController: UIViewController {
 }
 
 extension CustomerPurchaseViewController: PusherDelegate {}
+
+extension CustomerPurchaseViewController {
+    func setupLayout() {
+        setupLabel()
+    }
+
+    func setupLabel() {
+        view.addSubview(instructionLabel)
+        instructionLabel.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        instructionLabel.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
+        instructionLabel.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+    }
+}

@@ -75,7 +75,7 @@ extension SubmitStoryTableViewCell: UICollectionViewDataSource, UICollectionView
         cell.backgroundColor = selectedStoryIndex == indexPath.row ? .systemBlue : .lightGray
         cell.userImageProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.userImageProfile.sd_setImage(
-            with: URL(string: user.profilePicture),
+            with: URL(string: user.profilePicture ?? ""),
             placeholderImage: UIImage(named: "person.crop.circle"),
             options: .progressiveLoad,
             completed: nil

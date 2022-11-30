@@ -83,11 +83,11 @@ class ItemNotifTableViewCell: UITableViewCell {
             secondDetailLabel.text = "24 Hours of Waiting Period"
         case .approved:
             statusLabel.text = "Story Approved"
-            firstDetailLabel.text = timestamp.formatTodMMMyyyStory()
+            firstDetailLabel.text = timestamp.formatTodMMMyyy()
             secondDetailLabel.text = "\(allData.tokenHistoryData.tokenCashback.amount) coins credited to your balance"
         case .rejected:
             statusLabel.text = "Story Rejected"
-            firstDetailLabel.text = data.timestamp?.formatTodMMMyyyStory()
+            firstDetailLabel.text = data.timestamp?.formatTodMMMyyy()
             secondDetailLabel.text = "Reason: \(allData.tokenHistoryData.rejectedReason ?? "-")"
         case .redeemed:
             statusLabel.text = "Token Issued"

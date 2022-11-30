@@ -76,11 +76,11 @@ class SectionNotifHeader: UITableViewHeaderFooterView {
         }
 
         if status == "approved" || status == "rejected" {
-            dateLabel.text = statusHistory.last?.timestamp?.formatTodMMMyyyStory()
+            dateLabel.text = statusHistory.last?.timestamp?.formatTodMMMyyy()
         } else {
             dateLabel.text = statusHistory.last?.timestamp?.formatTodMMMyyy()
         }
-        merchantLabel.text = "\(data.tokenHistoryData.purchase?.merchant?.name)"
+        merchantLabel.text = "\(data.tokenHistoryData.purchase?.merchant?.name ?? "")"
     }
 
     private func setupLayout() {

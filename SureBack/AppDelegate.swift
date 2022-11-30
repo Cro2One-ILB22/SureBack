@@ -41,8 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().delegate = self
 
         window = UIWindow(frame: UIScreen.main.bounds)
-//        let viewController = CustomerPurchaseViewController(merchantId: 2)
         let viewController = IsLoginViewController()
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = .black
+        // navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGreen]
+
+//        let viewController = CustomerPurchase2ViewController(merchantId: 2)
+
         let nav = UINavigationController(rootViewController: viewController)
         window?.rootViewController = nav
         window?.makeKeyAndVisible()

@@ -206,7 +206,7 @@ class TransactionDetailViewController: UIViewController {
             statusImageView.image = UIImage(named: "checkmark.circle.fill.green")
             transactionStatusLabel.text = "Story Approved"
             expiredDateLabel.text = "Rewarded Date"
-            expiredDateValue.text = data.token.approvedAt?.formatTodMMMyyyhmmaStory()
+            expiredDateValue.text = data.token.approvedAt?.formatTodMMMyyyhmma()
 
             reasonLabel.isHidden = true
             reasonValue.isHidden = true
@@ -215,7 +215,7 @@ class TransactionDetailViewController: UIViewController {
             statusImageView.image = UIImage(named: "multiply.circle.fill.red.tintBlack")
             transactionStatusLabel.text = "Story Rejected"
             expiredDateLabel.text = "Rejected Date"
-            expiredDateValue.text = data.token.rejectedAt?.formatTodMMMyyyhmmaStory()
+            expiredDateValue.text = data.token.rejectedAt?.formatTodMMMyyyhmma()
             reasonValue.text = data.token.rejectedReason ?? "-"
         default:
             break
@@ -243,7 +243,7 @@ class TransactionDetailViewController: UIViewController {
             expiredDateLabel.text = "Redeemed Date"
             expiredDateValue.text = data.purchase?.token?.submittedAt?.formatTodMMMyyyhmma()
             reasonLabel.text = "Credited Date"
-            reasonValue.text = data.purchase?.token?.approvedAt?.formatTodMMMyyyhmmaStory() ?? data.purchase?.token?.rejectedAt?.formatTodMMMyyyhmmaStory()
+            reasonValue.text = data.purchase?.token?.approvedAt?.formatTodMMMyyyhmma() ?? data.purchase?.token?.rejectedAt?.formatTodMMMyyyhmma()
         case .d:
             statusImageView.image = UIImage(named: "arrow.up.forward.circle.fill")?.sd_tintedImage(with: .red)
             transactionStatusLabel.text = "Coin Used"

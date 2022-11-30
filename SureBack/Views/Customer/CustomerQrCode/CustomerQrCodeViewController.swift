@@ -33,9 +33,8 @@ class CustomerQrCodeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         purchasePusherService = PurchasePusherSerivce(delegate: self)
-        view.backgroundColor = .white
+        view.backgroundColor = .porcelain
         setupLabel()
         setupView()
 
@@ -75,8 +74,8 @@ extension CustomerQrCodeViewController {
     func setupLabel() {
         view.addSubview(instructionLabel)
         instructionLabel.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        instructionLabel.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
-        instructionLabel.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        instructionLabel.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30)
+        instructionLabel.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
     }
 
     func setupView() {
@@ -85,7 +84,6 @@ extension CustomerQrCodeViewController {
         qrView.setTopAnchorConstraint(equalTo: instructionLabel.bottomAnchor, constant: 20)
         qrView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 15)
         qrView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -15)
-//        qrView.setBottomAnchorConstraint(equalTo: view.bottomAnchor, constant: -20)
     }
 }
 

@@ -11,6 +11,12 @@ class ItemActiveTokenCollectionViewCell: UICollectionViewCell {
 
     static let id = "ItemActiveTokenCollectionViewCell"
 
+//    let bgImage: UIImageView = {
+//        let image = UIImageView()
+//        image.image = UIImage(named: "coupon.redeem")
+//        return image
+//    }()
+
     let expireLabel: UILabel = {
         let label = UILabel()
         label.text = "Expires in"
@@ -41,8 +47,8 @@ class ItemActiveTokenCollectionViewCell: UICollectionViewCell {
     var redeemButton: UIButton = {
         let button = UIButton()
         button.setTitle("Redeem", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .tealishGreen
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

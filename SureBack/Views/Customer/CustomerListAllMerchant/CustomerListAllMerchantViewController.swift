@@ -32,7 +32,6 @@ class CustomerListAllMerchantViewController: UIViewController {
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(ItemMerchantTableViewCell.self, forCellReuseIdentifier: ItemMerchantTableViewCell.id)
-        table.backgroundColor = .white
         table.separatorColor = .clear
         return table
     }()
@@ -96,6 +95,7 @@ extension CustomerListAllMerchantViewController: UITableViewDelegate, UITableVie
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemMerchantTableViewCell.id, for: indexPath) as? ItemMerchantTableViewCell else { return UITableViewCell() }
 
         cell.selectionStyle = .none
+        cell.backgroundColor = .porcelain
 
         cell.merchantImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.merchantImage.sd_setImage(

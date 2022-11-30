@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>PUSHER_APP_KEY</key>
-	<string>$(PUSHER_APP_KEY)</string>
-	<key>PUSHER_APP_CLUSTER</key>
-	<string>$(PUSHER_APP_CLUSTER)</string>
 	<key>BASE_URL</key>
 	<string>$(BASE_URL)</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
@@ -17,6 +13,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>PUSHER_APP_CLUSTER</key>
+	<string>$(PUSHER_APP_CLUSTER)</string>
+	<key>PUSHER_APP_KEY</key>
+	<string>$(PUSHER_APP_KEY)</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

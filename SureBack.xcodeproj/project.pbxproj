@@ -35,7 +35,6 @@
 		1619BB32291B500300085B74 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB31291B500300085B74 /* UIViewController+Ext.swift */; };
 		165121FB29244B7C00DBC0AE /* CustomerDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165121FA29244B7C00DBC0AE /* CustomerDashboardViewController.swift */; };
 		165121FD2924501000DBC0AE /* MerchantProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165121FC2924501000DBC0AE /* MerchantProfileViewController.swift */; };
-		165122012924CE2600DBC0AE /* CardFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165122002924CE2600DBC0AE /* CardFieldView.swift */; };
 		165122052925853E00DBC0AE /* NotificationsResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165122042925853E00DBC0AE /* NotificationsResponses.swift */; };
 		16512207292587C800DBC0AE /* MerchantDetailStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16512206292587C800DBC0AE /* MerchantDetailStoryViewController.swift */; };
 		1651220B2925BE2C00DBC0AE /* HeaderMerchantDetailStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1651220A2925BE2C00DBC0AE /* HeaderMerchantDetailStoryView.swift */; };
@@ -83,6 +82,7 @@
 		16C004432936D902008F5D0D /* CardRoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C004422936D902008F5D0D /* CardRoleView.swift */; };
 		16C004462936EE0E008F5D0D /* FormRegistrationViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C004452936EE0E008F5D0D /* FormRegistrationViewController+SetupUI.swift */; };
 		16C004482936F549008F5D0D /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C004472936F549008F5D0D /* UITextField+Ext.swift */; };
+		16C0044A29373E67008F5D0D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0044929373E67008F5D0D /* ProfileViewController.swift */; };
 		2DDDD70EABE69B42303C1AED /* Pods_SureBackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */; };
 		8A2D3CC34125394E06212A07 /* Pods_SureBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6F53CE101281D823C272BB /* Pods_SureBack.framework */; };
 		9CCB778BAEA00AE5C43FB920 /* Pods_SureBack_SureBackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */; };
@@ -184,7 +184,6 @@
 		1619BB31291B500300085B74 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		165121FA29244B7C00DBC0AE /* CustomerDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerDashboardViewController.swift; sourceTree = "<group>"; };
 		165121FC2924501000DBC0AE /* MerchantProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantProfileViewController.swift; sourceTree = "<group>"; };
-		165122002924CE2600DBC0AE /* CardFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFieldView.swift; sourceTree = "<group>"; };
 		165122042925853E00DBC0AE /* NotificationsResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsResponses.swift; sourceTree = "<group>"; };
 		16512206292587C800DBC0AE /* MerchantDetailStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailStoryViewController.swift; sourceTree = "<group>"; };
 		1651220A2925BE2C00DBC0AE /* HeaderMerchantDetailStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMerchantDetailStoryView.swift; sourceTree = "<group>"; };
@@ -234,6 +233,7 @@
 		16C004422936D902008F5D0D /* CardRoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRoleView.swift; sourceTree = "<group>"; };
 		16C004452936EE0E008F5D0D /* FormRegistrationViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormRegistrationViewController+SetupUI.swift"; sourceTree = "<group>"; };
 		16C004472936F549008F5D0D /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
+		16C0044929373E67008F5D0D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack_SureBackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FB4E7EBF11E0E918FCC83A /* Pods-SureBack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBack.release.xcconfig"; path = "Target Support Files/Pods-SureBack/Pods-SureBack.release.xcconfig"; sourceTree = "<group>"; };
 		5F47E67A5BE033AB27E63DDB /* Pods-SureBackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBackTests.debug.xcconfig"; path = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -448,18 +448,9 @@
 		165121FE2924CDF300DBC0AE /* MerchantProfile */ = {
 			isa = PBXGroup;
 			children = (
-				165121FF2924CDFE00DBC0AE /* Components */,
 				165121FC2924501000DBC0AE /* MerchantProfileViewController.swift */,
 			);
 			path = MerchantProfile;
-			sourceTree = "<group>";
-		};
-		165121FF2924CDFE00DBC0AE /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				165122002924CE2600DBC0AE /* CardFieldView.swift */,
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		165122082925BCE100DBC0AE /* MerchantDetailStory */ = {
@@ -695,6 +686,15 @@
 			path = FormRegistration;
 			sourceTree = "<group>";
 		};
+		16C0044B293747DA008F5D0D /* ProfileViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AC24AA3E2931E5590050A086 /* SettingCardView.swift */,
+				16C0044929373E67008F5D0D /* ProfileViewController.swift */,
+			);
+			path = ProfileViewController;
+			sourceTree = "<group>";
+		};
 		AC1C1C3B292F487C00863A87 /* CustomerQrCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,17 +713,10 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		AC24AA3D2931E54C0050A086 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				AC24AA3E2931E5590050A086 /* SettingCardView.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		AC24AA422931EF2C0050A086 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				16C0044B293747DA008F5D0D /* ProfileViewController */,
 				1603EFE1292B1D6800EC5485 /* CustomSegmentedControl.swift */,
 				AC24AA432931EF440050A086 /* CustomTextField.swift */,
 			);
@@ -874,7 +867,6 @@
 		ACF6441C2925DF0E00A6AD10 /* CustomerProfile */ = {
 			isa = PBXGroup;
 			children = (
-				AC24AA3D2931E54C0050A086 /* Components */,
 				ACF6441D2925DF2900A6AD10 /* CustomerProfileViewController.swift */,
 				AC24AA402931EE3A0050A086 /* CustomerEditProfileViewController.swift */,
 			);
@@ -1185,7 +1177,6 @@
 				169FCD62292F09F2009CBAB2 /* ConfirmRegistrationViewController+SetupUI.swift in Sources */,
 				ACCE106929337E7E00C2CB45 /* CustomerNotificationViewController.swift in Sources */,
 				ACE5CDB029127E6200D08177 /* ResponseData.swift in Sources */,
-				165122012924CE2600DBC0AE /* CardFieldView.swift in Sources */,
 				16512215292737EC00DBC0AE /* DetailCoinHistoryCardView.swift in Sources */,
 				AC1C1C40292F56DE00863A87 /* CustomerQRView.swift in Sources */,
 				169FCD3F292C849D009CBAB2 /* MyStoryResponses.swift in Sources */,
@@ -1278,6 +1269,7 @@
 				1603EFE8292B494700EC5485 /* WaitingViewController.swift in Sources */,
 				ACCE106B29339DB000C2CB45 /* SectionNotifHeader.swift in Sources */,
 				11CB60422933AEE800C66F39 /* CustomerPurchaseViewController.swift in Sources */,
+				16C0044A29373E67008F5D0D /* ProfileViewController.swift in Sources */,
 				169FCD5B292DD655009CBAB2 /* String+Ext.swift in Sources */,
 				AC2AC1BD291F3C5B00E9F8A7 /* ItemActiveTokenCollectionViewCell.swift in Sources */,
 			);

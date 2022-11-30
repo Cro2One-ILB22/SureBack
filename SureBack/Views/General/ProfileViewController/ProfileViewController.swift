@@ -125,7 +125,7 @@ class ProfileViewController: UIViewController {
         guard let user = viewModel.user else { return }
         profileImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         profileImage.sd_setImage(
-            with: URL(string: user.profilePicture),
+            with: URL(string: user.profilePicture ?? defaultImage),
             placeholderImage: UIImage(named: "system.photo"),
             options: .progressiveLoad,
             completed: nil

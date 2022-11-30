@@ -358,11 +358,6 @@
 				119B765E2906976F00530C80 /* Assets.xcassets */,
 				119B76602906976F00530C80 /* LaunchScreen.storyboard */,
 				119B76632906976F00530C80 /* Info.plist */,
-				AC04BD7F290995AD00635147 /* Function.swift */,
-				AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */,
-				ACE8C3582916267800BEA778 /* LoginViewController.swift */,
-				1619BB282919082700085B74 /* TabBarViewController.swift */,
-				AC59F88C29202888000F8345 /* IsLoginViewController.swift */,
 			);
 			path = SureBack;
 			sourceTree = "<group>";
@@ -541,6 +536,7 @@
 		169FCD50292CC4E5009CBAB2 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				AC04BD7F290995AD00635147 /* Function.swift */,
 				169FCD51292CC4F9009CBAB2 /* ImageDownloader.swift */,
 				1619BB262918B5E800085B74 /* AuthManager.swift */,
 				AC24AA4829327F480050A086 /* UserViewModel.swift */,
@@ -571,19 +567,9 @@
 		16BD919F291D521D0010731E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				16C0043F2936D878008F5D0D /* ChooseRoleRegistration */,
-				16C004442936E382008F5D0D /* FormRegistration */,
-				169FCD60292F03F9009CBAB2 /* ConfirmRegistration */,
-				16C004342934528F008F5D0D /* MerchantTransactionHistory */,
-				16C0042C29341C99008F5D0D /* MerchantRejectStoryForm */,
-				16C0042729340745008F5D0D /* MerchantGenerateTokenForm */,
 				AC24AA422931EF2C0050A086 /* General */,
+				16C0044C293764CF008F5D0D /* Merchant */,
 				AC59F88E29205480000F8345 /* Customer */,
-				1603EFDE292B059200EC5485 /* MerchantListAllCustomer */,
-				165122102927373900DBC0AE /* MerchantCoinHistory */,
-				165122082925BCE100DBC0AE /* MerchantDetailStory */,
-				165121FE2924CDF300DBC0AE /* MerchantProfile */,
-				16BD91A0291D52280010731E /* MerchantDashboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -689,6 +675,22 @@
 			path = ProfileViewController;
 			sourceTree = "<group>";
 		};
+		16C0044C293764CF008F5D0D /* Merchant */ = {
+			isa = PBXGroup;
+			children = (
+				AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */,
+				16C004342934528F008F5D0D /* MerchantTransactionHistory */,
+				16C0042C29341C99008F5D0D /* MerchantRejectStoryForm */,
+				1603EFDE292B059200EC5485 /* MerchantListAllCustomer */,
+				165122102927373900DBC0AE /* MerchantCoinHistory */,
+				165122082925BCE100DBC0AE /* MerchantDetailStory */,
+				165121FE2924CDF300DBC0AE /* MerchantProfile */,
+				16BD91A0291D52280010731E /* MerchantDashboard */,
+				16C0042729340745008F5D0D /* MerchantGenerateTokenForm */,
+			);
+			path = Merchant;
+			sourceTree = "<group>";
+		};
 		AC1C1C3B292F487C00863A87 /* CustomerQrCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -710,6 +712,12 @@
 		AC24AA422931EF2C0050A086 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				AC59F88C29202888000F8345 /* IsLoginViewController.swift */,
+				1619BB282919082700085B74 /* TabBarViewController.swift */,
+				16C0043F2936D878008F5D0D /* ChooseRoleRegistration */,
+				16C004442936E382008F5D0D /* FormRegistration */,
+				169FCD60292F03F9009CBAB2 /* ConfirmRegistration */,
+				ACE8C3582916267800BEA778 /* LoginViewController.swift */,
 				16C0044B293747DA008F5D0D /* ProfileViewController */,
 				1603EFE1292B1D6800EC5485 /* CustomSegmentedControl.swift */,
 				AC24AA432931EF440050A086 /* CustomTextField.swift */,

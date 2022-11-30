@@ -57,7 +57,7 @@ class TabBarViewController: UITabBarController {
                         let navDashboard = UINavigationController(rootViewController: dashboardVC)
                         navDashboard.tabBarItem = UITabBarItem(title: "Dashboard", image: UIImage(named: "list.dash.header.rectangle"), tag: 1)
 
-                        let qrVC = ViewController()
+                        let qrVC = ScanQrViewController()
 //                        qrVC.user = user
                         let navQR = UINavigationController(rootViewController: qrVC)
                         navQR.tabBarItem = UITabBarItem(title: "QR", image: UIImage(named: "qrcode.viewfinder"), tag: 1)

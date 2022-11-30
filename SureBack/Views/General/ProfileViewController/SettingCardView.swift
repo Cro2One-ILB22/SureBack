@@ -15,7 +15,6 @@ class SettingCardView: UIView {
         image.clipsToBounds = true
         return image
     }()
-    
     var title: UILabel = {
         let label = UILabel()
         label.text = "Text"
@@ -27,7 +26,6 @@ class SettingCardView: UIView {
         layer.cornerRadius = 10
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
-        setWidthAnchorConstraint(equalToConstant: UIScreen.screenWidth)
         translatesAutoresizingMaskIntoConstraints = false
         setupLayout()
     }
@@ -40,6 +38,8 @@ class SettingCardView: UIView {
         titleImage.setTopAnchorConstraint(equalTo: topAnchor, constant: 10)
         titleImage.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 10)
         titleImage.setCenterYAnchorConstraint(equalTo: centerYAnchor)
+        titleImage.setWidthAnchorConstraint(equalToConstant: 24)
+        titleImage.setHeightAnchorConstraint(equalToConstant: 24)
         addSubview(title)
         title.translatesAutoresizingMaskIntoConstraints = false
         title.setTopAnchorConstraint(equalTo: topAnchor, constant: 10)

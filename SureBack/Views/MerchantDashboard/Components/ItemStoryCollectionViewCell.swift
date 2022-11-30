@@ -51,7 +51,7 @@ class ItemStoryCollectionViewCell: UICollectionViewCell {
     }()
     public func setCellWithValueOf(_ data: MyStoryData) {
         updateUI(
-            profileImagePath: data.customer.profilePicture,
+            profileImagePath: data.customer.profilePicture ?? "",
             usernameInstagram: data.customer.instagramUsername,
             storyImagePath: data.imageURI ?? defaultImage)
     }

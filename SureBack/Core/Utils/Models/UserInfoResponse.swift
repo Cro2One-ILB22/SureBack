@@ -13,7 +13,7 @@ import AutoEquatable
 class UserInfoResponse: Codable, AutoEquatable {
     let id: Int
     var name: String
-    var profilePicture: String
+    var profilePicture: String?
     let instagramID: Int
     var instagramUsername: String
     var balance: Int

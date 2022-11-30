@@ -29,7 +29,7 @@
 		1603EFE8292B494700EC5485 /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603EFE7292B494700EC5485 /* WaitingViewController.swift */; };
 		1619BB272918B5E800085B74 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB262918B5E800085B74 /* AuthManager.swift */; };
 		1619BB292919082700085B74 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB282919082700085B74 /* TabBarViewController.swift */; };
-		1619BB2B2919B74800085B74 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB2A2919B74800085B74 /* RegistrationViewController.swift */; };
+		1619BB2B2919B74800085B74 /* FormRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB2A2919B74800085B74 /* FormRegistrationViewController.swift */; };
 		1619BB2E2919D9DC00085B74 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB2D2919D9DC00085B74 /* UIView+Ext.swift */; };
 		1619BB302919FCF700085B74 /* ConfirmRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB2F2919FCF700085B74 /* ConfirmRegistrationViewController.swift */; };
 		1619BB32291B500300085B74 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619BB31291B500300085B74 /* UIViewController+Ext.swift */; };
@@ -79,6 +79,10 @@
 		16C00436293452BA008F5D0D /* MerchantTransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C00435293452BA008F5D0D /* MerchantTransactionHistoryViewController.swift */; };
 		16C0043929345658008F5D0D /* CouponCardTransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0043829345658008F5D0D /* CouponCardTransactionHistory.swift */; };
 		16C0043C29345886008F5D0D /* CouponCardTransactionHistory+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0043B29345886008F5D0D /* CouponCardTransactionHistory+SetupUI.swift */; };
+		16C004412936D890008F5D0D /* ChooseRoleRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C004402936D890008F5D0D /* ChooseRoleRegistrationViewController.swift */; };
+		16C004432936D902008F5D0D /* CardRoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C004422936D902008F5D0D /* CardRoleView.swift */; };
+		16C004462936EE0E008F5D0D /* FormRegistrationViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C004452936EE0E008F5D0D /* FormRegistrationViewController+SetupUI.swift */; };
+		16C004482936F549008F5D0D /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C004472936F549008F5D0D /* UITextField+Ext.swift */; };
 		2DDDD70EABE69B42303C1AED /* Pods_SureBackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */; };
 		8A2D3CC34125394E06212A07 /* Pods_SureBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6F53CE101281D823C272BB /* Pods_SureBack.framework */; };
 		9CCB778BAEA00AE5C43FB920 /* Pods_SureBack_SureBackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */; };
@@ -174,7 +178,7 @@
 		1603EFE7292B494700EC5485 /* WaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingViewController.swift; sourceTree = "<group>"; };
 		1619BB262918B5E800085B74 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		1619BB282919082700085B74 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		1619BB2A2919B74800085B74 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		1619BB2A2919B74800085B74 /* FormRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRegistrationViewController.swift; sourceTree = "<group>"; };
 		1619BB2D2919D9DC00085B74 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		1619BB2F2919FCF700085B74 /* ConfirmRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationViewController.swift; sourceTree = "<group>"; };
 		1619BB31291B500300085B74 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
@@ -226,6 +230,10 @@
 		16C0043B29345886008F5D0D /* CouponCardTransactionHistory+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CouponCardTransactionHistory+SetupUI.swift"; sourceTree = "<group>"; };
 		16C0043D293610E1008F5D0D /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		16C0043E293617F9008F5D0D /* Secrets.example.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.example.xcconfig; sourceTree = "<group>"; };
+		16C004402936D890008F5D0D /* ChooseRoleRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRoleRegistrationViewController.swift; sourceTree = "<group>"; };
+		16C004422936D902008F5D0D /* CardRoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRoleView.swift; sourceTree = "<group>"; };
+		16C004452936EE0E008F5D0D /* FormRegistrationViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormRegistrationViewController+SetupUI.swift"; sourceTree = "<group>"; };
+		16C004472936F549008F5D0D /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 		3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack_SureBackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FB4E7EBF11E0E918FCC83A /* Pods-SureBack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBack.release.xcconfig"; path = "Target Support Files/Pods-SureBack/Pods-SureBack.release.xcconfig"; sourceTree = "<group>"; };
 		5F47E67A5BE033AB27E63DDB /* Pods-SureBackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBackTests.debug.xcconfig"; path = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -358,7 +366,6 @@
 				ACE8C35A2916D60700BEA778 /* DummyViewController.swift */,
 				ACE8C3582916267800BEA778 /* LoginViewController.swift */,
 				1619BB282919082700085B74 /* TabBarViewController.swift */,
-				1619BB2A2919B74800085B74 /* RegistrationViewController.swift */,
 				AC22879329182E8E00397ED0 /* ShowQRViewController.swift */,
 				AC1A6CBA291B43E700A99BB1 /* MerchantGenerateTokenViewController.swift */,
 				AC59F88C29202888000F8345 /* IsLoginViewController.swift */,
@@ -433,6 +440,7 @@
 				169FCD5A292DD655009CBAB2 /* String+Ext.swift */,
 				169FCD5C292E0A9E009CBAB2 /* UIImageView+Ext.swift */,
 				AC1C1C41292F7AC300863A87 /* Date+Ext.swift */,
+				16C004472936F549008F5D0D /* UITextField+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -578,11 +586,13 @@
 		16BD919F291D521D0010731E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				16C0043F2936D878008F5D0D /* ChooseRoleRegistration */,
+				16C004442936E382008F5D0D /* FormRegistration */,
+				169FCD60292F03F9009CBAB2 /* ConfirmRegistration */,
 				16C004342934528F008F5D0D /* MerchantTransactionHistory */,
 				16C0042C29341C99008F5D0D /* MerchantRejectStoryForm */,
 				16C0042729340745008F5D0D /* MerchantGenerateTokenForm */,
 				AC24AA422931EF2C0050A086 /* General */,
-				169FCD60292F03F9009CBAB2 /* ConfirmRegistration */,
 				AC59F88E29205480000F8345 /* Customer */,
 				1603EFDE292B059200EC5485 /* MerchantListAllCustomer */,
 				165122102927373900DBC0AE /* MerchantCoinHistory */,
@@ -665,6 +675,24 @@
 				16C0043B29345886008F5D0D /* CouponCardTransactionHistory+SetupUI.swift */,
 			);
 			path = CouponCardTransactionHistory;
+			sourceTree = "<group>";
+		};
+		16C0043F2936D878008F5D0D /* ChooseRoleRegistration */ = {
+			isa = PBXGroup;
+			children = (
+				16C004402936D890008F5D0D /* ChooseRoleRegistrationViewController.swift */,
+				16C004422936D902008F5D0D /* CardRoleView.swift */,
+			);
+			path = ChooseRoleRegistration;
+			sourceTree = "<group>";
+		};
+		16C004442936E382008F5D0D /* FormRegistration */ = {
+			isa = PBXGroup;
+			children = (
+				1619BB2A2919B74800085B74 /* FormRegistrationViewController.swift */,
+				16C004452936EE0E008F5D0D /* FormRegistrationViewController+SetupUI.swift */,
+			);
+			path = FormRegistration;
 			sourceTree = "<group>";
 		};
 		AC1C1C3B292F487C00863A87 /* CustomerQrCode */ = {
@@ -1147,6 +1175,7 @@
 				AC24AA3F2931E5590050A086 /* SettingCardView.swift in Sources */,
 				16BD91A5291D527C0010731E /* BussinesStatusCardView.swift in Sources */,
 				ACE8C35B2916D60700BEA778 /* DummyViewController.swift in Sources */,
+				16C004482936F549008F5D0D /* UITextField+Ext.swift in Sources */,
 				ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */,
 				ACCE107C29343FFE00C2CB45 /* CoinHistoryViewController.swift in Sources */,
 				169FCD55292CC5E7009CBAB2 /* HistoryViewController+SetupUI.swift in Sources */,
@@ -1176,6 +1205,7 @@
 				1603EFE0292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift in Sources */,
 				ACCE107E293464FE00C2CB45 /* ItemSubmitStoryCollectionViewCell.swift in Sources */,
 				115EBDAD2933F8A100069F83 /* PurchasePusherService.swift in Sources */,
+				16C004432936D902008F5D0D /* CardRoleView.swift in Sources */,
 				169FCD5F292E1935009CBAB2 /* MerchantDashboardViewController+SetupUI.swift in Sources */,
 				11CB603A293378A800C66F39 /* QRScanRequest.swift in Sources */,
 				1619BB302919FCF700085B74 /* ConfirmRegistrationViewController.swift in Sources */,
@@ -1188,6 +1218,7 @@
 				169FCD52292CC4F9009CBAB2 /* ImageDownloader.swift in Sources */,
 				ACCE107A29343A7F00C2CB45 /* TokenStatusViewController.swift in Sources */,
 				ACDD097A29128F1E00309FBC /* Transaction.swift in Sources */,
+				16C004462936EE0E008F5D0D /* FormRegistrationViewController+SetupUI.swift in Sources */,
 				1619BB2E2919D9DC00085B74 /* UIView+Ext.swift in Sources */,
 				16C0042B293412A9008F5D0D /* MerchantGenerateTokenFormViewController+SetupUI.swift in Sources */,
 				AC24AA442931EF440050A086 /* CustomTextField.swift in Sources */,
@@ -1202,6 +1233,7 @@
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
 				AC22879429182E8E00397ED0 /* ShowQRViewController.swift in Sources */,
 				AC886E8729250AD9007F1E41 /* SectionDashboardHeader.swift in Sources */,
+				16C004412936D890008F5D0D /* ChooseRoleRegistrationViewController.swift in Sources */,
 				169FCD41292C85E6009CBAB2 /* PurchaseResponse.swift in Sources */,
 				AC886E8329246FFF007F1E41 /* Protocol.swift in Sources */,
 				16BD91A7291D52E30010731E /* StoryTableViewCell.swift in Sources */,
@@ -1211,7 +1243,7 @@
 				169FCD5D292E0A9E009CBAB2 /* UIImageView+Ext.swift in Sources */,
 				169FCD4A292CC063009CBAB2 /* WaitingViewController+SetupUI.swift in Sources */,
 				ACE5CDA42912704800D08177 /* UserInfoResponse.swift in Sources */,
-				1619BB2B2919B74800085B74 /* RegistrationViewController.swift in Sources */,
+				1619BB2B2919B74800085B74 /* FormRegistrationViewController.swift in Sources */,
 				AC00FA35290A5D3600B6347D /* ScanQrViewController.swift in Sources */,
 				AC886E852924CD7B007F1E41 /* ActiveTokenTableViewCell.swift in Sources */,
 				AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */,

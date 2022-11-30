@@ -21,6 +21,14 @@ class CustomerListAllMerchantViewController: UIViewController {
         return search
     }()
 
+    lazy var loadingIndicator: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.style = .gray
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.isHidden = true
+        return loading
+    }()
+
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(ItemMerchantTableViewCell.self, forCellReuseIdentifier: ItemMerchantTableViewCell.id)
@@ -32,8 +40,42 @@ class CustomerListAllMerchantViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
-        setupSearch()
-        setupView()
+        showLoadingIndicator(true)
+        searchBar.delegate = self
+        setupLayout()
+        getListAllMerchant()
+    }
+
+    func getListAllMerchant(search searchedName: String = "") {
+        let rf = RequestFunction()
+        rf.getListMerchant(searchMerchantByName: searchedName) { data in
+            switch data {
+            case let .success(result):
+                do {
+                    self.merchantData = result.data
+                    self.tableView.reloadData()
+                    self.showLoadingIndicator(false)
+                } catch let error as NSError {
+                    print(error.description)
+                }
+            case let .failure(error):
+                print(error)
+                print("failed to get list merchant")
+            }
+        }
+    }
+
+    private func showLoadingIndicator(_ isShow: Bool) {
+        tableView.isHidden = isShow
+        loadingIndicator.show(isShow)
+    }
+}
+
+extension CustomerListAllMerchantViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        showLoadingIndicator(true)
+        print("Hasil pencarion", searchText.lowercased())
+        getListAllMerchant(search: searchText.lowercased())
     }
 }
 
@@ -83,30 +125,5 @@ extension CustomerListAllMerchantViewController: UITableViewDelegate, UITableVie
             }
         }
         navigationController?.pushViewController(merchantDetailVC, animated: true)
-    }
-}
-
-extension CustomerListAllMerchantViewController {
-    private func setupView() {
-        setupTableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-
-    private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.setTopAnchorConstraint(equalTo: searchBar.bottomAnchor)
-        tableView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 15)
-        tableView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -15)
-        tableView.setBottomAnchorConstraint(equalTo: view.bottomAnchor)
-    }
-
-    private func setupSearch() {
-        view.addSubview(searchBar)
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
-        searchBar.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 15)
-        searchBar.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -15)
     }
 }

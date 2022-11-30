@@ -163,7 +163,7 @@ class ProfileViewController: UIViewController {
             case let .success:
                 do {
                     print("logout success")
-                    let loginVC = LoginViewController()
+                    let loginVC = OnboardingViewController()
                     let navLogin = UINavigationController(rootViewController: loginVC)
                     navLogin.modalPresentationStyle = .fullScreen
                     self.present(navLogin, animated: true, completion: nil)

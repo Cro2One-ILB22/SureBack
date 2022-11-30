@@ -366,10 +366,12 @@ extension RequestFunction {
         requestWithToken(url: url, decodable: UserInfoResponse.self, completionHandler: { completion($0.result) })
     }
 
-    func getListMerchant(completion: @escaping (Result<ResponseData<UserInfoResponse>, AFError>) -> Void) {
+    func getListMerchant(searchMerchantByName merchantName: String? = nil, completion: @escaping (Result<ResponseData<UserInfoResponse>, AFError>) -> Void) {
         let url = Endpoints.getListMerchant.url
+        var parameters: [String: String] = [:]
+        parameters["name"] = merchantName
 
-        requestWithToken(url: url, decodable: ResponseData<UserInfoResponse>.self) {
+        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<UserInfoResponse>.self) {
             completion($0.result)
         }
     }

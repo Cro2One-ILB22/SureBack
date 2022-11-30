@@ -45,8 +45,7 @@ class CustomerHistoryViewController: UIViewController {
         }
 
         if tokenData == nil {
-            headerView.timerLabel.isHidden = true
-            headerView.redeemLabel.isHidden = true
+            headerView.redeemButtonView.isHidden = true
         }
 
         runCountdown()
@@ -63,7 +62,8 @@ class CustomerHistoryViewController: UIViewController {
         headerView.userNameLabel.text = "\(user?.name ?? "") @"
         headerView.merchantLabel.text = merchantData?.name
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(redeemButtonTapped))
-        headerView.stackRedeemButton.addGestureRecognizer(tapGesture)
+        headerView.redeemButtonView.isUserInteractionEnabled = true
+        headerView.redeemButtonView.addGestureRecognizer(tapGesture)
         headerView.loyaltCoinsValueLabel.text = "\(merchantData?.coins?[0].outstanding ?? 0)"
         headerView.openLinkButton.addTarget(self, action: #selector(openLinkTapped), for: .touchUpInside)
     }

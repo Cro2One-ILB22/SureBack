@@ -21,7 +21,7 @@ class IsLoginViewController: UIViewController {
             self.navigationController?.pushViewController(TabBarViewController(), animated: true)
             self.navigationController?.isNavigationBarHidden = true
         } else {
-            self.navigationController?.pushViewController(LoginViewController(), animated: true)
+            self.navigationController?.pushViewController(OnboardingViewController(), animated: true)
             self.navigationController?.isNavigationBarHidden = true
         }
     }

@@ -123,11 +123,13 @@ class HeaderCustomerHistoryView: UIView {
         return button
     }()
 
-    lazy var redeemButton: UIButton = {
-        let view = UIButton()
-        view.layer.cornerRadius = 10
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    lazy var redeemButtonView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "coupon.redeem")
+        image.setWidthAnchorConstraint(equalToConstant: 120)
+        image.setHeightAnchorConstraint(equalToConstant: 55)
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
     }()
 
     lazy var timerLabel: UILabel = {
@@ -142,10 +144,19 @@ class HeaderCustomerHistoryView: UIView {
 
     lazy var redeemLabel: UILabel = {
         let label = UILabel()
-        label.text = "Redeem Token"
+        label.text = "Redeem"
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+
+    lazy var redeemButton: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "arrow.right.circle.green")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.setWidthAnchorConstraint(equalToConstant: 20)
+        image.setHeightAnchorConstraint(equalToConstant: 20)
+        return image
     }()
 
     override init(frame: CGRect) {
@@ -155,95 +166,5 @@ class HeaderCustomerHistoryView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension HeaderCustomerHistoryView {
-    private func setupHeaderView() {
-        // Stack 1
-        let stackProfile = UIStackView(arrangedSubviews: [userNameLabel, merchantLabel])
-        stackProfile.axis = .vertical
-        stackProfile.distribution = .equalSpacing
-        stackProfile.translatesAutoresizingMaskIntoConstraints = false
-
-        // Stack 2
-        let stack2 = UIStackView(arrangedSubviews: [profileImage, openLinkButton])
-        stack2.axis = .horizontal
-        stack2.spacing = 5
-        stack2.distribution = .fill
-        stack2.alignment = .center
-        stack2.translatesAutoresizingMaskIntoConstraints = false
-
-
-        bgProfileImageView.addSubview(stack2)
-        stack2.setCenterYAnchorConstraint(equalTo: bgProfileImageView.centerYAnchor)
-        stack2.setCenterXAnchorConstraint(equalTo: bgProfileImageView.centerXAnchor)
-//        profileImage.translatesAutoresizingMaskIntoConstraints = false
-        bgProfileImageView.setWidthAnchorConstraint(equalToConstant: 80)
-
-        let stackCoinsLabel = UIStackView(arrangedSubviews: [loyaltCoinsLabel, coinImage])
-        stackCoinsLabel.axis = .horizontal
-        stackCoinsLabel.distribution = .equalSpacing
-        stackCoinsLabel.spacing = 5
-        stackCoinsLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        let stackCoins = UIStackView(arrangedSubviews: [loyaltCoinsValueLabel, stackCoinsLabel])
-        stackCoins.axis = .vertical
-        stackCoins.distribution = .equalSpacing
-        stackCoins.spacing = 5
-        stackCoins.translatesAutoresizingMaskIntoConstraints = false
-
-        let stackImageCoins = UIStackView(arrangedSubviews: [bgProfileImageView, stackCoins])
-        stackImageCoins.axis = .horizontal
-//        stackImageCoins.distribution = .fillProportionally
-        stackImageCoins.spacing = 170
-        stackImageCoins.translatesAutoresizingMaskIntoConstraints = false
-
-        // Stack 3
-        let stackStatus = UIStackView(arrangedSubviews: [lockImage, statusLabel])
-        stackStatus.axis = .horizontal
-        stackStatus.spacing = 5
-        stackStatus.distribution = .fill
-        stackStatus.translatesAutoresizingMaskIntoConstraints = false
-
-        stackRedeemButton = UIStackView(arrangedSubviews: [timerLabel, redeemLabel])
-        stackRedeemButton.backgroundColor = .lightGray
-        stackRedeemButton.axis = .vertical
-        stackRedeemButton.distribution = .fill
-        stackRedeemButton.alignment = .center
-        stackRedeemButton.translatesAutoresizingMaskIntoConstraints = false
-
-        let stackStatusRedeem = UIStackView(arrangedSubviews: [stackStatus, stackRedeemButton])
-        stackStatusRedeem.axis = .horizontal
-        stackStatusRedeem.distribution = .equalSpacing
-        stackStatusRedeem.alignment = .center
-        stackStatusRedeem.translatesAutoresizingMaskIntoConstraints = false
-
-        let contentView = UIView()
-        addSubview(contentView)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.setWidthAnchorConstraint(equalToConstant: UIScreen.screenWidth - 40)
-        contentView.setTopAnchorConstraint(equalTo: topAnchor, constant: 10)
-        contentView.setBottomAnchorConstraint(equalTo: bottomAnchor, constant: -10)
-        contentView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 10)
-        contentView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -10)
-
-        contentView.addSubview(image)
-
-        // Stack All
-        let stackViewAll = UIStackView(arrangedSubviews: [stackProfile, stackImageCoins, stackStatusRedeem])
-        stackViewAll.layer.cornerRadius = 10
-        stackViewAll.axis = .vertical
-        stackViewAll.distribution = .equalSpacing
-        stackViewAll.spacing = 5
-        stackViewAll.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(stackViewAll)
-//        stackViewAll.setWidthAnchorConstraint(equalToConstant: UIScreen.screenWidth - 20)
-        stackViewAll.setTopAnchorConstraint(equalTo: contentView.topAnchor, constant: 10)
-//        stackViewAll.setCenterXAnchorConstraint(equalTo: contentView.centerXAnchor)
-//        stackViewAll.setCenterYAnchorConstraint(equalTo: contentView.centerYAnchor)
-        stackViewAll.setBottomAnchorConstraint(equalTo: contentView.bottomAnchor, constant: -10)
-        stackViewAll.setLeadingAnchorConstraint(equalTo: contentView.leadingAnchor, constant: 10)
-        stackViewAll.setTrailingAnchorConstraint(equalTo: contentView.trailingAnchor, constant: 10)
     }
 }

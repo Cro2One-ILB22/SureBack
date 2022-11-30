@@ -64,7 +64,7 @@ extension ActiveTokenTableViewCell: UICollectionViewDataSource, UICollectionView
             return UICollectionViewCell()
         }
         cell.backgroundColor = .lightGray
-        cell.tokenMerchantNameLabel.text = activateTokenData[indexPath.row].merchant.name
+        cell.tokenMerchantNameLabel.text = activateTokenData[indexPath.row].purchase?.merchant?.name
         cell.redeemButton.tag = indexPath.row
         cell.redeemButton.addTarget(self, action: #selector(toRedeemTokenTapped), for: .touchUpInside)
         cell.expireAt = activateTokenData[indexPath.row].expiresAt.stringToDate()

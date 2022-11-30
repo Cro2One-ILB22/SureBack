@@ -66,7 +66,7 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         }
 
         headerView.tokenIdValueLabel.text = String(tokenData.id)
-        headerView.merchantNameValueLabel.text = tokenData.merchant.name
+        headerView.merchantNameValueLabel.text = tokenData.purchase?.merchant?.name
         headerView.dateValueLabel.text = tokenData.createdAt.formatTodMMMyyyhmma()
         headerView.purchaseValueLabel.text = String(tokenData.purchase?.purchaseAmount ?? 0)
         runCountdown()

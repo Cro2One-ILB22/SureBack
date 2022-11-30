@@ -14,7 +14,7 @@ class Token: Codable {
     let code: String
     let instagramID: Int
     let expiresAt, createdAt, updatedAt: String
-    let merchant: UserInfoResponse
+//    let merchant: UserInfoResponse
     let purchase: PurchaseResponse?
     let story: ApproveOrRejectStoryResponse?
     let tokenCashback: TokenCashback
@@ -33,7 +33,8 @@ class Token: Codable {
         case expiresAt = "expires_at"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case merchant, purchase
+//        case merchant
+        case purchase
         case tokenCashback = "cashback"
         case story
         case issuedAt = "issued_at"
@@ -53,9 +54,9 @@ class Token: Codable {
 
 struct TokenCashback: Codable {
     let amount: Int
-    let percent: Float
+    let percent: Float?
     let coinType, createdAt, updatedAt: String
-    let cashbackCalculationMethod: String
+    let cashbackCalculationMethod: String?
     
     enum CodingKeys: String, CodingKey {
         case amount, percent

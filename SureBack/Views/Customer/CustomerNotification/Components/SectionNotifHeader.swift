@@ -80,7 +80,7 @@ class SectionNotifHeader: UITableViewHeaderFooterView {
         } else {
             dateLabel.text = statusHistory.last?.timestamp?.formatTodMMMyyy()
         }
-        merchantLabel.text = "\(data.tokenHistoryData.merchant.name)"
+        merchantLabel.text = "\(data.tokenHistoryData.purchase?.merchant?.name)"
     }
 
     private func setupLayout() {

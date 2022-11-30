@@ -39,13 +39,13 @@ class MerchantDetailStoryViewController: UIViewController {
     }
     private func initData() {
         let imageDownloader = ImageDownloader()
-        let name = storyData?.customer.name
-        let username = "@" + (storyData?.customer.instagramUsername ?? "")
+        let name = storyData?.customer?.name
+        let username = "@" + (storyData?.customer?.instagramUsername ?? "")
         let createdStory = storyData?.createdAt.formatTodMMMyyyhmma()
         let follower = "\(getUserFollower())"
         headerView.loadingIndicatorImageProfile.show(true)
         storyCardView.loadingIndicatorStory.show(true)
-        guard let urlProfile = URL(string: storyData?.customer.profilePicture ?? defaultImage) else {return}
+        guard let urlProfile = URL(string: storyData?.customer?.profilePicture ?? defaultImage) else {return}
         guard let urlStory = URL(string: storyData?.storyURL ?? defaultImage) else {return}
         let cashbackAmount = storyData?.token.tokenCashback.amount ?? 0
         imageDownloader.downloadImage(url: urlProfile) {[weak self] data in
@@ -65,7 +65,7 @@ class MerchantDetailStoryViewController: UIViewController {
     }
     private func getUserFollower() -> Int {
         let rf = RequestFunction()
-        let username = storyData?.customer.instagramUsername ?? ""
+        let username = storyData?.customer?.instagramUsername ?? ""
         var follower: Int?
         rf.getProfileIG(username: username) { result in
             switch(result) {

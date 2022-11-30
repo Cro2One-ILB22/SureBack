@@ -158,4 +158,19 @@ extension CustomerPurchaseViewController {
         instructionLabel.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
         instructionLabel.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
     }
+
+    func setupDetails() {
+        let stackView = UIStackView(arrangedSubviews: [])
+    }
+
+    func setupSwitch() -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: [getTokenLabel, getTokenSwitch])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .top
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        return stackView
+    }
 }

@@ -13,7 +13,7 @@ struct MyStoryResponses: Codable {
     let lastPage: Int
     let lastPageURL: String
     let links: [MyStoryLink]
-    let nextPageURL: Int?
+    let nextPageURL: String?
     let path: String
     let perPage: Int
     let prevPageURL: Int?
@@ -48,7 +48,7 @@ struct MyStoryData: Codable {
     let createdAt, updatedAt: String
     let storyURL: String?
     let token: MyStoryToken
-    let customer: MyStoryCustomer
+    let customer: MyStoryCustomer?
 
     enum CodingKeys: String, CodingKey {
         case id

@@ -221,7 +221,7 @@ class TransactionDetailViewController: UIViewController {
             break
         }
         transactionIdLabel.text = String(data.token.id)
-        merchantNameValue.text = data.token.merchant.name
+        merchantNameValue.text = data.token.purchase?.merchant?.name
         purchaseDateValue.text = data.token.purchase?.createdAt.formatTodMMMyyyhmma()
         totalPurchaseValue.text = String(data.token.purchase?.purchaseAmount ?? 0)
         percentageValue.text = "\(data.token.tokenCashback.percent)%"

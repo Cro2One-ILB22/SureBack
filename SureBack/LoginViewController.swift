@@ -133,7 +133,7 @@ class LoginViewController: UIViewController {
     }
 
     @objc func registerButtonTapped(sender: UITapGestureRecognizer) {
-        let registerVC = RegistrationViewController()
+        let registerVC = ChooseRoleRegistrationViewController()
         navigationController?.pushViewController(registerVC, animated: true)
         self.navigationController?.isNavigationBarHidden = true
     }

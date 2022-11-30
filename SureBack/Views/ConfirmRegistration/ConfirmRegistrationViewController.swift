@@ -8,8 +8,8 @@
 import UIKit
 
 class ConfirmRegistrationViewController: UIViewController {
-    var responseOTP: RequestInstagramOTPResponse?
     var dataRegister: Register?
+    let apiRequest = RequestFunction()
     let title1Label: UILabel = {
         let title = UILabel()
         title.text = "You're almost there!"
@@ -74,10 +74,10 @@ class ConfirmRegistrationViewController: UIViewController {
         button.layer.cornerRadius = 10
         return button
     }()
-    var count = 120
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .porcelain
+        otpLabel.text = "\(String(describing: dataRegister?.otp))"
         setupLayout()
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCountDown), userInfo: nil, repeats: true)
         surebackInstagramAccountButton.addTarget(self, action: #selector(goToSurebackAccount), for: .touchUpInside)
@@ -97,40 +97,52 @@ extension ConfirmRegistrationViewController {
         print("Tapped renew code action")
     }
     @objc func copyToClipboardAction(sender: UITapGestureRecognizer) {
-        print("Tapped copy")
         UIPasteboard.general.string = "Ini adalah text yang berhasil dicopy"
         self.showAlert(title: "Successfully", message: "Copy to clipboard", action: "Ok")
     }
     @objc func updateCountDown() {
-        if count > 0 {
-            count -= 1
-            expiresLabel.text = "Expires: " + timeString(time: TimeInterval(count))
+        guard var expiredIn = dataRegister?.otpExpiredIn else {return}
+        if expiredIn > 0 {
+            expiredIn -= 1
+            expiresLabel.text = "Expires: " + timeString(time: TimeInterval(expiredIn))
         }
     }
     @objc func goToSurebackAccount() {
-        print("go to tapped")
-        guard let responseOTP = responseOTP else { return }
-        UIApplication.shared.open(URL(string: "https://www.instagram.com/\(responseOTP.instagramToDM)/?hl=id")!)
+        guard let instagramToDM = dataRegister?.instagramToDM else { return }
+        UIApplication.shared.open(URL(string: "https://www.instagram.com/\(instagramToDM)/?hl=id")!)
     }
     @objc func checkOtp() {
-        print("Tapped")
         guard let name = dataRegister?.name, !name.isEmpty else {return}
         guard let usernameIG = dataRegister?.usernameIG, !usernameIG.isEmpty else {return}
         guard let email = dataRegister?.email, !email.isEmpty else {return}
         guard let password = dataRegister?.password, !password.isEmpty else {return}
         guard let role = dataRegister?.role, !role.isEmpty else {return}
-        guard let responseOTP = responseOTP else { return }
-        let request = RequestFunction()
-        request.register(
+        guard let instagraToDM = dataRegister?.instagramToDM else { return }
+        register(name: name, email: email, password: password, role: role, usernameIG: usernameIG, instagraToDM: instagraToDM)
+    }
+    private func register(
+        name: String,
+        email: String,
+        password: String,
+        role: String,
+        usernameIG: String,
+        instagraToDM: String) {
+        apiRequest.register(
             name: name,
             email: email,
             password: password,
             role: role,
             username: usernameIG,
-            instagramToDM: responseOTP.instagramToDM) { data, error in
+            instagramToDM: instagraToDM) { data, error in
                 if error != nil {
                     self.showAlert(title: "Error", message: error?.localizedDescription ?? "", action: "Okey")
                     return
+                }
+                do {
+                    guard let accessToken = data?.accessToken else {return}
+                    try KeychainHelper.standard.save(key: .accessToken, value: accessToken)
+                } catch {
+                    print("Error save token")
                 }
                 let mainVC = IsLoginViewController()
                 self.navigationController?.pushViewController(mainVC, animated: true)

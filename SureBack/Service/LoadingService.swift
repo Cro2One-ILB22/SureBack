@@ -9,21 +9,21 @@ import Foundation
 import UIKit
 
 class LoadingService {
-    private let loadingIndicator: UIActivityIndicatorView
+    private let loadingIndicator: UIActivityIndicatorView?
     private(set) var loadingState: LoadingState = .notStarted
-    
-    init(loadingIndicator: UIActivityIndicatorView) {
+
+    init(loadingIndicator: UIActivityIndicatorView? = nil) {
         self.loadingIndicator = loadingIndicator
-        self.loadingIndicator.hidesWhenStopped = true
+        self.loadingIndicator?.hidesWhenStopped = true
     }
-    
+
     func setState(state: LoadingState) {
         loadingState = state
         switch state {
         case .loading:
-            loadingIndicator.startAnimating()
+            loadingIndicator?.startAnimating()
         case .notStarted, .success, .failed:
-            loadingIndicator.stopAnimating()
+            loadingIndicator?.stopAnimating()
         }
     }
 }

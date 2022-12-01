@@ -37,7 +37,7 @@ class ItemActiveTokenCollectionViewCell: UICollectionViewCell {
 
     var timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "Timer"
+        label.text = "00:00:00"
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -7,7 +7,18 @@
 
 import UIKit
 
+// extension Date {
+//    var month: Int? {
+//        let components = Calendar.current.dateComponents([.month], from: self)
+//        return components.month
+//    }
+// }
+
 class TokenStatusViewController: UIViewController {
+    private var loadingService: LoadingService?
+    var page = 1
+    var totalPage: Int?
+
     let request = RequestFunction()
     var merchantData: UserInfoResponse?
 
@@ -17,21 +28,35 @@ class TokenStatusViewController: UIViewController {
             print(transactionData)
             print("condata token: \(transactionData.count)")
             if transactionData.count == 0 {
-                self.tableView.setEmptyMessage(
+                tableView.setEmptyMessage(
                     image: UIImage(named: "empty.merchant")!,
                     title: "Empty",
                     message: "You don’t have any record with us.\nDon’t you want to visit us?",
                     centerYAnchorConstant: -50)
             }
+//            dict = Dictionary(grouping: transactionData) { model -> Int in
+//                model.updatedAt.stringToDate().month ?? 0
+//            }
         }
     }
 
-    lazy var tableView: UITableView = {
+//    var dict: [Int: [MyStoryData]] = [:]
+
+    var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .plain)
         table.register(ItemCustomerHistoryTableViewCell.self, forCellReuseIdentifier: ItemCustomerHistoryTableViewCell.id)
         table.backgroundColor = .clear
         return table
     }()
+
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 70))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
+    }
 
     lazy var loadingIndicator: UIActivityIndicatorView = {
         let loading = UIActivityIndicatorView()
@@ -50,13 +75,16 @@ class TokenStatusViewController: UIViewController {
         loadingIndicator.startAnimating()
         loadingIndicator.isHidden = false
 
+        loadingService = LoadingService()
+
         guard let merchantData = merchantData else { return }
-        getTokenStatusData(merchantData: merchantData)
+        getTokenStatusData(merchantData: merchantData, page: page)
         setupLayout()
     }
 
-    func getTokenStatusData(merchantData: UserInfoResponse) {
-        request.getMyStoryCustomer(merchantId: merchantData.id) { data in
+    func getTokenStatusData(merchantData: UserInfoResponse, page: Int) {
+        loadingService?.setState(state: .loading)
+        request.getMyStoryCustomer(merchantId: merchantData.id, page: page) { data in
             switch data {
             case let .success(result):
                 do {
@@ -71,13 +99,16 @@ class TokenStatusViewController: UIViewController {
                             }
                         }
                     }
+                    self.totalPage = result.lastPage
                     self.tableView.isHidden = false
                     self.loadingIndicator.stopAnimating()
                     self.loadingIndicator.isHidden = true
+                    self.loadingService?.setState(state: .success)
                 } catch let error as NSError {
                     print(error.description)
                 }
             case let .failure(error):
+                self.loadingService?.setState(state: .failed)
                 print(error)
                 print("failed to get list token status in merchant \(merchantData.name)")
             }
@@ -118,7 +149,6 @@ extension TokenStatusViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
         var status = ""
 
         if transactionData[indexPath.row].submittedAt == nil {
@@ -138,7 +168,108 @@ extension TokenStatusViewController: UITableViewDataSource, UITableViewDelegate 
         transactionDetailVC.title = "Token Status History Detail"
         transactionDetailVC.configureToken(transactionData[indexPath.row], status: status)
         navigationController?.pushViewController(transactionDetailVC, animated: true)
+    }
 
+    // number of section based on dict keys
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return dict.keys.count
+//    }
+
+    // view for header in section
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let view = UIView()
+//        view.backgroundColor = .white
+//
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.font = UIFont(name: "Poppins-SemiBold", size: 14)
+//        label.textColor = .black
+//
+//        view.addSubview(label)
+//
+//        NSLayoutConstraint.activate([
+//            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+//            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//        ])
+//
+//        // get key from dict
+//        let key = dict.keys.sorted()[section]
+//
+//        // get value from dict
+//        let value = dict[key]
+//
+//        // set label text
+//        // label.text = value?.first?.updatedAt.formatTodMMMyyy()
+//
+//        //label text only month
+//        label.text = value?.first?.updatedAt.formatToMMM()
+//
+//        return view
+//    }
+
+    // number of row based on section
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // get key from dict
+//        let key = dict.keys.sorted()[section]
+//
+//        // get value from dict
+//        let value = dict[key]
+//
+//        return value?.count ?? 0
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemCustomerHistoryTableViewCell.id, for: indexPath) as? ItemCustomerHistoryTableViewCell else { return UITableViewCell() }
+//
+//        // get key from dict
+//        let key = dict.keys.sorted()[indexPath.section]
+//
+//        // get value from dict
+//        let value = dict[key]
+//
+//        cell.dateLabel.text = value?[indexPath.row].updatedAt.formatTodMMMyyy()
+//
+//        if value?[indexPath.row].submittedAt == nil {
+//            cell.statusImage.image = UIImage(named: "multiply.circle.fill.red")?.sd_tintedImage(with: .red)
+//            cell.statusLabel.text = "\(value?[indexPath.row].id ?? 0) - Token Expired"
+//        } else {
+//            switch value?[indexPath.row].approvalStatus {
+//            case 0:
+//                cell.statusImage.image = UIImage(named: "multiply.circle.fill.red")?.sd_tintedImage(with: .red)
+//                cell.statusLabel.text = "\(value?[indexPath.row].id ?? 0) - Story Rejected"
+//
+//            case 1:
+//                cell.statusImage.image = UIImage(named: "checkmark.circle.fill")?.sd_tintedImage(with: .green)
+//                cell.statusLabel.text = "\(value?[indexPath.row].id ?? 0) - Story Approved"
+//            default:
+//                break
+//            }
+//        }
+//
+//        cell.coinsLabel.text = "Rp\(String(value?[indexPath.row].token.purchase?.purchaseAmount ?? 0))"
+//
+//        return cell
+//    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        tableView.tableFooterView = createSpinnerFooter()
+
+        guard loadingService?.loadingState == .success || loadingService?.loadingState == .failed else { return }
+
+        tableView.tableFooterView = nil
+
+        guard let totalPage = totalPage else { return }
+
+        if offsetY > contentHeight - scrollView.frame.height {
+            if page <= (totalPage - 1) {
+                page += 1
+                guard let merchantData = merchantData else { return }
+                getTokenStatusData(merchantData: merchantData, page: page)
+                tableView.reloadData()
+            }
+        }
     }
 }
 

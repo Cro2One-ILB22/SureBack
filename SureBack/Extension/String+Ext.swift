@@ -26,6 +26,15 @@ extension String {
         return dateFormatter.string(from: date!)
     }
 
+    func formatToMMM() -> Self {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let date = dateFormatter.date(from: self)
+        dateFormatter.dateFormat = "MMM"
+        return dateFormatter.string(from: date!)
+    }
+
     // TODO: add day format
 
     func stringToDate() -> Date {

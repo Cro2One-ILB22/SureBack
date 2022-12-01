@@ -53,6 +53,14 @@ class ItemMerchantTableViewCell: UITableViewCell {
         return label
     }()
 
+    lazy var bookmarkImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "bookmark.off")
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        return image
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .white
@@ -62,6 +70,7 @@ class ItemMerchantTableViewCell: UITableViewCell {
 
         setupImage()
         setupLabel()
+        setupBookmark()
         setupTag()
     }
 
@@ -99,6 +108,15 @@ class ItemMerchantTableViewCell: UITableViewCell {
         addSubview(stackView)
         stackView.setTopAnchorConstraint(equalTo: topAnchor, constant: 15)
         stackView.setLeadingAnchorConstraint(equalTo: merchantImage.trailingAnchor, constant: 20)
+    }
+
+    func setupBookmark() {
+        addSubview(bookmarkImage)
+        bookmarkImage.translatesAutoresizingMaskIntoConstraints = false
+        bookmarkImage.setTopAnchorConstraint(equalTo: topAnchor)
+        bookmarkImage.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -22)
+        bookmarkImage.setHeightAnchorConstraint(equalToConstant: 38)
+        bookmarkImage.setWidthAnchorConstraint(equalToConstant: 30)
     }
 
     func setupTag() {

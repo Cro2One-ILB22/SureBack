@@ -41,6 +41,7 @@ class SectionNotifHeader: UITableViewHeaderFooterView {
         button.setImage(UIImage(named: "chevron.right"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setHeightAnchorConstraint(equalToConstant: 12)
+        button.setWidthAnchorConstraint(equalToConstant: 12)
         return button
     }()
 
@@ -58,10 +59,10 @@ class SectionNotifHeader: UITableViewHeaderFooterView {
         let isHidden = data.isHidden
         if isHidden {
             expandButton.setImage(UIImage(named: "chevron.right"), for: .normal)
-            expandButton.setWidthAnchorConstraint(equalToConstant: 12)
+//            expandButton.setWidthAnchorConstraint(equalToConstant: 12)
         } else {
             expandButton.setImage(UIImage(named: "chevron.down"), for: .normal)
-            expandButton.setWidthAnchorConstraint(equalToConstant: 25)
+//            expandButton.setWidthAnchorConstraint(equalToConstant: 25)
         }
 
         let statusHistory = data.tokenHistoryData.statusHistory

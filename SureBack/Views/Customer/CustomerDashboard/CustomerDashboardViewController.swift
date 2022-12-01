@@ -5,11 +5,15 @@
 //  Created by Ditha Nurcahya Avianty on 09/11/22.
 //
 
+import CoreLocation
 import SDWebImage
 import UIKit
+import RxSwift
 
 class CustomerDashboardViewController: UIViewController, UIViewToController {
-    let locationManager = CLLocationManager()
+    private var loadingService: LoadingService?
+    private let locationSubject: ReplaySubject<CLLocationCoordinate2D>
+    private let disposeBag = DisposeBag()
     let request = RequestFunction()
     var user: UserInfoResponse!
     var merchantData = [UserInfoResponse]() {
@@ -46,32 +50,18 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initAndStartUpdatingLocation()
         view.backgroundColor = .porcelain
         setupLoadingIndicator()
+        loadingService = LoadingService(loadingIndicator: loadingIndicator)
+        locationSubject.subscribe(onNext: { [weak self] location in
+            self?.setupContent(location: location)
+        }).disposed(by: disposeBag)
 
         tableView.isHidden = true
-        loadingIndicator.show(true)
-
-        request.getListMerchant { data in
-            switch data {
-            case let .success(result):
-                do {
-                    self.merchantData = result.data
-                    self.tableView.isHidden = false
-                    self.loadingIndicator.show(false)
-                } catch let error as NSError {
-                    print(error.description)
-                }
-            case let .failure(error):
-                print(error)
-                print("failed to get list merchant")
-            }
-        }
 
         let headerView = HeaderCustomerDashboardView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: 50))
         headerView.notifButton.addTarget(self, action: #selector(notifButtonTapped), for: .touchUpInside)
-        self.setupView2(headerView: headerView)
+        setupView2(headerView: headerView)
 
         request.getListToken(expired: 0, submitted: 0, redeemed: 1) { data in
             switch data {
@@ -115,6 +105,15 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
 //        allMerchantVC.merchantData = merchantData
         allMerchantVC.activeTokenData = activeTokenData
         navigationController?.pushViewController(allMerchantVC, animated: true)
+    }
+
+    init(locationSubject: ReplaySubject<CLLocationCoordinate2D>) {
+        self.locationSubject = locationSubject
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -226,25 +225,21 @@ extension CustomerDashboardViewController {
         tableView.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         tableView.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     }
-}
 
-import CoreLocation
-
-extension CustomerDashboardViewController: CLLocationManagerDelegate {
-    func initAndStartUpdatingLocation() {
-        DispatchQueue.global(qos: .utility).async {
-            self.locationManager.requestWhenInUseAuthorization()
-            if CLLocationManager.locationServicesEnabled() {
-                self.locationManager.delegate = self
-                self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-                self.locationManager.startUpdatingLocation()
+    private func setupContent(location: CLLocationCoordinate2D) {
+        guard loadingService?.loadingState == .notStarted else { return }
+        loadingService?.setState(state: .loading)
+        request.getListMerchant(locationCoordinate: (location.latitude, location.longitude)) { data in
+            switch data {
+            case let .success(result):
+                self.merchantData = result.data
+                self.tableView.isHidden = false
+                self.loadingService?.setState(state: .success)
+            case let .failure(error):
+                self.loadingService?.setState(state: .failed)
+                print(error)
+                print("failed to get list merchant")
             }
         }
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue)")
-        self.locationManager.stopUpdatingLocation()
     }
 }

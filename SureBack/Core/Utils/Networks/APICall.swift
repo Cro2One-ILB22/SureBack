@@ -31,6 +31,7 @@ enum Endpoints: Endpoint {
     case redeemToken
     case updateUser
     case updateMerchantDetail
+    case updateMerchantLocation
     case getListCustomer
     case getCustomerById(Int)
     case getListMerchant
@@ -72,6 +73,8 @@ enum Endpoints: Endpoint {
             return "\(API.baseUrl)/api/user"
         case .updateMerchantDetail:
             return "\(API.baseUrl)/api/user/merchant-detail"
+        case .updateMerchantLocation:
+            return "\(API.baseUrl)/api/user/merchant/location"
         case .getListCustomer:
             return "\(API.baseUrl)/api/customer"
         case let .getCustomerById(id):

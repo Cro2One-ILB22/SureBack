@@ -149,16 +149,9 @@ class ProfileViewController: UIViewController {
         request.postLogout { data in
             switch data {
             case let .success:
-                do {
-                    print("logout success")
-                    let loginVC = OnboardingViewController()
-                    let navLogin = UINavigationController(rootViewController: loginVC)
-                    navLogin.modalPresentationStyle = .fullScreen
-                    self.present(navLogin, animated: true, completion: nil)
-                    self.showAlert(title: "Success", message: "Success Log Out", action: "Ok")
-                } catch let error as NSError {
-                    print(error.description)
-                }
+                print("logout success")
+                let appDelegate = UIApplication.shared.delegate as? AppDelegate
+                appDelegate?.window?.rootViewController = UINavigationController(rootViewController: IsLoginViewController())
             case .failure:
                 break
             }

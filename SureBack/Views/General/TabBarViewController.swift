@@ -5,11 +5,16 @@
 //  Created by Tubagus Adhitya Permana on 07/11/22.
 //
 
+import CoreLocation
 import RxCocoa
 import RxSwift
 import UIKit
 
 class TabBarViewController: UITabBarController {
+    private let locationManager = CLLocationManager()
+    private var currentLocation: CLLocationCoordinate2D?
+    private let locationSubject = ReplaySubject<CLLocationCoordinate2D>.create(bufferSize: 1)
+
     let request = RequestFunction()
 
     let viewModel = UserViewModel.shared
@@ -25,19 +30,20 @@ class TabBarViewController: UITabBarController {
         view.backgroundColor = .porcelain
 
         // proses nonton perubahan seperti didSet
-        viewModel.userSubject.subscribe(onNext: { user in // onNext : kalo update, next
-            self.dashboardVC?.user = user
-            self.qrVC?.user = user
+        viewModel.userSubject.subscribe(onNext: { [weak self] user in // onNext : kalo update, next
+            self?.dashboardVC?.user = user
+            self?.qrVC?.user = user
         }).disposed(by: disposeBag)
         request.getUserInfo { [self] data in
             switch data {
             case let .success(result):
+                self.initAndStartUpdatingLocation()
                 do {
                     viewModel.userSubject.onNext(result)
                     print("login success")
 
                     if viewModel.user?.roles![1] == "customer" {
-                        dashboardVC = CustomerDashboardViewController()
+                        dashboardVC = CustomerDashboardViewController(locationSubject: locationSubject)
                         dashboardVC?.user = viewModel.user
                         let navDashboard = UINavigationController(rootViewController: dashboardVC!)
                         navDashboard.tabBarItem = UITabBarItem(title: "Dashboard", image: UIImage(named: "list.dash.header.rectangle"), tag: 1)
@@ -94,4 +100,35 @@ class TabBarViewController: UITabBarController {
 //    required init?(coder: NSCoder) {
 //        fatalError("init(coder:) has not been implemented")
 //    }
+
+    deinit {
+        locationManager.stopUpdatingLocation()
+    }
+}
+
+extension TabBarViewController: CLLocationManagerDelegate {
+    func initAndStartUpdatingLocation() {
+        DispatchQueue.global(qos: .utility).async {
+            self.locationManager.requestWhenInUseAuthorization()
+            if CLLocationManager.locationServicesEnabled() {
+                self.locationManager.delegate = self
+                self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                self.locationManager.startUpdatingLocation()
+            }
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue)")
+        guard locValue.latitude != currentLocation?.latitude,
+              locValue.longitude != currentLocation?.longitude
+        else { return }
+        currentLocation = locValue
+        locationSubject.onNext(locValue)
+        guard let roles = viewModel.user?.roles,
+              roles.contains("merchant")
+        else { return }
+        request.updateMerchantLocation(locationCoordinate: (locValue.latitude, locValue.longitude))
+    }
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1101ABBE2906AE8200F15996 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1101ABBD2906AE8200F15996 /* .swiftlint.yml */; };
+		111337C02938188F00B90558 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111337BF2938188F00B90558 /* LoadingState.swift */; };
+		111337C229385E1F00B90558 /* LoadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111337C129385E1F00B90558 /* LoadingService.swift */; };
 		115EBDAD2933F8A100069F83 /* PurchasePusherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115EBDAC2933F8A100069F83 /* PurchasePusherService.swift */; };
 		119B76562906976E00530C80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119B76552906976E00530C80 /* AppDelegate.swift */; };
 		119B765F2906976F00530C80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 119B765E2906976F00530C80 /* Assets.xcassets */; };
@@ -153,6 +155,8 @@
 
 /* Begin PBXFileReference section */
 		1101ABBD2906AE8200F15996 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		111337BF2938188F00B90558 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
+		111337C129385E1F00B90558 /* LoadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingService.swift; sourceTree = "<group>"; };
 		115EBDAC2933F8A100069F83 /* PurchasePusherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasePusherService.swift; sourceTree = "<group>"; };
 		119B76522906976E00530C80 /* SureBack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SureBack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		119B76552906976E00530C80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -320,6 +324,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		111337BE2938187500B90558 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				111337BF2938188F00B90558 /* LoadingState.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		119B76492906976E00530C80 = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +361,7 @@
 		119B76542906976E00530C80 /* SureBack */ = {
 			isa = PBXGroup;
 			children = (
+				111337BE2938187500B90558 /* Enums */,
 				169FCD50292CC4E5009CBAB2 /* Service */,
 				AC886E8129246FEA007F1E41 /* Controller */,
 				16BD919F291D521D0010731E /* Views */,
@@ -544,6 +557,7 @@
 				AC24AA4829327F480050A086 /* UserViewModel.swift */,
 				11CC9558292FB5B00038E766 /* PusherService.swift */,
 				115EBDAC2933F8A100069F83 /* PurchasePusherService.swift */,
+				111337C129385E1F00B90558 /* LoadingService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1212,6 +1226,7 @@
 				16512207292587C800DBC0AE /* MerchantDetailStoryViewController.swift in Sources */,
 				11CC9559292FB5B00038E766 /* PusherService.swift in Sources */,
 				11CB603E293381D800C66F39 /* QRScanPurchase.swift in Sources */,
+				111337C02938188F00B90558 /* LoadingState.swift in Sources */,
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,
 				16C0044F29385F53008F5D0D /* MerchantFormBusinessSettingViewController.swift in Sources */,
 				16C0042429335D02008F5D0D /* MerchantCoinHistoryViewController+SetupUI.swift in Sources */,
@@ -1258,6 +1273,7 @@
 				169FCD5D292E0A9E009CBAB2 /* UIImageView+Ext.swift in Sources */,
 				169FCD4A292CC063009CBAB2 /* WaitingViewController+SetupUI.swift in Sources */,
 				ACE5CDA42912704800D08177 /* UserInfoResponse.swift in Sources */,
+				111337C229385E1F00B90558 /* LoadingService.swift in Sources */,
 				1619BB2B2919B74800085B74 /* FormRegistrationViewController.swift in Sources */,
 				AC00FA35290A5D3600B6347D /* ScanQrViewController.swift in Sources */,
 				AC886E852924CD7B007F1E41 /* ActiveTokenTableViewCell.swift in Sources */,

@@ -197,6 +197,15 @@ extension RequestFunction {
             }
         }
     }
+
+    func updateMerchantLocation(locationCoordinate: (latitude: Double, longitude: Double), completion: @escaping (Result<Data?, AFError>) -> Void = {_ in }) {
+        let url = Endpoints.updateMerchantLocation.url
+        let body = [
+            "latitude": locationCoordinate.latitude,
+            "longitude": locationCoordinate.longitude,
+        ]
+        requestWithToken(url: url, method: .put, parameters: body, completionHandler: { completion($0.result) })
+    }
 }
 
 // MARK: Instagram
@@ -345,10 +354,16 @@ extension RequestFunction {
         requestWithToken(url: url, decodable: UserInfoResponse.self, completionHandler: { completion($0.result) })
     }
 
-    func getListMerchant(searchMerchantByName merchantName: String? = nil, completion: @escaping (Result<ResponseData<UserInfoResponse>, AFError>) -> Void) {
+    func getListMerchant(searchMerchantByName merchantName: String? = nil,
+                         locationCoordinate: (latitude: Double, longitude: Double)? = nil,
+                         completion: @escaping (Result<ResponseData<UserInfoResponse>, AFError>) -> Void) {
         let url = Endpoints.getListMerchant.url
         var parameters: [String: String] = [:]
         parameters["name"] = merchantName
+        if let locationCoordinate = locationCoordinate {
+            parameters["latitude"] = String(locationCoordinate.latitude)
+            parameters["longitude"] = String(locationCoordinate.longitude)
+        }
 
         requestWithToken(url: url, parameters: parameters, decodable: ResponseData<UserInfoResponse>.self) {
             completion($0.result)

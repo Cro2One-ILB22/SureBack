@@ -46,13 +46,15 @@ class CustomerQrCodeViewController: UIViewController {
         qrView.dateLabel.text = Date().dateToString()
         qrView.usernameLabel.text = "@\(user.instagramUsername)"
 
-        do {
-            let tryJSON = try JSONEncoder().encode(user.id)
-            let stringJSON = String(data: tryJSON, encoding: .utf8)
-            print("stringJSON : \(stringJSON)")
-            qrView.qrImage.image = function.generateQR(stringJSON: stringJSON ?? "")
-        } catch let error as NSError {
-            print(error.description)
+        DispatchQueue.main.async {
+            do {
+                let tryJSON = try JSONEncoder().encode(user.id)
+                let stringJSON = String(data: tryJSON, encoding: .utf8)
+                print("stringJSON : \(stringJSON)")
+                self.qrView.qrImage.image = self.function.generateQR(stringJSON: stringJSON ?? "")
+            } catch let error as NSError {
+                print(error.description)
+            }
         }
     }
 

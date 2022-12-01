@@ -678,6 +678,7 @@
 		16C0044C293764CF008F5D0D /* Merchant */ = {
 			isa = PBXGroup;
 			children = (
+				16C0044D29385ECB008F5D0D /* MerchantFormBusinessSetting */,
 				AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */,
 				16C004342934528F008F5D0D /* MerchantTransactionHistory */,
 				16C0042C29341C99008F5D0D /* MerchantRejectStoryForm */,
@@ -689,6 +690,13 @@
 				16C0042729340745008F5D0D /* MerchantGenerateTokenForm */,
 			);
 			path = Merchant;
+			sourceTree = "<group>";
+		};
+		16C0044D29385ECB008F5D0D /* MerchantFormBusinessSetting */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MerchantFormBusinessSetting;
 			sourceTree = "<group>";
 		};
 		AC1C1C3B292F487C00863A87 /* CustomerQrCode */ = {

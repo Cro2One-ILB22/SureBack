@@ -75,12 +75,15 @@ class ConfirmRegistrationViewController: UIViewController {
         button.layer.cornerRadius = 10
         return button
     }()
-    let loadingIndicator: UIActivityIndicatorView = {
-        let loading = UIActivityIndicatorView()
-        loading.style = .gray
-        loading.translatesAutoresizingMaskIntoConstraints = false
-        loading.isHidden = true
-        return loading
+    let alertWaiting: UIAlertController = {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        alert.view.tintColor = UIColor.black
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating()
+        alert.view.addSubview(loadingIndicator)
+        return alert
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,20 +110,18 @@ extension ConfirmRegistrationViewController {
     @objc func renewCodeAction() {
         guard let dataRegister = dataRegister else {return}
         print("Tapped")
-        self.loadingIndicator.show(true)
+        present(alertWaiting, animated: true)
         preRegister(name: dataRegister.name, email: dataRegister.email, password: dataRegister.password, role: dataRegister.role, usernameIG: dataRegister.usernameIG)
     }
     private func preRegister(name: String, email: String, password: String, role: String, usernameIG: String) {
         apiRequest.preRegister(name: name, email: email, password: password, role: role, username: usernameIG) { [weak self] result, error  in
             guard let self = self else {return}
             if error != nil {
-                self.loadingIndicator.show(false)
-                self.loadingIndicator.isHidden = true
+                self.alertWaiting.dismiss(animated: true)
                 self.showAlert(title: "Error", message: error?.localizedDescription ?? "", action: "Oke")
                 return
             }
-            self.loadingIndicator.show(false)
-            self.loadingIndicator.isHidden = true
+            self.alertWaiting.dismiss(animated: true)
             guard let instagramToDM = result?.instagramToDM else {return}
             guard let otp = result?.otp else {return}
             guard let otpExpiredIn = result?.expiresIn else {return}
@@ -156,6 +157,7 @@ extension ConfirmRegistrationViewController {
         guard let password = dataRegister?.password, !password.isEmpty else {return}
         guard let role = dataRegister?.role, !role.isEmpty else {return}
         guard let instagraToDM = dataRegister?.instagramToDM else { return }
+        present(alertWaiting, animated: true)
         register(name: name, email: email, password: password, role: role, usernameIG: usernameIG, instagraToDM: instagraToDM)
     }
     private func register(
@@ -171,11 +173,15 @@ extension ConfirmRegistrationViewController {
             password: password,
             role: role,
             username: usernameIG,
-            instagramToDM: instagraToDM) { data, error in
+            instagramToDM: instagraToDM) {[weak self] data, error in
+//                guard let self = self else {return}
                 if error != nil {
-                    self.showAlert(title: "Error", message: error?.localizedDescription ?? "", action: "Okey")
+                    self?.alertWaiting.dismiss(animated: true, completion: {
+                        self?.showAlert(title: "Error", message: error?.localizedDescription ?? "", action: "Okey")
+                    })
                     return
                 }
+                self?.alertWaiting.dismiss(animated: true)
                 do {
                     guard let accessToken = data?.accessToken else {return}
                     try KeychainHelper.standard.save(key: .accessToken, value: accessToken)
@@ -183,7 +189,7 @@ extension ConfirmRegistrationViewController {
                     print("Error save token")
                 }
                 let mainVC = IsLoginViewController()
-                self.navigationController?.pushViewController(mainVC, animated: true)
+                self?.navigationController?.pushViewController(mainVC, animated: true)
             }
     }
 }

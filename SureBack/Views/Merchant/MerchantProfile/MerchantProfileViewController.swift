@@ -12,6 +12,7 @@ class MerchantProfileViewController: ProfileViewController {
         isMerchantProfile = true
         super.viewDidLoad()
         businessSettingsCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(businessSettingCardAction)))
+        tabBarController?.tabBar.backgroundColor = .white
     }
     @objc func businessSettingCardAction() {
         let formBusinessSettingVC = MerchantFormBusinessSettingViewController()

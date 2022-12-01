@@ -93,12 +93,15 @@ class FormRegistrationViewController: UIViewController {
         button.layer.cornerRadius = 10
         return button
     }()
-    let loadingIndicator: UIActivityIndicatorView = {
-        let loading = UIActivityIndicatorView()
-        loading.style = .gray
-        loading.translatesAutoresizingMaskIntoConstraints = false
-        loading.isHidden = true
-        return loading
+    let alertWaiting: UIAlertController = {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        alert.view.tintColor = UIColor.black
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating()
+        alert.view.addSubview(loadingIndicator)
+        return alert
     }()
     let emailMessageError: UILabel = {
         let title = UILabel()
@@ -174,18 +177,17 @@ class FormRegistrationViewController: UIViewController {
             confirmPasswordMessageError.isHidden = false
             return
         }
-        loadingIndicator.show(true)
+        present(alertWaiting, animated: true)
         preRegister(name: name, email: email, password: password, role: role, usernameIG: usernameIG)
     }
     private func preRegister(name: String, email: String, password: String, role: String, usernameIG: String) {
         apiRequest.preRegister(name: name, email: email, password: password, role: role, username: usernameIG) { result, error  in
             if error != nil {
-                self.loadingIndicator.show(false)
-                self.loadingIndicator.isHidden = true
+                self.alertWaiting.dismiss(animated: true)
                 self.showAlert(title: "Error", message: error?.localizedDescription ?? "", action: "Oke")
                 return
             }
-            self.loadingIndicator.show(false)
+            self.alertWaiting.dismiss(animated: true)
             guard let instagramToDM = result?.instagramToDM else {return}
             guard let otp = result?.otp else {return}
             guard let otpExpiredIn = result?.expiresIn else {return}

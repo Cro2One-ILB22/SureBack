@@ -25,7 +25,7 @@ class SettingCardView: UIView {
         backgroundColor = .white
         layer.cornerRadius = 10
         layer.borderWidth = 1
-        layer.borderColor = UIColor.black.cgColor
+        layer.borderColor = UIColor.osloGray.cgColor
         translatesAutoresizingMaskIntoConstraints = false
         setupLayout()
     }

@@ -9,6 +9,7 @@ import UIKit
 
 class MerchantRejectStoryFormViewController: UIViewController {
     var id: Int?
+    private let apiRequest = RequestFunction()
     let reasonForRejectTextLabel: UILabel = {
         let label = UILabel()
         label.text = "Reason for Rejection"
@@ -120,14 +121,10 @@ class MerchantRejectStoryFormViewController: UIViewController {
         }
     }
     @objc func sendToCustAction() {
-        print("Tapped")
-        let rf = RequestFunction()
-       
         guard let note = messageField.text else {return}
-        print("Datan note nya nih", note)
-        
-//        rf.approveStory(false, id: id, note: note) { data in
-//            print("Berhasil")
-//        }
+        guard let id = id else {return}
+        apiRequest.approveStory(false, id: id, note: note) {[weak self] data in
+            self?.dismiss(animated: true)
+        }
     }
 }

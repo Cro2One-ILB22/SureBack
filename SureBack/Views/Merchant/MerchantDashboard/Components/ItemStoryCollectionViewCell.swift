@@ -9,7 +9,6 @@ import UIKit
 
 class ItemStoryCollectionViewCell: UICollectionViewCell {
     static let id = "ItemStoryCollectionViewCell"
-    private var instagramUsername: String = ""
     private let apiRequest = RequestFunction()
     let loadingIndicatorImageProfile: UIActivityIndicatorView = {
         let loading = UIActivityIndicatorView()
@@ -53,7 +52,6 @@ class ItemStoryCollectionViewCell: UICollectionViewCell {
     }()
     override init(frame: CGRect) {
         super.init(frame: frame)
-        getProfileIg()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -85,9 +83,9 @@ class ItemStoryCollectionViewCell: UICollectionViewCell {
             self.loadingIndicatorStory.isHidden = true
         }
         usernameIG.text = "@" + usernameInstagram
-        instagramUsername = usernameInstagram
+        getProfileIg(instagramUsername: usernameInstagram)
     }
-    private func getProfileIg() {
+    private func getProfileIg(instagramUsername: String) {
         apiRequest.getProfileIG(username: instagramUsername) { data in
             switch data {
             case .success(let data):

@@ -131,19 +131,28 @@ class MerchantGenerateTokenFormViewController: UIViewController {
         button.isEnabled = false
         return button
     }()
+    let alertWaiting: UIAlertController = {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        alert.view.tintColor = UIColor.black
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating()
+        alert.view.addSubview(loadingIndicator)
+        return alert
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
-
         apiRequest.getCustomerById(id: customerId) { [weak self] response in
             switch response {
             case .success(let customer):
             guard let self = self, let merchant = self.userViewModel.user else { return }
                 self.setupContent(customer: customer, merchant: merchant)
+                self.customer = customer
             case .failure(let error):
                 print(error)
             }
         }
-
         purchasePusherService = PurchasePusherSerivce(delegate: self)
 
         guard let user = userViewModel.user else { return }
@@ -165,16 +174,23 @@ class MerchantGenerateTokenFormViewController: UIViewController {
         setupLayout()
     }
     @objc func generateTokenAction() {
-        print("Tapped")
+        present(alertWaiting, animated: true)
         guard let purchaseRequest = qrScanPurchase?.purchaseRequest else { return }
         guard let purchaseAmount = totalPurchaseField.text, let purchaseAmount = Int(purchaseAmount) else { return }
         self.apiRequest.postGenerateTokenOffline(customerId: self.customerId, purchaseAmount: purchaseAmount, isRequestingToken: purchaseRequest.isRequestingForToken ? 1 : 0) { [weak self] response in
+            guard let self = self else {return}
             switch response {
             case .success(let data):
+                self.alertWaiting.dismiss(animated: true)
+                self.navigationController?.popToRootViewController(animated: true)
                 let detailTransactionVC = MerchantTransactionHistoryViewController()
-                self?.present(detailTransactionVC, animated: true)
+                detailTransactionVC.customer = self.customer
+                detailTransactionVC.purchaseData = data
+                self.present(detailTransactionVC, animated: true)
             case .failure(let error):
-                print(error)
+                self.alertWaiting.dismiss(animated: true) {
+                    self.showAlert(title: "Error", message: error.localizedDescription, action: "Okay")
+                }
             }
         }
     }

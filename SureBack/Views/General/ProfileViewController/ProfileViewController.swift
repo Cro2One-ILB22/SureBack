@@ -93,8 +93,8 @@ class ProfileViewController: UIViewController {
 
     lazy var logoutButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .black
-        button.setTitleColor(UIColor.tealishGreen, for: .normal)
+        button.backgroundColor = .tealishGreen
+        button.setTitleColor(.black, for: .normal)
         button.setTitle("Logout", for: .normal)
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         button.layer.cornerRadius = 10
@@ -140,7 +140,6 @@ class ProfileViewController: UIViewController {
 
     @objc func accountSafetyTapped(sender: UITapGestureRecognizer) {
         print("account safety tapped")
-        navigationController?.pushViewController(ScanQrViewController(), animated: true)
     }
 
     @objc func appGuideTapped(sender: UITapGestureRecognizer) {

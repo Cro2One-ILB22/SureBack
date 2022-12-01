@@ -13,7 +13,6 @@ extension FormRegistrationViewController {
         setupTextFields()
         setupButton()
         setupAlreadyHaveAccount()
-        setupLoadingIndicator()
     }
     private func setupTitle() {
         view.addSubview(titleLabel)
@@ -73,10 +72,5 @@ extension FormRegistrationViewController {
         signUpButton.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 16)
         signUpButton.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -16)
         signUpButton.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -22)
-    }
-    private func setupLoadingIndicator() {
-        view.addSubview(loadingIndicator)
-        loadingIndicator.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
-        loadingIndicator.setCenterYAnchorConstraint(equalTo: view.centerYAnchor)
     }
 }

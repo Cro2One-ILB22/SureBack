@@ -8,6 +8,9 @@
 import UIKit
 
 class MerchantTransactionHistoryViewController: UIViewController {
+    var customer: UserInfoResponse?
+    var purchaseData: PurchaseResponse?
+    let userViewModel = UserViewModel.shared
     let transactionHistoryTextLabel: UILabel = {
         let label = UILabel()
         label.text = "Transaction History"
@@ -31,6 +34,24 @@ class MerchantTransactionHistoryViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupLayout()
+        closeImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapClose)))
+        configData()
+    }
+    private func configData() {
+        couponCard.tokenIdValueLabel.text = purchaseData?.token?.code ?? "-"
+        couponCard.dateCreatedLabel.text = purchaseData?.createdAt.formatTodMMMyyyhmma()
+        couponCard.merchantLabel.text = userViewModel.user?.name
+        couponCard.customerNameValue.text = customer?.name
+        couponCard.purchaseDateValue.text = purchaseData?.token?.createdAt.formatTodMMMyyyhmma() ?? "-"
+        couponCard.percentageValue.text = "\(purchaseData?.token?.tokenCashback.percent ?? 0.0)%"
+        couponCard.expiredDateValue.text = purchaseData?.token?.expiresAt.formatTodMMMyyyhmma() ?? "-"
+        couponCard.exchangedCoinValue.text = "\(purchaseData?.coinExchange?.amount ?? 0)"
+        couponCard.totalPurchaseValue.text = "\(purchaseData?.purchaseAmount ?? 0)"
+        couponCard.customerPayValue.text = "\(purchaseData?.paymentAmount ?? 0)"
+        couponCard.cashbackCoinValue.text = "\(purchaseData?.token?.tokenCashback.amount ?? 0)"
+    }
+    @objc func didTapClose() {
+        dismiss(animated: true)
     }
 }
 

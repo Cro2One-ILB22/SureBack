@@ -61,7 +61,6 @@ class MerchantDetailStoryViewController: UIViewController {
         let name = storyData?.customer?.name
         let username = "@" + (storyData?.customer?.instagramUsername ?? "")
         let createdStory = storyData?.createdAt.formatTodMMMyyyhmma()
-        let follower = "\(getUserFollower())"
         headerView.loadingIndicatorImageProfile.show(true)
         storyCardView.loadingIndicatorStory.show(true)
         guard let urlProfile = URL(string: storyData?.customer?.profilePicture ?? defaultImage) else {return}
@@ -75,7 +74,7 @@ class MerchantDetailStoryViewController: UIViewController {
         headerView.nameUser.text = name
         headerView.usernameIGUser.text = username
         headerView.timesVisitUser.text = createdStory
-        headerView.followersUser.text = follower
+        getUserFollower()
         imageDownloader.downloadImage(url: urlStory) {[weak self] data in
             self?.storyCardView.loadingIndicatorStory.show(false)
             self?.storyCardView.loadingIndicatorStory.isHidden = true
@@ -83,18 +82,17 @@ class MerchantDetailStoryViewController: UIViewController {
         }
         storyCardView.cashbackLabel.text = "\(cashbackAmount)"
     }
-    private func getUserFollower() -> Int {
-        guard let username = storyData?.customer?.instagramUsername else {return 0}
-        var follower: Int?
-        apiRequest.getProfileIG(username: username) { result in
+    private func getUserFollower() {
+        guard let username = storyData?.customer?.instagramUsername else {return}
+        apiRequest.getProfileIG(username: username) { [weak self]result in
             switch(result) {
             case .success(let data):
-                follower = data.followerCount
+                let follower = data.followerCount
+                self?.headerView.followersUser.text = "\(follower)"
             case .failure(let error):
                 print(error)
             }
         }
-        return follower ?? 0
     }
 }
 
@@ -104,6 +102,7 @@ extension MerchantDetailStoryViewController {
         setupHeader()
         setupStoryCard()
     }
+    
     func setupScrollView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false

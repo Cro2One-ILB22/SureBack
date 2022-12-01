@@ -15,7 +15,6 @@ class ItemCustomerStoryTableCell: UITableViewCell {
     var colorStatus = UIColor.titanWhite
     var iconStatus = UIImage(named: "checkmark.circle.fill.black")
     private let apiRequest = RequestFunction()
-    private var instagramUsername: String = ""
     lazy var userImageProfile: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 20
@@ -49,7 +48,6 @@ class ItemCustomerStoryTableCell: UITableViewCell {
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        getProfileIG()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -73,9 +71,9 @@ class ItemCustomerStoryTableCell: UITableViewCell {
         }
         usernameIG.text = "@" + usernameInstagram
         self.dateCreated.text = dateCreated.formatTodMMMyyyhmma()
-        instagramUsername = usernameInstagram
+        getProfileIG(instagramUsername: usernameInstagram)
     }
-    private func getProfileIG() {
+    private func getProfileIG(instagramUsername: String) {
         apiRequest.getProfileIG(username: instagramUsername) { data in
             switch data {
             case .success(let data):

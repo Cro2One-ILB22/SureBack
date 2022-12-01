@@ -44,7 +44,7 @@ class HeaderMerchantDetailStoryView: UIView {
     }()
     let followersUser: UILabel = {
         let label = UILabel()
-        label.text = "10K"
+        label.text = "0"
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         return label
     }()

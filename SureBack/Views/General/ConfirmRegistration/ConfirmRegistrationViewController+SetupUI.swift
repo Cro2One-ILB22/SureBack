@@ -15,7 +15,6 @@ extension ConfirmRegistrationViewController {
         setupExpiresAndRenewCode()
         setupCheckOTPButton()
         setupSurebackAccountButton()
-        setupLoadingIndicator()
     }
     private func setupTitle1() {
         view.addSubview(title1Label)
@@ -71,10 +70,5 @@ extension ConfirmRegistrationViewController {
         surebackInstagramAccountButton.setBottomAnchorConstraint(equalTo: checkOtpButton.topAnchor, constant: -10)
         surebackInstagramAccountButton.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 32)
         surebackInstagramAccountButton.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -32)
-    }
-    private func setupLoadingIndicator() {
-        view.addSubview(loadingIndicator)
-        loadingIndicator.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
-        loadingIndicator.setCenterYAnchorConstraint(equalTo: view.centerYAnchor)
     }
 }

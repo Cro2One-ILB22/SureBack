@@ -91,7 +91,8 @@ extension MerchantDashboardViewController: UITableViewDataSource, UITableViewDel
             self.tableView.setEmptyMessage(
                 image: UIImage(named: "empty.customers")!,
                 title: "Empty Customer",
-                message: "No customers mentioned you at this time. Don't worry, Let's find them!")
+                message: "No customers mentioned you at this time. Don't worry, Let's find them!",
+            centerYAnchorConstant: 50)
             return 0
         } else {
             self.tableView.restore()

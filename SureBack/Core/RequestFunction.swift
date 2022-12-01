@@ -207,6 +207,11 @@ extension RequestFunction {
         ]
         requestWithToken(url: url, method: .put, parameters: body, completionHandler: { completion($0.result) })
     }
+
+    func toggleMerchantFavorited(id: Int, completion: @escaping (Result<UserInfoResponse, AFError>) -> Void) {
+        let url = "\(Endpoints.getMerchantById(id).url)/favorite"
+        requestWithToken(url: url, method: .post, completionHandler: { completion($0.result) })
+    }
 }
 
 // MARK: Instagram
@@ -367,7 +372,17 @@ extension RequestFunction {
         }
 
         requestWithToken(url: url, parameters: parameters, decodable: ResponseData<UserInfoResponse>.self) {
-            completion($0.result)
+            response in
+            completion(response.result)
+            switch response.result {
+            case .success:
+                break
+            case let .failure(error):
+                if let data = response.data {
+                    let json = String(data: data, encoding: .utf8)
+                    print("Failure Response: \(String(describing: json))")
+                }
+            }
         }
     }
 
@@ -388,13 +403,8 @@ extension RequestFunction {
         parameters["category"] = category
         parameters["page"] = page
 
-
-        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<Transaction>.self) {response in
-            completion(response.result)
-            if let data = response.data {
-                let json = String(data: data, encoding: .utf8)
-                print("Failure Response: \(String(describing: json))")
-            }
+        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<Transaction>.self) {
+            completion($0.result)
         }
     }
 
@@ -402,19 +412,14 @@ extension RequestFunction {
         let url = Endpoints.getToken.url
         var parameters: [String: Any] = [:]
 
-
         parameters["expired"] = expired
         parameters["submitted"] = submitted
         parameters["redeemed"] = redeemed
         parameters["order_by"] = "updated_at"
         parameters["page"] = page
 
-        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<Token>.self) { response in
-            completion(response.result)
-            if let data = response.data {
-                let json = String(data: data, encoding: .utf8)
-                print("Failure Response: \(String(describing: json))")
-            }
+        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<Token>.self) {
+            completion($0.result)
         }
     }
 

@@ -30,9 +30,9 @@ class TabBarViewController: UITabBarController {
         view.backgroundColor = .porcelain
 
         // proses nonton perubahan seperti didSet
-        viewModel.userSubject.subscribe(onNext: { user in // onNext : kalo update, next
-            self.dashboardVC?.user = user
-            self.qrVC?.user = user
+        viewModel.userSubject.subscribe(onNext: { [weak self] user in // onNext : kalo update, next
+            self?.dashboardVC?.user = user
+            self?.qrVC?.user = user
         }).disposed(by: disposeBag)
         request.getUserInfo { [self] data in
             switch data {

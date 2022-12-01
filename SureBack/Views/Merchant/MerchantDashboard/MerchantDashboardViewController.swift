@@ -29,7 +29,7 @@ class MerchantDashboardViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = .systemGreen
         view.backgroundColor = .white
-        navigationItem.title = "Hi, bestie"
+        navigationItem.title = "Hi, " + (user?.name ?? "")
         tableView.isHidden = true
         loadingIndicator.show(true)
         configTableView()

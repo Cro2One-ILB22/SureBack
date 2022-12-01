@@ -17,7 +17,7 @@ extension FormRegistrationViewController {
     }
     private func setupTitle() {
         view.addSubview(titleLabel)
-        titleLabel.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
+        titleLabel.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30)
         titleLabel.setLeftAnchorConstraint(equalTo: view.leftAnchor)
         titleLabel.setRightAnchorConstraint(equalTo: view.rightAnchor)
     }

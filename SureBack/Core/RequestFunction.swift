@@ -174,48 +174,27 @@ extension RequestFunction {
 }
 
 // MARK: Partner
-
 extension RequestFunction {
-    func updatePartnerCashbackPercent(cashbackPercent: Float, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
+    func updateMerchantDetail(cashbackPercent: Float,
+                              cashbackLimit: Int? = nil,
+                              dailyTokenLimit: Int? = nil,
+                              cashbackCalculationMethod: String = "payment_amount",
+                              completion: @escaping (MerchantDetailResponse) -> Void) {
         let url = Endpoints.updateMerchantDetail.url
-        var body: [String: Float] = [:]
+        var body: [String: Any] = [:]
         body["cashback_percent"] = cashbackPercent
+        body["cashback_limit"] = cashbackLimit
+        body["daily_token_limit"] = dailyTokenLimit
+        body["cashback_calculation_method"] = cashbackCalculationMethod
 
         requestWithToken(url: url, method: .put, parameters: body, decodable: MerchantDetailResponse.self) {
-            completion($0.result)
-        }
-    }
-
-    func updatePartnerCashbackLimit(cashbackLimit: Int, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
-        let url = Endpoints.updateMerchantDetail.url
-        let body: [String: Int] = [
-            "cashback_limit": cashbackLimit,
-        ]
-
-        requestWithToken(url: url, method: .put, parameters: body, decodable: MerchantDetailResponse.self) {
-            completion($0.result)
-        }
-    }
-
-    func updatePartnerDailyTokenLimit(dailyTokenLimit: Int, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
-        let url = Endpoints.updateMerchantDetail.url
-        let body: [String: Int] = [
-            "daily_token_limit": dailyTokenLimit,
-        ]
-
-        requestWithToken(url: url, method: .put, parameters: body, decodable: MerchantDetailResponse.self) {
-            completion($0.result)
-        }
-    }
-
-    func updatePartnerIsActiveToken(isActiveToken: Bool, completion: @escaping (Result<MerchantDetailResponse, AFError>) -> Void) {
-        let url = Endpoints.updateMerchantDetail.url
-        let body: [String: Bool] = [
-            "is_active_generating_token": isActiveToken,
-        ]
-
-        requestWithToken(url: url, method: .put, parameters: body, decodable: MerchantDetailResponse.self) {
-            completion($0.result)
+            response in
+            switch(response.result) {
+            case .success(let data):
+                completion(data)
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 }

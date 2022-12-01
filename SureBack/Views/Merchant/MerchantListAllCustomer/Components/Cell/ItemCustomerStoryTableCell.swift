@@ -14,6 +14,8 @@ class ItemCustomerStoryTableCell: UITableViewCell {
     var isHistory = false
     var colorStatus = UIColor.titanWhite
     var iconStatus = UIImage(named: "checkmark.circle.fill.black")
+    private let apiRequest = RequestFunction()
+    private var instagramUsername: String = ""
     lazy var userImageProfile: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 20
@@ -45,6 +47,13 @@ class ItemCustomerStoryTableCell: UITableViewCell {
         label.font = .systemFont(ofSize: 11)
         return label
     }()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        getProfileIG()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     public func setCellWithValueOf(_ data: MyStoryData) {
         updateUI(imagePath: data.customer?.profilePicture  ?? "",
                  usernameInstagram: data.customer?.instagramUsername ?? "",
@@ -64,8 +73,10 @@ class ItemCustomerStoryTableCell: UITableViewCell {
         }
         usernameIG.text = "@" + usernameInstagram
         self.dateCreated.text = dateCreated.formatTodMMMyyyhmma()
-        let rf = RequestFunction()
-        rf.getProfileIG(username: usernameInstagram) { data in
+        instagramUsername = usernameInstagram
+    }
+    private func getProfileIG() {
+        apiRequest.getProfileIG(username: instagramUsername) { data in
             switch data {
             case .success(let data):
                 self.userFollower.text = "\(String(describing: data.followerCount)) Followers"

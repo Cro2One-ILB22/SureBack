@@ -10,6 +10,7 @@ import UIKit
 class ConfirmRegistrationViewController: UIViewController {
     var dataRegister: Register?
     let apiRequest = RequestFunction()
+    var expiresOtpIn: Int = 0
     let title1Label: UILabel = {
         let title = UILabel()
         title.text = "You're almost there!"
@@ -43,7 +44,7 @@ class ConfirmRegistrationViewController: UIViewController {
     }()
     let expiresLabel: UILabel = {
         let label = UILabel()
-        label.text = "Expires"
+        label.text = "Expires: 00.00"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = .black
@@ -77,7 +78,10 @@ class ConfirmRegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .porcelain
-        otpLabel.text = "\(String(describing: dataRegister?.otp))"
+        let otp = dataRegister?.otp ?? 0
+        let expiresIn = dataRegister?.otpExpiredIn ?? 299
+        otpLabel.text = "\(otp)"
+        expiresOtpIn = expiresIn
         setupLayout()
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCountDown), userInfo: nil, repeats: true)
         surebackInstagramAccountButton.addTarget(self, action: #selector(goToSurebackAccount), for: .touchUpInside)
@@ -97,18 +101,19 @@ extension ConfirmRegistrationViewController {
         print("Tapped renew code action")
     }
     @objc func copyToClipboardAction(sender: UITapGestureRecognizer) {
-        UIPasteboard.general.string = "Ini adalah text yang berhasil dicopy"
+        let otp = dataRegister?.otp ?? 0
+        UIPasteboard.general.string = "\(otp)"
         self.showAlert(title: "Successfully", message: "Copy to clipboard", action: "Ok")
     }
     @objc func updateCountDown() {
-        guard var expiredIn = dataRegister?.otpExpiredIn else {return}
-        if expiredIn > 0 {
-            expiredIn -= 1
-            expiresLabel.text = "Expires: " + timeString(time: TimeInterval(expiredIn))
+        if expiresOtpIn > 0 {
+            expiresOtpIn -= 1
+            expiresLabel.text = "Expires: " + timeString(time: TimeInterval(expiresOtpIn))
+            print(expiresOtpIn)
         }
     }
     @objc func goToSurebackAccount() {
-        guard let instagramToDM = dataRegister?.instagramToDM else { return }
+        let instagramToDM = dataRegister?.instagramToDM ?? "instagram"
         UIApplication.shared.open(URL(string: "https://www.instagram.com/\(instagramToDM)/?hl=id")!)
     }
     @objc func checkOtp() {

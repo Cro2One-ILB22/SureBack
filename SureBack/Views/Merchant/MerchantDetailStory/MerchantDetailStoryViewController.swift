@@ -8,9 +8,11 @@
 import UIKit
 
 class MerchantDetailStoryViewController: UIViewController {
+    var isFromHistory: Bool = false
     var storyData: MyStoryData?
     let scrollView = UIScrollView()
     let contentView = UIView()
+    private let apiRequest = RequestFunction()
     private let headerView: HeaderMerchantDetailStoryView = {
        let view = HeaderMerchantDetailStoryView()
         view.layer.borderWidth = 1
@@ -28,6 +30,7 @@ class MerchantDetailStoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .porcelain
+        setupStoryCardView()
         setupLayout()
         initData()
         storyCardView.rejectButton.addTarget(self, action: #selector(rejectAction), for: .touchUpInside)
@@ -36,6 +39,22 @@ class MerchantDetailStoryViewController: UIViewController {
         let rejectFormVC = MerchantRejectStoryFormViewController()
         rejectFormVC.id = storyData?.id
         present(rejectFormVC, animated: true)
+    }
+    private func setupStoryCardView() {
+        storyCardView.isFromHistory = isFromHistory
+        storyCardView.setupConstraint()
+        storyCardView.statusInfoImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(infoAction)))
+    }
+    @objc func infoAction() {
+        print("Tapped")
+        guard let storyData = storyData else {
+            return
+        }
+        let status = storyData.token.currentStatus?.rawValue ?? "approve"
+        let transactionDetailVC = TransactionDetailViewController()
+        transactionDetailVC.nameLabel.text = "Customer"
+        transactionDetailVC.configureToken(storyData, status: status)
+        present(transactionDetailVC, animated: true)
     }
     private func initData() {
         let imageDownloader = ImageDownloader()
@@ -50,6 +69,7 @@ class MerchantDetailStoryViewController: UIViewController {
         let cashbackAmount = storyData?.token.tokenCashback.amount ?? 0
         imageDownloader.downloadImage(url: urlProfile) {[weak self] data in
             self?.headerView.loadingIndicatorImageProfile.show(false)
+            self?.headerView.loadingIndicatorImageProfile.isHidden = true
             self?.headerView.imageUser.image = UIImage(data: data)
         }
         headerView.nameUser.text = name
@@ -64,10 +84,9 @@ class MerchantDetailStoryViewController: UIViewController {
         storyCardView.cashbackLabel.text = "\(cashbackAmount)"
     }
     private func getUserFollower() -> Int {
-        let rf = RequestFunction()
         let username = storyData?.customer?.instagramUsername ?? ""
         var follower: Int?
-        rf.getProfileIG(username: username) { result in
+        apiRequest.getProfileIG(username: username) { result in
             switch(result) {
             case .success(let data):
                 follower = data.followerCount

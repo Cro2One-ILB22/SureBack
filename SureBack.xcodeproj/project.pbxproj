@@ -82,6 +82,7 @@
 		16C004462936EE0E008F5D0D /* FormRegistrationViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C004452936EE0E008F5D0D /* FormRegistrationViewController+SetupUI.swift */; };
 		16C004482936F549008F5D0D /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C004472936F549008F5D0D /* UITextField+Ext.swift */; };
 		16C0044A29373E67008F5D0D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0044929373E67008F5D0D /* ProfileViewController.swift */; };
+		16C0044F29385F53008F5D0D /* MerchantFormBusinessSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0044E29385F53008F5D0D /* MerchantFormBusinessSettingViewController.swift */; };
 		2DDDD70EABE69B42303C1AED /* Pods_SureBackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */; };
 		8A2D3CC34125394E06212A07 /* Pods_SureBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6F53CE101281D823C272BB /* Pods_SureBack.framework */; };
 		9CCB778BAEA00AE5C43FB920 /* Pods_SureBack_SureBackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */; };
@@ -232,6 +233,7 @@
 		16C004452936EE0E008F5D0D /* FormRegistrationViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormRegistrationViewController+SetupUI.swift"; sourceTree = "<group>"; };
 		16C004472936F549008F5D0D /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 		16C0044929373E67008F5D0D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		16C0044E29385F53008F5D0D /* MerchantFormBusinessSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantFormBusinessSettingViewController.swift; sourceTree = "<group>"; };
 		3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack_SureBackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FB4E7EBF11E0E918FCC83A /* Pods-SureBack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBack.release.xcconfig"; path = "Target Support Files/Pods-SureBack/Pods-SureBack.release.xcconfig"; sourceTree = "<group>"; };
 		5F47E67A5BE033AB27E63DDB /* Pods-SureBackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBackTests.debug.xcconfig"; path = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -695,6 +697,7 @@
 		16C0044D29385ECB008F5D0D /* MerchantFormBusinessSetting */ = {
 			isa = PBXGroup;
 			children = (
+				16C0044E29385F53008F5D0D /* MerchantFormBusinessSettingViewController.swift */,
 			);
 			path = MerchantFormBusinessSetting;
 			sourceTree = "<group>";
@@ -1210,6 +1213,7 @@
 				11CC9559292FB5B00038E766 /* PusherService.swift in Sources */,
 				11CB603E293381D800C66F39 /* QRScanPurchase.swift in Sources */,
 				AC04BD80290995AD00635147 /* Function.swift in Sources */,
+				16C0044F29385F53008F5D0D /* MerchantFormBusinessSettingViewController.swift in Sources */,
 				16C0042429335D02008F5D0D /* MerchantCoinHistoryViewController+SetupUI.swift in Sources */,
 				1651220F2926C71700DBC0AE /* PreviewCustomerStoryView.swift in Sources */,
 				1651220F2926C71700DBC0AE /* PreviewCustomerStoryView.swift in Sources */,
@@ -1464,7 +1468,7 @@
 				CODE_SIGN_ENTITLEMENTS = SureBack/SureBack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C8VS35NTZ7;
+				DEVELOPMENT_TEAM = KVFMXTTSFG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To be able to Scan QR Code, you must allow the use of the camera.";
@@ -1482,7 +1486,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = cro2one.SureBack;
+				PRODUCT_BUNDLE_IDENTIFIER = cro2one.SureBackk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1500,7 +1504,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C8VS35NTZ7;
+				DEVELOPMENT_TEAM = KVFMXTTSFG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To be able to Scan QR Code, you must allow the use of the camera.";
@@ -1518,7 +1522,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = cro2one.SureBack;
+				PRODUCT_BUNDLE_IDENTIFIER = cro2one.SureBackk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

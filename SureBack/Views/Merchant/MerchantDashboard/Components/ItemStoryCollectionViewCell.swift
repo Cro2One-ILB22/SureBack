@@ -9,6 +9,8 @@ import UIKit
 
 class ItemStoryCollectionViewCell: UICollectionViewCell {
     static let id = "ItemStoryCollectionViewCell"
+    private var instagramUsername: String = ""
+    private let apiRequest = RequestFunction()
     let loadingIndicatorImageProfile: UIActivityIndicatorView = {
         let loading = UIActivityIndicatorView()
         loading.style = .gray
@@ -49,6 +51,13 @@ class ItemStoryCollectionViewCell: UICollectionViewCell {
         image.clipsToBounds = true
         return image
     }()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        getProfileIg()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     public func setCellWithValueOf(_ data: MyStoryData) {
         updateUI(
             profileImagePath: data.customer?.profilePicture ?? "",
@@ -76,8 +85,10 @@ class ItemStoryCollectionViewCell: UICollectionViewCell {
             self.loadingIndicatorStory.isHidden = true
         }
         usernameIG.text = "@" + usernameInstagram
-        let rf = RequestFunction()
-        rf.getProfileIG(username: usernameInstagram) { data in
+        instagramUsername = usernameInstagram
+    }
+    private func getProfileIg() {
+        apiRequest.getProfileIG(username: instagramUsername) { data in
             switch data {
             case .success(let data):
                 self.userFollower.text = "\(String(describing: data.followerCount)) Followers"

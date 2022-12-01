@@ -181,6 +181,7 @@ class FormRegistrationViewController: UIViewController {
         request.preRegister(name: name, email: email, password: password, role: role, username: usernameIG) { result, error  in
             if error != nil {
                 self.loadingIndicator.show(false)
+                self.loadingIndicator.isHidden = true
                 self.showAlert(title: "Error", message: error?.localizedDescription ?? "", action: "Oke")
                 return
             }

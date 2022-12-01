@@ -57,7 +57,6 @@ class HistoryViewController: UIViewController {
 extension HistoryViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         showLoadingIndicator(true)
-        print("Hasil pencarion",searchText.lowercased())
         getHistoryStoryCustomer(search: searchText.lowercased())
     }
 }
@@ -67,6 +66,7 @@ extension HistoryViewController: UITableViewDelegate {
         let detailStoryVC = MerchantDetailStoryViewController()
         let storyData = listHistoryStoryCustomer[indexPath.row]
         detailStoryVC.storyData = storyData
+        detailStoryVC.isFromHistory = true
         navigationController?.pushViewController(detailStoryVC, animated: true)
     }
 }

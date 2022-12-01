@@ -14,6 +14,8 @@ class MerchantProfileViewController: ProfileViewController {
         businessSettingsCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(businessSettingCardAction)))
     }
     @objc func businessSettingCardAction() {
-        print("Tapped")
+        let formBusinessSettingVC = MerchantFormBusinessSettingViewController()
+        formBusinessSettingVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(formBusinessSettingVC, animated: true)
     }
 }

@@ -43,7 +43,7 @@ class TransactionDetailViewController: UIViewController {
         return label
     }()
 
-    lazy var merchantNameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Merchant"
         label.font = UIFont.systemFont(ofSize: 15)
@@ -220,11 +220,12 @@ class TransactionDetailViewController: UIViewController {
         default:
             break
         }
+        let percentage = data.token.tokenCashback.percent ?? 0
         transactionIdLabel.text = String(data.token.id)
         merchantNameValue.text = data.token.purchase?.merchant?.name
         purchaseDateValue.text = data.token.purchase?.createdAt.formatTodMMMyyyhmma()
         totalPurchaseValue.text = String(data.token.purchase?.purchaseAmount ?? 0)
-        percentageValue.text = "\(data.token.tokenCashback.percent)%"
+        percentageValue.text = "\(percentage)%"
         coinValue.text = "\(data.token.tokenCashback.amount)"
     }
 
@@ -323,7 +324,7 @@ extension TransactionDetailViewController {
     }
 
     private func setupMerchant() -> UIStackView {
-        let stackView = UIStackView(arrangedSubviews: [merchantNameLabel, merchantNameValue])
+        let stackView = UIStackView(arrangedSubviews: [nameLabel, merchantNameValue])
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
         stackView.alignment = .top

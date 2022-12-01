@@ -22,7 +22,7 @@ class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .porcelain
 
         // proses nonton perubahan seperti didSet
         viewModel.userSubject.subscribe(onNext: { user in // onNext : kalo update, next

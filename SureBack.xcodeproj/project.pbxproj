@@ -721,15 +721,15 @@
 			isa = PBXGroup;
 			children = (
 				AC59F88C29202888000F8345 /* IsLoginViewController.swift */,
+				AC9DFC8F293679F5001C5F4B /* OnboardingViewController.swift */,
+				ACE8C3582916267800BEA778 /* LoginViewController.swift */,
 				1619BB282919082700085B74 /* TabBarViewController.swift */,
 				16C0043F2936D878008F5D0D /* ChooseRoleRegistration */,
 				16C004442936E382008F5D0D /* FormRegistration */,
 				169FCD60292F03F9009CBAB2 /* ConfirmRegistration */,
-				ACE8C3582916267800BEA778 /* LoginViewController.swift */,
 				16C0044B293747DA008F5D0D /* ProfileViewController */,
 				1603EFE1292B1D6800EC5485 /* CustomSegmentedControl.swift */,
 				AC24AA432931EF440050A086 /* CustomTextField.swift */,
-				AC9DFC8F293679F5001C5F4B /* OnboardingViewController.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -1464,7 +1464,7 @@
 				CODE_SIGN_ENTITLEMENTS = SureBack/SureBack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVFMXTTSFG;
+				DEVELOPMENT_TEAM = C8VS35NTZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To be able to Scan QR Code, you must allow the use of the camera.";
@@ -1482,7 +1482,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = mfahmialkautsar.SureBackk;
+				PRODUCT_BUNDLE_IDENTIFIER = cro2one.SureBack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1500,7 +1500,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVFMXTTSFG;
+				DEVELOPMENT_TEAM = C8VS35NTZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To be able to Scan QR Code, you must allow the use of the camera.";
@@ -1518,7 +1518,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = cro2one.SureBackk;
+				PRODUCT_BUNDLE_IDENTIFIER = cro2one.SureBack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

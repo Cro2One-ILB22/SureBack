@@ -28,7 +28,6 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(ActiveTokenTableViewCell.self, forCellReuseIdentifier: ActiveTokenTableViewCell.id)
         table.register(ItemMerchantTableViewCell.self, forCellReuseIdentifier: ItemMerchantTableViewCell.id)
-        table.backgroundColor = .white
         table.separatorColor = .clear
         return table
     }()
@@ -48,7 +47,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initAndStartUpdatingLocation()
-        view.backgroundColor = .white
+        view.backgroundColor = .porcelain
         setupLoadingIndicator()
 
         tableView.isHidden = true
@@ -80,9 +79,6 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
                 do {
                     print("result data count: \(result.data.count)")
                     self.activeTokenData = result.data
-//                    let headerView = HeaderCustomerDashboardView(count: result.data.count, activeTokenData: result.data, frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: height))
-//                    let headerView = HeaderCustomerDashboardView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: 50))
-//                    self.setupView2(headerView: headerView)
                 } catch let error as NSError {
                     print(error.description)
                 }
@@ -135,7 +131,6 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         switch indexPath.section {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ActiveTokenTableViewCell.id, for: indexPath) as? ActiveTokenTableViewCell else { return UITableViewCell() }
-            cell.backgroundColor = .red
             cell.delegate = self
             cell.activateTokenData = activeTokenData
             cell.user = user
@@ -144,6 +139,7 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemMerchantTableViewCell.id, for: indexPath) as? ItemMerchantTableViewCell else { return UITableViewCell() }
 
             cell.selectionStyle = .none
+            cell.backgroundColor = .porcelain
 
             cell.merchantImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.merchantImage.sd_setImage(

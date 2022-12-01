@@ -51,7 +51,6 @@ class CustomerEditProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         tabBarController?.tabBar.isHidden = true
 
         let saveButton = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveButtonTapped))

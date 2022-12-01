@@ -79,6 +79,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationController?.navigationBar.isHidden = true
 
         setupTitle()
         setupTextFields()
@@ -86,6 +87,7 @@ class LoginViewController: UIViewController {
         setupButton()
         setupLoadingIndicator()
 
+        passwordTextField.enablePasswordToggle()
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         toRegisterLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(registerButtonTapped)))
         toRegisterLabel.isUserInteractionEnabled = true
@@ -173,7 +175,7 @@ extension LoginViewController {
         view.addSubview(loginButton)
         loginButton.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 40)
         loginButton.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -40)
-        loginButton.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        loginButton.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
     }
     private func setupLoadingIndicator() {
         view.addSubview(loadingIndicator)

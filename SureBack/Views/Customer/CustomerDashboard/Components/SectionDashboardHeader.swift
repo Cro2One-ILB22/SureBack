@@ -19,7 +19,7 @@ class SectionDashboardHeader: UITableViewHeaderFooterView {
     let seeAllMerchantButton: UIButton = {
         let button = UIButton()
         button.setTitle("See All", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.tealishGreen, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

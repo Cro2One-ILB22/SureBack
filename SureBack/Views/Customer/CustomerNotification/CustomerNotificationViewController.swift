@@ -14,12 +14,18 @@ struct CustomerNotificationsData {
 
 class CustomerNotificationViewController: UIViewController {
 
+    let request = RequestFunction()
+
     var user: UserInfoResponse?
     var custNotifData = [CustomerNotificationsData]() {
         didSet {
             tableView.reloadData()
         }
     }
+
+    private var loadingService: LoadingService?
+    var page = 1
+    var totalPage: Int?
 
     var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -28,6 +34,16 @@ class CustomerNotificationViewController: UIViewController {
         table.backgroundColor = .clear
         return table
     }()
+
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 70))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
+    }
+
 
     var loadingIndicator: UIActivityIndicatorView = {
         let loading = UIActivityIndicatorView()
@@ -41,30 +57,32 @@ class CustomerNotificationViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         tabBarController?.tabBar.isHidden = true
+        loadingService = LoadingService()
         tableView.isHidden = true
         loadingIndicator.show(true)
         setupLayout()
-        getNotificationsData()
+        getNotificationsData(page: page)
     }
 
-    func getNotificationsData() {
-        let request = RequestFunction()
-        request.getListToken { data in
+    func getNotificationsData(page: Int) {
+        loadingService?.setState(state: .loading)
+        request.getListToken(page: page) { data in
             switch data {
             case let .success(result):
                 do {
                     for i in result.data {
                         self.custNotifData.append(CustomerNotificationsData(isHidden: true, tokenHistoryData: i))
                     }
-                    // TODO: why loading indicator can not be hide!
                     self.tableView.isHidden = false
-                    //                        self?.loadingIndicator.show(false)
                     self.loadingIndicator.stopAnimating()
                     self.loadingIndicator.isHidden = true
+                    self.totalPage = result.lastPage
+                    self.loadingService?.setState(state: .success)
                 } catch let error as NSError {
                     print(error.description)
                 }
             case let .failure(error):
+                self.loadingService?.setState(state: .failed)
                 print(error)
                 print("failed to get notif data")
             }
@@ -117,6 +135,26 @@ extension CustomerNotificationViewController: UITableViewDataSource, UITableView
         selectedSection.isHidden = !selectedSection.isHidden
         custNotifData[sender.tag] = selectedSection
         tableView.reloadData()
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        tableView.tableFooterView = createSpinnerFooter()
+
+        guard loadingService?.loadingState == .success || loadingService?.loadingState == .failed else { return }
+
+        tableView.tableFooterView = nil
+
+        guard let totalPage = totalPage else { return }
+
+        if offsetY > contentHeight - scrollView.frame.height {
+            if page <= (totalPage - 1) {
+                page += 1
+                getNotificationsData(page: page)
+                tableView.reloadData()
+            }
+        }
     }
 }
 

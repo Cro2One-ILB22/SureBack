@@ -69,7 +69,6 @@ class OnboardingViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print("view.frame.origin.y : \(view.frame.origin.y)")
         pageController.frame = CGRect(x: 10, y: view.frame.size.height - 80, width: view.frame.size.width - 20, height: 50)
         scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
 

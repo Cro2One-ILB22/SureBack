@@ -94,6 +94,16 @@ extension SubmitStoryTableViewCell: UICollectionViewDataSource, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if storyData.count == 0 {
+            self.collectionView.setEmptyMessage(
+                image: UIImage(named: "empty.story")!,
+                title: "Empty Story",
+                message: "Please post story on your IG account and mention our IG then come back to this page.",
+                centerYAnchorConstant: -90
+            )
+        } else {
+            self.collectionView.restore()
+        }
         return storyData.count
     }
 

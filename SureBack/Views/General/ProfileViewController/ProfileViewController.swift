@@ -5,9 +5,9 @@
 //  Created by Tubagus Adhitya Permana on 30/11/22.
 //
 
-import UIKit
 import RxSwift
 import SDWebImage
+import UIKit
 
 class ProfileViewController: UIViewController {
     let request = RequestFunction()
@@ -60,24 +60,30 @@ class ProfileViewController: UIViewController {
         button.backgroundColor = .clear
         return button
     }()
+
     let moreSettingsLabel: UILabel = {
         let label = UILabel()
         label.text = "More Settings"
         label.font = UIFont.boldSystemFont(ofSize: 17)
         return label
     }()
+
     let accountSafetyCard: SettingCardView = {
         let card = SettingCardView()
         card.titleImage.image = UIImage(named: "account.safety")
         card.title.text = "Account Safety"
+        card.backgroundColor = .lightGray.lighter(by: 10)
         return card
     }()
+
     let appGuideCard: SettingCardView = {
         let card = SettingCardView()
         card.titleImage.image = UIImage(named: "app.guide")
         card.title.text = "App Guide"
+        card.backgroundColor = .lightGray.lighter(by: 10)
         return card
     }()
+
     let businessSettingsCard: SettingCardView = {
         let card = SettingCardView()
         card.titleImage.image = UIImage(named: "business.settings")
@@ -95,9 +101,11 @@ class ProfileViewController: UIViewController {
         button.addTarget(self, action: #selector(logout), for: .touchUpInside)
         return button
     }()
+
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .porcelain
@@ -109,6 +117,7 @@ class ProfileViewController: UIViewController {
         setupLayout()
         configure()
     }
+
     func configure() {
         guard let user = viewModel.user else { return }
         profileImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -189,13 +198,12 @@ extension ProfileViewController {
         moreSettingsLabel.setTopAnchorConstraint(equalTo: manageProfileButton.bottomAnchor, constant: 40)
         moreSettingsLabel.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 20)
 
-        
         view.addSubview(accountSafetyCard)
         accountSafetyCard.translatesAutoresizingMaskIntoConstraints = false
         accountSafetyCard.setTopAnchorConstraint(equalTo: moreSettingsLabel.bottomAnchor, constant: 20)
         accountSafetyCard.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -20)
         accountSafetyCard.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 20)
-        
+
         if isMerchantProfile {
             view.addSubview(businessSettingsCard)
             businessSettingsCard.translatesAutoresizingMaskIntoConstraints = false

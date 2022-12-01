@@ -8,6 +8,10 @@
 import UIKit
 
 class CoinHistoryViewController: UIViewController {
+    private var loadingService: LoadingService?
+    var page = 1
+    var totalPage: Int?
+
     let request = RequestFunction()
     var merchantData: UserInfoResponse?
 
@@ -33,6 +37,15 @@ class CoinHistoryViewController: UIViewController {
         return table
     }()
 
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 70))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
+    }
+
     lazy var loadingIndicator: UIActivityIndicatorView = {
         let loading = UIActivityIndicatorView()
         loading.style = .gray
@@ -49,26 +62,32 @@ class CoinHistoryViewController: UIViewController {
         loadingIndicator.startAnimating()
         loadingIndicator.isHidden = false
 
+        loadingService = LoadingService()
+
         guard let merchantData = merchantData else { return }
-        getCoinHistoryData(merchantData: merchantData)
+        getCoinHistoryData(merchantData: merchantData, page: page)
         setupLayout()
     }
 
-    func getCoinHistoryData(merchantData: UserInfoResponse) {
-        request.getListTransaction(merchantId: merchantData.id, status: "success") { data in
+    func getCoinHistoryData(merchantData: UserInfoResponse, page: Int) {
+        loadingService?.setState(state: .loading)
+        request.getListTransaction(merchantId: merchantData.id, status: "success", page: page) { data in
             switch data {
             case let .success(result):
                 print("coin balance data: \(result)")
                 do {
                     print(result.data)
                     self.transactionData = result.data
+                    self.totalPage = result.lastPage
                     self.tableView.isHidden = false
                     self.loadingIndicator.stopAnimating()
                     self.loadingIndicator.isHidden = true
+                    self.loadingService?.setState(state: .success)
                 } catch let error as NSError {
                     print(error.description)
                 }
             case let .failure(error):
+                self.loadingService?.setState(state: .failed)
                 print(error)
                 print("failed to get list coins balance in merchant \(merchantData.name)")
             }
@@ -105,7 +124,27 @@ extension CoinHistoryViewController: UITableViewDataSource, UITableViewDelegate 
         transactionDetailVC.title = "Coin Balance History Detail"
         transactionDetailVC.configureCoin(transactionData[indexPath.row])
         navigationController?.pushViewController(transactionDetailVC, animated: true)
+    }
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        tableView.tableFooterView = createSpinnerFooter()
+
+        guard loadingService?.loadingState == .success || loadingService?.loadingState == .failed else { return }
+
+        tableView.tableFooterView = nil
+
+        guard let totalPage = totalPage else { return }
+
+        if offsetY > contentHeight - scrollView.frame.height {
+            if page <= (totalPage - 1) {
+                page += 1
+                guard let merchantData = merchantData else { return }
+                getCoinHistoryData(merchantData: merchantData, page: page)
+                tableView.reloadData()
+            }
+        }
     }
 }
 
@@ -114,11 +153,13 @@ extension CoinHistoryViewController {
         setupLoadingIndicator()
         setupTableView()
     }
+
     private func setupLoadingIndicator() {
         view.addSubview(loadingIndicator)
         loadingIndicator.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
         loadingIndicator.setCenterYAnchorConstraint(equalTo: view.centerYAnchor)
     }
+
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false

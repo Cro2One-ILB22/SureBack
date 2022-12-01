@@ -13,8 +13,9 @@ class LoginViewController: UIViewController {
 
     let titleTextView: UITextView = {
         let textView = UITextView()
-        textView.text = "Let's join \nthe rewarding program!"
-        textView.font = UIFont.boldSystemFont(ofSize: 20)
+        textView.backgroundColor = .porcelain
+        textView.text = "Hello there! Let's log in."
+        textView.font = UIFont.boldSystemFont(ofSize: 22)
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.textAlignment = .center
         textView.isEditable = false
@@ -51,8 +52,8 @@ class LoginViewController: UIViewController {
     let toRegisterLabel: UILabel = {
         let label = UILabel()
         label.text = "join now"
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.textColor = .blue
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textColor = .tealishGreen
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -76,16 +77,14 @@ class LoginViewController: UIViewController {
         return loading
     }()
 
+    let alertWaiting = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .porcelain
         navigationController?.navigationBar.isHidden = true
 
-        setupTitle()
-        setupTextFields()
-        setupToRegister()
-        setupButton()
-        setupLoadingIndicator()
+        setupLayout()
 
         passwordTextField.enablePasswordToggle()
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
@@ -103,7 +102,8 @@ class LoginViewController: UIViewController {
         }
         let isFormFilled = !email.isEmpty && !password.isEmpty
         if isFormFilled {
-            loginButton.backgroundColor = .blue
+            loginButton.backgroundColor = .tealishGreen
+            loginButton.setTitleColor(.black, for: .normal)
             loginButton.isEnabled = true
         } else {
             loginButton.backgroundColor = .gray
@@ -120,16 +120,25 @@ class LoginViewController: UIViewController {
             alert.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: "Default action"), style: .default))
             present(alert, animated: true, completion: nil)
         }
+        alertWaiting.view.tintColor = UIColor.black
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating()
+        alertWaiting.view.addSubview(loadingIndicator)
+        present(alertWaiting, animated: true, completion: nil)
         request.postLogin(email: email.lowercased(), password: password) { data in
             print(data)
             switch data {
             case .success:
                 self.navigationController?.pushViewController(TabBarViewController(), animated: true)
                 self.navigationController?.isNavigationBarHidden = true
-//                self.showAlert(title: "Success", message: "Success Log In", action: "Ok")
+                self.alertWaiting.dismiss(animated: true, completion: nil)
             case .failure:
                 print("Failed to Login")
-                self.showAlert(title: "Wrong Email or Password", message: "Please try again", action: "Ok")
+                self.alertWaiting.dismiss(animated: true, completion: {
+                    self.showAlert(title: "Wrong Email or Password", message: "Please try again", action: "Ok")
+                })
             }
         }
     }
@@ -143,9 +152,16 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController {
+    private func setupLayout() {
+        setupTitle()
+        setupTextFields()
+        setupButton()
+        setupToRegister()
+        setupLoadingIndicator()
+    }
     private func setupTitle() {
         view.addSubview(titleTextView)
-        titleTextView.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30)
+        titleTextView.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50)
         titleTextView.setLeftAnchorConstraint(equalTo: view.leftAnchor)
         titleTextView.setRightAnchorConstraint(equalTo: view.rightAnchor)
     }
@@ -158,7 +174,7 @@ extension LoginViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
         stackView.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
-        stackView.setTopAnchorConstraint(equalTo: titleTextView.bottomAnchor, constant: 50)
+        stackView.setTopAnchorConstraint(equalTo: titleTextView.bottomAnchor, constant: 20)
         stackView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 30)
     }
     private func setupToRegister() {
@@ -168,7 +184,7 @@ extension LoginViewController {
         stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
-        stackView.setTopAnchorConstraint(equalTo: passwordTextField.bottomAnchor, constant: 15)
+        stackView.setBottomAnchorConstraint(equalTo: loginButton.topAnchor, constant: -15)
         stackView.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
     }
     private func setupButton() {

@@ -108,6 +108,7 @@
 		AC59F892292057CE000F8345 /* HeaderCustomerHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F891292057CE000F8345 /* HeaderCustomerHistoryView.swift */; };
 		AC59F89429206137000F8345 /* ItemCustomerHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC59F89329206137000F8345 /* ItemCustomerHistoryTableViewCell.swift */; };
 		AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */; };
+		AC7E67E22939388500B135CE /* UICollectionView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7E67E12939388500B135CE /* UICollectionView+Ext.swift */; };
 		AC886E8329246FFF007F1E41 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC886E8229246FFF007F1E41 /* Protocol.swift */; };
 		AC886E852924CD7B007F1E41 /* ActiveTokenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC886E842924CD7B007F1E41 /* ActiveTokenTableViewCell.swift */; };
 		AC886E8729250AD9007F1E41 /* SectionDashboardHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC886E8629250AD9007F1E41 /* SectionDashboardHeader.swift */; };
@@ -266,6 +267,7 @@
 		AC59F891292057CE000F8345 /* HeaderCustomerHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCustomerHistoryView.swift; sourceTree = "<group>"; };
 		AC59F89329206137000F8345 /* ItemCustomerHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCustomerHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		AC67ABE6291515150042FECF /* MerchantDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailResponse.swift; sourceTree = "<group>"; };
+		AC7E67E12939388500B135CE /* UICollectionView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Ext.swift"; sourceTree = "<group>"; };
 		AC886E8229246FFF007F1E41 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		AC886E842924CD7B007F1E41 /* ActiveTokenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTokenTableViewCell.swift; sourceTree = "<group>"; };
 		AC886E8629250AD9007F1E41 /* SectionDashboardHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDashboardHeader.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 				169FCD5C292E0A9E009CBAB2 /* UIImageView+Ext.swift */,
 				AC1C1C41292F7AC300863A87 /* Date+Ext.swift */,
 				16C004472936F549008F5D0D /* UITextField+Ext.swift */,
+				AC7E67E12939388500B135CE /* UICollectionView+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1197,6 +1200,7 @@
 				169FCD3C292C4C36009CBAB2 /* UITableView+Ext.swift in Sources */,
 				1651220B2925BE2C00DBC0AE /* HeaderMerchantDetailStoryView.swift in Sources */,
 				1619BB272918B5E800085B74 /* AuthManager.swift in Sources */,
+				AC7E67E22939388500B135CE /* UICollectionView+Ext.swift in Sources */,
 				169FCD47292CA30E009CBAB2 /* HistoryViewController.swift in Sources */,
 				16C0043029343BAB008F5D0D /* MerchantRejectStoryFormViewController+SetupUI.swift in Sources */,
 				16BD91AB291E88790010731E /* ItemStoryCollectionViewCell.swift in Sources */,
@@ -1520,7 +1524,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KVFMXTTSFG;
+				DEVELOPMENT_TEAM = C8VS35NTZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To be able to Scan QR Code, you must allow the use of the camera.";

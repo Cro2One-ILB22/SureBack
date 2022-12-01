@@ -84,7 +84,7 @@ class MerchantDetailStoryViewController: UIViewController {
         storyCardView.cashbackLabel.text = "\(cashbackAmount)"
     }
     private func getUserFollower() -> Int {
-        let username = storyData?.customer?.instagramUsername ?? ""
+        guard let username = storyData?.customer?.instagramUsername else {return 0}
         var follower: Int?
         apiRequest.getProfileIG(username: username) { result in
             switch(result) {

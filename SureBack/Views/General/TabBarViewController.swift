@@ -83,9 +83,8 @@ class TabBarViewController: UITabBarController {
                 if error.responseCode == 401 {
                     KeychainHelper.standard.delete(key: .accessToken)
                     let loginVC = LoginViewController()
-                    let navLogin = UINavigationController(rootViewController: loginVC)
-                    navLogin.modalPresentationStyle = .fullScreen
-                    navigationController?.pushViewController(navLogin, animated: true)
+                    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+                    appDelegate?.window?.rootViewController = UINavigationController(rootViewController: IsLoginViewController())
 //                    present(navLogin, animated: true, completion: nil)
                 }
             }

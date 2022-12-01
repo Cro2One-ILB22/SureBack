@@ -85,6 +85,7 @@
 		16C004482936F549008F5D0D /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C004472936F549008F5D0D /* UITextField+Ext.swift */; };
 		16C0044A29373E67008F5D0D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0044929373E67008F5D0D /* ProfileViewController.swift */; };
 		16C0044F29385F53008F5D0D /* MerchantFormBusinessSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0044E29385F53008F5D0D /* MerchantFormBusinessSettingViewController.swift */; };
+		16C0045229393DBB008F5D0D /* MerchantScanQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0045129393DBB008F5D0D /* MerchantScanQRViewController.swift */; };
 		2DDDD70EABE69B42303C1AED /* Pods_SureBackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */; };
 		8A2D3CC34125394E06212A07 /* Pods_SureBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6F53CE101281D823C272BB /* Pods_SureBack.framework */; };
 		9CCB778BAEA00AE5C43FB920 /* Pods_SureBack_SureBackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */; };
@@ -238,6 +239,7 @@
 		16C004472936F549008F5D0D /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 		16C0044929373E67008F5D0D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		16C0044E29385F53008F5D0D /* MerchantFormBusinessSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantFormBusinessSettingViewController.swift; sourceTree = "<group>"; };
+		16C0045129393DBB008F5D0D /* MerchantScanQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantScanQRViewController.swift; sourceTree = "<group>"; };
 		3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack_SureBackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FB4E7EBF11E0E918FCC83A /* Pods-SureBack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBack.release.xcconfig"; path = "Target Support Files/Pods-SureBack/Pods-SureBack.release.xcconfig"; sourceTree = "<group>"; };
 		5F47E67A5BE033AB27E63DDB /* Pods-SureBackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBackTests.debug.xcconfig"; path = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -694,8 +696,8 @@
 		16C0044C293764CF008F5D0D /* Merchant */ = {
 			isa = PBXGroup;
 			children = (
+				16C0045029393DAD008F5D0D /* MerchantScanQRViewController */,
 				16C0044D29385ECB008F5D0D /* MerchantFormBusinessSetting */,
-				AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */,
 				16C004342934528F008F5D0D /* MerchantTransactionHistory */,
 				16C0042C29341C99008F5D0D /* MerchantRejectStoryForm */,
 				1603EFDE292B059200EC5485 /* MerchantListAllCustomer */,
@@ -714,6 +716,15 @@
 				16C0044E29385F53008F5D0D /* MerchantFormBusinessSettingViewController.swift */,
 			);
 			path = MerchantFormBusinessSetting;
+			sourceTree = "<group>";
+		};
+		16C0045029393DAD008F5D0D /* MerchantScanQRViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AC00FA34290A5D3600B6347D /* ScanQrViewController.swift */,
+				16C0045129393DBB008F5D0D /* MerchantScanQRViewController.swift */,
+			);
+			path = MerchantScanQRViewController;
 			sourceTree = "<group>";
 		};
 		AC1C1C3B292F487C00863A87 /* CustomerQrCode */ = {
@@ -1294,6 +1305,7 @@
 				ACCE1075293420DD00C2CB45 /* TransactionDetailViewController.swift in Sources */,
 				16BD91AD291E93270010731E /* MerchantDashboardViewController.swift in Sources */,
 				AC59F88B291F8117000F8345 /* Token.swift in Sources */,
+				16C0045229393DBB008F5D0D /* MerchantScanQRViewController.swift in Sources */,
 				16C0042629335DDD008F5D0D /* SectionMonth.swift in Sources */,
 				169FCD59292DBEA4009CBAB2 /* UIColor+Ext.swift in Sources */,
 				169FCD43292C8A33009CBAB2 /* LinkResponses.swift in Sources */,

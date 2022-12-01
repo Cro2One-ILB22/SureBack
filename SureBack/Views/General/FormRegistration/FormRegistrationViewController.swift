@@ -13,13 +13,14 @@ struct Register {
     let email: String
     let role: String
     let password: String
-    let instagramToDM: String
-    let otp: Int
-    let otpExpiredIn: Int
+    var instagramToDM: String
+    var otp: Int
+    var otpExpiredIn: Int
 }
 
 class FormRegistrationViewController: UIViewController {
     var role: String?
+    private let apiRequest = RequestFunction()
     let titleLabel: UILabel = {
         let title = UILabel()
         title.text = "Hi! Let's join the \nrewarding program."
@@ -177,8 +178,7 @@ class FormRegistrationViewController: UIViewController {
         preRegister(name: name, email: email, password: password, role: role, usernameIG: usernameIG)
     }
     private func preRegister(name: String, email: String, password: String, role: String, usernameIG: String) {
-        let request = RequestFunction()
-        request.preRegister(name: name, email: email, password: password, role: role, username: usernameIG) { result, error  in
+        apiRequest.preRegister(name: name, email: email, password: password, role: role, username: usernameIG) { result, error  in
             if error != nil {
                 self.loadingIndicator.show(false)
                 self.loadingIndicator.isHidden = true

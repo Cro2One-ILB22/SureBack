@@ -10,7 +10,7 @@ import UIKit
 class MerchantDashboardViewController: UIViewController {
     var user: UserInfoResponse?
     var listCustomerStory: [MyStoryData] = []
-
+    private let apiRequest = RequestFunction()
     let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(StoryTableViewCell.self, forCellReuseIdentifier: StoryTableViewCell.id)
@@ -42,8 +42,7 @@ class MerchantDashboardViewController: UIViewController {
         self.navigationController?.pushViewController(merchantListAllCustomerVC, animated: true)
     }
     private func getCustomerStory() {
-        let rf = RequestFunction()
-        rf.getCustomerStory { data in
+        apiRequest.getCustomerStory(assessed: true) { data in
             self.listCustomerStory = data.data
             self.tableView.isHidden = false
             self.loadingIndicator.show(false)
@@ -52,11 +51,19 @@ class MerchantDashboardViewController: UIViewController {
         }
     }
     private func configTableView() {
+        configHeaderView()
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    private func configHeaderView() {
         let headerView = HeaderMerchantDashboardView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 250))
         headerView.seeAllCustomersButton.addTarget(self, action: #selector(seeAllCustomers), for: .touchUpInside)
         headerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cardSummaryAction)))
-        tableView.delegate = self
-        tableView.dataSource = self
+        guard let coin = user?.coins?[0].coinType == "local" ? user?.coins?[0] : user?.coins?[1] else {return}
+        let totalTokenToday = user?.merchantDetail?.todaysTokenCount ?? 0
+        headerView.businessStatusCard.totalOutstandingCoinLabel.text = "\(coin.outstanding)"
+        headerView.businessStatusCard.totalExchangedCoinLabel.text = "\(coin.exchanged)"
+        headerView.businessStatusCard.totalTokenLabel.text = "\(totalTokenToday) Tokens"
         tableView.tableHeaderView = headerView
     }
     @objc func cardSummaryAction() {

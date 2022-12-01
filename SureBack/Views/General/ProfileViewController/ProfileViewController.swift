@@ -131,6 +131,7 @@ class ProfileViewController: UIViewController {
 
     @objc func accountSafetyTapped(sender: UITapGestureRecognizer) {
         print("account safety tapped")
+        navigationController?.pushViewController(ScanQrViewController(), animated: true)
     }
 
     @objc func appGuideTapped(sender: UITapGestureRecognizer) {

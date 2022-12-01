@@ -104,9 +104,9 @@ class MerchantGenerateTokenFormViewController: UIViewController {
     }()
     let exchangedCoinValueLabel: UILabel = {
         let label = UILabel()
-        label.text = "-"
-        label.font = .systemFont(ofSize: 15)
-        label.textColor = .black
+        label.text = "Waiting for customer input"
+        label.font = .italicSystemFont(ofSize: 15)
+        label.textColor = .red
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -114,6 +114,7 @@ class MerchantGenerateTokenFormViewController: UIViewController {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.placeholder = "Total Purchase"
+        textField.keyboardType = .numberPad
         textField.textContentType = .telephoneNumber
         textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         textField.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width - 60).isActive = true
@@ -121,12 +122,13 @@ class MerchantGenerateTokenFormViewController: UIViewController {
     }()
     let generateTokenButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .tealishGreen
+        button.backgroundColor = .pastelGray
         button.setTitleColor(.black, for: .normal)
         button.setTitle("Generate Token", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         button.layer.cornerRadius = 10
+        button.isEnabled = false
         return button
     }()
     override func viewDidLoad() {
@@ -151,6 +153,10 @@ class MerchantGenerateTokenFormViewController: UIViewController {
             self.qrScanPurchase = response
             if let purchaseRequest = response.purchaseRequest {
                 self.exchangedCoinValueLabel.text = String(purchaseRequest.usedCoins)
+                self.exchangedCoinValueLabel.font = .systemFont(ofSize: 15)
+                self.exchangedCoinValueLabel.textColor = .black
+                self.generateTokenButton.isEnabled = true
+                self.generateTokenButton.backgroundColor = .tealishGreen
             }
         }
 
@@ -165,7 +171,6 @@ class MerchantGenerateTokenFormViewController: UIViewController {
         self.apiRequest.postGenerateTokenOffline(customerId: self.customerId, purchaseAmount: purchaseAmount, isRequestingToken: purchaseRequest.isRequestingForToken ? 1 : 0) { [weak self] _ in
             let detailTransactionVC = MerchantTransactionHistoryViewController()
             self?.present(detailTransactionVC, animated: true)
-//            self?.navigationController?.pushViewController(DummyViewController(), animated: true)
         }
     }
 

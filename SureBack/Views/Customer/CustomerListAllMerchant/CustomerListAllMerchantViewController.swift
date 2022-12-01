@@ -9,6 +9,7 @@ import UIKit
 import SDWebImage
 
 class CustomerListAllMerchantViewController: UIViewController {
+    let request = RequestFunction()
     var user: UserInfoResponse?
     var merchantData = [UserInfoResponse]()
     var activeTokenData = [Token]()
@@ -68,6 +69,24 @@ class CustomerListAllMerchantViewController: UIViewController {
         tableView.isHidden = isShow
         loadingIndicator.show(isShow)
     }
+
+    @objc func bookmarkTapped(_ sender: UITapGestureRecognizer) {
+        guard let tag = sender.view?.tag else {return}
+        request.toggleMerchantFavorited(id: merchantData[tag].id) { response in
+            switch response {
+            case .success(let result):
+                let indexPath = IndexPath(row: tag, section: 1)
+                let cell = self.tableView.cellForRow(at: indexPath) as? ItemMerchantTableViewCell
+                self.merchantData[tag].isFavorited = result.isFavorited
+                guard let isFavorite = result.isFavorited else {return}
+                let image = isFavorite ? "bookmark.on" : "bookmark.off"
+                cell?.bookmarkImage.image = UIImage(named: image)
+            case let .failure(error):
+                print(error)
+                print("failed to bookmarked the merchant")
+            }
+        }
+    }
 }
 
 extension CustomerListAllMerchantViewController: UISearchBarDelegate {
@@ -106,6 +125,12 @@ extension CustomerListAllMerchantViewController: UITableViewDelegate, UITableVie
         )
         cell.merchantNameLabel.text = merchantData[indexPath.row].name
         cell.totalCoinsLabel.text = "\(merchantData[indexPath.row].balance) coin(s)"
+        cell.bookmarkImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bookmarkTapped)))
+        cell.bookmarkImage.tag = indexPath.row
+        cell.bookmarkImage.isUserInteractionEnabled = true
+        guard let isFavorite = merchantData[indexPath.row].isFavorited else {return UITableViewCell()}
+        let image = isFavorite ? "bookmark.on" : "bookmark.off"
+        cell.bookmarkImage.image = UIImage(named: image)
         return cell
     }
 

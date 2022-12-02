@@ -13,7 +13,7 @@ import UIKit
 class TabBarViewController: UITabBarController {
     private let locationManager = CLLocationManager()
     private var currentLocation: CLLocationCoordinate2D?
-    private let locationSubject = ReplaySubject<CLLocationCoordinate2D>.create(bufferSize: 1)
+    private let locationSubject = ReplaySubject<CLLocationCoordinate2D?>.create(bufferSize: 1)
 
     let request = RequestFunction()
 
@@ -151,5 +151,9 @@ extension TabBarViewController: CLLocationManagerDelegate {
               roles.contains("merchant")
         else { return }
         request.updateMerchantLocation(locationCoordinate: (locValue.latitude, locValue.longitude))
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        locationSubject.onNext(nil)
     }
 }

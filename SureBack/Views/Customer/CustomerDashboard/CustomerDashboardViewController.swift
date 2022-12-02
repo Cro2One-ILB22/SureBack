@@ -12,7 +12,7 @@ import RxSwift
 
 class CustomerDashboardViewController: UIViewController, UIViewToController {
     private var loadingService: LoadingService?
-    private let locationSubject: ReplaySubject<CLLocationCoordinate2D>
+    private let locationSubject: ReplaySubject<CLLocationCoordinate2D?>
     private let disposeBag = DisposeBag()
     let request = RequestFunction()
     var user: UserInfoResponse!
@@ -127,7 +127,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         }
     }
 
-    init(locationSubject: ReplaySubject<CLLocationCoordinate2D>) {
+    init(locationSubject: ReplaySubject<CLLocationCoordinate2D?>) {
         self.locationSubject = locationSubject
         super.init(nibName: nil, bundle: nil)
     }
@@ -254,10 +254,11 @@ extension CustomerDashboardViewController {
         tableView.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     }
 
-    private func setupContent(location: CLLocationCoordinate2D) {
+    private func setupContent(location: CLLocationCoordinate2D?) {
         guard loadingService?.loadingState == .notStarted else { return }
         loadingService?.setState(state: .loading)
-        request.getListMerchant { data in
+        let coordinate = (location != nil) ? (location!.latitude, location!.longitude) : nil
+        request.getListMerchant(locationCoordinate: coordinate) { data in
             switch data {
             case let .success(result):
                 self.merchantData = result.data

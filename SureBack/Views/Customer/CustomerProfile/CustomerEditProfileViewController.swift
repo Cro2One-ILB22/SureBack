@@ -81,7 +81,8 @@ class CustomerEditProfileViewController: UIViewController {
         guard let user = viewModel.user else {return}
 
         if let email = emailTextField.text, let name = nameTextField.text {
-            request.updateUser(name: name, email: email != user.email ? email : nil) { _ in
+            request.updateUser(name: name, email: email != user.email ? email : nil) { [weak self] _ in
+                guard let self = self else {return}
                 print("successfully update user data")
                 user.email = email
                 user.name = name

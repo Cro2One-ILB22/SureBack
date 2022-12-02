@@ -48,7 +48,8 @@ class CustomerListAllMerchantViewController: UIViewController {
 
     func getListAllMerchant(search searchedName: String = "") {
         let rf = RequestFunction()
-        rf.getListMerchant(searchMerchantByName: searchedName) { data in
+        rf.getListMerchant(searchMerchantByName: searchedName) { [weak self] data in
+            guard let self = self else {return}
             switch data {
             case let .success(result):
                 do {
@@ -72,18 +73,24 @@ class CustomerListAllMerchantViewController: UIViewController {
 
     @objc func bookmarkTapped(_ sender: UITapGestureRecognizer) {
         guard let tag = sender.view?.tag else {return}
-        request.toggleMerchantFavorited(id: merchantData[tag].id) { response in
-            switch response {
-            case .success(let result):
-                let indexPath = IndexPath(row: tag, section: 1)
-                let cell = self.tableView.cellForRow(at: indexPath) as? ItemMerchantTableViewCell
-                self.merchantData[tag].isFavorited = result.isFavorited
-                guard let isFavorite = result.isFavorited else {return}
-                let image = isFavorite ? "bookmark.on" : "bookmark.off"
-                cell?.bookmarkImage.image = UIImage(named: image)
-            case let .failure(error):
-                print(error)
-                print("failed to bookmarked the merchant")
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.request.toggleMerchantFavorited(id: self.merchantData[tag].id) {  response in
+    //            guard let self = self else {return}
+                switch response {
+                case .success(let result):
+                    let indexPath = IndexPath(row: tag, section: 1)
+                    let cell = self.tableView.cellForRow(at: indexPath) as? ItemMerchantTableViewCell
+                    self.merchantData[tag].isFavorite = result.isFavorite
+                    guard let isFavorite = result.isFavorite else {return}
+                    let image = isFavorite ? "bookmark.on" : "bookmark.off"
+                    DispatchQueue.main.async {
+                        cell?.bookmarkImage.image = UIImage(named: image)
+                        self.tableView.reloadData()
+                    }
+                case let .failure(error):
+                    print(error)
+                    print("failed to bookmarked the merchant")
+                }
             }
         }
     }
@@ -128,9 +135,10 @@ extension CustomerListAllMerchantViewController: UITableViewDelegate, UITableVie
         cell.bookmarkImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bookmarkTapped)))
         cell.bookmarkImage.tag = indexPath.row
         cell.bookmarkImage.isUserInteractionEnabled = true
-        guard let isFavorite = merchantData[indexPath.row].isFavorited else {return UITableViewCell()}
-        let image = isFavorite ? "bookmark.on" : "bookmark.off"
-        cell.bookmarkImage.image = UIImage(named: image)
+        if let isFavorite = merchantData[indexPath.row].isFavorite {
+            let image = isFavorite ? "bookmark.on" : "bookmark.off"
+            cell.bookmarkImage.image = UIImage(named: image)
+        }
         return cell
     }
 

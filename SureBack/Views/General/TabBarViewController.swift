@@ -14,64 +14,65 @@ class TabBarViewController: UITabBarController {
     private let locationManager = CLLocationManager()
     private var currentLocation: CLLocationCoordinate2D?
     private let locationSubject = ReplaySubject<CLLocationCoordinate2D>.create(bufferSize: 1)
-    
+
     let request = RequestFunction()
-    
+
     let viewModel = UserViewModel.shared
-    
+
     var disposeBag = DisposeBag()
-    
+
     var dashboardVC: CustomerDashboardViewController?
     var qrVC: CustomerQrCodeViewController?
     var profileVC: CustomerProfileViewController?
 //    var selectedRole: String?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .porcelain
-        self.setValue(tabBar, forKey: "tabBar")
+        setValue(tabBar, forKey: "tabBar")
         // proses nonton perubahan seperti didSet
         viewModel.userSubject.subscribe(onNext: { [weak self] user in // onNext : kalo update, next
             self?.dashboardVC?.user = user
             self?.qrVC?.user = user
         }).disposed(by: disposeBag)
-        request.getUserInfo { [self] data in
+        request.getUserInfo { [weak self] data in
+            guard let self = self else {return}
             switch data {
             case let .success(result):
                 self.initAndStartUpdatingLocation()
                 do {
-                    viewModel.userSubject.onNext(result)
+                    self.viewModel.userSubject.onNext(result)
                     print("login success")
-                    let role = viewModel.user?.roles![1]
+                    let role = self.viewModel.user?.roles![1]
                     if role == "customer" {
-                        dashboardVC = CustomerDashboardViewController(locationSubject: locationSubject)
-                        dashboardVC?.user = viewModel.user
-                        let navDashboard = UINavigationController(rootViewController: dashboardVC!)
+                        self.dashboardVC = CustomerDashboardViewController(locationSubject: self.locationSubject)
+                        self.dashboardVC?.user = self.viewModel.user
+                        let navDashboard = UINavigationController(rootViewController: self.dashboardVC!)
                         navDashboard.tabBarItem = UITabBarItem(title: "Dashboard", image: UIImage(named: "list.dash.header.rectangle"), tag: 1)
-                        
-                        qrVC = CustomerQrCodeViewController()
-                        qrVC?.user = viewModel.user
-                        let navQR = UINavigationController(rootViewController: qrVC!)
+
+                        self.qrVC = CustomerQrCodeViewController()
+                        self.qrVC?.user = self.viewModel.user
+                        let navQR = UINavigationController(rootViewController: self.qrVC!)
                         navQR.tabBarItem = UITabBarItem(title: "QR", image: UIImage(named: "qrcode.viewfinder"), tag: 1)
-                        
-                        profileVC = CustomerProfileViewController()
-                        let navProfile = UINavigationController(rootViewController: profileVC!)
+
+                        self.profileVC = CustomerProfileViewController()
+                        let navProfile = UINavigationController(rootViewController: self.profileVC!)
                         navProfile.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "person.crop.circle"), tag: 1)
-                        setViewControllers([navDashboard, navQR, navProfile], animated: false)
+                        self.setViewControllers([navDashboard, navQR, navProfile], animated: false)
                     } else {
                         let dashboardVC = MerchantDashboardViewController()
-                        dashboardVC.user = viewModel.user
+                        dashboardVC.user = self.viewModel.user
                         let navDashboard = UINavigationController(rootViewController: dashboardVC)
                         navDashboard.tabBarItem = UITabBarItem(title: "Dashboard", image: UIImage(named: "list.dash.header.rectangle"), tag: 1)
-                        
+
                         let scanQR = MerchantScanQRViewController()
                         let navQR = UINavigationController(rootViewController: scanQR)
                         navQR.tabBarItem = UITabBarItem(title: "QR", image: UIImage(named: "qrcode.viewfinder"), tag: 1)
-                        
+
                         let profileVC = MerchantProfileViewController()
                         let navProfile = UINavigationController(rootViewController: profileVC)
                         navProfile.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "person.crop.circle"), tag: 1)
-                        setViewControllers([navDashboard, navQR, navProfile], animated: false)
+                        self.setViewControllers([navDashboard, navQR, navProfile], animated: false)
                     }
 //                    selectedRole = role
 //                    setupMiddleButton()
@@ -91,6 +92,7 @@ class TabBarViewController: UITabBarController {
             }
         }
     }
+
 //    func setupMiddleButton() {
 //        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
 //        var menuButtonFrame = menuButton.frame
@@ -136,6 +138,7 @@ extension TabBarViewController: CLLocationManagerDelegate {
             }
         }
     }
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         print("locations = \(locValue)")
@@ -150,5 +153,3 @@ extension TabBarViewController: CLLocationManagerDelegate {
         request.updateMerchantLocation(locationCoordinate: (locValue.latitude, locValue.longitude))
     }
 }
-
-

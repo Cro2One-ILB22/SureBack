@@ -84,7 +84,8 @@ class TokenStatusViewController: UIViewController {
 
     func getTokenStatusData(merchantData: UserInfoResponse, page: Int) {
         loadingService?.setState(state: .loading)
-        request.getMyStoryCustomer(merchantId: merchantData.id, page: page) { data in
+        request.getMyStoryCustomer(merchantId: merchantData.id, page: page) { [weak self] data in
+            guard let self = self else {return}
             switch data {
             case let .success(result):
                 do {

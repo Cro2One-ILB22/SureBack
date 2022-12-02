@@ -66,7 +66,8 @@ class CustomerNotificationViewController: UIViewController {
 
     func getNotificationsData(page: Int) {
         loadingService?.setState(state: .loading)
-        request.getListToken(page: page) { data in
+        request.getListToken(page: page) { [weak self] data in
+            guard let self = self else {return}
             switch data {
             case let .success(result):
                 do {

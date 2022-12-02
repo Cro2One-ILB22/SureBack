@@ -77,7 +77,8 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         tableView.tableHeaderView = headerView
         setupTableView()
 
-        request.getProfileIG(username: user?.instagramUsername ?? "") { data in
+        request.getProfileIG(username: user?.instagramUsername ?? "") { [weak self] data in
+            guard let self = self else {return}
             switch data {
             case let .success(result):
                 do {
@@ -92,7 +93,8 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         }
 
         // req mention story
-        request.getStoryIG(storyId: storyID) { data in
+        request.getStoryIG(storyId: storyID) { [weak self] data in
+            guard let self = self else {return}
             switch data {
             case let .success(result):
                 do {
@@ -190,7 +192,8 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         }
 
 //        request submit story
-        request.submitStory(storyId: storyId, instagtamStoryId: igStoryId) { data in
+        request.submitStory(storyId: storyId, instagtamStoryId: igStoryId) { [weak self] data in
+            guard let self = self else {return}
             switch data {
             case let .success(result):
                 print(result)

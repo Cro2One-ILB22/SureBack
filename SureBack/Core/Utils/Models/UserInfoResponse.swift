@@ -24,7 +24,7 @@ class UserInfoResponse: Codable, AutoEquatable {
     var merchantDetail: MerchantDetailResponse?
     let coins: [Coin]?
     let individualCoins: [Coin]?
-    var isFavorited: Bool?
+    var isFavorite: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -39,7 +39,7 @@ class UserInfoResponse: Codable, AutoEquatable {
         case merchantDetail = "merchant_detail"
         case coins
         case individualCoins = "individual_coins"
-        case isFavorited = "is_favorited"
+        case isFavorite = "is_favorite"
     }
 }
 

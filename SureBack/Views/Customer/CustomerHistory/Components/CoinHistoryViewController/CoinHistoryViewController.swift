@@ -71,7 +71,8 @@ class CoinHistoryViewController: UIViewController {
 
     func getCoinHistoryData(merchantData: UserInfoResponse, page: Int) {
         loadingService?.setState(state: .loading)
-        request.getListTransaction(merchantId: merchantData.id, status: "success", page: page) { data in
+        request.getListTransaction(merchantId: merchantData.id, status: "success", page: page) { [weak self] data in
+            guard let self = self else {return}
             switch data {
             case let .success(result):
                 print("coin balance data: \(result)")

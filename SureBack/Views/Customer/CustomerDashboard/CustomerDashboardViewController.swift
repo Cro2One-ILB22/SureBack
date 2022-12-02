@@ -63,7 +63,8 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         headerView.notifButton.addTarget(self, action: #selector(notifButtonTapped), for: .touchUpInside)
         setupView2(headerView: headerView)
 
-        request.getListToken(expired: 0, submitted: 0, redeemed: 1) { data in
+        request.getListToken(expired: 0, submitted: 0, redeemed: 1) { [weak self]data in
+            guard let self = self else {return}
             switch data {
             case let .success(result):
                 do {
@@ -110,12 +111,13 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
     @objc func bookmarkTapped(_ sender: UITapGestureRecognizer) {
         guard let tag = sender.view?.tag else {return}
         request.toggleMerchantFavorited(id: merchantData[tag].id) { response in
+//            guard let self = self else {return}
             switch response {
             case .success(let result):
                 let indexPath = IndexPath(row: tag, section: 1)
                 let cell = self.tableView.cellForRow(at: indexPath) as? ItemMerchantTableViewCell
-                self.merchantData[tag].isFavorited = result.isFavorited
-                guard let isFavorite = result.isFavorited else {return print("return")}
+                self.merchantData[tag].isFavorite = result.isFavorite
+                guard let isFavorite = result.isFavorite else {return print("return")}
                 let image = isFavorite ? "bookmark.on" : "bookmark.off"
                 cell?.bookmarkImage.image = UIImage(named: image)
             case let .failure(error):
@@ -170,9 +172,10 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
             cell.bookmarkImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bookmarkTapped)))
             cell.bookmarkImage.tag = indexPath.row
             cell.bookmarkImage.isUserInteractionEnabled = true
-            guard let isFavorite = merchantData[indexPath.row].isFavorited else {return UITableViewCell()}
-            let image = isFavorite ? "bookmark.on" : "bookmark.off"
-            cell.bookmarkImage.image = UIImage(named: image)
+            if let isFavorite = merchantData[indexPath.row].isFavorite {
+                let image = isFavorite ? "bookmark.on" : "bookmark.off"
+                cell.bookmarkImage.image = UIImage(named: image)
+            }
 
             return cell
         }
@@ -254,7 +257,7 @@ extension CustomerDashboardViewController {
     private func setupContent(location: CLLocationCoordinate2D) {
         guard loadingService?.loadingState == .notStarted else { return }
         loadingService?.setState(state: .loading)
-        request.getListMerchant() { data in
+        request.getListMerchant { data in
             switch data {
             case let .success(result):
                 self.merchantData = result.data

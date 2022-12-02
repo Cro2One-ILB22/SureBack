@@ -127,8 +127,8 @@ class LoginViewController: UIViewController {
         loadingIndicator.startAnimating()
         alertWaiting.view.addSubview(loadingIndicator)
         present(alertWaiting, animated: true, completion: nil)
-        request.postLogin(email: email.lowercased(), password: password) { data in
-            print(data)
+        request.postLogin(email: email.lowercased(), password: password) { [weak self] data in
+            guard let self = self else {return}
             switch data {
             case .success:
                 self.navigationController?.pushViewController(TabBarViewController(), animated: true)

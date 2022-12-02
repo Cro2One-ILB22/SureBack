@@ -1503,6 +1503,7 @@
 				DEVELOPMENT_TEAM = C8VS35NTZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To be able to Scan QR Code, you must allow the use of the camera.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We’ll use this to personalize your app experience”";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1517,7 +1518,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = cro2one.SureBack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1535,10 +1536,11 @@
 				CODE_SIGN_ENTITLEMENTS = SureBack/SureBack.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C8VS35NTZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To be able to Scan QR Code, you must allow the use of the camera.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We’ll use this to personalize your app experience”";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1553,7 +1555,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = cro2one.SureBack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1592,7 +1594,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BAFJ582D2S;
+				DEVELOPMENT_TEAM = C8VS35NTZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;

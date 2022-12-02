@@ -271,13 +271,14 @@ extension RequestFunction {
         }
     }
 
-    func postGenerateTokenOffline(customerId: Int, purchaseAmount: Int, isRequestingToken: Int, completion: @escaping (Result<PurchaseResponse, AFError>) -> Void) {
+    func postGenerateTokenOffline(customerId: Int, purchaseAmount: Int, coinUsed: Int? = 0, isRequestingToken: Int, completion: @escaping (Result<PurchaseResponse, AFError>) -> Void) {
         let url = Endpoints.scanQr.url
-        let body: [String: Int] = [
-            "customer_id": customerId,
-            "purchase_amount": purchaseAmount,
-            "is_requesting_for_token": isRequestingToken,
-        ]
+        var body: [String: Int] = [:]
+
+        body["customer_id"] = customerId
+        body["purchase_amount"] = purchaseAmount
+        body["is_requesting_for_token"] = isRequestingToken
+        body["used_coins"] = coinUsed
 
         requestWithToken(url: url, method: .post, parameters: body, decodable: PurchaseResponse.self) {
             response in

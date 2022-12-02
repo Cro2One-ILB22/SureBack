@@ -110,7 +110,7 @@ class CustomerPurchaseViewController: UIViewController {
         alertWaiting.view.addSubview(loadingIndicator)
         present(alertWaiting, animated: true, completion: nil)
 
-        apiRequest.requestPurchase(merchantId: merchantId, usedCoins: coinsUsed, isRequestingForToken: useCoinSwitch.isOn) { [weak self] _ in
+        apiRequest.requestPurchase(merchantId: merchantId, usedCoins: coinsUsed, isRequestingForToken: isCoinActive) { [weak self] _ in
             guard let self = self else { return }
         }
     }
@@ -152,7 +152,7 @@ class CustomerPurchaseViewController: UIViewController {
                     self.purchasePusherService?.disconnect()
                     self.alertWaiting.dismiss(animated: true, completion: {
                         self.alertSuccess.title = "Congratulations!"
-                        self.alertSuccess.message = "Get token and \(purchase.coinExchange?.amount) coin used success"
+                        self.alertSuccess.message = "Get token and \(purchase.coinExchange?.amount ?? 0) coin used success"
                         self.alertSuccess.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                             self.navigationController?.popViewController(animated: true)
                         }))

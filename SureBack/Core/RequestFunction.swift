@@ -504,7 +504,7 @@ extension RequestFunction {
         requestWithToken(url: url, method: .post, parameters: body) { completion($0.result) }
     }
 
-    func requestPurchase(merchantId: Int, usedCoins: Int = 0, isRequestingForToken: Bool = true, completion: @escaping (Result<Data?, AFError>) -> Void) {
+    func requestPurchase(merchantId: Int, usedCoins: Int = 0, isRequestingForToken: Bool, completion: @escaping (Result<Data?, AFError>) -> Void) {
         let url = Endpoints.requestPurchase.url
         let body: [String: Any] = [
             "merchant_id": merchantId,

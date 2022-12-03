@@ -84,7 +84,7 @@ class RequestFunction {
         }
     }
 
-    func preRegister(name: String, email: String, password: String, role: String, username: String, completion: @escaping (RequestInstagramOTPResponse?, AFError?) -> Void) {
+    func preRegister(name: String, email: String, password: String, role: String, username: String, completion: @escaping (RequestInstagramOTPResponse?, Int?) -> Void) {
         let url = Endpoints.preRegister.url
         let body: [String: Any] = [
             "name": name,
@@ -98,15 +98,15 @@ class RequestFunction {
             .responseDecodable(of: RequestInstagramOTPResponse.self) { response in
                 switch response.result {
                 case let .success(data):
-                    completion(data, nil)
+                    completion(data, response.response?.statusCode)
                 case let .failure(error):
-                    completion(nil, error)
+                    completion(nil, nil)
                     print("Error: \(error.localizedDescription)")
                 }
             }
     }
 
-    func register(name: String, email: String, password: String, role: String, username: String, instagramToDM: String, completion: @escaping (AuthResponse?, AFError?) -> Void) {
+    func register(name: String, email: String, password: String, role: String, username: String, instagramToDM: String, completion: @escaping (AuthResponse?, Int?) -> Void) {
         let url = Endpoints.register.url
         let body: [String: Any] = [
             "name": name,
@@ -124,9 +124,9 @@ class RequestFunction {
                     .responseDecodable(of: AuthResponse.self) { response in
                         switch response.result {
                         case let .success(data):
-                            completion(data, nil)
+                            completion(data, response.response?.statusCode)
                         case let .failure(error):
-                            completion(nil, error)
+                            completion(nil, nil)
                             print(error.localizedDescription)
                         }
                     }

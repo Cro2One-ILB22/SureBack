@@ -85,6 +85,7 @@ class ConfirmRegistrationViewController: UIViewController {
         alert.view.addSubview(loadingIndicator)
         return alert
     }()
+    var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .porcelain
@@ -98,6 +99,7 @@ class ConfirmRegistrationViewController: UIViewController {
         checkOtpButton.addTarget(self, action: #selector(checkOtp), for: .touchUpInside)
         copyToClipboard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(copyToClipboardAction)))
         renewCodeButton.addTarget(self, action: #selector(renewCodeAction), for: .touchUpInside)
+        snackBarMessage = SnackBarMessage(view: view)
     }
     func timeString(time: TimeInterval) -> String {
         let minutes = Int(time) / 60 % 60
@@ -114,14 +116,11 @@ extension ConfirmRegistrationViewController {
         preRegister(name: dataRegister.name, email: dataRegister.email, password: dataRegister.password, role: dataRegister.role, usernameIG: dataRegister.usernameIG)
     }
     private func preRegister(name: String, email: String, password: String, role: String, usernameIG: String) {
-        apiRequest.preRegister(name: name, email: email, password: password, role: role, username: usernameIG) { [weak self] result, error  in
+        apiRequest.preRegister(name: name, email: email, password: password, role: role, username: usernameIG) { [weak self] result, statusCode  in
             guard let self = self else {return}
-            if error != nil {
-                self.alertWaiting.dismiss(animated: true)
-                self.showAlert(title: "Error", message: error?.localizedDescription ?? "", action: "Oke")
-                return
-            }
             self.alertWaiting.dismiss(animated: true)
+            guard let statusCode = statusCode else {return}
+            self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
             guard let instagramToDM = result?.instagramToDM else {return}
             guard let otp = result?.otp else {return}
             guard let otpExpiredIn = result?.expiresIn else {return}
@@ -173,15 +172,11 @@ extension ConfirmRegistrationViewController {
             password: password,
             role: role,
             username: usernameIG,
-            instagramToDM: instagraToDM) {[weak self] data, error in
+            instagramToDM: instagraToDM) {[weak self] data, statusCode in
 //                guard let self = self else {return}
-                if error != nil {
-                    self?.alertWaiting.dismiss(animated: true, completion: {
-                        self?.showAlert(title: "Error", message: error?.localizedDescription ?? "", action: "Okey")
-                    })
-                    return
-                }
                 self?.alertWaiting.dismiss(animated: true)
+                guard let statusCode = statusCode else {return}
+                self?.snackBarMessage?.showResponseMessage(statusCode: statusCode)
                 do {
                     guard let accessToken = data?.accessToken else {return}
                     try KeychainHelper.standard.save(key: .accessToken, value: accessToken)

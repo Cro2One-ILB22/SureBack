@@ -19,8 +19,6 @@ struct Register {
 }
 
 class FormRegistrationViewController: UIViewController {
-    var role: String?
-    private let apiRequest = RequestFunction()
     let titleLabel: UILabel = {
         let title = UILabel()
         title.text = "Hi! Let's join the \nrewarding program."
@@ -34,12 +32,14 @@ class FormRegistrationViewController: UIViewController {
         let nameField = CustomTextField(insets: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12))
         nameField.placeholder = "Name"
         nameField.backgroundColor = .white
+        nameField.autocapitalizationType = .none
         return nameField
     }()
     let usernamIGField: CustomTextField = {
         let usernamIGField = CustomTextField(insets: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12))
         usernamIGField.placeholder = "Instagram Username"
         usernamIGField.backgroundColor = .white
+        usernamIGField.autocapitalizationType = .none
         return usernamIGField
     }()
     let emaillField: CustomTextField = {
@@ -47,12 +47,14 @@ class FormRegistrationViewController: UIViewController {
         email.placeholder = "Email Address"
         email.backgroundColor = .white
         email.keyboardType = .emailAddress
+        email.autocapitalizationType = .none
         return email
     }()
     let passwordField: CustomTextField = {
         let passField = CustomTextField(insets: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12))
         passField.placeholder = "Password"
         passField.backgroundColor = .white
+        passField.autocapitalizationType = .none
         passField.isSecureTextEntry = true
         return passField
     }()
@@ -60,6 +62,7 @@ class FormRegistrationViewController: UIViewController {
         let confirmPassField = CustomTextField(insets: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12))
         confirmPassField.placeholder = "Your Password, again"
         confirmPassField.backgroundColor = .white
+        confirmPassField.autocapitalizationType = .none
         confirmPassField.isSecureTextEntry = true
         return confirmPassField
     }()
@@ -135,6 +138,9 @@ class FormRegistrationViewController: UIViewController {
         title.isHidden = true
         return title
     }()
+    var role: String?
+    private let apiRequest = RequestFunction()
+    var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .porcelain
@@ -151,6 +157,7 @@ class FormRegistrationViewController: UIViewController {
         emaillField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
         passwordField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
         confirmPasswordField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
+        snackBarMessage = SnackBarMessage(view: view)
     }
     @objc func signUpTapped() {
         guard let name = nameField.text, !name.isEmpty else {return}
@@ -181,13 +188,10 @@ class FormRegistrationViewController: UIViewController {
         preRegister(name: name, email: email, password: password, role: role, usernameIG: usernameIG)
     }
     private func preRegister(name: String, email: String, password: String, role: String, usernameIG: String) {
-        apiRequest.preRegister(name: name, email: email, password: password, role: role, username: usernameIG) { result, error  in
-            if error != nil {
-                self.alertWaiting.dismiss(animated: true)
-                self.showAlert(title: "Error", message: error?.localizedDescription ?? "", action: "Oke")
-                return
-            }
+        apiRequest.preRegister(name: name, email: email, password: password, role: role, username: usernameIG) { result, statusCode  in
             self.alertWaiting.dismiss(animated: true)
+            guard let statusCode = statusCode else {return}
+            self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
             guard let instagramToDM = result?.instagramToDM else {return}
             guard let otp = result?.otp else {return}
             guard let otpExpiredIn = result?.expiresIn else {return}

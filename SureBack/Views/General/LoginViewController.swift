@@ -10,7 +10,6 @@ import UIKit
 
 class LoginViewController: UIViewController {
     let request = RequestFunction()
-
     let titleTextView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .porcelain
@@ -61,7 +60,7 @@ class LoginViewController: UIViewController {
     let loginButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .gray
-        button.isEnabled = false
+//        button.isEnabled = false
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Login", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false

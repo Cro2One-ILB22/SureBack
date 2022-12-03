@@ -16,6 +16,7 @@ extension UIColor {
     static let porcelain = UIColor(rgb: 0xffF2F2F7) // putih ke abu abuan
     static let iceBerg = UIColor(rgb: 0xffD9F7E7) // hijau muda keputihan
     static let pastelGray = UIColor(rgb: 0xffcccccc)
+    static let darkTerraCotta = UIColor(rgb: 0xffD9435E)
 }
 
 extension UIColor {

@@ -86,6 +86,8 @@
 		16C0044A29373E67008F5D0D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0044929373E67008F5D0D /* ProfileViewController.swift */; };
 		16C0044F29385F53008F5D0D /* MerchantFormBusinessSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0044E29385F53008F5D0D /* MerchantFormBusinessSettingViewController.swift */; };
 		16C0045229393DBB008F5D0D /* MerchantScanQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C0045129393DBB008F5D0D /* MerchantScanQRViewController.swift */; };
+		16EFD659293BB70200D6C396 /* SnackBarMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD658293BB70200D6C396 /* SnackBarMessage.swift */; };
+		16EFD65C293BC69900D6C396 /* SnackBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD65B293BC69900D6C396 /* SnackBarView.swift */; };
 		2DDDD70EABE69B42303C1AED /* Pods_SureBackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */; };
 		8A2D3CC34125394E06212A07 /* Pods_SureBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6F53CE101281D823C272BB /* Pods_SureBack.framework */; };
 		9CCB778BAEA00AE5C43FB920 /* Pods_SureBack_SureBackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */; };
@@ -241,6 +243,8 @@
 		16C0044929373E67008F5D0D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		16C0044E29385F53008F5D0D /* MerchantFormBusinessSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantFormBusinessSettingViewController.swift; sourceTree = "<group>"; };
 		16C0045129393DBB008F5D0D /* MerchantScanQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantScanQRViewController.swift; sourceTree = "<group>"; };
+		16EFD658293BB70200D6C396 /* SnackBarMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarMessage.swift; sourceTree = "<group>"; };
+		16EFD65B293BC69900D6C396 /* SnackBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarView.swift; sourceTree = "<group>"; };
 		3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack_SureBackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FB4E7EBF11E0E918FCC83A /* Pods-SureBack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBack.release.xcconfig"; path = "Target Support Files/Pods-SureBack/Pods-SureBack.release.xcconfig"; sourceTree = "<group>"; };
 		5F47E67A5BE033AB27E63DDB /* Pods-SureBackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBackTests.debug.xcconfig"; path = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -556,6 +560,7 @@
 		169FCD50292CC4E5009CBAB2 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				16EFD65A293BC68A00D6C396 /* SnackBar */,
 				AC04BD7F290995AD00635147 /* Function.swift */,
 				169FCD51292CC4F9009CBAB2 /* ImageDownloader.swift */,
 				1619BB262918B5E800085B74 /* AuthManager.swift */,
@@ -728,6 +733,15 @@
 				16C0045129393DBB008F5D0D /* MerchantScanQRViewController.swift */,
 			);
 			path = MerchantScanQRViewController;
+			sourceTree = "<group>";
+		};
+		16EFD65A293BC68A00D6C396 /* SnackBar */ = {
+			isa = PBXGroup;
+			children = (
+				16EFD65B293BC69900D6C396 /* SnackBarView.swift */,
+				16EFD658293BB70200D6C396 /* SnackBarMessage.swift */,
+			);
+			path = SnackBar;
 			sourceTree = "<group>";
 		};
 		AC1C1C3B292F487C00863A87 /* CustomerQrCode */ = {
@@ -1275,7 +1289,9 @@
 				AC24AA4929327F480050A086 /* UserViewModel.swift in Sources */,
 				AC8AF8DB2922FA8700227BDE /* SubmitStoryTableViewCell.swift in Sources */,
 				165121FB29244B7C00DBC0AE /* CustomerDashboardViewController.swift in Sources */,
+				16EFD65C293BC69900D6C396 /* SnackBarView.swift in Sources */,
 				AC59F892292057CE000F8345 /* HeaderCustomerHistoryView.swift in Sources */,
+				16EFD659293BB70200D6C396 /* SnackBarMessage.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
 				AC886E8729250AD9007F1E41 /* SectionDashboardHeader.swift in Sources */,
 				16C004412936D890008F5D0D /* ChooseRoleRegistrationViewController.swift in Sources */,

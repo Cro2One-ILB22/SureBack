@@ -2,7 +2,7 @@
 //  CustomerPurchaseViewController.swift
 //  SureBack
 //
-//  Created by Muhamad Fahmi Al Kautsar on 27/11/22.
+//  Created by Ditha Nurcahya Avianty on 03/12/22.
 //
 
 import PusherSwift
@@ -13,7 +13,8 @@ class CustomerPurchaseViewController: UIViewController {
     let merchantId: Int
     let userViewModel = UserViewModel.shared
     let apiRequest = RequestFunction()
-    var isCoinActive = true
+    var isGetTokenActive = true
+    var isUseCoinActive = true
 
     let instructionLabel: UILabel = {
         let label = UILabel()
@@ -26,93 +27,45 @@ class CustomerPurchaseViewController: UIViewController {
         return label
     }()
 
-    let useCoinLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Use Coin?"
-        label.font = UIFont.systemFont(ofSize: 17)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    let firstView: CustomerPurchaseFirstView = {
+        let view = CustomerPurchaseFirstView()
+        return view
     }()
 
-    let useCoinSwitch: UISwitch = {
-        let switcher = UISwitch()
-        switcher.isOn = true
-        switcher.translatesAutoresizingMaskIntoConstraints = false
-        return switcher
-    }()
-
-    let merchantNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Merchant Name"
-        label.textColor = .systemGray
-        label.font = UIFont.systemFont(ofSize: 17)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    let merchantNameValue: UILabel = {
-        let label = UILabel()
-        label.text = "Bestie Cafe"
-        label.font = UIFont.systemFont(ofSize: 17)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    let totalCoinLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Total Coin"
-        label.textColor = .systemGray
-        label.font = UIFont.systemFont(ofSize: 17)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    let totalCoinValue: UILabel = {
-        let label = UILabel()
-        label.text = "2000 Coin"
-        label.font = UIFont.systemFont(ofSize: 17)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Monday, 10 November 2022"
-        label.font = UIFont.systemFont(ofSize: 17)
-        label.sizeToFit()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    lazy var usernameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "@Barbara"
-        label.font = UIFont.systemFont(ofSize: 17)
-        label.sizeToFit()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    let secondView: CustomerPurchaseSecondView = {
+        let view = CustomerPurchaseSecondView()
+        return view
     }()
 
     let alertSuccess = UIAlertController(title: "Alert", message: "Message", preferredStyle: .alert)
-    let alertWaiting = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
 
-    @objc func switchStateDidChange(_ sender: UISwitch!) {
-        isCoinActive = sender.isOn
-    }
-
-    @objc func makePurchase() {
-        guard let coinsUsed = totalCoinValue.text, let coinsUsed = Int(coinsUsed) else { return }
-        alertWaiting.view.tintColor = UIColor.black
+    let alertWaiting: UIAlertController = {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        alert.view.tintColor = UIColor.black
         let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.style = UIActivityIndicatorView.Style.gray
         loadingIndicator.startAnimating()
-        alertWaiting.view.addSubview(loadingIndicator)
+        alert.view.addSubview(loadingIndicator)
+        return alert
+    }()
+
+    @objc func switchCoinStateDidChange(_ sender: UISwitch!) {
+        isUseCoinActive = sender.isOn
+        secondView.isHidden = isUseCoinActive ? false : true
+    }
+
+    @objc func switchTokenStateDidChange(_ sender: UISwitch!) {
+        isGetTokenActive = sender.isOn
+    }
+
+    @objc func makePurchase() {
+        guard let coinsUsed = secondView.coinUsedValue.text, let coinsUsed = Int(coinsUsed) else { return }
         present(alertWaiting, animated: true, completion: nil)
 
-        apiRequest.requestPurchase(merchantId: merchantId, usedCoins: coinsUsed, isRequestingForToken: isCoinActive) { [weak self] _ in
-            guard let self = self else { return }
-        }
+//        apiRequest.requestPurchase(merchantId: merchantId, usedCoins: coinsUsed, isRequestingForToken: isUseCoinActive) { [weak self] _ in
+//            guard let self = self else { return }
+//        }
     }
 
     override func viewDidLoad() {
@@ -121,8 +74,10 @@ class CustomerPurchaseViewController: UIViewController {
         view.backgroundColor = .porcelain
 
         setupLayout()
-        useCoinSwitch.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
-        useCoinSwitch.setOn(true, animated: false)
+        firstView.useCoinSwitch.addTarget(self, action: #selector(switchCoinStateDidChange(_:)), for: .valueChanged)
+        firstView.useCoinSwitch.setOn(true, animated: false)
+        firstView.getTokenSwitch.addTarget(self, action: #selector(switchTokenStateDidChange(_:)), for: .valueChanged)
+        firstView.getTokenSwitch.setOn(true, animated: false)
 
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(makePurchase))
         navigationItem.rightBarButtonItem = doneButton
@@ -130,39 +85,39 @@ class CustomerPurchaseViewController: UIViewController {
 
         guard let user = userViewModel.user else { return }
 
-        dateLabel.text = Date().dateToString()
-        usernameLabel.text = "@\(user.instagramUsername)"
+        firstView.dateLabel.text = Date().dateToString()
+        firstView.usernameLabel.text = "@\(user.instagramUsername)"
+//
+//        apiRequest.getMerchantById(id: merchantId) { [weak self] response in
+//            switch response {
+//            case let .success(merchant):
+//                self?.secondView.coinUsedValue.text = String(merchant.individualCoins?.filter({ $0.coinType == "local" }).first?.outstanding ?? 0)
+//                self?.firstView.merchantNameValue.text = merchant.name
+//            case let .failure(failure):
+//                print(failure)
+//            }
+//        }
 
-        apiRequest.getMerchantById(id: merchantId) { [weak self] response in
-            switch response {
-            case let .success(merchant):
-                self?.totalCoinValue.text = String(merchant.individualCoins?.filter({ $0.coinType == "local" }).first?.outstanding ?? 0)
-                self?.merchantNameValue.text = merchant.name
-            case let .failure(failure):
-                print(failure)
-            }
-        }
-
-        purchasePusherService?.purchase(customerId: user.id, merchantId: merchantId) { [weak self] response in
-            guard let self = self, let coins = self.totalCoinValue.text, let coins = Int(coins), let purchase = response.purchase else { return }
-            self.apiRequest.requestPurchase(merchantId: self.merchantId, usedCoins: coins, isRequestingForToken: true) { [weak self] response in
-                guard let self = self else { return }
-                switch response {
-                case .success:
-                    self.purchasePusherService?.disconnect()
-                    self.alertWaiting.dismiss(animated: true, completion: {
-                        self.alertSuccess.title = "Congratulations!"
-                        self.alertSuccess.message = "Get token and \(purchase.coinExchange?.amount ?? 0) coin used success"
-                        self.alertSuccess.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                            self.navigationController?.popViewController(animated: true)
-                        }))
-                        self.present(self.alertSuccess, animated: true, completion: nil)
-                    })
-                case let .failure(failure):
-                    print(failure)
-                }
-            }
-        }
+//        purchasePusherService?.purchase(customerId: user.id, merchantId: merchantId) { [weak self] response in
+//            guard let self = self, let coins = self.secondView.coinUsedValue.text, let coins = Int(coins), let purchase = response.purchase else { return }
+//            self.apiRequest.requestPurchase(merchantId: self.merchantId, usedCoins: coins, isRequestingForToken: self.isGetTokenActive) { [weak self] response in
+//                guard let self = self else { return }
+//                switch response {
+//                case .success:
+//                    self.purchasePusherService?.disconnect()
+//                    self.alertWaiting.dismiss(animated: true, completion: {
+//                        self.alertSuccess.title = "Congratulations!"
+//                        self.alertSuccess.message = "Transaction success"
+//                        self.alertSuccess.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+//                            self.navigationController?.popViewController(animated: true)
+//                        }))
+//                        self.present(self.alertSuccess, animated: true, completion: nil)
+//                    })
+//                case let .failure(failure):
+//                    print(failure)
+//                }
+//            }
+//        }
     }
 
     init(merchantId: Int) {
@@ -180,77 +135,28 @@ extension CustomerPurchaseViewController: PusherDelegate {}
 extension CustomerPurchaseViewController {
     func setupLayout() {
         setupLabel()
-        setupDetails()
+        setupFirstView()
+        setupSecondView()
     }
-
     func setupLabel() {
         view.addSubview(instructionLabel)
         instructionLabel.setTopAnchorConstraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
-        instructionLabel.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
-        instructionLabel.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        instructionLabel.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30)
+        instructionLabel.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
     }
-
-    func setupDetails() {
-        let stackGetToken = setupGetToken()
-        let stackMerchantName = setupMerchantName()
-        let stackTotalCoin = setupTotalCoin()
-        let stackDateProfile = setupDateProfile()
-
-        let stackview = UIStackView(arrangedSubviews: [stackGetToken, stackMerchantName, stackTotalCoin, stackDateProfile])
-        stackview.backgroundColor = .white
-        stackview.layer.borderWidth = 1
-        stackview.layer.borderColor = UIColor.gray.cgColor
-        stackview.layer.cornerRadius = 10
-        stackview.axis = .vertical
-        stackview.spacing = 30
-        stackview.distribution = .fill
-        stackview.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        stackview.isLayoutMarginsRelativeArrangement = true
-        stackview.translatesAutoresizingMaskIntoConstraints = false
-
-        view.addSubview(stackview)
-        stackview.setTopAnchorConstraint(equalTo: instructionLabel.bottomAnchor, constant: 20)
-        stackview.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -20)
-        stackview.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 20)
+    func setupFirstView() {
+        view.addSubview(firstView)
+        firstView.translatesAutoresizingMaskIntoConstraints = false
+        firstView.useCoinSwitch.isUserInteractionEnabled = true
+        firstView.setTopAnchorConstraint(equalTo: instructionLabel.bottomAnchor, constant: 20)
+        firstView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 20)
+        firstView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -20)
     }
-
-    func setupGetToken() -> UIStackView {
-        let stackView = UIStackView(arrangedSubviews: [useCoinLabel, useCoinSwitch])
-        stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 20
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        return stackView
-    }
-
-    func setupMerchantName() -> UIStackView {
-        let stackView = UIStackView(arrangedSubviews: [merchantNameLabel, merchantNameValue])
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 20
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        return stackView
-    }
-
-    func setupTotalCoin() -> UIStackView {
-        let stackView = UIStackView(arrangedSubviews: [totalCoinLabel, totalCoinValue])
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 20
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        return stackView
-    }
-
-    func setupDateProfile() -> UIStackView {
-        let stackView = UIStackView(arrangedSubviews: [dateLabel, usernameLabel])
-        stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 5
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        return stackView
+    func setupSecondView() {
+        view.addSubview(secondView)
+        secondView.translatesAutoresizingMaskIntoConstraints = false
+        secondView.setTopAnchorConstraint(equalTo: firstView.useCoinSwitch.bottomAnchor, constant: 30)
+        secondView.setLeadingAnchorConstraint(equalTo: view.leadingAnchor, constant: 20)
+        secondView.setTrailingAnchorConstraint(equalTo: view.trailingAnchor, constant: -20)
     }
 }

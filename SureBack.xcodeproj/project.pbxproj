@@ -22,7 +22,6 @@
 		11CB603A293378A800C66F39 /* QRScanRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CB6039293378A800C66F39 /* QRScanRequest.swift */; };
 		11CB603C29337AD100C66F39 /* QRScanPurchaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CB603B29337AD100C66F39 /* QRScanPurchaseRequest.swift */; };
 		11CB603E293381D800C66F39 /* QRScanPurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CB603D293381D800C66F39 /* QRScanPurchase.swift */; };
-		11CB60422933AEE800C66F39 /* CustomerPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CB60412933AEE800C66F39 /* CustomerPurchaseViewController.swift */; };
 		11CC9559292FB5B00038E766 /* PusherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CC9558292FB5B00038E766 /* PusherService.swift */; };
 		1603EFE0292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603EFDF292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift */; };
 		1603EFE2292B1D6800EC5485 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1603EFE1292B1D6800EC5485 /* CustomSegmentedControl.swift */; };
@@ -134,6 +133,9 @@
 		ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */; };
 		ACE5CDAC2912722800D08177 /* ResultStoryIG.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAB2912722800D08177 /* ResultStoryIG.swift */; };
 		ACE5CDB029127E6200D08177 /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5CDAF29127E6200D08177 /* ResponseData.swift */; };
+		ACE87EAB293B53FD00DB3DED /* CustomerPurchaseFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE87EAA293B53FD00DB3DED /* CustomerPurchaseFirstView.swift */; };
+		ACE87EAD293B5D4B00DB3DED /* CustomerPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE87EAC293B5D4B00DB3DED /* CustomerPurchaseViewController.swift */; };
+		ACE87EAF293B928200DB3DED /* CustomerPurchaseSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE87EAE293B928200DB3DED /* CustomerPurchaseSecondView.swift */; };
 		ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE8C3582916267800BEA778 /* LoginViewController.swift */; };
 		ACF6441E2925DF2900A6AD10 /* CustomerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF6441D2925DF2900A6AD10 /* CustomerProfileViewController.swift */; };
 /* End PBXBuildFile section */
@@ -175,7 +177,6 @@
 		11CB6039293378A800C66F39 /* QRScanRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanRequest.swift; sourceTree = "<group>"; };
 		11CB603B29337AD100C66F39 /* QRScanPurchaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanPurchaseRequest.swift; sourceTree = "<group>"; };
 		11CB603D293381D800C66F39 /* QRScanPurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanPurchase.swift; sourceTree = "<group>"; };
-		11CB60412933AEE800C66F39 /* CustomerPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerPurchaseViewController.swift; sourceTree = "<group>"; };
 		11CC9558292FB5B00038E766 /* PusherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherService.swift; sourceTree = "<group>"; };
 		1603EFDF292B05BB00EC5485 /* MerchantListAllCustomerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantListAllCustomerViewController.swift; sourceTree = "<group>"; };
 		1603EFE1292B1D6800EC5485 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
@@ -295,6 +296,9 @@
 		ACE5CDA9291271AB00D08177 /* ProfileIGResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIGResponse.swift; sourceTree = "<group>"; };
 		ACE5CDAB2912722800D08177 /* ResultStoryIG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStoryIG.swift; sourceTree = "<group>"; };
 		ACE5CDAF29127E6200D08177 /* ResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData.swift; sourceTree = "<group>"; };
+		ACE87EAA293B53FD00DB3DED /* CustomerPurchaseFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerPurchaseFirstView.swift; sourceTree = "<group>"; };
+		ACE87EAC293B5D4B00DB3DED /* CustomerPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerPurchaseViewController.swift; sourceTree = "<group>"; };
+		ACE87EAE293B928200DB3DED /* CustomerPurchaseSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerPurchaseSecondView.swift; sourceTree = "<group>"; };
 		ACE8C3582916267800BEA778 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ACF6441D2925DF2900A6AD10 /* CustomerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerProfileViewController.swift; sourceTree = "<group>"; };
 		BB6F53CE101281D823C272BB /* Pods_SureBack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -735,7 +739,7 @@
 			children = (
 				AC1C1C3E292F56C800863A87 /* Component */,
 				AC1C1C3C292F4A5400863A87 /* CustomerQrCodeViewController.swift */,
-				11CB60412933AEE800C66F39 /* CustomerPurchaseViewController.swift */,
+				ACE87EAC293B5D4B00DB3DED /* CustomerPurchaseViewController.swift */,
 			);
 			path = CustomerQrCode;
 			sourceTree = "<group>";
@@ -744,6 +748,8 @@
 			isa = PBXGroup;
 			children = (
 				AC1C1C3F292F56DE00863A87 /* CustomerQRView.swift */,
+				ACE87EAA293B53FD00DB3DED /* CustomerPurchaseFirstView.swift */,
+				ACE87EAE293B928200DB3DED /* CustomerPurchaseSecondView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1215,6 +1221,7 @@
 				169FCD47292CA30E009CBAB2 /* HistoryViewController.swift in Sources */,
 				16C0043029343BAB008F5D0D /* MerchantRejectStoryFormViewController+SetupUI.swift in Sources */,
 				16BD91AB291E88790010731E /* ItemStoryCollectionViewCell.swift in Sources */,
+				ACE87EAF293B928200DB3DED /* CustomerPurchaseSecondView.swift in Sources */,
 				16C0042E29341CC0008F5D0D /* MerchantRejectStoryFormViewController.swift in Sources */,
 				AC9DFC90293679F5001C5F4B /* OnboardingViewController.swift in Sources */,
 				1619BB292919082700085B74 /* TabBarViewController.swift in Sources */,
@@ -1227,6 +1234,7 @@
 				AC59F885291F50B5000F8345 /* HeaderCustomerDashboardView.swift in Sources */,
 				ACE5CDAA291271AB00D08177 /* ProfileIGResponse.swift in Sources */,
 				ACE5CDA62912711D00D08177 /* GenerateTokenOnlineResponse.swift in Sources */,
+				ACE87EAD293B5D4B00DB3DED /* CustomerPurchaseViewController.swift in Sources */,
 				169FCD62292F09F2009CBAB2 /* ConfirmRegistrationViewController+SetupUI.swift in Sources */,
 				ACCE106929337E7E00C2CB45 /* CustomerNotificationViewController.swift in Sources */,
 				ACE5CDB029127E6200D08177 /* ResponseData.swift in Sources */,
@@ -1287,6 +1295,7 @@
 				16BD91A9291D534C0010731E /* HeaderMerchantDashboardView.swift in Sources */,
 				169FCD5D292E0A9E009CBAB2 /* UIImageView+Ext.swift in Sources */,
 				169FCD4A292CC063009CBAB2 /* WaitingViewController+SetupUI.swift in Sources */,
+				ACE87EAB293B53FD00DB3DED /* CustomerPurchaseFirstView.swift in Sources */,
 				ACE5CDA42912704800D08177 /* UserInfoResponse.swift in Sources */,
 				111337C229385E1F00B90558 /* LoadingService.swift in Sources */,
 				1619BB2B2919B74800085B74 /* FormRegistrationViewController.swift in Sources */,
@@ -1323,7 +1332,6 @@
 				11B2DD2F2907CF760065E98D /* APICall.swift in Sources */,
 				1603EFE8292B494700EC5485 /* WaitingViewController.swift in Sources */,
 				ACCE106B29339DB000C2CB45 /* SectionNotifHeader.swift in Sources */,
-				11CB60422933AEE800C66F39 /* CustomerPurchaseViewController.swift in Sources */,
 				16C0044A29373E67008F5D0D /* ProfileViewController.swift in Sources */,
 				169FCD5B292DD655009CBAB2 /* String+Ext.swift in Sources */,
 				AC9DFC92293720E7001C5F4B /* CustomerListAllMerchantViewController+SetupUI.swift in Sources */,

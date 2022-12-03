@@ -16,7 +16,7 @@ class CustomerListAllMerchantViewController: UIViewController {
 
     lazy var searchBar: UISearchBar = {
         let search = UISearchBar()
-        search.searchBarStyle = .default
+        search.searchBarStyle = .minimal
         search.placeholder = "Search.."
         search.sizeToFit()
         return search
@@ -47,8 +47,7 @@ class CustomerListAllMerchantViewController: UIViewController {
     }
 
     func getListAllMerchant(search searchedName: String = "") {
-        let rf = RequestFunction()
-        rf.getListMerchant(searchMerchantByName: searchedName) { [weak self] data in
+        request.getListMerchant(searchMerchantByName: searchedName) { [weak self] data in
             guard let self = self else {return}
             switch data {
             case let .success(result):
@@ -110,7 +109,8 @@ extension CustomerListAllMerchantViewController: UITableViewDelegate, UITableVie
             self.tableView.setEmptyMessage(
                 image: UIImage(named: "empty.merchant")!,
                 title: "Empty Merchant",
-                message: "Let’s Get Going! Which Merchant will be your First Visit?")
+                message: "Let’s Get Going! Which Merchant will be your First Visit?",
+                centerYAnchorConstant: -50)
         } else {
             self.tableView.restore()
         }

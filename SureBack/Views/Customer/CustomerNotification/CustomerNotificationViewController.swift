@@ -79,6 +79,7 @@ class CustomerNotificationViewController: UIViewController {
                     self.loadingIndicator.isHidden = true
                     self.totalPage = result.lastPage
                     self.loadingService?.setState(state: .success)
+                    self.tableView.tableFooterView = nil
                 } catch let error as NSError {
                     print(error.description)
                 }
@@ -93,6 +94,15 @@ class CustomerNotificationViewController: UIViewController {
 
 extension CustomerNotificationViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
+        if custNotifData.count == 0 {
+            self.tableView.setEmptyMessage(
+                image: UIImage(named: "empty.notification")!,
+                title: "Empty",
+                message: "You don’t have any notification. Don’t you want to visit some merchants?",
+                centerYAnchorConstant: -50)
+        } else {
+            self.tableView.restore()
+        }
         return custNotifData.count
     }
 
@@ -143,7 +153,9 @@ extension CustomerNotificationViewController: UITableViewDataSource, UITableView
         let contentHeight = scrollView.contentSize.height
         tableView.tableFooterView = createSpinnerFooter()
 
-        guard loadingService?.loadingState == .success || loadingService?.loadingState == .failed else { return }
+//        guard loadingService?.loadingState == .success || loadingService?.loadingState == .failed else { return }
+
+        guard loadingService?.loadingState != .loading else { return }
 
         tableView.tableFooterView = nil
 

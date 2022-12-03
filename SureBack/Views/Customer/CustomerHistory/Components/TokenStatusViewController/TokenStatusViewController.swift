@@ -25,15 +25,6 @@ class TokenStatusViewController: UIViewController {
     var transactionData: [MyStoryData] = [] {
         didSet {
             tableView.reloadData()
-            print(transactionData)
-            print("condata token: \(transactionData.count)")
-            if transactionData.count == 0 {
-                tableView.setEmptyMessage(
-                    image: UIImage(named: "empty.merchant")!,
-                    title: "Empty",
-                    message: "You don’t have any record with us.\nDon’t you want to visit us?",
-                    centerYAnchorConstant: -50)
-            }
 //            dict = Dictionary(grouping: transactionData) { model -> Int in
 //                model.updatedAt.stringToDate().month ?? 0
 //            }
@@ -119,6 +110,15 @@ class TokenStatusViewController: UIViewController {
 
 extension TokenStatusViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if transactionData.count == 0 {
+            self.tableView.setEmptyMessage(
+                image: UIImage(named: "empty.merchant")!,
+                title: "Empty",
+                message: "You don’t have any record with us.\nDon’t you want to visit us?",
+                centerYAnchorConstant: -50)
+        } else {
+            self.tableView.restore()
+        }
         return transactionData.count
     }
 

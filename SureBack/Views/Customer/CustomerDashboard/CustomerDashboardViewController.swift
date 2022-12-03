@@ -142,6 +142,15 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         if section == 0 {
             return activeTokenData.count == 0 ? 0 : 1
         } else {
+            if merchantData.count == 0 {
+                self.tableView.setEmptyMessage(
+                    image: UIImage(named: "empty.merchant")!,
+                    title: "Empty Merchant",
+                    message: "Let’s Get Going! Which Merchant will be your First Visit?",
+                    centerYAnchorConstant: -50)
+            } else {
+                self.tableView.restore()
+            }
             return merchantData.count > 5 ? 5 : merchantData.count
         }
     }
@@ -261,7 +270,7 @@ extension CustomerDashboardViewController {
         request.getListMerchant(locationCoordinate: coordinate) { data in
             switch data {
             case let .success(result):
-                self.merchantData = result.data
+                self.merchantData = result.data //ngambil 3 data
                 self.tableView.isHidden = false
                 self.loadingService?.setState(state: .success)
             case let .failure(error):

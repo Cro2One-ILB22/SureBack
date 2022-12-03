@@ -152,12 +152,15 @@ extension RequestFunction {
         let url = Endpoints.updateUser.url
         var body: [String: String] = [:]
 
-        if name != nil {
-            body["name"] = name
-        }
-        if email != nil {
-            body["email"] = email
-        }
+        body["name"] = name
+        body["email"] = email
+
+//        if name != nil {
+//            body["name"] = name
+//        }
+//        if email != nil {
+//            body["email"] = email
+//        }
 
         requestWithToken(url: url, method: .put, parameters: body, decodable: UserInfoResponse.self) { response in
             switch response.result {
@@ -367,6 +370,7 @@ extension RequestFunction {
         let url = Endpoints.getListMerchant.url
         var parameters: [String: String] = [:]
         parameters["name"] = merchantName
+        parameters["order_by"] = "is_favorite:desc"
         if let locationCoordinate = locationCoordinate {
             parameters["latitude"] = String(locationCoordinate.latitude)
             parameters["longitude"] = String(locationCoordinate.longitude)

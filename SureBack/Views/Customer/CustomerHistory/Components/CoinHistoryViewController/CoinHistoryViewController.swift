@@ -18,8 +18,6 @@ class CoinHistoryViewController: UIViewController {
     var transactionData: [Transaction] = [] {
         didSet {
             tableView.reloadData()
-            print(transactionData)
-            print("condata coin: \(transactionData.count)")
             if transactionData.count == 0 {
                 self.tableView.setEmptyMessage(
                     image: UIImage(named: "empty.merchant")!,
@@ -75,7 +73,6 @@ class CoinHistoryViewController: UIViewController {
             guard let self = self else {return}
             switch data {
             case let .success(result):
-                print("coin balance data: \(result)")
                 do {
                     print(result.data)
                     self.transactionData = result.data

@@ -39,6 +39,10 @@ class ChooseRoleRegistrationViewController: UIViewController {
         cardRoleMerchant.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(chooseRole)))
         cardRoleCustomer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(chooseRole)))
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
     @objc func chooseRole(sender: UITapGestureRecognizer) {
         var role: String?
         if sender.view == cardRoleMerchant {

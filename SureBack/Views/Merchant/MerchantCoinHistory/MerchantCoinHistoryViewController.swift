@@ -11,6 +11,7 @@ import UIKit
 class MerchantCoinHistoryViewController: UIViewController {
     var merchant: MerchantDetailResponse?
     private var listTransaction: [Transaction] = []
+    private let apiRequest = RequestFunction()
     let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(ItemCustomerHistoryTableViewCell.self, forCellReuseIdentifier: ItemCustomerHistoryTableViewCell.id)
@@ -24,24 +25,32 @@ class MerchantCoinHistoryViewController: UIViewController {
         loading.isHidden = true
         return loading
     }()
+    var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupLayout()
         configTableView()
         getTransaction()
+        snackBarMessage = SnackBarMessage(view: view)
     }
     private func getTransaction() {
-        let rf = RequestFunction()
-        rf.getListTransaction { result in
-            switch(result) {
-            case.success(let data):
-                print("Datanya :",data.data)
-                self.listTransaction = data.data
-            case.failure(let error):
-                print(error)
+        showLoadingIndicator(true)
+        apiRequest.getListTransaction {[weak self] data, statusCode in
+            guard let self = self else {return}
+            guard let statusCode = statusCode else {return}
+            self.showLoadingIndicator(false)
+            if statusCode != 200 {
+                self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
+                return
             }
+            self.listTransaction = data?.data ?? []
         }
+    }
+    private func showLoadingIndicator(_ isShow: Bool) {
+        self.tableView.isHidden = isShow
+        self.loadingIndicator.show(isShow)
+        self.loadingIndicator.isHidden = !isShow
     }
     private func configTableView() {
         let headerView = HeaderCoinHistoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 270))

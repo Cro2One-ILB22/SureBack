@@ -34,7 +34,7 @@ class SnackBarMessage {
     }
     
     private func showSnackbar(snackBar: SnackbarView) {
-        let width = view.frame.size.width/1.19
+        let width = view.frame.size.width/1.2
         snackBar.frame = CGRect(x: (view.frame.size.width-width) / 2,
                                 y: -view.frame.size.height,
                                 width: width,
@@ -44,7 +44,7 @@ class SnackBarMessage {
 
         UIView.animate(withDuration: 0.5, animations: {
             snackBar.frame = CGRect(x: (self.view.frame.size.width - width) / 2,
-                                    y: 55,
+                                    y: 70,
                                     width: width,
                                     height: 60)
         }, completion: { done in

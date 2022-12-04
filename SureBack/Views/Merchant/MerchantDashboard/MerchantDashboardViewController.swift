@@ -25,16 +25,17 @@ class MerchantDashboardViewController: UIViewController {
         loading.isHidden = true
         return loading
     }()
+    var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = .systemGreen
         view.backgroundColor = .white
         navigationItem.title = "Hi, " + (user?.name ?? "")
-        tableView.isHidden = true
-        loadingIndicator.show(true)
+        showLoadingIndicator(true)
         configTableView()
         getCustomerStory()
         setupLayout()
+        snackBarMessage = SnackBarMessage(view: view)
     }
     @objc func seeAllCustomers() {
         let merchantListAllCustomerVC = MerchantListAllCustomerViewController()
@@ -42,13 +43,22 @@ class MerchantDashboardViewController: UIViewController {
         self.navigationController?.pushViewController(merchantListAllCustomerVC, animated: true)
     }
     private func getCustomerStory() {
-        apiRequest.getCustomerStory(assessed: true) { data in
-            self.listCustomerStory = data.data
-            self.tableView.isHidden = false
-            self.loadingIndicator.show(false)
-            self.loadingIndicator.isHidden = true
+        apiRequest.getCustomerStory(assessed: true) {[weak self] data, statusCode in
+            guard let self = self else {return}
+            self.showLoadingIndicator(false)
+            guard let statusCode = statusCode else {return}
+            if statusCode != 200 {
+                self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
+                return
+            }
+            self.listCustomerStory = data?.data ?? []
             self.tableView.reloadData()
         }
+    }
+    private func showLoadingIndicator(_ isShow: Bool) {
+        self.tableView.isHidden = isShow
+        self.loadingIndicator.show(isShow)
+        self.loadingIndicator.isHidden = !isShow
     }
     private func configTableView() {
         configHeaderView()

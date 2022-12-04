@@ -141,6 +141,7 @@ class MerchantGenerateTokenFormViewController: UIViewController {
         alert.view.addSubview(loadingIndicator)
         return alert
     }()
+    var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
         apiRequest.getCustomerById(id: customerId) { [weak self] response in
@@ -154,10 +155,8 @@ class MerchantGenerateTokenFormViewController: UIViewController {
             }
         }
         purchasePusherService = PurchasePusherSerivce(delegate: self)
-
         guard let user = userViewModel.user else { return }
         purchasePusherService?.purchase(customerId: customerId, merchantId: user.id) { [weak self] response in
-
             guard let self = self else { return }
             self.qrScanPurchase = response
             if let purchaseRequest = response.purchaseRequest {
@@ -168,33 +167,36 @@ class MerchantGenerateTokenFormViewController: UIViewController {
                 self.generateTokenButton.backgroundColor = .tealishGreen
             }
         }
-
         view.backgroundColor = .porcelain
         generateTokenButton.addTarget(self, action: #selector(generateTokenAction), for: .touchUpInside)
         setupLayout()
+        snackBarMessage = SnackBarMessage(view: view)
     }
     @objc func generateTokenAction() {
         present(alertWaiting, animated: true)
         guard let purchaseRequest = qrScanPurchase?.purchaseRequest else { return }
         guard let purchaseAmount = totalPurchaseField.text, let purchaseAmount = Int(purchaseAmount) else { return }
-        self.apiRequest.postGenerateTokenOffline(customerId: self.customerId, purchaseAmount: purchaseAmount, coinUsed: purchaseRequest.usedCoins, isRequestingToken: purchaseRequest.isRequestingForToken ? 1 : 0) { [weak self] response in
+        let isRequestingToken = purchaseRequest.isRequestingForToken ? 1 : 0
+        let coinUser = purchaseRequest.usedCoins
+        generateToken(purchaseAmount: purchaseAmount, coinUser: coinUser, isRequestingToken: isRequestingToken)
+    }
+    private func generateToken(purchaseAmount: Int, coinUser: Int, isRequestingToken: Int) {
+        apiRequest.postGenerateTokenOffline(
+            customerId: self.customerId, purchaseAmount: purchaseAmount, isRequestingToken: isRequestingToken) {[weak self] data, statusCode in
             guard let self = self else {return}
-            switch response {
-            case .success(let data):
-                self.alertWaiting.dismiss(animated: true)
-                self.navigationController?.popToRootViewController(animated: true)
-                let detailTransactionVC = MerchantTransactionHistoryViewController()
-                detailTransactionVC.customer = self.customer
-                detailTransactionVC.purchaseData = data
-                self.present(detailTransactionVC, animated: true)
-            case .failure(let error):
-                self.alertWaiting.dismiss(animated: true) {
-                    self.showAlert(title: "Error", message: error.localizedDescription, action: "Okay")
-                }
+            guard let statusCode = statusCode else {return}
+            self.alertWaiting.dismiss(animated: true)
+            if statusCode != 200 {
+                self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
+                return
             }
+            self.navigationController?.popToRootViewController(animated: true)
+            let detailTransactionVC = MerchantTransactionHistoryViewController()
+            detailTransactionVC.customer = self.customer
+            detailTransactionVC.purchaseData = data
+            self.present(detailTransactionVC, animated: true)
         }
     }
-
     init(customerId: Int) {
         self.customerId = customerId
         super.init(nibName: nil, bundle: nil)

@@ -46,7 +46,6 @@ class MerchantDetailStoryViewController: UIViewController {
         storyCardView.statusInfoImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(infoAction)))
     }
     @objc func infoAction() {
-        print("Tapped")
         guard let storyData = storyData else {
             return
         }

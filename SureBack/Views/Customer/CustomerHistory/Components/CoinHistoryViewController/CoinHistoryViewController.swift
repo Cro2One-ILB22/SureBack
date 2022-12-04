@@ -50,45 +50,42 @@ class CoinHistoryViewController: UIViewController {
         loading.translatesAutoresizingMaskIntoConstraints = false
         return loading
     }()
-
+    var snackbarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
 
-        tableView.isHidden = true
-        loadingIndicator.startAnimating()
-        loadingIndicator.isHidden = false
+        showLoadingIndicator(true)
 
         loadingService = LoadingService()
 
         guard let merchantData = merchantData else { return }
         getCoinHistoryData(merchantData: merchantData, page: page)
         setupLayout()
+        snackbarMessage = SnackBarMessage(view: view)
+    }
+    
+    private func showLoadingIndicator(_ isShow: Bool) {
+        tableView.isHidden = isShow
+        loadingIndicator.show(isShow)
+        loadingIndicator.isHidden = !isShow
     }
 
     func getCoinHistoryData(merchantData: UserInfoResponse, page: Int) {
         loadingService?.setState(state: .loading)
-        request.getListTransaction(merchantId: merchantData.id, status: "success", page: page) { [weak self] data in
+        request.getListTransaction(merchantId: merchantData.id, status: "success", page: page) { [weak self] data, statusCode in
             guard let self = self else {return}
-            switch data {
-            case let .success(result):
-                do {
-                    print(result.data)
-                    self.transactionData = result.data
-                    self.totalPage = result.lastPage
-                    self.tableView.isHidden = false
-                    self.loadingIndicator.stopAnimating()
-                    self.loadingIndicator.isHidden = true
-                    self.loadingService?.setState(state: .success)
-                } catch let error as NSError {
-                    print(error.description)
-                }
-            case let .failure(error):
+            guard let statusCode = statusCode else {return}
+            self.showLoadingIndicator(false)
+            if statusCode != 200 {
+                self.snackbarMessage?.showResponseMessage(statusCode: statusCode)
                 self.loadingService?.setState(state: .failed)
-                print(error)
-                print("failed to get list coins balance in merchant \(merchantData.name)")
+                return
             }
+            self.transactionData = data?.data ?? []
+            self.totalPage = data?.lastPage
+            self.loadingService?.setState(state: .success)
         }
     }
 }

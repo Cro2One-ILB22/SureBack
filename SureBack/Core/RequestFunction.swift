@@ -20,14 +20,14 @@ class RequestFunction {
             return "noToken"
         }
     }
-
+    
     func postLogin(email: String, password: String, completionHandler: @escaping (Result<AuthResponse, AFError>) -> Void) {
         let url = Endpoints.login.url
         let body: [String: String] = [
             "email": email,
             "password": password,
         ]
-
+        
         fetchHeadersForDeviceRegistration { response in
             switch response {
             case let .success(headers):
@@ -54,10 +54,10 @@ class RequestFunction {
             }
         }
     }
-
+    
     func postLogout(completionHandler: @escaping (Result<Data?, AFError>) -> Void) {
         let url = Endpoints.logout.url
-
+        
         fetchHeadersForDeviceRegistration { response in
             switch response {
             case let .success(headers):
@@ -83,7 +83,7 @@ class RequestFunction {
             }
         }
     }
-
+    
     func preRegister(name: String, email: String, password: String, role: String, username: String, completion: @escaping (RequestInstagramOTPResponse?, Int?) -> Void) {
         let url = Endpoints.preRegister.url
         let body: [String: Any] = [
@@ -100,12 +100,12 @@ class RequestFunction {
                 case let .success(data):
                     completion(data, response.response?.statusCode)
                 case let .failure(error):
-                    completion(nil, nil)
+                    completion(nil, response.response?.statusCode)
                     print("Error: \(error.localizedDescription)")
                 }
             }
     }
-
+    
     func register(name: String, email: String, password: String, role: String, username: String, instagramToDM: String, completion: @escaping (AuthResponse?, Int?) -> Void) {
         let url = Endpoints.register.url
         let body: [String: Any] = [
@@ -126,7 +126,7 @@ class RequestFunction {
                         case let .success(data):
                             completion(data, response.response?.statusCode)
                         case let .failure(error):
-                            completion(nil, nil)
+                            completion(nil, response.response?.statusCode)
                             print(error.localizedDescription)
                         }
                     }
@@ -135,10 +135,10 @@ class RequestFunction {
             }
         }
     }
-
+    
     func getUserInfo(completion: @escaping (Result<UserInfoResponse, AFError>) -> Void) {
         let url = Endpoints.getAccount.url
-
+        
         requestWithToken(url: url, decodable: UserInfoResponse.self) {
             completion($0.result)
         }
@@ -151,17 +151,17 @@ extension RequestFunction {
     func updateUser(name: String? = nil, email: String? = nil, completionHandler: @escaping (_ data: UserInfoResponse) -> Void) {
         let url = Endpoints.updateUser.url
         var body: [String: String] = [:]
-
+        
         body["name"] = name
         body["email"] = email
-
-//        if name != nil {
-//            body["name"] = name
-//        }
-//        if email != nil {
-//            body["email"] = email
-//        }
-
+        
+        //        if name != nil {
+        //            body["name"] = name
+        //        }
+        //        if email != nil {
+        //            body["email"] = email
+        //        }
+        
         requestWithToken(url: url, method: .put, parameters: body, decodable: UserInfoResponse.self) { response in
             switch response.result {
             case let .success(data):
@@ -183,25 +183,26 @@ extension RequestFunction {
                               cashbackLimit: Int? = nil,
                               dailyTokenLimit: Int? = nil,
                               cashbackCalculationMethod: String = "payment_amount",
-                              completion: @escaping (MerchantDetailResponse) -> Void) {
+                              completion: @escaping (MerchantDetailResponse?, Int?) -> Void) {
         let url = Endpoints.updateMerchantDetail.url
         var body: [String: Any] = [:]
         body["cashback_percent"] = cashbackPercent
         body["cashback_limit"] = cashbackLimit
         body["daily_token_limit"] = dailyTokenLimit
         body["cashback_calculation_method"] = cashbackCalculationMethod
-
+        
         requestWithToken(url: url, method: .put, parameters: body, decodable: MerchantDetailResponse.self) {
             response in
             switch response.result {
             case let .success(data):
-                completion(data)
+                completion(data, response.response?.statusCode)
             case let .failure(error):
-                print(error)
+                print("Error update merchant detail :",error)
+                completion(nil, response.response?.statusCode)
             }
         }
     }
-
+    
     func updateMerchantLocation(locationCoordinate: (latitude: Double, longitude: Double), completion: @escaping (Result<Data?, AFError>) -> Void = { _ in }) {
         let url = Endpoints.updateMerchantLocation.url
         let body = [
@@ -210,7 +211,7 @@ extension RequestFunction {
         ]
         requestWithToken(url: url, method: .put, parameters: body, completionHandler: { completion($0.result) })
     }
-
+    
     func toggleMerchantFavorited(id: Int, completion: @escaping (Result<UserInfoResponse, AFError>) -> Void) {
         let url = "\(Endpoints.getMerchantById(id).url)/favorite"
         requestWithToken(url: url, method: .post, completionHandler: { completion($0.result) })
@@ -220,7 +221,7 @@ extension RequestFunction {
 // MARK: Instagram
 
 extension RequestFunction {
-    func approveStory(_ isApproved: Bool, id: Int, note: String = "", completionHandler: @escaping (_ data: ApproveOrRejectStoryResponse) -> Void) {
+    func approveStory(_ isApproved: Bool, id: Int, note: String = "", completionHandler: @escaping (_ data: ApproveOrRejectStoryResponse?, Int?) -> Void) {
         let url = Endpoints.approveOrRejectStory.url
         let body: [String: Any] = [
             "id": id,
@@ -230,13 +231,14 @@ extension RequestFunction {
         requestWithToken(url: url, method: .put, parameters: body, decodable: ApproveOrRejectStoryResponse.self) { response in
             switch response.result {
             case let .success(data):
-                completionHandler(data)
+                completionHandler(data, response.response?.statusCode)
             case let .failure(error):
-                print(error)
+                print("Error approve story",error)
+                completionHandler(nil, response.response?.statusCode)
             }
         }
     }
-
+    
     func submitStory(storyId: Int, instagtamStoryId: Int, completion: @escaping (Result<Data?, AFError>) -> Void) {
         let url = Endpoints.submitStory.url
         let body: [String: Int] = [
@@ -262,48 +264,42 @@ extension RequestFunction {
                 }
             }
     }
-
+    
     func postGenerateTokenOnline(purchaseAmount: Int, completion: @escaping (Result<GenerateTokenOnlineResponse, AFError>) -> Void) {
         let url = Endpoints.generateToken.url
         let body: [String: Int] = [
             "purchase_amount": purchaseAmount,
         ]
-
+        
         requestWithToken(url: url, method: .post, parameters: body, decodable: GenerateTokenOnlineResponse.self) {
             completion($0.result)
         }
     }
-
-    func postGenerateTokenOffline(customerId: Int, purchaseAmount: Int, coinUsed: Int? = 0, isRequestingToken: Int, completion: @escaping (Result<PurchaseResponse, AFError>) -> Void) {
+    
+    func postGenerateTokenOffline(customerId: Int, purchaseAmount: Int, coinUsed: Int? = 0, isRequestingToken: Int, completion: @escaping (PurchaseResponse?, Int?) -> Void) {
         let url = Endpoints.scanQr.url
         var body: [String: Int] = [:]
-
         body["customer_id"] = customerId
         body["purchase_amount"] = purchaseAmount
         body["is_requesting_for_token"] = isRequestingToken
         body["used_coins"] = coinUsed
-
         requestWithToken(url: url, method: .post, parameters: body, decodable: PurchaseResponse.self) {
             response in
-            completion(response.result)
             switch response.result {
-            case .success:
-                break
-            case let .failure(error):
-                if let data = response.data {
-                    let json = String(data: data, encoding: .utf8)
-                    print("Failure Response: \(String(describing: json))")
-                }
+            case .success(let data):
+                completion(data, response.response?.statusCode)
+            case .failure(let error):
+                print("Error generate token offline : ", error)
+                completion(nil, response.response?.statusCode)
             }
         }
     }
-
     func redeemToken(token: String, completion: @escaping (Result<Token, AFError>) -> Void) {
         let url = Endpoints.redeemToken.url
         let body: [String: String] = [
             "token": token,
         ]
-
+        
         requestWithToken(url: url, method: .post, parameters: body, decodable: Token.self) {
             //            completion($0.result)
             response in
@@ -320,29 +316,29 @@ extension RequestFunction {
             }
         }
     }
-
+    
     func getProfileIG(username: String, completion: @escaping (Result<ProfileIGResponse, AFError>) -> Void) {
         let url = "\(Endpoints.getProfileIG.url)\(username)"
-
+        
         requestWithToken(url: url, decodable: ProfileIGResponse.self) {
             completion($0.result)
         }
     }
-
+    
     func getUserIG(id: String, completion: @escaping (Result<ProfileIGResponse, AFError>) -> Void) {
         let url = "\(Endpoints.getUserIG.url)\(id)"
-
+        
         requestWithToken(url: url, decodable: ProfileIGResponse.self) {
             completion($0.result)
         }
     }
-
+    
     func getStoryIG(storyId: Int, completion: @escaping (Result<ResponseData<ResultStoryIG>, AFError>) -> Void) {
         let url = Endpoints.toStoryIG.url
         let parameters: [String: Int] = [
             "story_id": storyId,
         ]
-
+        
         requestWithToken(url: url, parameters: parameters, decodable: ResponseData<ResultStoryIG>.self) {
             completion($0.result)
         }
@@ -352,18 +348,18 @@ extension RequestFunction {
 extension RequestFunction {
     func getListCustomer(completion: @escaping (Result<ResponseData<UserInfoResponse>, AFError>) -> Void) {
         let url = Endpoints.getListCustomer.url
-
+        
         requestWithToken(url: url, decodable: ResponseData<UserInfoResponse>.self) {
             completion($0.result)
         }
     }
-
+    
     func getCustomerById(id: Int, completion: @escaping (Result<UserInfoResponse, AFError>) -> Void) {
         let url = Endpoints.getCustomerById(id).url
-
+        
         requestWithToken(url: url, decodable: UserInfoResponse.self, completionHandler: { completion($0.result) })
     }
-
+    
     func getListMerchant(searchMerchantByName merchantName: String? = nil,
                          locationCoordinate: (latitude: Double, longitude: Double)? = nil,
                          completion: @escaping (Result<ResponseData<UserInfoResponse>, AFError>) -> Void) {
@@ -375,7 +371,7 @@ extension RequestFunction {
             parameters["latitude"] = String(locationCoordinate.latitude)
             parameters["longitude"] = String(locationCoordinate.longitude)
         }
-
+        
         requestWithToken(url: url, parameters: parameters, decodable: ResponseData<UserInfoResponse>.self) {
             response in
             completion(response.result)
@@ -390,44 +386,56 @@ extension RequestFunction {
             }
         }
     }
-
+    
     func getMerchantById(id: Int, completion: @escaping (Result<UserInfoResponse, AFError>) -> Void) {
         let url = Endpoints.getMerchantById(id).url
-
+        
         requestWithToken(url: url, decodable: UserInfoResponse.self, completionHandler: { completion($0.result) })
     }
-
-    func getListTransaction(merchantId: Int? = nil, accountingEntry: String? = nil, status: String? = nil, category: String? = nil, page: Int? = nil, completion: @escaping (Result<ResponseData<Transaction>, AFError>) -> Void) {
-        let url = Endpoints.getListTransaction.url
-
-        var parameters: [String: Any] = [:]
-
-        parameters["merchant_id"] = merchantId
-        parameters["accounting_entry"] = accountingEntry
-        parameters["status"] = status
-        parameters["category"] = category
-        parameters["page"] = page
-
-        requestWithToken(url: url, parameters: parameters, decodable: ResponseData<Transaction>.self) {
-            completion($0.result)
+    
+    func getListTransaction(
+        merchantId: Int? = nil,
+        accountingEntry: String? = nil,
+        status: String? = nil,
+        category: String? = nil,
+        page: Int? = nil,
+        completion: @escaping (ResponseData<Transaction>?, Int?) -> Void) {
+            let url = Endpoints.getListTransaction.url
+            
+            var parameters: [String: Any] = [:]
+            
+            parameters["merchant_id"] = merchantId
+            parameters["accounting_entry"] = accountingEntry
+            parameters["status"] = status
+            parameters["category"] = category
+            parameters["page"] = page
+            
+            requestWithToken(url: url, parameters: parameters, decodable: ResponseData<Transaction>.self) { response in
+                switch response.result {
+                case .success(let data):
+                    completion(data, response.response?.statusCode)
+                case .failure(let error):
+                    print("Error getListTransaction :", error)
+                    completion(nil, response.response?.statusCode)
+                }
+            }
         }
-    }
-
+    
     func getListToken(expired: Int? = nil, submitted: Int? = nil, redeemed: Int? = nil, page: Int? = nil, completion: @escaping (Result<ResponseData<Token>, AFError>) -> Void) {
         let url = Endpoints.getToken.url
         var parameters: [String: Any] = [:]
-
+        
         parameters["expired"] = expired
         parameters["submitted"] = submitted
         parameters["redeemed"] = redeemed
         parameters["order_by"] = "updated_at"
         parameters["page"] = page
-
+        
         requestWithToken(url: url, parameters: parameters, decodable: ResponseData<Token>.self) {
             completion($0.result)
         }
     }
-
+    
     func getNotifications(completionHandler: @escaping (NotificationsResponses) -> Void) {
         let url = Endpoints.getNotifications.url
         requestWithToken(url: url, decodable: NotificationsResponses.self) { response in
@@ -439,7 +447,7 @@ extension RequestFunction {
             }
         }
     }
-
+    
     func getCustomerStory(expired: Bool? = nil,
                           submitted: Bool? = nil,
                           approved: Bool? = nil,
@@ -448,7 +456,7 @@ extension RequestFunction {
                           searchCustomerById customerId: Int? = nil,
                           searchMerchantByName merchantName: String? = nil,
                           searchMerchantById merchantId: Int? = nil,
-                          completionHandler: @escaping (MyStoryResponses) -> Void) {
+                          completionHandler: @escaping (MyStoryResponses?, Int?) -> Void) {
         let url = Endpoints.getMyStory.url
         var parameters: [String: Any] = [:]
         parameters["expired"] = expired
@@ -464,20 +472,21 @@ extension RequestFunction {
                          decodable: MyStoryResponses.self) { response in
             switch response.result {
             case let .success(data):
-                completionHandler(data)
+                completionHandler(data, response.response?.statusCode)
             case let .failure(error):
-                print("Errornya bos", error)
+                completionHandler(nil, response.response?.statusCode)
+                print("Error", error.localizedDescription)
             }
         }
     }
-
+    
     // MARK: ntar digabung sm yg diatas
-
+    
     func getMyStoryCustomer(customerId: Int? = nil, merchantId: Int? = nil, customerName: String? = nil, merchantName: String? = nil, expired: Int? = nil, submitted: Int? = nil, approved: Int? = nil, assessed: Int? = nil, page: Int? = nil, completionHandler: @escaping (Result<ResponseData<MyStoryData>, AFError>) -> Void) {
         let url = Endpoints.getMyStory.url
-
+        
         var parameters: [String: Any?] = [:]
-
+        
         parameters["customer_id"] = customerId
         parameters["merchant_id"] = merchantId
         parameters["customer_name"] = customerName
@@ -487,7 +496,7 @@ extension RequestFunction {
         parameters["approved"] = approved
         parameters["assessed"] = assessed
         parameters["page"] = page
-
+        
         requestWithToken(url: url, parameters: parameters, decodable: ResponseData<MyStoryData>.self) { response in
             completionHandler(response.result)
         }
@@ -500,10 +509,10 @@ extension RequestFunction {
     func responseQRPurchase(customerId: Int, completion: @escaping (Result<Data?, AFError>) -> Void) {
         let url = Endpoints.responseQRPurchase.url
         let body = ["customer_id": customerId]
-
+        
         requestWithToken(url: url, method: .post, parameters: body) { completion($0.result) }
     }
-
+    
     func requestPurchase(merchantId: Int, usedCoins: Int = 0, isRequestingForToken: Bool, completion: @escaping (Result<Data?, AFError>) -> Void) {
         let url = Endpoints.requestPurchase.url
         let body: [String: Any] = [
@@ -511,7 +520,7 @@ extension RequestFunction {
             "used_coins": usedCoins,
             "is_requesting_for_token": isRequestingForToken ? 1 : 0,
         ]
-
+        
         requestWithToken(url: url, method: .post, parameters: body) { completion($0.result) }
     }
 }
@@ -523,41 +532,41 @@ extension RequestFunction {
         parameters: Dictionary<String, Any>? = nil,
         decodable: T.Type = T.self,
         completionHandler: @escaping (DataResponse<T, AFError>) -> Void) {
-        AuthManager.shared.withValidToken { token in
-            let headers: HTTPHeaders = [
-                "Authorization": "Bearer \(token)",
-                "Accept": "application/json",
-            ]
-            AF.request(url, method: method, parameters: parameters, headers: headers)
-                .validate()
-                .responseDecodable(of: decodable) { response in
-                    completionHandler(response)
-                }
+            AuthManager.shared.withValidToken { token in
+                let headers: HTTPHeaders = [
+                    "Authorization": "Bearer \(token)",
+                    "Accept": "application/json",
+                ]
+                AF.request(url, method: method, parameters: parameters, headers: headers)
+                    .validate()
+                    .responseDecodable(of: decodable) { response in
+                        completionHandler(response)
+                    }
+            }
         }
-    }
-
+    
     private func requestWithToken(
         url: String,
         method: HTTPMethod = .get,
         parameters: Dictionary<String, Any>? = nil,
         headers: HTTPHeaders = [],
         completionHandler: @escaping (DataResponse<Data?, AFError>) -> Void) {
-        AuthManager.shared.withValidToken { token in
-            var generalHeaders: HTTPHeaders = [
-                "Authorization": "Bearer \(token)",
-                "Accept": "application/json",
-            ]
-            for header in headers {
-                generalHeaders.add(header)
-            }
-            AF.request(url, method: method, parameters: parameters, headers: generalHeaders)
-                .validate()
-                .response { response in
-                    completionHandler(response)
+            AuthManager.shared.withValidToken { token in
+                var generalHeaders: HTTPHeaders = [
+                    "Authorization": "Bearer \(token)",
+                    "Accept": "application/json",
+                ]
+                for header in headers {
+                    generalHeaders.add(header)
                 }
+                AF.request(url, method: method, parameters: parameters, headers: generalHeaders)
+                    .validate()
+                    .response { response in
+                        completionHandler(response)
+                    }
+            }
         }
-    }
-
+    
     private func fetchHeadersForDeviceRegistration(completion: @escaping (Result<HTTPHeaders, Error>) -> Void
     ) {
         var headers: HTTPHeaders = [
@@ -567,7 +576,7 @@ extension RequestFunction {
             "x-device-os-version": UIDevice.current.systemVersion,
             "x-device-model": UIDevice.current.model,
         ]
-
+        
         Messaging.messaging().token { token, error in
             if let error = error {
                 print("Error fetching FCM registration token: \(error)")

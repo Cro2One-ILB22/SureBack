@@ -120,7 +120,10 @@ extension ConfirmRegistrationViewController {
             guard let self = self else {return}
             self.alertWaiting.dismiss(animated: true)
             guard let statusCode = statusCode else {return}
-            self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
+            if statusCode != 200 {
+                self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
+                return
+            }
             guard let instagramToDM = result?.instagramToDM else {return}
             guard let otp = result?.otp else {return}
             guard let otpExpiredIn = result?.expiresIn else {return}
@@ -173,10 +176,12 @@ extension ConfirmRegistrationViewController {
             role: role,
             username: usernameIG,
             instagramToDM: instagraToDM) {[weak self] data, statusCode in
-//                guard let self = self else {return}
                 self?.alertWaiting.dismiss(animated: true)
                 guard let statusCode = statusCode else {return}
-                self?.snackBarMessage?.showResponseMessage(statusCode: statusCode)
+                if statusCode != 200 {
+                    self?.snackBarMessage?.showResponseMessage(statusCode: statusCode)
+                    return
+                }
                 do {
                     guard let accessToken = data?.accessToken else {return}
                     try KeychainHelper.standard.save(key: .accessToken, value: accessToken)

@@ -35,7 +35,7 @@ class MerchantDashboardViewController: UIViewController {
         configTableView()
         getCustomerStory()
         setupLayout()
-        snackBarMessage = SnackBarMessage(view: view)
+        snackBarMessage = SnackBarMessage()
     }
     @objc func seeAllCustomers() {
         let merchantListAllCustomerVC = MerchantListAllCustomerViewController()

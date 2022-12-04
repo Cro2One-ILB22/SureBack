@@ -99,7 +99,7 @@ class ConfirmRegistrationViewController: UIViewController {
         checkOtpButton.addTarget(self, action: #selector(checkOtp), for: .touchUpInside)
         copyToClipboard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(copyToClipboardAction)))
         renewCodeButton.addTarget(self, action: #selector(renewCodeAction), for: .touchUpInside)
-        snackBarMessage = SnackBarMessage(view: view)
+        snackBarMessage = SnackBarMessage()
     }
     func timeString(time: TimeInterval) -> String {
         let minutes = Int(time) / 60 % 60

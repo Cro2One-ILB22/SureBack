@@ -40,7 +40,7 @@ class WaitingViewController: UIViewController {
         tableView.dataSource = self
         getWaitingStoryCustomer()
         setupLayout()
-        snackBarMessage = SnackBarMessage(view: view)
+        snackBarMessage = SnackBarMessage()
     }
     private func getWaitingStoryCustomer(search customerName: String = "") {
         apiRequest.getCustomerStory(submitted: true, searchCustomerByName: customerName) {[weak self] data, statusCode in

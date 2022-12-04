@@ -170,7 +170,7 @@ class MerchantGenerateTokenFormViewController: UIViewController {
         view.backgroundColor = .porcelain
         generateTokenButton.addTarget(self, action: #selector(generateTokenAction), for: .touchUpInside)
         setupLayout()
-        snackBarMessage = SnackBarMessage(view: view)
+        snackBarMessage = SnackBarMessage()
     }
     @objc func generateTokenAction() {
         present(alertWaiting, animated: true)

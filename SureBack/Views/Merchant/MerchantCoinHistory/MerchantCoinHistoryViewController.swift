@@ -32,7 +32,7 @@ class MerchantCoinHistoryViewController: UIViewController {
         setupLayout()
         configTableView()
         getTransaction()
-        snackBarMessage = SnackBarMessage(view: view)
+        snackBarMessage = SnackBarMessage()
     }
     private func getTransaction() {
         showLoadingIndicator(true)

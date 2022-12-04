@@ -8,13 +8,8 @@
 import UIKit
 
 class SnackBarMessage {
-    
-    let view: UIView
-    
-    init(view: UIView) {
-        self.view = view
-    }
-    
+
+    private let currentWindow: UIWindow = UIApplication.shared.keyWindow!
     public func showResponseMessage(statusCode: Int) {
         let viewModel: SnackbarViewModel?
         switch statusCode {
@@ -27,32 +22,31 @@ class SnackBarMessage {
         default:
             return
         }
-        let frame = CGRect(x: 0, y: 0, width: view.frame.size.width/1.5, height: 60)
+        let frame = CGRect(x: 0, y: 0, width: currentWindow.frame.size.width/1.5, height: 60)
         guard let viewModel = viewModel else {return}
         let snackBar = SnackbarView(viewModel: viewModel, frame: frame)
         showSnackbar(snackBar: snackBar)
     }
-    
     private func showSnackbar(snackBar: SnackbarView) {
-        let width = view.frame.size.width/1.2
-        snackBar.frame = CGRect(x: (view.frame.size.width-width) / 2,
-                                y: -view.frame.size.height,
+        let width = currentWindow.frame.size.width/1.1
+        snackBar.frame = CGRect(x: (currentWindow.frame.size.width-width) / 2,
+                                y: -currentWindow.frame.size.height,
                                 width: width,
                                 height: 60)
 
-        view.addSubview(snackBar)
-
+        currentWindow.addSubview(snackBar)
+        let isFullScreenDevice = currentWindow.frame.size.height >= 852 ? true : false
         UIView.animate(withDuration: 0.5, animations: {
-            snackBar.frame = CGRect(x: (self.view.frame.size.width - width) / 2,
-                                    y: 70,
+            snackBar.frame = CGRect(x: (self.currentWindow.frame.size.width - width) / 2,
+                                    y: isFullScreenDevice ? 100 : 60,
                                     width: width,
                                     height: 60)
         }, completion: { done in
             if done {
                 DispatchQueue.main.asyncAfter(deadline: .now()+2, execute: {
                     UIView.animate(withDuration: 0.5, animations: {
-                        snackBar.frame = CGRect(x: (self.view.frame.size.width-width) / 2,
-                                                y: -self.view.frame.size.height,
+                        snackBar.frame = CGRect(x: (self.currentWindow.frame.size.width-width) / 2,
+                                                y: -self.currentWindow.frame.size.height,
                                                 width: width,
                                                 height: 60)
                     }, completion: { finished in

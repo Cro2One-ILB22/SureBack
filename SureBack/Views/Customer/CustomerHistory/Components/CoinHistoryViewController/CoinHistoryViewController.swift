@@ -63,7 +63,7 @@ class CoinHistoryViewController: UIViewController {
         guard let merchantData = merchantData else { return }
         getCoinHistoryData(merchantData: merchantData, page: page)
         setupLayout()
-        snackbarMessage = SnackBarMessage(view: view)
+        snackbarMessage = SnackBarMessage()
     }
     
     private func showLoadingIndicator(_ isShow: Bool) {

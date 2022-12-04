@@ -94,7 +94,7 @@ class MerchantRejectStoryFormViewController: UIViewController {
         suggestMessage5.addTarget(self, action: #selector(suggestMessageAction), for: .touchUpInside)
         sendToCustButton.addTarget(self, action: #selector(sendToCustAction), for: .touchUpInside)
         closeImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(close)))
-        snackBarMessage = SnackBarMessage(view: view)
+        snackBarMessage = SnackBarMessage()
     }
     @objc func close() {
         dismiss(animated: true)

@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.main.bounds)
 //        let viewController = CustomerPurchaseViewController(merchantId: 2)
-        let viewController = IsLoginViewController()
+        let viewController = ChooseRoleRegistrationViewController()
         let navigationBarAppearace = UINavigationBar.appearance()
         navigationBarAppearace.tintColor = .black
         // navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGreen]

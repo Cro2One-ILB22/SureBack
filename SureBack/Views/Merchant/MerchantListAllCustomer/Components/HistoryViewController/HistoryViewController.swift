@@ -40,7 +40,7 @@ class HistoryViewController: UIViewController {
         searchBar.delegate = self
         setupLayout()
         getHistoryStoryCustomer()
-        snackBarMessage = SnackBarMessage(view: view)
+        snackBarMessage = SnackBarMessage()
     }
     private func getHistoryStoryCustomer(search searchedName: String = "") {
         apiRequest.getCustomerStory(assessed: true, searchCustomerByName: searchedName) {[weak self] data, statusCode in

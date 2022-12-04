@@ -70,7 +70,7 @@ class MerchantFormBusinessSettingViewController: UIViewController {
         navigationItem.rightBarButtonItem = saveButton
         setupLayout()
         configure()
-        snackBarMessage = SnackBarMessage(view: view)
+        snackBarMessage = SnackBarMessage()
     }
     func configure() {
         guard let user = viewModel.user else {return}

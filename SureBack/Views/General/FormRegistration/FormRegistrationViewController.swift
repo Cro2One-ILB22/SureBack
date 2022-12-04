@@ -157,7 +157,7 @@ class FormRegistrationViewController: UIViewController {
         emaillField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
         passwordField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
         confirmPasswordField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
-        snackBarMessage = SnackBarMessage(view: view)
+        snackBarMessage = SnackBarMessage()
     }
     @objc func signUpTapped() {
         guard let name = nameField.text, !name.isEmpty else {return}

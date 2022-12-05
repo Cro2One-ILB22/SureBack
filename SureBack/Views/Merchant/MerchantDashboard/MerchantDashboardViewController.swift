@@ -78,7 +78,7 @@ class MerchantDashboardViewController: UIViewController {
     }
     @objc func cardSummaryAction() {
         let coinHistoryVC = MerchantCoinHistoryViewController()
-        coinHistoryVC.merchant = user?.merchantDetail
+        coinHistoryVC.merchant = user
         coinHistoryVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(coinHistoryVC, animated: true)
     }

@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: BELOM SELESAI
 class MerchantCoinHistoryViewController: UIViewController {
-    var merchant: MerchantDetailResponse?
+    var merchant: UserInfoResponse?
     private var listTransaction: [Transaction] = []
     private let apiRequest = RequestFunction()
     let tableView: UITableView = {
@@ -53,11 +53,26 @@ class MerchantCoinHistoryViewController: UIViewController {
         self.loadingIndicator.isHidden = !isShow
     }
     private func configTableView() {
-        let headerView = HeaderCoinHistoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 270))
+        configHeader()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.tableHeaderView = headerView
         tableView.register(SectionMonth.self, forHeaderFooterViewReuseIdentifier: SectionMonth.id)
+    }
+    private func configHeader() {
+        let headerView = HeaderCoinHistoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 270))
+        tableView.tableHeaderView = headerView
+        let outstandingThisMonth = merchant?.outstandingCoins.thisMonth ?? 0
+        let outstandingThisWeek = merchant?.outstandingCoins.thisWeek ?? 0
+        let outstandingToday = merchant?.outstandingCoins.today ?? 0
+        let exchangedThisMonth = merchant?.exchangedCoins.thisMonth ?? 0
+        let exchangedThisWeek = merchant?.exchangedCoins.thisWeek ?? 0
+        let exchangedToday = merchant?.exchangedCoins.today ?? 0
+        headerView.outstandingCoinCard.totalThisMonthCoinLabel.text = "\(outstandingThisMonth)"
+        headerView.outstandingCoinCard.totalThisWeekCoinLabel.text = "\(outstandingThisWeek)"
+        headerView.outstandingCoinCard.totalTodayCoinLabel.text = "\(outstandingToday)"
+        headerView.exchangedCoinCard.totalThisMonthCoinLabel.text = "\(exchangedThisMonth)"
+        headerView.exchangedCoinCard.totalThisWeekCoinLabel.text = "\(exchangedThisWeek)"
+        headerView.exchangedCoinCard.totalTodayCoinLabel.text = "\(exchangedToday)"
     }
 }
 

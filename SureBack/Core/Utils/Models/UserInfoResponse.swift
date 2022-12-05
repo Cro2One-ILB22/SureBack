@@ -21,6 +21,7 @@ class UserInfoResponse: Codable, AutoEquatable {
     var emailVerifiedAt: String?
     let createdAt, updatedAt: String?
     let roles: [String]?
+    let outstandingCoins, exchangedCoins: Coins
     var merchantDetail: MerchantDetailResponse?
     let coins: [Coin]?
     let individualCoins: [Coin]?
@@ -36,6 +37,8 @@ class UserInfoResponse: Codable, AutoEquatable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case roles
+        case outstandingCoins = "outstanding_coins"
+        case exchangedCoins = "exchanged_coins"
         case merchantDetail = "merchant_detail"
         case coins
         case individualCoins = "individual_coins"
@@ -54,5 +57,15 @@ struct Coin: Codable, AutoEquatable {
         case outstanding, exchanged
         case coinType = "coin_type"
         case updatedAt = "updated_at"
+    }
+}
+
+struct Coins: Codable {
+    let thisMonth, thisWeek, today: Int
+
+    enum CodingKeys: String, CodingKey {
+        case thisMonth = "this_month"
+        case thisWeek = "this_week"
+        case today
     }
 }

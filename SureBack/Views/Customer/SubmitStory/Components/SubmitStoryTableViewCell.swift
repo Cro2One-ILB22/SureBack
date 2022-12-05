@@ -23,6 +23,7 @@ class SubmitStoryTableViewCell: UITableViewCell {
     weak var delegate: SendDataDelegate?
     
     var user = UserViewModel.shared.user
+    var merchantData: UserInfoResponse?
     var userIgInfo: ProfileIGResponse?
 
     var selectedStoryIndex = -1
@@ -95,10 +96,11 @@ extension SubmitStoryTableViewCell: UICollectionViewDataSource, UICollectionView
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if storyData.count == 0 {
+            guard let username = merchantData?.instagramUsername else {return storyData.count}
             self.collectionView.setEmptyMessage(
                 image: UIImage(named: "empty.story")!,
                 title: "Empty Story",
-                message: "Please post story on your IG account and mention our IG then come back to this page.",
+                message: "Please post story on your IG account and mention @\(username) then come back to this page.",
                 centerYAnchorConstant: -90
             )
         } else {

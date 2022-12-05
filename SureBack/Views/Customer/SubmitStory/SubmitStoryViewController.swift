@@ -103,8 +103,7 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
             switch data {
             case let .success(result):
                 do {
-//                    if result.data.isEmpty { break }
-                    print(result.data[0].mediaType)
+                    if result.data.isEmpty { break }
                     self.storyData = result.data.filter{ $0.submittedAt == nil }
                 } catch let error as NSError {
                     print(error.description)
@@ -236,6 +235,7 @@ extension SubmitStoryViewController: UITableViewDelegate, UITableViewDataSource 
 
         cell.storyData = storyData
         cell.user = user
+        cell.merchantData = tokenData?.purchase?.merchant
         cell.userIgInfo = userIgInfo
         cell.delegate = self
 

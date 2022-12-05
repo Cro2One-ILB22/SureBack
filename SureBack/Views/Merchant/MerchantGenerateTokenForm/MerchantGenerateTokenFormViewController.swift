@@ -176,20 +176,27 @@ class MerchantGenerateTokenFormViewController: UIViewController {
         present(alertWaiting, animated: true)
         guard let purchaseRequest = qrScanPurchase?.purchaseRequest else { return }
         guard let purchaseAmount = totalPurchaseField.text, let purchaseAmount = Int(purchaseAmount) else { return }
-        self.apiRequest.postGenerateTokenOffline(customerId: self.customerId, purchaseAmount: purchaseAmount, coinUsed: purchaseRequest.coinsUsed, isRequestingToken: purchaseRequest.isRequestingForToken ? 1 : 0) { [weak self] response in
-            guard let self = self else {return}
-            guard let statusCode = statusCode else {return}
-            self.alertWaiting.dismiss(animated: true)
-            if statusCode != 200 {
-                self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
-                return
+        let isRequestingToken = purchaseRequest.isRequestingForToken ? 1 : 0
+        let coinUser = purchaseRequest.coinsUsed
+        generateToken(purchaseAmount: purchaseAmount, coinUser: coinUser, isRequestingToken: isRequestingToken)
+    }
+
+    private func generateToken(purchaseAmount: Int, coinUser: Int, isRequestingToken: Int) {
+        apiRequest.postGenerateTokenOffline(
+            customerId: self.customerId, purchaseAmount: purchaseAmount, isRequestingToken: isRequestingToken) {[weak self] data, statusCode in
+                guard let self = self else {return}
+                guard let statusCode = statusCode else {return}
+                self.alertWaiting.dismiss(animated: true)
+                if statusCode != 200 {
+                    self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
+                    return
+                }
+                self.navigationController?.popToRootViewController(animated: true)
+                let detailTransactionVC = MerchantTransactionHistoryViewController()
+                detailTransactionVC.customer = self.customer
+                detailTransactionVC.purchaseData = data
+                self.present(detailTransactionVC, animated: true)
             }
-            self.navigationController?.popToRootViewController(animated: true)
-            let detailTransactionVC = MerchantTransactionHistoryViewController()
-            detailTransactionVC.customer = self.customer
-            detailTransactionVC.purchaseData = data
-            self.present(detailTransactionVC, animated: true)
-        }
     }
     init(customerId: Int) {
         self.customerId = customerId

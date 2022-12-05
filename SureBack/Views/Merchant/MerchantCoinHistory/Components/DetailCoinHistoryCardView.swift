@@ -85,11 +85,8 @@ class DetailCoinHistoryCardView: UIView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.setTopAnchorConstraint(equalTo: topAnchor, constant: -15)
         titleLabel.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 8)
-        let separator = UIView()
-        separator.widthAnchor.constraint(equalToConstant: 1).isActive = true
-        separator.backgroundColor = .black
 
-        let thisMonthStackView = verticalStackView([totalThisMonthCoinLabel, separator, thisMonthText])
+        let thisMonthStackView = verticalStackView([totalThisMonthCoinLabel, thisMonthText])
         let thisWeekStackView = verticalStackView([totalThisWeekCoinLabel, thisWeekText])
         let todayStackView = verticalStackView([totalTodayCoinLabel, todayText])
 
@@ -117,4 +114,3 @@ class DetailCoinHistoryCardView: UIView {
     }
 
 }
-

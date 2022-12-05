@@ -121,9 +121,9 @@ class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         apiRequest.responseQRPurchase(customerId: customerId) { [weak self] response in
             switch response {
             case .success:
-                let merchantGenerateTokenFormVC = MerchantGenerateTokenFormViewController(customerId: customerId)
-                merchantGenerateTokenFormVC.hidesBottomBarWhenPushed = true
-                self?.navigationController?.pushViewController(merchantGenerateTokenFormVC, animated: true)
+                let totalPurchaseVC = TotalPurchaseFormViewController()
+                totalPurchaseVC.hidesBottomBarWhenPushed = true
+                self?.present(totalPurchaseVC, animated: true)
             case .failure(let failure):
                 print(failure)
             }

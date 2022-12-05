@@ -25,7 +25,7 @@ class CustomerStoryViewModel {
     }
     func fetchCustomerStory() {
         setState(state: .loading)
-        apiRequest.getCustomerStory(assessed: true) {[weak self] data, statusCode in
+        apiRequest.getCustomerStory(submitted: true, assessed: false) {[weak self] data, statusCode in
             if statusCode != 200 {
                 self?.setState(state: .failed)
             }

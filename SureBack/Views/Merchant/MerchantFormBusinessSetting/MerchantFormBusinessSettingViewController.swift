@@ -122,6 +122,7 @@ class MerchantFormBusinessSettingViewController: UIViewController {
             user.merchantDetail?.cashbackPercent = percentCashbackCoin
             user.merchantDetail?.cashbackLimit = maximumCashbackCoin
             user.merchantDetail?.dailyTokenLimit = tokenLimit
+            user.merchantDetail?.cashbackCalculationMethod = self.selectedCashbackMethod
             self.viewModel.userSubject.on(.next(user))
             self.navigationController?.popViewController(animated: true)
         }

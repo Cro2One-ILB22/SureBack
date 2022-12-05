@@ -43,7 +43,7 @@ class LoginViewController: UIViewController {
 
     let firstLabel: UILabel = {
         let label = UILabel()
-        label.text = "Don't have an account yet, "
+        label.text = "Don't have an account yet? "
         label.font = UIFont.systemFont(ofSize: 15)
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -14,7 +14,8 @@ struct MerchantDetailResponse: Codable, AutoEquatable {
     var cashbackLimit, dailyTokenLimit: Int?
     let isActiveGeneratingToken: Bool
     let todaysTokenCount: Int
-    let updatedAt, cashbackCalculationMethod, lastTokenGeneratedForMeAt: String?
+    let updatedAt, lastTokenGeneratedForMeAt: String?
+    var cashbackCalculationMethod: String?
     let cooldownUntil: String?
     let addresses: [Address]?
 

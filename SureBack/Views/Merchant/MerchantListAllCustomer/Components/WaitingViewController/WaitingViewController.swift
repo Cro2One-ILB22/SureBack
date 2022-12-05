@@ -87,7 +87,7 @@ extension WaitingViewController: UISearchBarDelegate {
 extension WaitingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailStoryVC = MerchantDetailStoryViewController()
-        let storyData = listUserStory[indexPath.row]
+        let storyData = listUserStory[indexPath.section]
         detailStoryVC.storyData = storyData
         navigationController?.pushViewController(detailStoryVC, animated: true)
     }
@@ -113,6 +113,8 @@ extension WaitingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemCustomerStoryTableCell.id, for: indexPath) as? ItemCustomerStoryTableCell else {return UITableViewCell()}
         cell.isHistory = false
+        let data = listUserStory[indexPath.section]
+        cell.setCellWithValueOf(data)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

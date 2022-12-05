@@ -54,6 +54,7 @@ class CustomerPurchaseFirstView: UIView {
         let label = UILabel()
         label.text = "Bestie Cafe"
         label.font = UIFont.systemFont(ofSize: 17)
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -126,8 +127,10 @@ extension CustomerPurchaseFirstView {
     func setupMerchantName() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [merchantNameLabel, merchantNameValue])
         stackView.axis = .horizontal
-        stackView.distribution = .equalCentering
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .top
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.setHeightAnchorConstraint(equalToConstant: 50)
 
         return stackView
     }

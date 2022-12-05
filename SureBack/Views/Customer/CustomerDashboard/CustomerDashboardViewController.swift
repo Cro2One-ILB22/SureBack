@@ -59,7 +59,6 @@ class CustomerDashboardViewController: UIViewController, UIViewToController, Sen
 
         activeTokensViewModel.activeTokensSubject.subscribe(onNext: { [weak self] tokens in
             self?.loadingService?.setState(state: tokens.loadingState)
-
             self?.tableView.reloadData()
         }).disposed(by: disposeBag)
 

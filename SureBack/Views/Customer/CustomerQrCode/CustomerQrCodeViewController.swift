@@ -63,7 +63,9 @@ class CustomerQrCodeViewController: UIViewController {
         guard let user = user else { return }
         purchasePusherService?.requestQRScan(customerId: user.id) { [weak self] response in
             self?.purchasePusherService?.pusherService?.disconnect()
-            self?.navigationController?.pushViewController(CustomerPurchaseViewController(merchantId: response.merchantId), animated: true)
+            let purchaseVC = CustomerPurchaseViewController(merchantId: response.merchantId)
+            purchaseVC.hidesBottomBarWhenPushed = true
+            self?.navigationController?.pushViewController(purchaseVC, animated: true)
         }
     }
 

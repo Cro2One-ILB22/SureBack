@@ -15,13 +15,20 @@ class SubmitStoryTableViewCell: UITableViewCell {
         didSet {
             collectionView.reloadData()
             collectionView.isHidden = false
-            loadingIndicator.stopAnimating()
-            loadingIndicator.isHidden = true
+            if storyData.count == 0 {
+                guard let username = merchantData?.instagramUsername else {return}
+                self.collectionView.setEmptyMessage(
+                    image: UIImage(named: "empty.story")!,
+                    title: "Empty Story",
+                    message: "Please post story on your IG account and mention @\(username) then come back to this page.",
+                    centerYAnchorConstant: -90,
+                    username: username
+                )
+            }
         }
     }
 
     weak var delegate: SendDataDelegate?
-    
     var user = UserViewModel.shared.user
     var merchantData: UserInfoResponse?
     var userIgInfo: ProfileIGResponse?
@@ -40,19 +47,11 @@ class SubmitStoryTableViewCell: UITableViewCell {
         return collectionView
     }()
 
-    var loadingIndicator: UIActivityIndicatorView = {
-        let loading = UIActivityIndicatorView()
-        loading.style = .gray
-        loading.translatesAutoresizingMaskIntoConstraints = false
-        loading.hidesWhenStopped = true
-        return loading
-    }()
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .systemBlue
         collectionView.isHidden = true
-        loadingIndicator.show(true)
+//        loadingIndicator.show(true)
         contentView.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -95,17 +94,6 @@ extension SubmitStoryTableViewCell: UICollectionViewDataSource, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if storyData.count == 0 {
-            guard let username = merchantData?.instagramUsername else {return storyData.count}
-            self.collectionView.setEmptyMessage(
-                image: UIImage(named: "empty.story")!,
-                title: "Empty Story",
-                message: "Please post story on your IG account and mention @\(username) then come back to this page.",
-                centerYAnchorConstant: -90
-            )
-        } else {
-            self.collectionView.restore()
-        }
         return storyData.count
     }
 

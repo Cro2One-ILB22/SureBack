@@ -8,11 +8,11 @@
 import Foundation
 
 struct QRScanPurchaseRequest: Codable {
-    let usedCoins: Int
+    let coinsUsed: Int
     let isRequestingForToken: Bool
 
     enum CodingKeys: String, CodingKey {
-        case usedCoins = "used_coins"
+        case coinsUsed = "coins_used"
         case isRequestingForToken = "is_requesting_for_token"
     }
 }

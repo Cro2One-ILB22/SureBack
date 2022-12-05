@@ -161,7 +161,7 @@ class MerchantGenerateTokenFormViewController: UIViewController {
             guard let self = self else { return }
             self.qrScanPurchase = response
             if let purchaseRequest = response.purchaseRequest {
-                self.exchangedCoinValueLabel.text = String(purchaseRequest.usedCoins)
+                self.exchangedCoinValueLabel.text = String(purchaseRequest.coinsUsed)
                 self.exchangedCoinValueLabel.font = .systemFont(ofSize: 15)
                 self.exchangedCoinValueLabel.textColor = .black
                 self.generateTokenButton.isEnabled = true
@@ -177,7 +177,7 @@ class MerchantGenerateTokenFormViewController: UIViewController {
         present(alertWaiting, animated: true)
         guard let purchaseRequest = qrScanPurchase?.purchaseRequest else { return }
         guard let purchaseAmount = totalPurchaseField.text, let purchaseAmount = Int(purchaseAmount) else { return }
-        self.apiRequest.postGenerateTokenOffline(customerId: self.customerId, purchaseAmount: purchaseAmount, coinUsed: purchaseRequest.usedCoins, isRequestingToken: purchaseRequest.isRequestingForToken ? 1 : 0) { [weak self] response in
+        self.apiRequest.postGenerateTokenOffline(customerId: self.customerId, purchaseAmount: purchaseAmount, coinUsed: purchaseRequest.coinsUsed, isRequestingToken: purchaseRequest.isRequestingForToken ? 1 : 0) { [weak self] response in
             guard let self = self else {return}
             switch response {
             case .success(let data):

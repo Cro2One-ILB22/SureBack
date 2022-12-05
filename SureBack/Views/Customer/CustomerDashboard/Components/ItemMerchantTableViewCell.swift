@@ -22,6 +22,7 @@ class ItemMerchantTableViewCell: UITableViewCell {
     lazy var merchantNameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
+        label.numberOfLines = 0
         label.font = UIFont.boldSystemFont(ofSize: 18)
         return label
     }()
@@ -108,6 +109,8 @@ class ItemMerchantTableViewCell: UITableViewCell {
         addSubview(stackView)
         stackView.setTopAnchorConstraint(equalTo: topAnchor, constant: 15)
         stackView.setLeadingAnchorConstraint(equalTo: merchantImage.trailingAnchor, constant: 20)
+        stackView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -25)
+
     }
 
     func setupBookmark() {

@@ -20,7 +20,7 @@ class ItemActiveTokenCollectionViewCell: UICollectionViewCell {
     let expireLabel: UILabel = {
         let label = UILabel()
         label.text = "Expires in"
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -29,7 +29,8 @@ class ItemActiveTokenCollectionViewCell: UICollectionViewCell {
     var tokenMerchantNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Merchant Name"
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.numberOfLines = 0
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -46,7 +47,7 @@ class ItemActiveTokenCollectionViewCell: UICollectionViewCell {
 
     var redeemButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Redeem", for: .normal)
+        button.setTitle(" Redeem ", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .tealishGreen
         button.layer.cornerRadius = 10
@@ -96,15 +97,16 @@ extension ItemActiveTokenCollectionViewCell {
     }
 
     private func setupStackLabel() {
-        let stackView = UIStackView(arrangedSubviews: [expireLabel, tokenMerchantNameLabel, timerLabel])
+        let stackView = UIStackView(arrangedSubviews: [tokenMerchantNameLabel, expireLabel, timerLabel])
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
-        stackView.setTopAnchorConstraint(equalTo: topAnchor, constant: 20)
+//        stackView.setTopAnchorConstraint(equalTo: topAnchor, constant: 20)
         stackView.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
         stackView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
+        stackView.setCenterYAnchorConstraint(equalTo: centerYAnchor)
     }
 
     private func setupButton() {

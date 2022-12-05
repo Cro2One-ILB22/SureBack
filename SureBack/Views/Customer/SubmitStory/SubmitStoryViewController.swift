@@ -83,6 +83,11 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
             case let .success(result):
                 do {
                     self.userIgInfo = result
+                    if result.isPrivate {
+                        let alert = UIAlertController(title: "Your IG account is Private", message: "Please set your IG account to public", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: "Default action"), style: .default))
+                        self.present(alert, animated: true, completion: nil)
+                    }
                 } catch let error as NSError {
                     print(error.description)
                 }
@@ -98,9 +103,9 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
             switch data {
             case let .success(result):
                 do {
-                    if result.data.isEmpty { break }
+//                    if result.data.isEmpty { break }
                     print(result.data[0].mediaType)
-                    self.storyData = result.data
+                    self.storyData = result.data.filter{ $0.submittedAt == nil }
                 } catch let error as NSError {
                     print(error.description)
                 }
@@ -180,7 +185,14 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
     }
 
     @objc func submitStoryTapped() {
-        print("submit story button tapped")
+
+//        guard let follsIG = userIgInfo?.followerCount, follsIG >= 100 else {
+//            let alert = UIAlertController(title: "Not enough followers", message: "Please increase your follower to >= 100", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: "Default action"), style: .default))
+//            self.present(alert, animated: true, completion: nil)
+//
+//            return
+//        }
 
         guard let storyId = tokenData?.story?.id, let igStoryId = igStoryId else {
             let okActionBtn = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
@@ -196,20 +208,21 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
             guard let self = self else {return}
             switch data {
             case let .success(result):
-                print(result)
-                print("success submit story")
+                let okActionBtn = UIAlertAction(title: "Ok", style: .default, handler: { _ in
+                    self.navigationController?.popViewController(animated: true)
+                })
+                let alert = UIAlertController(title: "Success", message: "Success Submit Story", preferredStyle: .alert)
+                alert.addAction(okActionBtn)
+                self.present(alert, animated: true)
             case let .failure(error):
-                print(error)
-                print("failed to submit story")
+                let okActionBtn = UIAlertAction(title: "Try Again", style: .cancel, handler: nil)
+                let alert = UIAlertController(title: "Failed to Submit Story", message: "", preferredStyle: .alert)
+                alert.addAction(okActionBtn)
+                self.present(alert, animated: true)
             }
         }
 
-        let okActionBtn = UIAlertAction(title: "Ok", style: .default, handler: { _ in
-            self.navigationController?.popViewController(animated: true)
-        })
-        let alert = UIAlertController(title: "Success", message: "Success Submit Story", preferredStyle: .alert)
-        alert.addAction(okActionBtn)
-        present(alert, animated: true)
+
     }
 }
 

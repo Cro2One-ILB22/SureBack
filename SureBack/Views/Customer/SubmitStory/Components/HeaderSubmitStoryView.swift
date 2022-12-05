@@ -66,8 +66,10 @@ class HeaderSubmitStoryView: UIView {
         let label = UILabel()
         label.text = "Sushi Mei"
         label.font = UIFont.systemFont(ofSize: 15)
-        label.sizeToFit()
+        label.numberOfLines = 0
+        label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
+//        label.setWidthAnchorConstraint(equalToConstant: 180)
         return label
     }()
 
@@ -131,30 +133,78 @@ class HeaderSubmitStoryView: UIView {
         stackTimer.alignment = .fill
         stackTimer.translatesAutoresizingMaskIntoConstraints = false
 
-        let stackLabel = UIStackView(arrangedSubviews: [tokenIdLabel, merchantNameLabel, dateLabel, purchaseLabel])
-        stackLabel.axis = .vertical
-        stackLabel.distribution = .equalSpacing
-        stackLabel.alignment = .fill
-        stackLabel.spacing = 5
-        stackLabel.translatesAutoresizingMaskIntoConstraints = false
+        let stackTokenId = UIStackView(arrangedSubviews: [tokenIdLabel, tokenIdValueLabel])
+        stackTokenId.axis = .horizontal
+        stackTokenId.distribution = .equalCentering
+        stackTokenId.translatesAutoresizingMaskIntoConstraints = false
 
-        let stackValue = UIStackView(arrangedSubviews: [tokenIdValueLabel, merchantNameValueLabel, dateValueLabel, purchaseValueLabel])
-        stackValue.axis = .vertical
-        stackValue.distribution = .equalSpacing
-        stackValue.alignment = .fill
-        stackValue.spacing = 5
-        stackValue.translatesAutoresizingMaskIntoConstraints = false
+//        let stackMerchant = UIStackView(arrangedSubviews: [merchantNameLabel, merchantNameValueLabel])
+//        stackMerchant.axis = .horizontal
+//        stackMerchant.distribution = .equalCentering
+//        stackMerchant.translatesAutoresizingMaskIntoConstraints = false
 
-        let stackTokenDetails = UIStackView(arrangedSubviews: [stackLabel, stackValue])
+        let merchantLabel = UIView()
+        merchantLabel.translatesAutoresizingMaskIntoConstraints = false
+        merchantLabel.addSubview(merchantNameLabel)
+        merchantLabel.addSubview(merchantNameValueLabel)
+        merchantNameLabel.setTopAnchorConstraint(equalTo: merchantLabel.topAnchor, constant: 0)
+        merchantNameLabel.setBottomAnchorConstraint(equalTo: merchantLabel.bottomAnchor, constant: 0)
+        merchantNameValueLabel.setTopAnchorConstraint(equalTo: merchantLabel.topAnchor, constant: 0)
+        merchantNameValueLabel.setBottomAnchorConstraint(equalTo: merchantLabel.bottomAnchor, constant: 0)
+
+        merchantNameLabel.setLeadingAnchorConstraint(equalTo: merchantLabel.leadingAnchor, constant: 0)
+//        merchantNameValueLabel.setLeadingAnchorConstraint(equalTo: merchantNameLabel.trailingAnchor, constant: 70)
+        merchantNameValueLabel.setTrailingAnchorConstraint(equalTo: merchantLabel.trailingAnchor, constant: 0)
+//        merchantNameValueLabel.setLeadingAnchorConstraint(equalTo: merchantNameLabel.trailingAnchor, constant: 100)
+//        stackMerchant.setTopAnchorConstraint(equalTo: merchantlabel.topAnchor)
+//        stackMerchant.setLeadingAnchorConstraint(equalTo: merchantlabel.leadingAnchor)
+//        stackMerchant.setTrailingAnchorConstraint(equalTo: merchantlabel.trailingAnchor)
+//        stackMerchant.setBottomAnchorConstraint(equalTo: merchantlabel.bottomAnchor)
+
+        let stackDate = UIStackView(arrangedSubviews: [dateLabel, dateValueLabel])
+        stackDate.axis = .horizontal
+        stackDate.distribution = .equalCentering
+        stackDate.translatesAutoresizingMaskIntoConstraints = false
+
+        let stackPurchase = UIStackView(arrangedSubviews: [purchaseLabel, purchaseValueLabel])
+        stackPurchase.axis = .horizontal
+        stackPurchase.distribution = .equalCentering
+        stackPurchase.translatesAutoresizingMaskIntoConstraints = false
+
+        let stackTokenDetails = UIStackView(arrangedSubviews: [stackTokenId, merchantLabel, stackDate, stackPurchase])
+        stackTokenDetails.axis = .vertical
         stackTokenDetails.backgroundColor = .white
         stackTokenDetails.layer.borderWidth = 1
         stackTokenDetails.layer.borderColor = UIColor.gray.cgColor
         stackTokenDetails.layer.cornerRadius = 10
-        stackTokenDetails.axis = .horizontal
-        stackTokenDetails.spacing = 30
         stackTokenDetails.layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         stackTokenDetails.isLayoutMarginsRelativeArrangement = true
         stackTokenDetails.translatesAutoresizingMaskIntoConstraints = false
+
+        // let stackLabel = UIStackView(arrangedSubviews: [tokenIdLabel, merchantNameLabel, dateLabel, purchaseLabel])
+        // stackLabel.axis = .vertical
+        // stackLabel.distribution = .equalSpacing
+        // stackLabel.alignment = .fill
+        // stackLabel.spacing = 5
+        // stackLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        // let stackValue = UIStackView(arrangedSubviews: [tokenIdValueLabel, merchantNameValueLabel, dateValueLabel, purchaseValueLabel])
+        // stackValue.axis = .vertical
+        // stackValue.distribution = .equalSpacing
+        // stackValue.alignment = .fill
+        // stackValue.spacing = 5
+        // stackValue.translatesAutoresizingMaskIntoConstraints = false
+
+        // let stackTokenDetails = UIStackView(arrangedSubviews: [stackLabel, stackValue])
+        // stackTokenDetails.backgroundColor = .white
+        // stackTokenDetails.layer.borderWidth = 1
+        // stackTokenDetails.layer.borderColor = UIColor.gray.cgColor
+        // stackTokenDetails.layer.cornerRadius = 10
+        // stackTokenDetails.axis = .horizontal
+        // stackTokenDetails.spacing = 30
+        // stackTokenDetails.layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        // stackTokenDetails.isLayoutMarginsRelativeArrangement = true
+        // stackTokenDetails.translatesAutoresizingMaskIntoConstraints = false
 
         let stackView = UIStackView(arrangedSubviews: [stackTimer, tokenLabel, stackTokenDetails])
         stackView.axis = .vertical
@@ -170,5 +220,9 @@ class HeaderSubmitStoryView: UIView {
         storyLabel.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 20)
         storyLabel.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
         storyLabel.setBottomAnchorConstraint(equalTo: bottomAnchor, constant: -20)
+
+        stackTokenDetails.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -10)
+        stackTokenDetails.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 10)
+
     }
 }

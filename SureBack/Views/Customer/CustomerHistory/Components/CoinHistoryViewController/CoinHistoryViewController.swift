@@ -65,7 +65,6 @@ class CoinHistoryViewController: UIViewController {
         setupLayout()
         snackbarMessage = SnackBarMessage()
     }
-    
     private func showLoadingIndicator(_ isShow: Bool) {
         tableView.isHidden = isShow
         loadingIndicator.show(isShow)

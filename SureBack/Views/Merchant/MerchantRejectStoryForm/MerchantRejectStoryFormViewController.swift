@@ -7,24 +7,9 @@
 
 import UIKit
 
-class MerchantRejectStoryFormViewController: UIViewController {
+class MerchantRejectStoryFormViewController: CommonSheetViewController {
     var id: Int?
     private let apiRequest = RequestFunction()
-    let reasonForRejectTextLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Reason for Rejection"
-        label.font = .systemFont(ofSize: 17, weight: .semibold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    let closeImage: UIImageView = {
-        let iconImage = UIImageView()
-        iconImage.image = UIImage(named: "multiply.circle.fill.green")
-        iconImage.setWidthAnchorConstraint(equalToConstant: 24)
-        iconImage.setHeightAnchorConstraint(equalToConstant: 24)
-        iconImage.isUserInteractionEnabled = true
-        return iconImage
-    }()
     let question1TextLabel: UILabel = {
         let label = UILabel()
         label.text = "What's wrong with that Story?"
@@ -85,6 +70,7 @@ class MerchantRejectStoryFormViewController: UIViewController {
     var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = "Reason for Rejection"
         view.backgroundColor = .porcelain
         setupLayout()
         suggestMessage1.addTarget(self, action: #selector(suggestMessageAction), for: .touchUpInside)
@@ -93,11 +79,7 @@ class MerchantRejectStoryFormViewController: UIViewController {
         suggestMessage4.addTarget(self, action: #selector(suggestMessageAction), for: .touchUpInside)
         suggestMessage5.addTarget(self, action: #selector(suggestMessageAction), for: .touchUpInside)
         sendToCustButton.addTarget(self, action: #selector(sendToCustAction), for: .touchUpInside)
-        closeImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(close)))
         snackBarMessage = SnackBarMessage()
-    }
-    @objc func close() {
-        dismiss(animated: true)
     }
     @objc func suggestMessageAction(sender: UIButton) {
         messageField.text = ""

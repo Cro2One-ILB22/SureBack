@@ -32,20 +32,21 @@ extension HeaderCustomerHistoryView {
 
         let stackCoinsLabel = UIStackView(arrangedSubviews: [loyaltCoinsLabel, coinImage])
         stackCoinsLabel.axis = .horizontal
-        stackCoinsLabel.distribution = .equalSpacing
+        stackCoinsLabel.distribution = .fill
         stackCoinsLabel.spacing = 5
         stackCoinsLabel.translatesAutoresizingMaskIntoConstraints = false
 
         let stackCoins = UIStackView(arrangedSubviews: [loyaltCoinsValueLabel, stackCoinsLabel])
         stackCoins.axis = .vertical
         stackCoins.distribution = .equalSpacing
+        stackCoins.alignment = .trailing
         stackCoins.spacing = 5
         stackCoins.translatesAutoresizingMaskIntoConstraints = false
 
         let stackImageCoins = UIStackView(arrangedSubviews: [bgProfileImageView, stackCoins])
         stackImageCoins.axis = .horizontal
-//        stackImageCoins.distribution = .fillProportionally
-        stackImageCoins.spacing = 170
+        stackImageCoins.distribution = .equalSpacing
+//        stackImageCoins.spacing = 100
         stackImageCoins.translatesAutoresizingMaskIntoConstraints = false
 
         // Stack 3

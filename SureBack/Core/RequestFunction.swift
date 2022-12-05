@@ -429,7 +429,7 @@ extension RequestFunction {
         parameters["expired"] = expired
         parameters["submitted"] = submitted
         parameters["redeemed"] = redeemed
-        parameters["order_by"] = "updated_at"
+        parameters["order_by"] = "updated_at:desc"
         parameters["page"] = page
         
         requestWithToken(url: url, parameters: parameters, decodable: ResponseData<Token>.self) {

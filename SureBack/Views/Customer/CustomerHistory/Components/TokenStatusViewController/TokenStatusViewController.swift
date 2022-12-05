@@ -74,28 +74,25 @@ class TokenStatusViewController: UIViewController {
     }
 
     func getTokenStatusData(merchantData: UserInfoResponse, page: Int) {
+        //TODO: change request to Get Token where finished_at != nil
         loadingService?.setState(state: .loading)
         request.getMyStoryCustomer(merchantId: merchantData.id, page: page) { [weak self] data in
-            guard let self = self else {return}
+            guard let self = self else { return }
             switch data {
             case let .success(result):
                 do {
-                    for i in result.data {
-                        if i.submittedAt == nil {
-                            if i.token.expiresAt.stringToDate() < Date() {
-                                self.transactionData.append(i)
-                            }
-                        } else {
-                            if i.instagramStoryStatus == "validated" {
-                                self.transactionData.append(i)
-                            }
-                        }
+                    self.transactionData = result.data.filter {
+                        $0.submittedAt == nil && $0.token.expiresAt.stringToDate() < Date() ||
+                            $0.submittedAt != nil && $0.instagramStoryStatus == "validated"
                     }
                     self.totalPage = result.lastPage
                     self.tableView.isHidden = false
                     self.loadingIndicator.stopAnimating()
                     self.loadingIndicator.isHidden = true
                     self.loadingService?.setState(state: .success)
+//                    if self.transactionData.count == 0 && page < self.totalPage ?? 1 {
+//                        self.getTokenStatusData(merchantData: merchantData, page: page+1)
+//                    }
                 } catch let error as NSError {
                     print(error.description)
                 }

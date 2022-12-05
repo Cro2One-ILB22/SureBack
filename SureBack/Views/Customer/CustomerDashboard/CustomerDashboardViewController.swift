@@ -6,11 +6,13 @@
 //
 
 import CoreLocation
+import RxSwift
 import SDWebImage
 import UIKit
-import RxSwift
 
-class CustomerDashboardViewController: UIViewController, UIViewToController {
+class CustomerDashboardViewController: UIViewController, UIViewToController, SendBookmark {
+//    private let locationSubject = ReplaySubject<CLLocationCoordinate2D?>.create(bufferSize: 1)
+
     private var loadingService: LoadingService?
     private let locationSubject: ReplaySubject<CLLocationCoordinate2D?>
     private let disposeBag = DisposeBag()
@@ -38,7 +40,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false
+        tabBarController?.tabBar.isHidden = false
     }
 
     override func viewDidLoad() {
@@ -75,7 +77,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         headerView.notifButton.addTarget(self, action: #selector(notifButtonTapped), for: .touchUpInside)
         setupView2(headerView: headerView)
 
-        self.setupView()
+        setupView()
     }
 
     func didToRedeemTapButton(data: Token, user: UserInfoResponse) {
@@ -100,22 +102,22 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         allMerchantVC.title = "All Merchant"
         allMerchantVC.user = user
         allMerchantVC.activeTokenData = activeTokensViewModel.activeTokens.tokens
+        allMerchantVC.delegate = self
         navigationController?.pushViewController(allMerchantVC, animated: true)
     }
 
     @objc func bookmarkTapped(_ sender: UITapGestureRecognizer) {
-        guard let tag = sender.view?.tag else {return}
+        guard let tag = sender.view?.tag else { return }
         let indexPath = IndexPath(row: tag, section: 1)
-        let cell = self.tableView.cellForRow(at: indexPath) as? ItemMerchantTableViewCell
+        let cell = tableView.cellForRow(at: indexPath) as? ItemMerchantTableViewCell
         cell?.bookmarkImage.isUserInteractionEnabled = false
 
         request.toggleMerchantFavorited(id: merchantsProcessViewModel.merchantsProcess.merchants[tag].id) { response in
 //            guard let self = self else {return}
             switch response {
-            case .success(let result):
-
+            case let .success(result):
                 self.merchantsProcessViewModel.merchantsProcess.merchants[tag].isFavorite = result.isFavorite
-                guard let isFavorite = result.isFavorite else {return print("return")}
+                guard let isFavorite = result.isFavorite else { return print("return") }
                 let image = isFavorite ? "bookmark.on" : "bookmark.off"
                 cell?.bookmarkImage.image = UIImage(named: image)
                 cell?.bookmarkImage.isUserInteractionEnabled = true
@@ -124,6 +126,26 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
                 print("failed to bookmarked the merchant")
             }
         }
+    }
+
+    //TODO: fix no cell detected
+    func didTapBookmark(merchantId: Int, isFavorite: Bool) {
+        var tag = 0
+        let dashboardVC = CustomerDashboardViewController(locationSubject: locationSubject)
+        for i in 0 ... merchantsProcessViewModel.merchantsProcess.merchants.count {
+            let cell = tableView.cellForRow(at: IndexPath(row: i, section: 1))
+            if merchantsProcessViewModel.merchantsProcess.merchants[i].id == merchantId {
+                tag = i
+                break
+            }
+        }
+
+        let indexPath = IndexPath(row: tag, section: 1)
+        let cell = dashboardVC.tableView.cellForRow(at: indexPath) as? ItemMerchantTableViewCell
+        let image = isFavorite ? "bookmark.on" : "bookmark.off"
+        guard let cell = cell else {return print("no cell")}
+        cell.bookmarkImage.image = UIImage(named: image)
+        tableView.reloadData()
     }
 
     init(locationSubject: ReplaySubject<CLLocationCoordinate2D?>) {
@@ -175,7 +197,7 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
                 completed: nil
             )
             cell.merchantNameLabel.text = merchantsProcessViewModel.merchantsProcess.merchants[indexPath.row].name
-            cell.totalCoinsLabel.text = "\(merchantsProcessViewModel.merchantsProcess.merchants[indexPath.row].balance) coin(s)"
+            cell.totalCoinsLabel.text = "\(merchantsProcessViewModel.merchantsProcess.merchants[indexPath.row].individualCoins?[1].outstanding ?? 0) Coin(s)"
 
             cell.bookmarkImage.tag = indexPath.row
             cell.bookmarkImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bookmarkTapped)))
@@ -248,7 +270,7 @@ extension CustomerDashboardViewController {
     private func setupView2(headerView: HeaderCustomerDashboardView) {
         view.addSubview(headerView)
         headerView.profileLabel.text = "Hi, @\(user.instagramUsername)!"
-        headerView.totalCoinsLabel.text = " \(user.coins![0].outstanding)"
+        headerView.totalCoinsLabel.text = " \(user.coins?[1].exchanged ?? 0)"
         tableView.tableHeaderView = headerView
         tableView.register(SectionDashboardHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
     }

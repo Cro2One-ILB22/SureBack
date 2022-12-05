@@ -10,7 +10,6 @@ import UIKit
 
 class LoginViewController: UIViewController {
     let request = RequestFunction()
-
     let titleTextView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .porcelain
@@ -61,7 +60,7 @@ class LoginViewController: UIViewController {
     let loginButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .gray
-        button.isEnabled = false
+//        button.isEnabled = false
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Login", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -82,7 +81,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .porcelain
-        navigationController?.navigationBar.isHidden = true
 
         setupLayout()
 
@@ -93,6 +91,10 @@ class LoginViewController: UIViewController {
 
         emailTextField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(handleTextChanged), for: .editingChanged)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
     }
 
     @objc func handleTextChanged() {
@@ -146,7 +148,6 @@ class LoginViewController: UIViewController {
     @objc func registerButtonTapped(sender: UITapGestureRecognizer) {
         let registerVC = ChooseRoleRegistrationViewController()
         navigationController?.pushViewController(registerVC, animated: true)
-        self.navigationController?.isNavigationBarHidden = true
     }
 
 }

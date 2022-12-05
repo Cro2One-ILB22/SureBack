@@ -51,7 +51,18 @@ class MerchantFormBusinessSettingViewController: UIViewController {
         field.keyboardType = .numberPad
         return field
     }()
+    let alertWaiting: UIAlertController = {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        alert.view.tintColor = UIColor.black
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating()
+        alert.view.addSubview(loadingIndicator)
+        return alert
+    }()
     var cashbackMethodField: CustomTextField = CustomTextField(insets: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12))
+    var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Business Setting"
@@ -59,6 +70,7 @@ class MerchantFormBusinessSettingViewController: UIViewController {
         navigationItem.rightBarButtonItem = saveButton
         setupLayout()
         configure()
+        snackBarMessage = SnackBarMessage()
     }
     func configure() {
         guard let user = viewModel.user else {return}
@@ -70,23 +82,24 @@ class MerchantFormBusinessSettingViewController: UIViewController {
         tokenLimitField.text = "\(tokenLimit)"
     }
     @objc func saveButtonTapped() {
-        print("Save Button tapped")
-
+        present(alertWaiting, animated: true)
         guard let user = viewModel.user else {return}
         guard let percentCashbackCoin = Float(percentCashbackCoinField.text ?? "0.0") else {return}
         guard let maximumCashbackCoin = Int(maximumCashbackCoinField.text ?? "0") else {return}
         guard let tokenLimit = Int(tokenLimitField.text ?? "0") else {return}
-        updateDetailBusiness(cashbackPercent: percentCashbackCoin, cashbackLimit: maximumCashbackCoin, dailyTokenLimit: tokenLimit) {
+        apiRequest.updateMerchantDetail(cashbackPercent: percentCashbackCoin, cashbackLimit: maximumCashbackCoin, dailyTokenLimit: tokenLimit) {[weak self] _, statusCode in
+            guard let self = self else {return}
+            self.alertWaiting.dismiss(animated: true)
+            guard let statusCode = statusCode else {return}
+            if statusCode != 200 {
+                self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
+                return
+            }
             user.merchantDetail?.cashbackPercent = percentCashbackCoin
             user.merchantDetail?.cashbackLimit = maximumCashbackCoin
             user.merchantDetail?.dailyTokenLimit = tokenLimit
             self.viewModel.userSubject.on(.next(user))
             self.navigationController?.popViewController(animated: true)
-        }
-    }
-    private func updateDetailBusiness(cashbackPercent: Float, cashbackLimit: Int, dailyTokenLimit: Int, completion: @escaping () -> Void) {
-        apiRequest.updateMerchantDetail(cashbackPercent: cashbackPercent, cashbackLimit: cashbackLimit, dailyTokenLimit: dailyTokenLimit) { _ in
-            completion()
         }
     }
 }

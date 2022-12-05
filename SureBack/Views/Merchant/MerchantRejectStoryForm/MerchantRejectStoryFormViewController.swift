@@ -82,6 +82,7 @@ class MerchantRejectStoryFormViewController: UIViewController {
         button.layer.cornerRadius = 10
         return button
     }()
+    var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .porcelain
@@ -93,9 +94,9 @@ class MerchantRejectStoryFormViewController: UIViewController {
         suggestMessage5.addTarget(self, action: #selector(suggestMessageAction), for: .touchUpInside)
         sendToCustButton.addTarget(self, action: #selector(sendToCustAction), for: .touchUpInside)
         closeImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(close)))
+        snackBarMessage = SnackBarMessage()
     }
     @objc func close() {
-        print("Tapp")
         dismiss(animated: true)
     }
     @objc func suggestMessageAction(sender: UIButton) {
@@ -113,7 +114,7 @@ class MerchantRejectStoryFormViewController: UIViewController {
             UIPasteboard.general.string = suggestMessage5.currentTitle
         case .none:
             return
-        case .some(_):
+        case .some:
             return
         }
         if let myString = UIPasteboard.general.string {
@@ -123,8 +124,14 @@ class MerchantRejectStoryFormViewController: UIViewController {
     @objc func sendToCustAction() {
         guard let note = messageField.text else {return}
         guard let id = id else {return}
-        apiRequest.approveStory(false, id: id, note: note) {[weak self] data in
-            self?.dismiss(animated: true)
+        apiRequest.approveStory(false, id: id, note: note) {[weak self] _, statusCode in
+            guard let self = self else {return}
+            guard let statusCode = statusCode else {return}
+            if statusCode != 200 {
+                self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
+                return
+            }
+            self.dismiss(animated: true)
         }
     }
 }

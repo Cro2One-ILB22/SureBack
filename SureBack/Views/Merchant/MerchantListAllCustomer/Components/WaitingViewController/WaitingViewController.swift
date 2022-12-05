@@ -9,6 +9,7 @@ import UIKit
 
 class WaitingViewController: UIViewController {
     var listUserStory: [MyStoryData] = []
+    private let apiRequest = RequestFunction()
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .plain)
         table.register(ItemCustomerStoryTableCell.self, forCellReuseIdentifier: ItemCustomerStoryTableCell.id)
@@ -30,6 +31,7 @@ class WaitingViewController: UIViewController {
         loading.isHidden = true
         return loading
     }()
+    var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
@@ -38,12 +40,17 @@ class WaitingViewController: UIViewController {
         tableView.dataSource = self
         getWaitingStoryCustomer()
         setupLayout()
+        snackBarMessage = SnackBarMessage()
     }
     private func getWaitingStoryCustomer(search customerName: String = "") {
-//        try! KeychainHelper.standard.save(key: .accessToken, value: "158|aZv8kOUYRdqVtYFA7yCScXbqybST2oMaostKG4Pb")
-        let rf = RequestFunction()
-        rf.getCustomerStory(submitted: true, searchCustomerByName: customerName) { data in
-            self.listUserStory = data.data
+        apiRequest.getCustomerStory(submitted: true, searchCustomerByName: customerName) {[weak self] data, statusCode in
+            guard let self = self else {return}
+            guard let statusCode = statusCode else {return}
+            if statusCode != 200 {
+                self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
+                return
+            }
+            self.listUserStory = data?.data ?? []
             self.tableView.reloadData()
             self.showLoadingIndicator(false)
         }

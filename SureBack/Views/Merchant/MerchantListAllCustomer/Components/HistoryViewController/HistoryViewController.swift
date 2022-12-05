@@ -9,6 +9,7 @@ import UIKit
 
 class HistoryViewController: UIViewController {
     var listHistoryStoryCustomer: [MyStoryData] = []
+    private let apiRequest = RequestFunction()
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .plain)
         table.register(ItemCustomerStoryTableCell.self, forCellReuseIdentifier: ItemCustomerStoryTableCell.id)
@@ -30,6 +31,7 @@ class HistoryViewController: UIViewController {
         loading.isHidden = true
         return loading
     }()
+    var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
         showLoadingIndicator(true)
@@ -38,12 +40,17 @@ class HistoryViewController: UIViewController {
         searchBar.delegate = self
         setupLayout()
         getHistoryStoryCustomer()
+        snackBarMessage = SnackBarMessage()
     }
     private func getHistoryStoryCustomer(search searchedName: String = "") {
-        let rf = RequestFunction()
-        rf.getCustomerStory(expired: true, searchCustomerByName: searchedName) { data in
-            print("Datanya", data.data)
-            self.listHistoryStoryCustomer = data.data
+        apiRequest.getCustomerStory(assessed: true, searchCustomerByName: searchedName) {[weak self] data, statusCode in
+            guard let self = self else {return}
+            guard let statusCode = statusCode else {return}
+            if statusCode != 200 {
+                self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
+                return
+            }
+            self.listHistoryStoryCustomer = data?.data ?? []
             self.tableView.reloadData()
             self.showLoadingIndicator(false)
         }

@@ -524,6 +524,16 @@ extension RequestFunction {
         
         requestWithToken(url: url, method: .post, parameters: body) { completion($0.result) }
     }
+
+    func sendTotalPurchase(customerId: Int, totalPurchase: Int, completion: @escaping (Result<Data?, AFError>) -> Void) {
+        let url = Endpoints.sendTotalPurchase.url
+        let body: [String: Any] = [
+            "customer_id": customerId,
+            "total_purchase": totalPurchase,
+        ]
+
+        requestWithToken(url: url, method: .post, parameters: body, completionHandler: { completion($0.result) })
+    }
 }
 
 extension RequestFunction {

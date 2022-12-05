@@ -119,11 +119,12 @@ class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         print("scanQR result: \(userData)")
         guard let customerId = Int(userData) else { return }
         apiRequest.responseQRPurchase(customerId: customerId) { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success:
-                let totalPurchaseVC = TotalPurchaseFormViewController()
+                let totalPurchaseVC = TotalPurchaseFormViewController(presenter: self, customerId: customerId)
                 totalPurchaseVC.hidesBottomBarWhenPushed = true
-                self?.present(totalPurchaseVC, animated: true)
+                self.present(totalPurchaseVC, animated: true)
             case .failure(let failure):
                 print(failure)
             }

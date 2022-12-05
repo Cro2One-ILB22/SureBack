@@ -8,7 +8,10 @@
 import UIKit
 
 class TotalPurchaseFormViewController: CommonSheetViewController {
+    private weak var presenter: UIViewController?
     var totalPurchase: String?
+    let customerId: Int
+    private let apiRequest = RequestFunction()
     let information: UILabel = {
         let label = UILabel()
         label.text = "Please pay attention to the nominal that you will input."
@@ -55,15 +58,38 @@ class TotalPurchaseFormViewController: CommonSheetViewController {
     }
     @objc func didTapConfirm() {
         guard let totalPurchase = totalPurchaseField.text else {return}
-        if totalPurchase.isEmpty {
+        guard !totalPurchase.isEmpty, let totalPurchase = Int(totalPurchase), totalPurchase > 0 else {
             self.showAlert(title: "Total Purchase", message: "Please input total purchase", action: "Okey")
             return
         }
-        self.showAlert(title: "Total Purchase Confirmed", message: "Make sure the nominal is correct", action: "Done") { _ in
-            // Pindah ke halaman detail purchase
+        apiRequest.sendTotalPurchase(customerId: customerId, totalPurchase: totalPurchase) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.dismiss(animated: true) {
+                    if self.presenter is ScanQrViewController, let presenter = self.presenter {
+                        let merchantDetailVC = MerchantDetailPurchaseViewController(presenter: presenter, customerId: self.customerId)
+                        merchantDetailVC.totalPurchase = totalPurchase
+                        self.presenter?.navigationController?.pushViewController(merchantDetailVC, animated: true)
+                    } else if let presenter = self.presenter as? MerchantDetailPurchaseViewController {
+                        presenter.totalPurchase = totalPurchase
+                    }
+                }
+            case .failure(let failure):
+                print(failure)
+            }
         }
     }
 
+    init(presenter: UIViewController, customerId: Int) {
+        self.presenter = presenter
+        self.customerId = customerId
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension TotalPurchaseFormViewController {

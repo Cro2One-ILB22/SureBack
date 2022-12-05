@@ -8,6 +8,7 @@
 import UIKit
 
 class MerchantTransactionHistoryViewController: UIViewController {
+    var onDismiss: (() -> Void)?
     var customer: UserInfoResponse?
     var purchaseData: PurchaseResponse?
     let userViewModel = UserViewModel.shared
@@ -52,6 +53,10 @@ class MerchantTransactionHistoryViewController: UIViewController {
     }
     @objc func didTapClose() {
         dismiss(animated: true)
+    }
+
+    deinit {
+        onDismiss?()
     }
 }
 

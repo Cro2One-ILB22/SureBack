@@ -9,7 +9,24 @@ import PusherSwift
 import UIKit
 
 class CustomerPurchaseViewController: UIViewController {
+    var totalPurchase = 0 {
+        didSet {
+            let coins = merchant?.individualCoins?.filter({ $0.coinType == "local" }).first?.outstanding ?? 0
+            // floor to the nearest 1000
+            let flooredCoins = Int(floor(Double(coins) / 1000) * 1000)
+            var coinsUsed = 0
+            if totalPurchase > 1000 {
+                coinsUsed = Int(floor(Double(min(flooredCoins, totalPurchase)) / 1000) * 1000 )
+            }
+
+            secondView.totalPurchaseValue.text = String(totalPurchase)
+            secondView.coinUsedValue.text = String(coinsUsed)
+            secondView.totalPaymentValue.text = String(totalPurchase - coinsUsed)
+            secondView.coinBalanceValue.text = String(coins - coinsUsed)
+        }
+    }
     var purchasePusherService: PurchasePusherSerivce?
+    var merchant: UserInfoResponse?
     let merchantId: Int
     let userViewModel = UserViewModel.shared
     let merchantsProcessViewModel = MerchantsProcessViewModel.shared
@@ -93,7 +110,7 @@ class CustomerPurchaseViewController: UIViewController {
         apiRequest.getMerchantById(id: merchantId) { [weak self] response in
             switch response {
             case let .success(merchant):
-                self?.secondView.coinUsedValue.text = String(merchant.individualCoins?.filter({ $0.coinType == "local" }).first?.outstanding ?? 0)
+                self?.merchant = merchant
                 self?.firstView.merchantNameValue.text = merchant.name
             case let .failure(failure):
                 print(failure)
@@ -101,25 +118,30 @@ class CustomerPurchaseViewController: UIViewController {
         }
 
         purchasePusherService?.purchase(customerId: user.id, merchantId: merchantId) { [weak self] response in
-            guard let self = self, let coins = self.secondView.coinUsedValue.text, let coins = Int(coins), let purchase = response.purchase else { return }
-            self.apiRequest.requestPurchase(merchantId: self.merchantId, coinsUsed: self.isUseCoinActive ? coins : 0, isRequestingForToken: self.isGetTokenActive) { [weak self] response in
-                guard let self = self else { return }
-                switch response {
-                case .success:
-                    self.purchasePusherService?.disconnect()
-                    self.merchantsProcessViewModel.fetchMerchants()
-                    self.activeTokensViewModel.fetchTokens()
-                    self.alertWaiting.dismiss(animated: true, completion: {
-                        self.alertSuccess.title = "Congratulations!"
-                        self.alertSuccess.message = "Transaction success"
-                        self.alertSuccess.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                            self.navigationController?.popViewController(animated: true)
-                        }))
-                        self.present(self.alertSuccess, animated: true, completion: nil)
-                    })
-                case let .failure(failure):
-                    print(failure)
+            guard let self = self else { return }
+
+            if let purchase = response.purchase, let coins = self.secondView.coinUsedValue.text, let coins = Int(coins) {
+                self.apiRequest.requestPurchase(merchantId: self.merchantId, coinsUsed: self.isUseCoinActive ? coins : 0, isRequestingForToken: self.isGetTokenActive) { [weak self] response in
+                    guard let self = self else { return }
+                    switch response {
+                    case .success:
+                        self.purchasePusherService?.disconnect()
+                        self.merchantsProcessViewModel.fetchMerchants()
+                        self.activeTokensViewModel.fetchTokens()
+                        self.alertWaiting.dismiss(animated: true, completion: {
+                            self.alertSuccess.title = "Congratulations!"
+                            self.alertSuccess.message = "Transaction success"
+                            self.alertSuccess.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                                self.navigationController?.popViewController(animated: true)
+                            }))
+                            self.present(self.alertSuccess, animated: true, completion: nil)
+                        })
+                    case let .failure(failure):
+                        print(failure)
+                    }
                 }
+            } else if let totalPurchase = response.totalPurchase {
+                self.totalPurchase = totalPurchase
             }
         }
     }

@@ -21,7 +21,7 @@ class UserInfoResponse: Codable, AutoEquatable {
     var emailVerifiedAt: String?
     let createdAt, updatedAt: String?
     let roles: [String]?
-    let outstandingCoins, exchangedCoins: Coins
+    let outstandingCoins, exchangedCoins: Coins?
     var merchantDetail: MerchantDetailResponse?
     let coins: [Coin]?
     let individualCoins: [Coin]?

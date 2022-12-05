@@ -142,7 +142,7 @@
 		ACE87EAD293B5D4B00DB3DED /* CustomerPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE87EAC293B5D4B00DB3DED /* CustomerPurchaseViewController.swift */; };
 		ACE87EAF293B928200DB3DED /* CustomerPurchaseSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE87EAE293B928200DB3DED /* CustomerPurchaseSecondView.swift */; };
 		ACE87EB1293BCC6500DB3DED /* TokenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE87EB0293BCC6500DB3DED /* TokenViewModel.swift */; };
-		ACE87EB3293D022500DB3DED /* MerchantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE87EB2293D022500DB3DED /* MerchantsViewModel.swift */; };
+		ACE87EB3293D022500DB3DED /* MerchantsProcessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE87EB2293D022500DB3DED /* MerchantsProcessViewModel.swift */; };
 		ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE8C3582916267800BEA778 /* LoginViewController.swift */; };
 		ACF6441E2925DF2900A6AD10 /* CustomerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF6441D2925DF2900A6AD10 /* CustomerProfileViewController.swift */; };
 /* End PBXBuildFile section */
@@ -312,7 +312,7 @@
 		ACE87EAC293B5D4B00DB3DED /* CustomerPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerPurchaseViewController.swift; sourceTree = "<group>"; };
 		ACE87EAE293B928200DB3DED /* CustomerPurchaseSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerPurchaseSecondView.swift; sourceTree = "<group>"; };
 		ACE87EB0293BCC6500DB3DED /* TokenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenViewModel.swift; sourceTree = "<group>"; };
-		ACE87EB2293D022500DB3DED /* MerchantsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantsViewModel.swift; sourceTree = "<group>"; };
+		ACE87EB2293D022500DB3DED /* MerchantsProcessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantsProcessViewModel.swift; sourceTree = "<group>"; };
 		ACE8C3582916267800BEA778 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ACF6441D2925DF2900A6AD10 /* CustomerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerProfileViewController.swift; sourceTree = "<group>"; };
 		BB6F53CE101281D823C272BB /* Pods_SureBack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -953,7 +953,7 @@
 			children = (
 				AC24AA4829327F480050A086 /* UserViewModel.swift */,
 				ACE87EB0293BCC6500DB3DED /* TokenViewModel.swift */,
-				ACE87EB2293D022500DB3DED /* MerchantsViewModel.swift */,
+				ACE87EB2293D022500DB3DED /* MerchantsProcessViewModel.swift */,
 				16EFD666293DAA8F00D6C396 /* CustomerStoryViewModel.swift */,
 			);
 			path = ViewModels;
@@ -1345,7 +1345,7 @@
 				1619BB2B2919B74800085B74 /* FormRegistrationViewController.swift in Sources */,
 				AC00FA35290A5D3600B6347D /* ScanQrViewController.swift in Sources */,
 				AC886E852924CD7B007F1E41 /* ActiveTokenTableViewCell.swift in Sources */,
-				ACE87EB3293D022500DB3DED /* MerchantsViewModel.swift in Sources */,
+				ACE87EB3293D022500DB3DED /* MerchantsProcessViewModel.swift in Sources */,
 				AC3FEDCC2908346C0011202E /* RequestFunction.swift in Sources */,
 				ACF6441E2925DF2900A6AD10 /* CustomerProfileViewController.swift in Sources */,
 				1603EFE6292B2F3300EC5485 /* ItemCustomerStoryTableCell.swift in Sources */,
@@ -1552,7 +1552,7 @@
 				CODE_SIGN_ENTITLEMENTS = SureBack/SureBack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C8VS35NTZ7;
+				DEVELOPMENT_TEAM = BAFJ582D2S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
@@ -1571,7 +1571,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = cro2one.SureBack;
+				PRODUCT_BUNDLE_IDENTIFIER = mfahmialkautsar.SureBack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -8,12 +8,18 @@
 import UIKit
 
 class MerchantDetailPurchaseViewController: UIViewController {
-//    var purchasePusherService: PurchasePusherSerivce?
-//    let customerId: Int
-//    var customer: UserInfoResponse?
-//    var qrScanPurchase: QRScanPurchase?
-//    let apiRequest = RequestFunction()
-//    let userViewModel = UserViewModel.shared
+    private weak var presenter: UIViewController?
+    var purchasePusherService: PurchasePusherSerivce?
+    var totalPurchase: Int = 0 {
+        didSet {
+            totalPurchaseValueLabel.text = String(totalPurchase)
+        }
+    }
+    let customerId: Int
+    var customer: UserInfoResponse?
+    var qrScanPurchase: QRScanPurchase?
+    let apiRequest = RequestFunction()
+    let userViewModel = UserViewModel.shared
     let totalPurchaseTextLabel: UILabel = {
         let label = UILabel()
         label.text = "Total Purchase"
@@ -140,29 +146,33 @@ class MerchantDetailPurchaseViewController: UIViewController {
     var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
-//        apiRequest.getCustomerById(id: customerId) { [weak self] response in
-//            switch response {
-//            case .success(let customer):
-//            guard let self = self, let merchant = self.userViewModel.user else { return }
-//                self.setupContent(customer: customer, merchant: merchant)
-//                self.customer = customer
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-//        purchasePusherService = PurchasePusherSerivce(delegate: self)
-//        guard let user = userViewModel.user else { return }
-//        purchasePusherService?.purchase(customerId: customerId, merchantId: user.id) { [weak self] response in
-//            guard let self = self else { return }
-//            self.qrScanPurchase = response
-//            if let purchaseRequest = response.purchaseRequest {
-//                self.exchangedCoinValueLabel.text = String(purchaseRequest.usedCoins)
-//                self.exchangedCoinValueLabel.font = .systemFont(ofSize: 15)
-//                self.exchangedCoinValueLabel.textColor = .black
-//                self.generateTokenButton.isEnabled = true
-//                self.generateTokenButton.backgroundColor = .tealishGreen
-//            }
-//        }
+        apiRequest.getCustomerById(id: customerId) { [weak self] response in
+            switch response {
+            case .success(let customer):
+            guard let self = self, let merchant = self.userViewModel.user else { return }
+                self.setupContent(customer: customer, merchant: merchant)
+                self.customer = customer
+            case .failure(let error):
+                print(error)
+            }
+        }
+        purchasePusherService = PurchasePusherSerivce(delegate: self)
+        guard let user = userViewModel.user else { return }
+        purchasePusherService?.purchase(customerId: customerId, merchantId: user.id) { [weak self] response in
+            guard let self = self else { return }
+            self.qrScanPurchase = response
+            if let purchaseRequest = response.purchaseRequest {
+                let percentCashback = self.userViewModel.user?.merchantDetail?.cashbackPercent ?? 0
+                let coinsUsed = purchaseRequest.coinsUsed
+                self.exchangedCoinValueLabel.text = String(coinsUsed)
+                self.exchangedCoinValueLabel.font = .systemFont(ofSize: 15)
+                self.exchangedCoinValueLabel.textColor = .black
+                self.makePurchaseButton.isEnabled = true
+                self.makePurchaseButton.backgroundColor = .tealishGreen
+                self.totalPaymentValueLabel.text = String(self.totalPurchase - coinsUsed)
+                self.cashbackCoinValueLabel.text = String(Int(self.userViewModel.user?.merchantDetail?.cashbackCalculationMethod == "payment_amount" ? (Float(self.totalPaymentValueLabel.text ?? "") ?? 0) * percentCashback : Float(self.totalPurchase) * percentCashback) / 100)
+            }
+        }
         view.backgroundColor = .porcelain
         makePurchaseButton.addTarget(self, action: #selector(generateTokenAction), for: .touchUpInside)
         setupLayout()
@@ -170,49 +180,53 @@ class MerchantDetailPurchaseViewController: UIViewController {
         editImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapEdit)))
     }
     @objc func didTapEdit() {
-        let sheetInputTotalPurchase = TotalPurchaseFormViewController()
+        let sheetInputTotalPurchase = TotalPurchaseFormViewController(presenter: self, customerId: customerId)
         sheetInputTotalPurchase.totalPurchase = ""
         present(sheetInputTotalPurchase, animated: true)
     }
     @objc func generateTokenAction() {
         present(alertWaiting, animated: true)
-//        guard let purchaseRequest = qrScanPurchase?.purchaseRequest else { return }
-//        guard let purchaseAmount = totalPurchaseField.text, let purchaseAmount = Int(purchaseAmount) else { return }
-//        let isRequestingToken = purchaseRequest.isRequestingForToken ? 1 : 0
-//        let coinUser = purchaseRequest.usedCoins
-//        generateToken(purchaseAmount: purchaseAmount, coinUser: coinUser, isRequestingToken: isRequestingToken)
+        guard let purchaseRequest = qrScanPurchase?.purchaseRequest else { return }
+        guard let purchaseAmount = totalPurchaseValueLabel.text, let purchaseAmount = Int(purchaseAmount) else { return }
+        let isRequestingToken = purchaseRequest.isRequestingForToken ? 1 : 0
+        let coinUsed = purchaseRequest.coinsUsed
+        generateToken(purchaseAmount: purchaseAmount, coinUsed: coinUsed, isRequestingToken: isRequestingToken)
     }
 
-    private func generateToken(purchaseAmount: Int, coinUser: Int, isRequestingToken: Int) {
-//        apiRequest.postGenerateTokenOffline(
-//            customerId: self.customerId, purchaseAmount: purchaseAmount, isRequestingToken: isRequestingToken) {[weak self] data, statusCode in
-//            guard let self = self else {return}
-//            guard let statusCode = statusCode else {return}
-//            self.alertWaiting.dismiss(animated: true)
-//            if statusCode != 200 {
-//                self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
-//                return
-//            }
-//            self.navigationController?.popToRootViewController(animated: true)
-//            let detailTransactionVC = MerchantTransactionHistoryViewController()
-//            detailTransactionVC.customer = self.customer
-//            detailTransactionVC.purchaseData = data
-//            self.present(detailTransactionVC, animated: true)
-//        }
+    private func generateToken(purchaseAmount: Int, coinUsed: Int, isRequestingToken: Int) {
+        apiRequest.postGenerateTokenOffline(
+            customerId: self.customerId, purchaseAmount: purchaseAmount, coinUsed: coinUsed, isRequestingToken: isRequestingToken) {[weak self] data, statusCode in
+            guard let self = self else {return}
+            guard let statusCode = statusCode else {return}
+                self.alertWaiting.dismiss(animated: true) {
+                    if statusCode != 200 {
+                        self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
+                        return
+                    }
+                    let detailTransactionVC = MerchantTransactionHistoryViewController()
+                    detailTransactionVC.customer = self.customer
+                    detailTransactionVC.purchaseData = data
+                    detailTransactionVC.onDismiss = {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                    self.present(detailTransactionVC, animated: true)
+                }
+        }
     }
-//    init(customerId: Int) {
-//        self.customerId = customerId
-//        super.init(nibName: nil, bundle: nil)
-//    }
-
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
 
     func setupContent(customer: UserInfoResponse, merchant: UserInfoResponse) {
         customerNameValueLabel.text = customer.name
-//        purchaseDateValueLabel.text = String(DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .short))
         percentageValueLabel.text = String(merchant.merchantDetail?.cashbackPercent ?? 0)
-//        expiredDateValueLabel.text = String(DateFormatter.localizedString(from: Date().addingTimeInterval(18 * 60 * 60), dateStyle: .medium, timeStyle: .short))
+    }
+
+    init(presenter: UIViewController, customerId: Int) {
+        self.presenter = presenter
+        self.customerId = customerId
+        self.totalPurchaseValueLabel.text = String(totalPurchase)
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

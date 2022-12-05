@@ -44,6 +44,7 @@ enum Endpoints: Endpoint {
     case getMyStory
     case responseQRPurchase
     case requestPurchase
+    case sendTotalPurchase
 
     public var url: String {
         switch self {
@@ -101,6 +102,8 @@ enum Endpoints: Endpoint {
             return "\(API.baseUrl)/api/broadcasting/qr/response"
         case .requestPurchase:
             return "\(API.baseUrl)/api/broadcasting/qr/purchase"
+        case .sendTotalPurchase:
+            return "\(API.baseUrl)/api/broadcasting/qr/total-purchase"
         }
     }
 }

@@ -29,3 +29,7 @@ extension SendDataDelegate {
 protocol CustomSegmentedControlDelegate: AnyObject {
     func change(to index: Int)
 }
+
+protocol SendBookmark {
+    func didTapBookmark(merchantId: Int, isFavorite: Bool)
+}

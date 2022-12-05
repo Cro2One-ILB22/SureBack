@@ -14,6 +14,8 @@ class CustomerListAllMerchantViewController: UIViewController {
     var merchantData = [UserInfoResponse]()
     var activeTokenData = [Token]()
 
+    var delegate: SendBookmark?
+
     lazy var searchBar: UISearchBar = {
         let search = UISearchBar()
         search.searchBarStyle = .minimal
@@ -82,9 +84,11 @@ class CustomerListAllMerchantViewController: UIViewController {
                     self.merchantData[tag].isFavorite = result.isFavorite
                     guard let isFavorite = result.isFavorite else {return}
                     let image = isFavorite ? "bookmark.on" : "bookmark.off"
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [self] in
                         cell?.bookmarkImage.image = UIImage(named: image)
                         self.tableView.reloadData()
+//                        self.delegate?.didTapBookmark(tag: tag, isFavorite: isFavorite)
+                        self.delegate?.didTapBookmark(merchantId: self.merchantData[tag].id, isFavorite: isFavorite)
                     }
                 case let .failure(error):
                     print(error)
@@ -98,7 +102,6 @@ class CustomerListAllMerchantViewController: UIViewController {
 extension CustomerListAllMerchantViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         showLoadingIndicator(true)
-        print("Hasil pencarion", searchText.lowercased())
         getListAllMerchant(search: searchText.lowercased())
     }
 }
@@ -131,7 +134,7 @@ extension CustomerListAllMerchantViewController: UITableViewDelegate, UITableVie
             completed: nil
         )
         cell.merchantNameLabel.text = merchantData[indexPath.row].name
-        cell.totalCoinsLabel.text = "\(merchantData[indexPath.row].balance) coin(s)"
+        cell.totalCoinsLabel.text = "\(merchantData[indexPath.row].individualCoins?[1].outstanding ?? 0) Coin(s)"
         cell.bookmarkImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bookmarkTapped)))
         cell.bookmarkImage.tag = indexPath.row
         cell.bookmarkImage.isUserInteractionEnabled = true

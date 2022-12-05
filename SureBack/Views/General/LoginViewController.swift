@@ -27,6 +27,7 @@ class LoginViewController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.placeholder = "Email"
         textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        textField.autocapitalizationType = .none
         return textField
     }()
 
@@ -36,6 +37,7 @@ class LoginViewController: UIViewController {
         textField.placeholder = "Password"
         textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         textField.isSecureTextEntry = true
+        textField.autocapitalizationType = .none
         return textField
     }()
 
@@ -114,7 +116,7 @@ class LoginViewController: UIViewController {
     }
 
     @objc func loginButtonTapped() {
-        guard let email = emailTextField.text, let password = passwordTextField.text else {
+        guard let email = emailTextField.text?.lowercased(), let password = passwordTextField.text else {
             return print("email or password is nil")
         }
         if email.isEmpty || password.isEmpty {

@@ -12,6 +12,8 @@ class CustomerPurchaseViewController: UIViewController {
     var purchasePusherService: PurchasePusherSerivce?
     let merchantId: Int
     let userViewModel = UserViewModel.shared
+    let merchantsProcessViewModel = MerchantsProcessViewModel.shared
+    let activeTokensViewModel = ActiveTokensViewModel.shared
     let apiRequest = RequestFunction()
     var isGetTokenActive = true
     var isUseCoinActive = true
@@ -63,9 +65,9 @@ class CustomerPurchaseViewController: UIViewController {
         guard let coinsUsed = secondView.coinUsedValue.text, let coinsUsed = Int(coinsUsed) else { return }
         present(alertWaiting, animated: true, completion: nil)
 
-//        apiRequest.requestPurchase(merchantId: merchantId, usedCoins: coinsUsed, isRequestingForToken: isUseCoinActive) { [weak self] _ in
-//            guard let self = self else { return }
-//        }
+        apiRequest.requestPurchase(merchantId: merchantId, coinsUsed: isUseCoinActive ? coinsUsed : 0, isRequestingForToken: isGetTokenActive) { [weak self] _ in
+            guard let self = self else { return }
+        }
     }
 
     override func viewDidLoad() {
@@ -88,36 +90,38 @@ class CustomerPurchaseViewController: UIViewController {
         firstView.dateLabel.text = Date().dateToString()
         firstView.usernameLabel.text = "@\(user.instagramUsername)"
 //
-//        apiRequest.getMerchantById(id: merchantId) { [weak self] response in
-//            switch response {
-//            case let .success(merchant):
-//                self?.secondView.coinUsedValue.text = String(merchant.individualCoins?.filter({ $0.coinType == "local" }).first?.outstanding ?? 0)
-//                self?.firstView.merchantNameValue.text = merchant.name
-//            case let .failure(failure):
-//                print(failure)
-//            }
-//        }
+        apiRequest.getMerchantById(id: merchantId) { [weak self] response in
+            switch response {
+            case let .success(merchant):
+                self?.secondView.coinUsedValue.text = String(merchant.individualCoins?.filter({ $0.coinType == "local" }).first?.outstanding ?? 0)
+                self?.firstView.merchantNameValue.text = merchant.name
+            case let .failure(failure):
+                print(failure)
+            }
+        }
 
-//        purchasePusherService?.purchase(customerId: user.id, merchantId: merchantId) { [weak self] response in
-//            guard let self = self, let coins = self.secondView.coinUsedValue.text, let coins = Int(coins), let purchase = response.purchase else { return }
-//            self.apiRequest.requestPurchase(merchantId: self.merchantId, usedCoins: coins, isRequestingForToken: self.isGetTokenActive) { [weak self] response in
-//                guard let self = self else { return }
-//                switch response {
-//                case .success:
-//                    self.purchasePusherService?.disconnect()
-//                    self.alertWaiting.dismiss(animated: true, completion: {
-//                        self.alertSuccess.title = "Congratulations!"
-//                        self.alertSuccess.message = "Transaction success"
-//                        self.alertSuccess.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-//                            self.navigationController?.popViewController(animated: true)
-//                        }))
-//                        self.present(self.alertSuccess, animated: true, completion: nil)
-//                    })
-//                case let .failure(failure):
-//                    print(failure)
-//                }
-//            }
-//        }
+        purchasePusherService?.purchase(customerId: user.id, merchantId: merchantId) { [weak self] response in
+            guard let self = self, let coins = self.secondView.coinUsedValue.text, let coins = Int(coins), let purchase = response.purchase else { return }
+            self.apiRequest.requestPurchase(merchantId: self.merchantId, coinsUsed: self.isUseCoinActive ? coins : 0, isRequestingForToken: self.isGetTokenActive) { [weak self] response in
+                guard let self = self else { return }
+                switch response {
+                case .success:
+                    self.purchasePusherService?.disconnect()
+                    self.merchantsProcessViewModel.fetchMerchants()
+                    self.activeTokensViewModel.fetchTokens()
+                    self.alertWaiting.dismiss(animated: true, completion: {
+                        self.alertSuccess.title = "Congratulations!"
+                        self.alertSuccess.message = "Transaction success"
+                        self.alertSuccess.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                            self.navigationController?.popViewController(animated: true)
+                        }))
+                        self.present(self.alertSuccess, animated: true, completion: nil)
+                    })
+                case let .failure(failure):
+                    print(failure)
+                }
+            }
+        }
     }
 
     init(merchantId: Int) {

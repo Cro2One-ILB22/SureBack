@@ -6,18 +6,17 @@
 //
 
 import UIKit
+import RxSwift
 
 class ActiveTokenTableViewCell: UITableViewCell {
 
     static let id = "ActiveTokenTableViewCell"
 
     var delegate: UIViewToController?
-    var activateTokenData = [Token]() {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
     var user: UserInfoResponse!
+    let activeTokensViewModel = ActiveTokensViewModel.shared
+    private let disposeBag = DisposeBag()
+    private var loadingService: LoadingService?
 
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -53,6 +52,13 @@ class ActiveTokenTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func didMoveToSuperview() {
+        activeTokensViewModel.activeTokensSubject.subscribe(onNext: { [weak self] tokens in
+            self?.loadingService?.setState(state: tokens.loadingState)
+            self?.collectionView.reloadData()
+        }).disposed(by: disposeBag)
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         collectionView.frame = contentView.bounds
@@ -65,20 +71,20 @@ extension ActiveTokenTableViewCell: UICollectionViewDataSource, UICollectionView
             return UICollectionViewCell()
         }
         cell.backgroundColor = .lightGray
-        cell.tokenMerchantNameLabel.text = activateTokenData[indexPath.row].purchase?.merchant?.name
+        cell.tokenMerchantNameLabel.text = activeTokensViewModel.activeTokens.tokens[indexPath.row].purchase?.merchant?.name
         cell.redeemButton.tag = indexPath.row
         cell.redeemButton.addTarget(self, action: #selector(toRedeemTokenTapped), for: .touchUpInside)
-        cell.expireAt = activateTokenData[indexPath.row].expiresAt.stringToDate()
+        cell.expireAt = activeTokensViewModel.activeTokens.tokens[indexPath.row].expiresAt.stringToDate()
 
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if activateTokenData.count == 1 {
+        if activeTokensViewModel.activeTokens.tokens.count == 1 {
             pageControl.isHidden = true
         }
-        pageControl.numberOfPages = activateTokenData.count
-        return activateTokenData.count
+        pageControl.numberOfPages = activeTokensViewModel.activeTokens.tokens.count
+        return activeTokensViewModel.activeTokens.tokens.count
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -89,6 +95,6 @@ extension ActiveTokenTableViewCell: UICollectionViewDataSource, UICollectionView
     }
 
     @objc func toRedeemTokenTapped(sender: UIButton) {
-        delegate?.didToRedeemTapButton(data: activateTokenData[sender.tag], user: user)
+        delegate?.didToRedeemTapButton(data: activeTokensViewModel.activeTokens.tokens[sender.tag], user: user)
     }
 }

@@ -282,7 +282,8 @@ extension RequestFunction {
         body["customer_id"] = customerId
         body["purchase_amount"] = purchaseAmount
         body["is_requesting_for_token"] = isRequestingToken
-        body["used_coins"] = coinUsed
+        body["coins_used"] = coinUsed
+
         requestWithToken(url: url, method: .post, parameters: body, decodable: PurchaseResponse.self) {
             response in
             switch response.result {
@@ -512,12 +513,12 @@ extension RequestFunction {
         
         requestWithToken(url: url, method: .post, parameters: body) { completion($0.result) }
     }
-    
-    func requestPurchase(merchantId: Int, usedCoins: Int = 0, isRequestingForToken: Bool, completion: @escaping (Result<Data?, AFError>) -> Void) {
+
+    func requestPurchase(merchantId: Int, coinsUsed: Int = 0, isRequestingForToken: Bool, completion: @escaping (Result<Data?, AFError>) -> Void) {
         let url = Endpoints.requestPurchase.url
         let body: [String: Any] = [
             "merchant_id": merchantId,
-            "used_coins": usedCoins,
+            "coins_used": coinsUsed,
             "is_requesting_for_token": isRequestingForToken ? 1 : 0,
         ]
         

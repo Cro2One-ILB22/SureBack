@@ -17,8 +17,8 @@ class UserViewModel {
     private ( set ) var user: UserInfoResponse?
 
     init() {
-        userSubject.subscribe(onNext: { user in // onNext :
-            self.user = user
+        userSubject.subscribe(onNext: { [weak self] user in // onNext :
+            self?.user = user
         }).disposed(by: disposeBag)
     }
 }

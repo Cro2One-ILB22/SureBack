@@ -28,7 +28,7 @@ class ItemSubmitStoryCollectionViewCell: UICollectionViewCell {
     }()
     let userImageStory: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "person.crop.circle")
+        image.image = UIImage(named: "system.photo")
         image.layer.cornerRadius = 20
         image.clipsToBounds = true
         return image
@@ -36,9 +36,7 @@ class ItemSubmitStoryCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.cornerRadius = 10
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.gray.cgColor
-        backgroundColor = .gray
+        backgroundColor = .tealishGreenWithOpacity
         setupConstraint()
     }
     required init?(coder: NSCoder) {

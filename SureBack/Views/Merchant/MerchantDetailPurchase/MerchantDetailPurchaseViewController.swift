@@ -182,6 +182,7 @@ class MerchantDetailPurchaseViewController: UIViewController {
 //        let coinUser = purchaseRequest.usedCoins
 //        generateToken(purchaseAmount: purchaseAmount, coinUser: coinUser, isRequestingToken: isRequestingToken)
     }
+
     private func generateToken(purchaseAmount: Int, coinUser: Int, isRequestingToken: Int) {
 //        apiRequest.postGenerateTokenOffline(
 //            customerId: self.customerId, purchaseAmount: purchaseAmount, isRequestingToken: isRequestingToken) {[weak self] data, statusCode in

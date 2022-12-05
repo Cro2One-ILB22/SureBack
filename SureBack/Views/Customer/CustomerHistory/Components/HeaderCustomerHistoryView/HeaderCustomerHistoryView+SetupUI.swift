@@ -89,6 +89,8 @@ extension HeaderCustomerHistoryView {
         contentView.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -10)
 
         contentView.addSubview(image)
+        image.setTopAnchorConstraint(equalTo: contentView.topAnchor)
+        image.setBottomAnchorConstraint(equalTo: contentView.bottomAnchor)
 
         // Stack All
         let stackViewAll = UIStackView(arrangedSubviews: [stackProfile, stackImageCoins, stackStatusRedeem])

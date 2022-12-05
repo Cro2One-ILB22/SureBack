@@ -16,17 +16,9 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
     private let disposeBag = DisposeBag()
     let request = RequestFunction()
     var user: UserInfoResponse!
-    var merchantData = [UserInfoResponse]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
 
-    var activeTokenData = [Token]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    let activeTokensViewModel = ActiveTokensViewModel.shared
+    let merchantsProcessViewModel = MerchantsProcessViewModel.shared
 
     var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -45,6 +37,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
     }()
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
     }
 
@@ -54,7 +47,26 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         setupLoadingIndicator()
         loadingService = LoadingService(loadingIndicator: loadingIndicator)
         locationSubject.subscribe(onNext: { [weak self] location in
-            self?.setupContent(location: location)
+            if let location = location {
+                self?.merchantsProcessViewModel.setLocation(location: location)
+            }
+            self?.merchantsProcessViewModel.fetchMerchants()
+        }).disposed(by: disposeBag)
+
+        activeTokensViewModel.fetchTokens()
+
+        activeTokensViewModel.activeTokensSubject.subscribe(onNext: { [weak self] tokens in
+            self?.loadingService?.setState(state: tokens.loadingState)
+
+            self?.tableView.reloadData()
+        }).disposed(by: disposeBag)
+
+        merchantsProcessViewModel.merchantsProcessSubject.subscribe(onNext: { [weak self] merchantsProcess in
+            self?.loadingService?.setState(state: merchantsProcess.loadingState)
+            if merchantsProcess.loadingState == .success {
+                self?.tableView.isHidden = false
+            }
+            self?.tableView.reloadData()
         }).disposed(by: disposeBag)
 
         tableView.isHidden = true
@@ -62,22 +74,6 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         let headerView = HeaderCustomerDashboardView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.screenWidth), height: 50))
         headerView.notifButton.addTarget(self, action: #selector(notifButtonTapped), for: .touchUpInside)
         setupView2(headerView: headerView)
-
-        request.getListToken(expired: 0, submitted: 0, redeemed: 1) { [weak self]data in
-            guard let self = self else {return}
-            switch data {
-            case let .success(result):
-                do {
-                    print("result data count: \(result.data.count)")
-                    self.activeTokenData = result.data
-                } catch let error as NSError {
-                    print(error.description)
-                }
-            case let .failure(error):
-                print(error)
-                print("failed to get active token")
-            }
-        }
 
         self.setupView()
     }
@@ -103,23 +99,26 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
         let allMerchantVC = CustomerListAllMerchantViewController()
         allMerchantVC.title = "All Merchant"
         allMerchantVC.user = user
-//        allMerchantVC.merchantData = merchantData
-        allMerchantVC.activeTokenData = activeTokenData
+        allMerchantVC.activeTokenData = activeTokensViewModel.activeTokens.tokens
         navigationController?.pushViewController(allMerchantVC, animated: true)
     }
 
     @objc func bookmarkTapped(_ sender: UITapGestureRecognizer) {
         guard let tag = sender.view?.tag else {return}
-        request.toggleMerchantFavorited(id: merchantData[tag].id) { response in
+        let indexPath = IndexPath(row: tag, section: 1)
+        let cell = self.tableView.cellForRow(at: indexPath) as? ItemMerchantTableViewCell
+        cell?.bookmarkImage.isUserInteractionEnabled = false
+
+        request.toggleMerchantFavorited(id: merchantsProcessViewModel.merchantsProcess.merchants[tag].id) { response in
 //            guard let self = self else {return}
             switch response {
             case .success(let result):
-                let indexPath = IndexPath(row: tag, section: 1)
-                let cell = self.tableView.cellForRow(at: indexPath) as? ItemMerchantTableViewCell
-                self.merchantData[tag].isFavorite = result.isFavorite
+
+                self.merchantsProcessViewModel.merchantsProcess.merchants[tag].isFavorite = result.isFavorite
                 guard let isFavorite = result.isFavorite else {return print("return")}
                 let image = isFavorite ? "bookmark.on" : "bookmark.off"
                 cell?.bookmarkImage.image = UIImage(named: image)
+                cell?.bookmarkImage.isUserInteractionEnabled = true
             case let .failure(error):
                 print(error)
                 print("failed to bookmarked the merchant")
@@ -140,9 +139,9 @@ class CustomerDashboardViewController: UIViewController, UIViewToController {
 extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return activeTokenData.count == 0 ? 0 : 1
+            return activeTokensViewModel.activeTokens.tokens.count == 0 ? 0 : 1
         } else {
-            if merchantData.count == 0 {
+            if merchantsProcessViewModel.merchantsProcess.merchants.count == 0 {
                 self.tableView.setEmptyMessage(
                     image: UIImage(named: "empty.merchant")!,
                     title: "Empty Merchant",
@@ -151,7 +150,7 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
             } else {
                 self.tableView.restore()
             }
-            return merchantData.count > 5 ? 5 : merchantData.count
+            return merchantsProcessViewModel.merchantsProcess.merchants.count > 5 ? 5 : merchantsProcessViewModel.merchantsProcess.merchants.count
         }
     }
 
@@ -160,7 +159,6 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ActiveTokenTableViewCell.id, for: indexPath) as? ActiveTokenTableViewCell else { return UITableViewCell() }
             cell.delegate = self
-            cell.activateTokenData = activeTokenData
             cell.user = user
             return cell
         default:
@@ -171,17 +169,18 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
 
             cell.merchantImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.merchantImage.sd_setImage(
-                with: URL(string: merchantData[indexPath.row].profilePicture ?? ""),
+                with: URL(string: merchantsProcessViewModel.merchantsProcess.merchants[indexPath.row].profilePicture ?? ""),
                 placeholderImage: UIImage(named: "system.photo"),
                 options: .progressiveLoad,
                 completed: nil
             )
-            cell.merchantNameLabel.text = merchantData[indexPath.row].name
-            cell.totalCoinsLabel.text = "\(merchantData[indexPath.row].balance) coin(s)"
-            cell.bookmarkImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bookmarkTapped)))
+            cell.merchantNameLabel.text = merchantsProcessViewModel.merchantsProcess.merchants[indexPath.row].name
+            cell.totalCoinsLabel.text = "\(merchantsProcessViewModel.merchantsProcess.merchants[indexPath.row].balance) coin(s)"
+
             cell.bookmarkImage.tag = indexPath.row
+            cell.bookmarkImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bookmarkTapped)))
             cell.bookmarkImage.isUserInteractionEnabled = true
-            if let isFavorite = merchantData[indexPath.row].isFavorite {
+            if let isFavorite = merchantsProcessViewModel.merchantsProcess.merchants[indexPath.row].isFavorite {
                 let image = isFavorite ? "bookmark.on" : "bookmark.off"
                 cell.bookmarkImage.image = UIImage(named: image)
             }
@@ -201,9 +200,9 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         let merchantDetailVC = CustomerHistoryViewController()
         merchantDetailVC.title = "Merchant"
         merchantDetailVC.user = user
-        merchantDetailVC.merchantData = merchantData[indexPath.row]
-        for i in activeTokenData {
-            if i.purchase?.merchant?.id == merchantData[indexPath.row].id {
+        merchantDetailVC.merchantData = merchantsProcessViewModel.merchantsProcess.merchants[indexPath.row]
+        for i in activeTokensViewModel.activeTokens.tokens {
+            if i.purchase?.merchant?.id == merchantsProcessViewModel.merchantsProcess.merchants[indexPath.row].id {
                 merchantDetailVC.tokenData = i
                 break
             }
@@ -221,7 +220,7 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
         if section == 0 {
             view.seeAllMerchantButton.isHidden = true
             view.merchantLabel.text = "Token"
-            if activeTokenData.count == 0 {
+            if activeTokensViewModel.activeTokens.tokens.count == 0 {
                 return nil
             }
         } else {
@@ -261,23 +260,5 @@ extension CustomerDashboardViewController {
         tableView.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         tableView.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         tableView.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-    }
-
-    private func setupContent(location: CLLocationCoordinate2D?) {
-        guard loadingService?.loadingState == .notStarted else { return }
-        loadingService?.setState(state: .loading)
-        let coordinate = (location != nil) ? (location!.latitude, location!.longitude) : nil
-        request.getListMerchant(locationCoordinate: coordinate) { data in
-            switch data {
-            case let .success(result):
-                self.merchantData = result.data //ngambil 3 data
-                self.tableView.isHidden = false
-                self.loadingService?.setState(state: .success)
-            case let .failure(error):
-                self.loadingService?.setState(state: .failed)
-                print(error)
-                print("failed to get list merchant")
-            }
-        }
     }
 }

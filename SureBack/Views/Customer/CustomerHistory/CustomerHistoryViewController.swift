@@ -66,6 +66,7 @@ class CustomerHistoryViewController: UIViewController {
         headerView.redeemButtonView.addGestureRecognizer(tapGesture)
         headerView.loyaltCoinsValueLabel.text = "\(merchantData?.coins?[0].outstanding ?? 0)"
         headerView.openLinkButton.addTarget(self, action: #selector(openLinkTapped), for: .touchUpInside)
+        headerView.statusLabel.text = merchantData?.merchantDetail?.cooldownUntil
     }
 
     @objc func openLinkTapped() {

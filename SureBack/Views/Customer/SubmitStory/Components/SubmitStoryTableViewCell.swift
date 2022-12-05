@@ -21,8 +21,8 @@ class SubmitStoryTableViewCell: UITableViewCell {
     }
 
     weak var delegate: SendDataDelegate?
-
-    var user: UserInfoResponse?
+    
+    var user = UserViewModel.shared.user
     var userIgInfo: ProfileIGResponse?
 
     var selectedStoryIndex = -1
@@ -72,7 +72,7 @@ extension SubmitStoryTableViewCell: UICollectionViewDataSource, UICollectionView
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemSubmitStoryCollectionViewCell.id, for: indexPath) as? ItemSubmitStoryCollectionViewCell, let user = user, let userIgInfo = userIgInfo else {
             return collectionView.dequeueReusableCell(withReuseIdentifier: ItemSubmitStoryCollectionViewCell.id, for: indexPath) as! UICollectionViewCell // swiftlint:disable:this force_cast
         }
-        cell.backgroundColor = selectedStoryIndex == indexPath.row ? .systemBlue : .lightGray
+        cell.backgroundColor = selectedStoryIndex == indexPath.row ? .tealishGreen : .tealishGreenWithOpacity
         cell.userImageProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.userImageProfile.sd_setImage(
             with: URL(string: user.profilePicture ?? ""),

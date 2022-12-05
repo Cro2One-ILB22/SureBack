@@ -16,15 +16,15 @@ class HeaderCustomerHistoryView: UIView {
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: UIScreen.screenWidth - 20).isActive = true
+        imageView.setHeightAnchorConstraint(equalToConstant: 220)
+        imageView.setWidthAnchorConstraint(equalToConstant: UIScreen.screenWidth - 20)
         return imageView
     }()
 
     lazy var userNameLabel: UILabel = {
         let label = UILabel()
         label.text = "User Name"
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont.boldSystemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -32,7 +32,8 @@ class HeaderCustomerHistoryView: UIView {
     lazy var merchantLabel: UILabel = {
         let label = UILabel()
         label.text = "Merchant Name"
-        label.font = UIFont.boldSystemFont(ofSize: 28)
+        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -104,7 +105,7 @@ class HeaderCustomerHistoryView: UIView {
 
     lazy var statusLabel: UILabel = {
         let label = UILabel()
-        label.text = "Status"
+        label.text = "Cooldown"
         label.font = UIFont.systemFont(ofSize: 15)
         label.numberOfLines = 0
 //        label.lineBreakMode = .byWordWrapping

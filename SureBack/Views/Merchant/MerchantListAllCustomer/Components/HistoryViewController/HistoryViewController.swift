@@ -31,16 +31,32 @@ class HistoryViewController: UIViewController {
         loading.isHidden = true
         return loading
     }()
+    private let refreshControl = UIRefreshControl()
     var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
         showLoadingIndicator(true)
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
         setupLayout()
         getHistoryStoryCustomer()
         snackBarMessage = SnackBarMessage()
+    }
+    @objc func refreshData() {
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+            self.listHistoryStoryCustomer.removeAll()
+            self.showLoadingIndicator(true)
+            self.tableView.reloadData()
+            self.getHistoryStoryCustomer()
+        }
     }
     private func getHistoryStoryCustomer(search searchedName: String = "") {
         apiRequest.getCustomerStory(assessed: true, searchCustomerByName: searchedName) {[weak self] data, statusCode in

@@ -31,16 +31,32 @@ class WaitingViewController: UIViewController {
         loading.isHidden = true
         return loading
     }()
+    private let refreshControl = UIRefreshControl()
     var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
         showLoadingIndicator(true)
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         tableView.delegate = self
         tableView.dataSource = self
         getWaitingStoryCustomer()
         setupLayout()
         snackBarMessage = SnackBarMessage()
+    }
+    @objc func refreshData() {
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+            self.listUserStory.removeAll()
+            self.showLoadingIndicator(true)
+            self.tableView.reloadData()
+            self.getWaitingStoryCustomer()
+        }
     }
     private func getWaitingStoryCustomer(search customerName: String = "") {
         apiRequest.getCustomerStory(submitted: true, searchCustomerByName: customerName) {[weak self] data, statusCode in

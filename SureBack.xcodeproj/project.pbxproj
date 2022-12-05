@@ -89,6 +89,7 @@
 		16EFD660293D833E00D6C396 /* TotalPurchaseFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD65F293D833E00D6C396 /* TotalPurchaseFormViewController.swift */; };
 		16EFD663293D881300D6C396 /* MerchantDetailPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD662293D881300D6C396 /* MerchantDetailPurchaseViewController.swift */; };
 		16EFD665293D882F00D6C396 /* MerchantDetailPurchaseViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD664293D882F00D6C396 /* MerchantDetailPurchaseViewController+SetupUI.swift */; };
+		16EFD667293DAA8F00D6C396 /* CustomerStoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD666293DAA8F00D6C396 /* CustomerStoryViewModel.swift */; };
 		2DDDD70EABE69B42303C1AED /* Pods_SureBackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */; };
 		8A2D3CC34125394E06212A07 /* Pods_SureBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6F53CE101281D823C272BB /* Pods_SureBack.framework */; };
 		9CCB778BAEA00AE5C43FB920 /* Pods_SureBack_SureBackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */; };
@@ -252,6 +253,7 @@
 		16EFD65F293D833E00D6C396 /* TotalPurchaseFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalPurchaseFormViewController.swift; sourceTree = "<group>"; };
 		16EFD662293D881300D6C396 /* MerchantDetailPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailPurchaseViewController.swift; sourceTree = "<group>"; };
 		16EFD664293D882F00D6C396 /* MerchantDetailPurchaseViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MerchantDetailPurchaseViewController+SetupUI.swift"; sourceTree = "<group>"; };
+		16EFD666293DAA8F00D6C396 /* CustomerStoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStoryViewModel.swift; sourceTree = "<group>"; };
 		3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack_SureBackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FB4E7EBF11E0E918FCC83A /* Pods-SureBack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBack.release.xcconfig"; path = "Target Support Files/Pods-SureBack/Pods-SureBack.release.xcconfig"; sourceTree = "<group>"; };
 		5F47E67A5BE033AB27E63DDB /* Pods-SureBackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBackTests.debug.xcconfig"; path = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -952,6 +954,7 @@
 				AC24AA4829327F480050A086 /* UserViewModel.swift */,
 				ACE87EB0293BCC6500DB3DED /* TokenViewModel.swift */,
 				ACE87EB2293D022500DB3DED /* MerchantsViewModel.swift */,
+				16EFD666293DAA8F00D6C396 /* CustomerStoryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1313,6 +1316,7 @@
 				AC24AA442931EF440050A086 /* CustomTextField.swift in Sources */,
 				AC59F88D29202888000F8345 /* IsLoginViewController.swift in Sources */,
 				1603EFE2292B1D6800EC5485 /* CustomSegmentedControl.swift in Sources */,
+				16EFD667293DAA8F00D6C396 /* CustomerStoryViewModel.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
 				16C004222933578B008F5D0D /* HeaderCoinHistoryView.swift in Sources */,
 				AC24AA4929327F480050A086 /* UserViewModel.swift in Sources */,

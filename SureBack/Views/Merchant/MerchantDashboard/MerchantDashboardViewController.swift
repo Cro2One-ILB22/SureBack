@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import RxSwift
 
 class MerchantDashboardViewController: UIViewController {
     var user: UserInfoResponse?
-    var listCustomerStory: [MyStoryData] = []
     private let apiRequest = RequestFunction()
+    private let viewModel = CustomerStoryViewModel.shared
+    private let dispose = DisposeBag()
     let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(StoryTableViewCell.self, forCellReuseIdentifier: StoryTableViewCell.id)
@@ -25,6 +27,7 @@ class MerchantDashboardViewController: UIViewController {
         loading.isHidden = true
         return loading
     }()
+    private let refreshControl = UIRefreshControl()
     var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,28 +35,35 @@ class MerchantDashboardViewController: UIViewController {
         view.backgroundColor = .white
         navigationItem.title = "Hi, " + (user?.name ?? "")
         showLoadingIndicator(true)
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         configTableView()
-        getCustomerStory()
+        viewModel.fetchCustomerStory()
+        viewModel.customerStorySubject.subscribe(onNext: {
+            [weak self] customerStory in
+            if customerStory.loadingState == .success {
+                self?.showLoadingIndicator(false)
+            }
+            self?.tableView.reloadData()
+        }).disposed(by: dispose)
         setupLayout()
         snackBarMessage = SnackBarMessage()
+    }
+    @objc func refreshData() {
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+            self.viewModel.fetchCustomerStory()
+            self.tableView.reloadData()
+        }
     }
     @objc func seeAllCustomers() {
         let merchantListAllCustomerVC = MerchantListAllCustomerViewController()
         merchantListAllCustomerVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(merchantListAllCustomerVC, animated: true)
-    }
-    private func getCustomerStory() {
-        apiRequest.getCustomerStory(assessed: true) {[weak self] data, statusCode in
-            guard let self = self else {return}
-            self.showLoadingIndicator(false)
-            guard let statusCode = statusCode else {return}
-            if statusCode != 200 {
-                self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
-                return
-            }
-            self.listCustomerStory = data?.data ?? []
-            self.tableView.reloadData()
-        }
     }
     private func showLoadingIndicator(_ isShow: Bool) {
         self.tableView.isHidden = isShow
@@ -97,7 +107,7 @@ extension MerchantDashboardViewController: UITableViewDataSource, UITableViewDel
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if listCustomerStory.count == 0 {
+        if viewModel.customerStory.stories.count == 0 {
             self.tableView.setEmptyMessage(
                 image: UIImage(named: "empty.customers")!,
                 title: "Empty Customer",
@@ -112,7 +122,7 @@ extension MerchantDashboardViewController: UITableViewDataSource, UITableViewDel
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: StoryTableViewCell.id, for: indexPath) as? StoryTableViewCell else { return UITableViewCell() }
-        cell.listCustomerStory = self.listCustomerStory
+        cell.listCustomerStory = viewModel.customerStory.stories
         cell.delegate = self
         return cell
     }

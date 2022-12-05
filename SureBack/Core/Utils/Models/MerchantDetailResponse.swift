@@ -16,7 +16,7 @@ struct MerchantDetailResponse: Codable, AutoEquatable {
     let todaysTokenCount: Int
     let updatedAt, cashbackCalculationMethod, lastTokenGeneratedForMeAt: String?
     let cooldownUntil: String?
-    let addresses: [Address]
+    let addresses: [Address]?
 
     enum CodingKeys: String, CodingKey {
         case cashbackPercent = "cashback_percent"

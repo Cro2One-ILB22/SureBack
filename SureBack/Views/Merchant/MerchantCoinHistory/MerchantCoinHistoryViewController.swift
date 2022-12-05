@@ -61,12 +61,12 @@ class MerchantCoinHistoryViewController: UIViewController {
     private func configHeader() {
         let headerView = HeaderCoinHistoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 270))
         tableView.tableHeaderView = headerView
-        let outstandingThisMonth = merchant?.outstandingCoins.thisMonth ?? 0
-        let outstandingThisWeek = merchant?.outstandingCoins.thisWeek ?? 0
-        let outstandingToday = merchant?.outstandingCoins.today ?? 0
-        let exchangedThisMonth = merchant?.exchangedCoins.thisMonth ?? 0
-        let exchangedThisWeek = merchant?.exchangedCoins.thisWeek ?? 0
-        let exchangedToday = merchant?.exchangedCoins.today ?? 0
+        let outstandingThisMonth = merchant?.outstandingCoins?.thisMonth ?? 0
+        let outstandingThisWeek = merchant?.outstandingCoins?.thisWeek ?? 0
+        let outstandingToday = merchant?.outstandingCoins?.today ?? 0
+        let exchangedThisMonth = merchant?.exchangedCoins?.thisMonth ?? 0
+        let exchangedThisWeek = merchant?.exchangedCoins?.thisWeek ?? 0
+        let exchangedToday = merchant?.exchangedCoins?.today ?? 0
         headerView.outstandingCoinCard.totalThisMonthCoinLabel.text = "\(outstandingThisMonth)"
         headerView.outstandingCoinCard.totalThisWeekCoinLabel.text = "\(outstandingThisWeek)"
         headerView.outstandingCoinCard.totalTodayCoinLabel.text = "\(outstandingToday)"

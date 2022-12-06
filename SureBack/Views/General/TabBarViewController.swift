@@ -141,6 +141,7 @@ extension TabBarViewController: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        locationManager.stopUpdatingLocation()
         print("locations = \(locValue)")
         guard locValue.latitude != currentLocation?.latitude,
               locValue.longitude != currentLocation?.longitude
@@ -151,7 +152,6 @@ extension TabBarViewController: CLLocationManagerDelegate {
               roles.contains("merchant")
         else { return }
         request.updateMerchantLocation(locationCoordinate: (locValue.latitude, locValue.longitude))
-        locationManager.stopUpdatingLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

@@ -8,6 +8,7 @@
 import UIKit
 
 class SubmitStoryViewController: UIViewController, SendDataDelegate {
+    let activeTokensViewModel = ActiveTokensViewModel.shared
     let request = RequestFunction()
     var user: UserInfoResponse?
     var tokenData: Token?
@@ -33,12 +34,25 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         return table
     }()
 
+    private var loadingService: LoadingService?
+
     var loadingIndicator: UIActivityIndicatorView = {
         let loading = UIActivityIndicatorView()
         loading.style = .gray
         loading.translatesAutoresizingMaskIntoConstraints = false
         loading.hidesWhenStopped = true
         return loading
+    }()
+
+    lazy var alertWaiting: UIAlertController = {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        alert.view.tintColor = UIColor.black
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating()
+        alert.view.addSubview(loadingIndicator)
+        return alert
     }()
 
     let headerView = HeaderSubmitStoryView(frame: CGRect(x: 0, y: 0, width: UIScreen.screenWidth, height: 280))
@@ -61,6 +75,9 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         let redeemButton = UIBarButtonItem(title: "Redeem", style: .done, target: self, action: #selector(submitStoryTapped))
         navigationItem.rightBarButtonItem = redeemButton
 
+        loadingService = LoadingService(loadingIndicator: loadingIndicator)
+        loadingService?.setState(state: .loading)
+
         guard let tokenData = tokenData, let storyID = tokenData.story?.id else {
             return
         }
@@ -78,7 +95,7 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         setupTableView()
 
         request.getProfileIG(username: user?.instagramUsername ?? "") { [weak self] data in
-            guard let self = self else {return}
+            guard let self = self else { return }
             switch data {
             case let .success(result):
                 do {
@@ -99,19 +116,17 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
 
         // req mention story
         request.getStoryIG(storyId: storyID) { [weak self] data in
-            guard let self = self else {return}
+            guard let self = self else { return }
             switch data {
             case let .success(result):
-                do {
-//                    if result.data.isEmpty { break }
-                    print(result.data[0].mediaType)
-                    self.storyData = result.data.filter{ $0.submittedAt == nil }
-                } catch let error as NSError {
-                    print(error.description)
-                }
+//                if result.data.isEmpty { break }
+                self.storyData = result.data.filter { $0.submittedAt == nil }
+                self.loadingService?.setState(state: .success)
             case let .failure(error):
                 print(error)
                 print("failed to get mention story")
+                self.loadingService?.setState(state: .failed)
+                self.showAlert(title: "Failed to get story Instagram", message: "Try Again", action: "Okay")
             }
         }
         // coba pake data postman
@@ -142,7 +157,7 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
 //                            "video_url": null,
 //                            "music_metadata": null,
 //                            "story_url": "https://www.instagram.com/stories/ditpages/2974680429929408945/",
-//                            "submitted_at": null
+//                            "submitted_at": "2022-11-25T12:48:24.000000Z"
 //                        },
 //                        {
 //                            "id": 2974680685798627605,
@@ -163,7 +178,7 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
 //            let story = try JSONDecoder().decode(ResponseData<ResultStoryIG>.self, from: Data(jsonString.utf8))
 //            print(story)
 //            print(story.data[0].mediaType)
-//            storyData = story.data
+//            storyData = story.data.filter{ $0.submittedAt == nil }
 //        } catch {
 //            print(error)
 //        }
@@ -185,7 +200,6 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
     }
 
     @objc func submitStoryTapped() {
-
 //        guard let follsIG = userIgInfo?.followerCount, follsIG >= 100 else {
 //            let alert = UIAlertController(title: "Not enough followers", message: "Please increase your follower to >= 100", preferredStyle: .alert)
 //            alert.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: "Default action"), style: .default))
@@ -203,26 +217,31 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
             return
         }
 
+        present(alertWaiting, animated: true)
+
 //        request submit story
         request.submitStory(storyId: storyId, instagtamStoryId: igStoryId) { [weak self] data in
-            guard let self = self else {return}
+            guard let self = self else { return }
             switch data {
-            case let .success(result):
-                let okActionBtn = UIAlertAction(title: "Ok", style: .default, handler: { _ in
-                    self.navigationController?.popViewController(animated: true)
-                })
-                let alert = UIAlertController(title: "Success", message: "Success Submit Story", preferredStyle: .alert)
-                alert.addAction(okActionBtn)
-                self.present(alert, animated: true)
-            case let .failure(error):
-                let okActionBtn = UIAlertAction(title: "Try Again", style: .cancel, handler: nil)
-                let alert = UIAlertController(title: "Failed to Submit Story", message: "", preferredStyle: .alert)
-                alert.addAction(okActionBtn)
-                self.present(alert, animated: true)
+            case .success:
+                self.activeTokensViewModel.removeWhere(storyId: storyId)
+                self.alertWaiting.dismiss(animated: true) {
+                    let okActionBtn = UIAlertAction(title: "Ok", style: .default, handler: { _ in
+                        self.navigationController?.popViewController(animated: true)
+                    })
+                    let alert = UIAlertController(title: "Success", message: "Success Submit Story", preferredStyle: .alert)
+                    alert.addAction(okActionBtn)
+                    self.present(alert, animated: true)
+                }
+            case .failure:
+                self.alertWaiting.dismiss(animated: true) {
+                    let okActionBtn = UIAlertAction(title: "Try Again", style: .cancel, handler: nil)
+                    let alert = UIAlertController(title: "Failed to Submit Story", message: "", preferredStyle: .alert)
+                    alert.addAction(okActionBtn)
+                    self.present(alert, animated: true)
+                }
             }
         }
-
-
     }
 }
 
@@ -236,6 +255,7 @@ extension SubmitStoryViewController: UITableViewDelegate, UITableViewDataSource 
 
         cell.storyData = storyData
         cell.user = user
+        cell.merchantData = tokenData?.purchase?.merchant
         cell.userIgInfo = userIgInfo
         cell.delegate = self
 

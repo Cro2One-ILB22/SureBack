@@ -31,16 +31,32 @@ class WaitingViewController: UIViewController {
         loading.isHidden = true
         return loading
     }()
+    private let refreshControl = UIRefreshControl()
     var snackBarMessage: SnackBarMessage?
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
         showLoadingIndicator(true)
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         tableView.delegate = self
         tableView.dataSource = self
         getWaitingStoryCustomer()
         setupLayout()
         snackBarMessage = SnackBarMessage()
+    }
+    @objc func refreshData() {
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+            self.listUserStory.removeAll()
+            self.showLoadingIndicator(true)
+            self.tableView.reloadData()
+            self.getWaitingStoryCustomer()
+        }
     }
     private func getWaitingStoryCustomer(search customerName: String = "") {
         apiRequest.getCustomerStory(submitted: true, searchCustomerByName: customerName) {[weak self] data, statusCode in
@@ -71,7 +87,7 @@ extension WaitingViewController: UISearchBarDelegate {
 extension WaitingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailStoryVC = MerchantDetailStoryViewController()
-        let storyData = listUserStory[indexPath.row]
+        let storyData = listUserStory[indexPath.section]
         detailStoryVC.storyData = storyData
         navigationController?.pushViewController(detailStoryVC, animated: true)
     }
@@ -97,6 +113,8 @@ extension WaitingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemCustomerStoryTableCell.id, for: indexPath) as? ItemCustomerStoryTableCell else {return UITableViewCell()}
         cell.isHistory = false
+        let data = listUserStory[indexPath.section]
+        cell.setCellWithValueOf(data)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

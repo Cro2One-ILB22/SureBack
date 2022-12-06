@@ -12,9 +12,10 @@ extension UICollectionView {
         image: UIImage,
         title: String,
         message: String,
-        centerYAnchorConstant: CGFloat = 0
+        centerYAnchorConstant: CGFloat = 0,
+        username: String? = nil
     ) {
-        let emptyView = UIView(frame: CGRect(x: self.center.x, y: self.center.y, width: self.bounds.size.width, height: self.bounds.size.height))
+        let emptyView = UIView(frame: CGRect(x: center.x, y: center.y, width: bounds.size.width, height: bounds.size.height))
         let imageEmpty = UIImageView()
         let titleLabel = UILabel()
         let messageLabel = UILabel()
@@ -28,6 +29,8 @@ extension UICollectionView {
         emptyView.addSubview(imageEmpty)
         emptyView.addSubview(titleLabel)
         emptyView.addSubview(messageLabel)
+        // imageEmpty scale to fit
+        imageEmpty.contentMode = .scaleAspectFit
         imageEmpty.setWidthAnchorConstraint(equalToConstant: 80)
         imageEmpty.setHeightAnchorConstraint(equalToConstant: 50)
         imageEmpty.setCenterYAnchorConstraint(equalTo: emptyView.centerYAnchor, constant: centerYAnchorConstant)
@@ -44,10 +47,30 @@ extension UICollectionView {
         messageLabel.text = message
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
-        self.backgroundView = emptyView
+        messageLabel.isUserInteractionEnabled = true
+        backgroundView = emptyView
+
+        guard let text = messageLabel.text else { return }
+        let underlineAttriString = NSMutableAttributedString(string: text)
+
+        let range1 = (text as NSString).range(of: "@\(username ?? "")")
+        underlineAttriString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.tealishGreen, range: range1)
+        messageLabel.attributedText = underlineAttriString
+        messageLabel.isUserInteractionEnabled = true
+        let tappy = MyTapGesture(target: self, action: #selector(tapped))
+        messageLabel.addGestureRecognizer(tappy)
     }
 
     func restore() {
-        self.backgroundView = nil
+        backgroundView = nil
     }
+
+    @objc func tapped(sender: MyTapGesture) {
+        UIApplication.shared.open(URL(string: "https://instagram.com/\(sender.username)")!)
+    }
+
+}
+
+class MyTapGesture: UITapGestureRecognizer {
+    var username = String()
 }

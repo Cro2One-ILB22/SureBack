@@ -1,5 +1,5 @@
 //
-//  TokenViewModel.swift
+//  ActiveTokensViewModel.swift
 //  SureBack
 //
 //  Created by Ditha Nurcahya Avianty on 04/12/22.
@@ -46,6 +46,11 @@ class ActiveTokensViewModel {
                 print("failed to get active token")
             }
         }
+    }
+
+    func removeWhere(storyId: Int) {
+        activeTokens.tokens = activeTokens.tokens.filter({$0.story?.id != storyId})
+        self.activeTokensSubject.onNext(activeTokens)
     }
 
 }

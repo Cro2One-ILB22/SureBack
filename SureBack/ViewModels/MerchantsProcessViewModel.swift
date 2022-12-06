@@ -52,7 +52,7 @@ class MerchantsProcessViewModel {
                 print(error)
                 print("failed to get list merchant")
             }
-        }
+        } 
     }
 }
 

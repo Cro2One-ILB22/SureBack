@@ -56,9 +56,9 @@ class ItemCustomerStoryTableCell: UITableViewCell {
         updateUI(imagePath: data.customer?.profilePicture  ?? "",
                  usernameInstagram: data.customer?.instagramUsername ?? "",
                  dateCreated: data.createdAt,
-                 historyStatus: "Approve")
+                 historyStatus: data.approvalStatus)
     }
-    private func updateUI(imagePath: String, usernameInstagram: String, dateCreated: String, historyStatus: String? = nil) {
+    private func updateUI(imagePath: String, usernameInstagram: String, dateCreated: String, historyStatus: Int? = nil) {
         contentView.backgroundColor = .white
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.gray.cgColor
@@ -68,6 +68,17 @@ class ItemCustomerStoryTableCell: UITableViewCell {
         guard let url = URL(string: imagePath) else {return}
         imageDownloader.downloadImage(url: url) { imageData in
             self.userImageProfile.image = UIImage(data: imageData)
+        }
+        switch historyStatus {
+        case 0:
+            self.historyStatus.text = "Rejected"
+            self.colorStatus = .softPeach
+            self.iconStatus = UIImage(named: "multiply.circle.fill.black")
+        case 1:
+            self.historyStatus.text = "Approved"
+            self.colorStatus = .titanWhite
+            self.iconStatus = UIImage(named: "checkmark.circle.fill.black")
+        default: break
         }
         usernameIG.text = "@" + usernameInstagram
         self.dateCreated.text = dateCreated.formatTodMMMyyyhmma()

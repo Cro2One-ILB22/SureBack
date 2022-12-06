@@ -42,6 +42,7 @@ class CustomerListAllMerchantViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
+        view.backgroundColor = .porcelain
         showLoadingIndicator(true)
         searchBar.delegate = self
         setupLayout()

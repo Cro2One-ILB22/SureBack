@@ -221,8 +221,8 @@ class HeaderSubmitStoryView: UIView {
         storyLabel.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -20)
         storyLabel.setBottomAnchorConstraint(equalTo: bottomAnchor, constant: -20)
 
-        stackTokenDetails.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -10)
-        stackTokenDetails.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 10)
+        stackTokenDetails.setTrailingAnchorConstraint(equalTo: trailingAnchor, constant: -15)
+        stackTokenDetails.setLeadingAnchorConstraint(equalTo: leadingAnchor, constant: 15)
 
     }
 }

@@ -19,6 +19,8 @@ class CustomerPurchaseViewController: UIViewController {
                 coinsUsed = Int(floor(Double(min(flooredCoins, totalPurchase)) / 1000) * 1000 )
             }
 
+            secondView.totalPurchaseValue.textColor = .black
+            secondView.totalPurchaseValue.font = UIFont.systemFont(ofSize: 17)
             secondView.totalPurchaseValue.text = String(totalPurchase)
             secondView.coinUsedValue.text = String(coinsUsed)
             secondView.totalPaymentValue.text = String(totalPurchase - coinsUsed)
@@ -119,7 +121,6 @@ class CustomerPurchaseViewController: UIViewController {
 
         purchasePusherService?.purchase(customerId: user.id, merchantId: merchantId) { [weak self] response in
             guard let self = self else { return }
-
             if let purchase = response.purchase, let coins = self.secondView.coinUsedValue.text, let coins = Int(coins) {
                 self.apiRequest.requestPurchase(merchantId: self.merchantId, coinsUsed: self.isUseCoinActive ? coins : 0, isRequestingForToken: self.isGetTokenActive) { [weak self] response in
                     guard let self = self else { return }

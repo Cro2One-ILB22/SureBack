@@ -89,6 +89,7 @@
 		16EFD660293D833E00D6C396 /* TotalPurchaseFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD65F293D833E00D6C396 /* TotalPurchaseFormViewController.swift */; };
 		16EFD663293D881300D6C396 /* MerchantDetailPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD662293D881300D6C396 /* MerchantDetailPurchaseViewController.swift */; };
 		16EFD665293D882F00D6C396 /* MerchantDetailPurchaseViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD664293D882F00D6C396 /* MerchantDetailPurchaseViewController+SetupUI.swift */; };
+		16EFD667293DAA8F00D6C396 /* CustomerStoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD666293DAA8F00D6C396 /* CustomerStoryViewModel.swift */; };
 		2DDDD70EABE69B42303C1AED /* Pods_SureBackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A66D292D4EC5148560DFAB1C /* Pods_SureBackTests.framework */; };
 		8A2D3CC34125394E06212A07 /* Pods_SureBack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6F53CE101281D823C272BB /* Pods_SureBack.framework */; };
 		9CCB778BAEA00AE5C43FB920 /* Pods_SureBack_SureBackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */; };
@@ -140,7 +141,7 @@
 		ACE87EAB293B53FD00DB3DED /* CustomerPurchaseFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE87EAA293B53FD00DB3DED /* CustomerPurchaseFirstView.swift */; };
 		ACE87EAD293B5D4B00DB3DED /* CustomerPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE87EAC293B5D4B00DB3DED /* CustomerPurchaseViewController.swift */; };
 		ACE87EAF293B928200DB3DED /* CustomerPurchaseSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE87EAE293B928200DB3DED /* CustomerPurchaseSecondView.swift */; };
-		ACE87EB1293BCC6500DB3DED /* TokenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE87EB0293BCC6500DB3DED /* TokenViewModel.swift */; };
+		ACE87EB1293BCC6500DB3DED /* ActiveTokensViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE87EB0293BCC6500DB3DED /* ActiveTokensViewModel.swift */; };
 		ACE87EB3293D022500DB3DED /* MerchantsProcessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE87EB2293D022500DB3DED /* MerchantsProcessViewModel.swift */; };
 		ACE8C3592916267800BEA778 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE8C3582916267800BEA778 /* LoginViewController.swift */; };
 		ACF6441E2925DF2900A6AD10 /* CustomerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF6441D2925DF2900A6AD10 /* CustomerProfileViewController.swift */; };
@@ -252,6 +253,7 @@
 		16EFD65F293D833E00D6C396 /* TotalPurchaseFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalPurchaseFormViewController.swift; sourceTree = "<group>"; };
 		16EFD662293D881300D6C396 /* MerchantDetailPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetailPurchaseViewController.swift; sourceTree = "<group>"; };
 		16EFD664293D882F00D6C396 /* MerchantDetailPurchaseViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MerchantDetailPurchaseViewController+SetupUI.swift"; sourceTree = "<group>"; };
+		16EFD666293DAA8F00D6C396 /* CustomerStoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerStoryViewModel.swift; sourceTree = "<group>"; };
 		3E2508592815CBCC9B194E91 /* Pods_SureBack_SureBackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SureBack_SureBackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FB4E7EBF11E0E918FCC83A /* Pods-SureBack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBack.release.xcconfig"; path = "Target Support Files/Pods-SureBack/Pods-SureBack.release.xcconfig"; sourceTree = "<group>"; };
 		5F47E67A5BE033AB27E63DDB /* Pods-SureBackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SureBackTests.debug.xcconfig"; path = "Target Support Files/Pods-SureBackTests/Pods-SureBackTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -309,7 +311,7 @@
 		ACE87EAA293B53FD00DB3DED /* CustomerPurchaseFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerPurchaseFirstView.swift; sourceTree = "<group>"; };
 		ACE87EAC293B5D4B00DB3DED /* CustomerPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerPurchaseViewController.swift; sourceTree = "<group>"; };
 		ACE87EAE293B928200DB3DED /* CustomerPurchaseSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerPurchaseSecondView.swift; sourceTree = "<group>"; };
-		ACE87EB0293BCC6500DB3DED /* TokenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenViewModel.swift; sourceTree = "<group>"; };
+		ACE87EB0293BCC6500DB3DED /* ActiveTokensViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTokensViewModel.swift; sourceTree = "<group>"; };
 		ACE87EB2293D022500DB3DED /* MerchantsProcessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantsProcessViewModel.swift; sourceTree = "<group>"; };
 		ACE8C3582916267800BEA778 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ACF6441D2925DF2900A6AD10 /* CustomerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerProfileViewController.swift; sourceTree = "<group>"; };
@@ -950,8 +952,9 @@
 			isa = PBXGroup;
 			children = (
 				AC24AA4829327F480050A086 /* UserViewModel.swift */,
-				ACE87EB0293BCC6500DB3DED /* TokenViewModel.swift */,
+				ACE87EB0293BCC6500DB3DED /* ActiveTokensViewModel.swift */,
 				ACE87EB2293D022500DB3DED /* MerchantsProcessViewModel.swift */,
+				16EFD666293DAA8F00D6C396 /* CustomerStoryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1313,6 +1316,7 @@
 				AC24AA442931EF440050A086 /* CustomTextField.swift in Sources */,
 				AC59F88D29202888000F8345 /* IsLoginViewController.swift in Sources */,
 				1603EFE2292B1D6800EC5485 /* CustomSegmentedControl.swift in Sources */,
+				16EFD667293DAA8F00D6C396 /* CustomerStoryViewModel.swift in Sources */,
 				AC67ABE7291515150042FECF /* MerchantDetailResponse.swift in Sources */,
 				16C004222933578B008F5D0D /* HeaderCoinHistoryView.swift in Sources */,
 				AC24AA4929327F480050A086 /* UserViewModel.swift in Sources */,
@@ -1332,7 +1336,7 @@
 				119B76562906976E00530C80 /* AppDelegate.swift in Sources */,
 				16BD91A9291D534C0010731E /* HeaderMerchantDashboardView.swift in Sources */,
 				169FCD5D292E0A9E009CBAB2 /* UIImageView+Ext.swift in Sources */,
-				ACE87EB1293BCC6500DB3DED /* TokenViewModel.swift in Sources */,
+				ACE87EB1293BCC6500DB3DED /* ActiveTokensViewModel.swift in Sources */,
 				169FCD4A292CC063009CBAB2 /* WaitingViewController+SetupUI.swift in Sources */,
 				ACE87EAB293B53FD00DB3DED /* CustomerPurchaseFirstView.swift in Sources */,
 				16EFD663293D881300D6C396 /* MerchantDetailPurchaseViewController.swift in Sources */,
@@ -1548,7 +1552,7 @@
 				CODE_SIGN_ENTITLEMENTS = SureBack/SureBack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BAFJ582D2S;
+				DEVELOPMENT_TEAM = C8VS35NTZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SureBack/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
@@ -1567,7 +1571,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = mfahmialkautsar.SureBack;
+				PRODUCT_BUNDLE_IDENTIFIER = cro2one.SureBack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

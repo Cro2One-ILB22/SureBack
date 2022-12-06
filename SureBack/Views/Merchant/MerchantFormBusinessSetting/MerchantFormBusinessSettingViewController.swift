@@ -51,6 +51,11 @@ class MerchantFormBusinessSettingViewController: UIViewController {
         field.keyboardType = .numberPad
         return field
     }()
+    var chooseCashbackMethod: UISegmentedControl = {
+        let segmented = UISegmentedControl(items: ["Payment Amount", "Purchase Amount"])
+        segmented.selectedSegmentIndex = 0
+        return segmented
+    }()
     let alertWaiting: UIAlertController = {
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
         alert.view.tintColor = UIColor.black
@@ -61,16 +66,29 @@ class MerchantFormBusinessSettingViewController: UIViewController {
         alert.view.addSubview(loadingIndicator)
         return alert
     }()
-    var cashbackMethodField: CustomTextField = CustomTextField(insets: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12))
     var snackBarMessage: SnackBarMessage?
+    var selectedCashbackMethod: String = "payment_amount"
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .porcelain
         navigationItem.title = "Business Setting"
         let saveButton = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveButtonTapped))
         navigationItem.rightBarButtonItem = saveButton
         setupLayout()
         configure()
         snackBarMessage = SnackBarMessage()
+        chooseCashbackMethod.addTarget(self, action: #selector(segmentedValueChanged), for: .valueChanged)
+        print("Neh",viewModel.user?.merchantDetail?.cashbackCalculationMethod)
+    }
+    @objc func segmentedValueChanged(_ sender:UISegmentedControl!) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            selectedCashbackMethod = "payment_amount"
+        case 1:
+            selectedCashbackMethod = "purchase_amount"
+        default:
+            break
+        }
     }
     func configure() {
         guard let user = viewModel.user else {return}
@@ -80,6 +98,11 @@ class MerchantFormBusinessSettingViewController: UIViewController {
         percentCashbackCoinField.text = "\(percentCashbackCoin)"
         maximumCashbackCoinField.text = "\(maximumCashbackCoin)"
         tokenLimitField.text = "\(tokenLimit)"
+        if user.merchantDetail?.cashbackCalculationMethod == "payment_amount" {
+            chooseCashbackMethod.selectedSegmentIndex = 0
+        } else {
+            chooseCashbackMethod.selectedSegmentIndex = 1
+        }
     }
     @objc func saveButtonTapped() {
         present(alertWaiting, animated: true)
@@ -87,7 +110,8 @@ class MerchantFormBusinessSettingViewController: UIViewController {
         guard let percentCashbackCoin = Float(percentCashbackCoinField.text ?? "0.0") else {return}
         guard let maximumCashbackCoin = Int(maximumCashbackCoinField.text ?? "0") else {return}
         guard let tokenLimit = Int(tokenLimitField.text ?? "0") else {return}
-        apiRequest.updateMerchantDetail(cashbackPercent: percentCashbackCoin, cashbackLimit: maximumCashbackCoin, dailyTokenLimit: tokenLimit) {[weak self] _, statusCode in
+        print("Selected method", selectedCashbackMethod)
+        apiRequest.updateMerchantDetail(cashbackPercent: percentCashbackCoin, cashbackLimit: maximumCashbackCoin, dailyTokenLimit: tokenLimit, cashbackCalculationMethod: selectedCashbackMethod) {[weak self] _, statusCode in
             guard let self = self else {return}
             self.alertWaiting.dismiss(animated: true)
             guard let statusCode = statusCode else {return}
@@ -98,6 +122,7 @@ class MerchantFormBusinessSettingViewController: UIViewController {
             user.merchantDetail?.cashbackPercent = percentCashbackCoin
             user.merchantDetail?.cashbackLimit = maximumCashbackCoin
             user.merchantDetail?.dailyTokenLimit = tokenLimit
+            user.merchantDetail?.cashbackCalculationMethod = self.selectedCashbackMethod
             self.viewModel.userSubject.on(.next(user))
             self.navigationController?.popViewController(animated: true)
         }
@@ -110,7 +135,7 @@ extension MerchantFormBusinessSettingViewController {
     }
 
     private func setupTextField() {
-        let stackView = UIStackView(arrangedSubviews: [percentCashbackCoinLabel, percentCashbackCoinField, maximumCashbackCoinLabel, maximumCashbackCoinField, tokenLimitLabel, tokenLimitField, cashbackMethodLabel, cashbackMethodField])
+        let stackView = UIStackView(arrangedSubviews: [percentCashbackCoinLabel, percentCashbackCoinField, maximumCashbackCoinLabel, maximumCashbackCoinField, tokenLimitLabel, tokenLimitField, cashbackMethodLabel, chooseCashbackMethod])
         stackView.axis = .vertical
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -123,6 +148,6 @@ extension MerchantFormBusinessSettingViewController {
         percentCashbackCoinField.setHeightAnchorConstraint(equalToConstant: 40)
         maximumCashbackCoinField.setHeightAnchorConstraint(equalToConstant: 40)
         tokenLimitField.setHeightAnchorConstraint(equalToConstant: 40)
-        cashbackMethodField.setHeightAnchorConstraint(equalToConstant: 40)
+        chooseCashbackMethod.setHeightAnchorConstraint(equalToConstant: 40)
     }
 }

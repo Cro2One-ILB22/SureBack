@@ -135,7 +135,11 @@ extension CustomerListAllMerchantViewController: UITableViewDelegate, UITableVie
             completed: nil
         )
         cell.merchantNameLabel.text = merchantData[indexPath.row].name
-        cell.totalCoinsLabel.text = "\(merchantData[indexPath.row].individualCoins?[1].outstanding ?? 0) Coin(s)"
+        var outstandingCoins = 0
+        if let individualCoins = merchantData[indexPath.row].individualCoins, individualCoins.count == 2, let localCoins = individualCoins.filter({$0.coinType == "local"}).first {
+            outstandingCoins = localCoins.outstanding
+        }
+        cell.totalCoinsLabel.text = "\(outstandingCoins) Coins(s)"
         cell.bookmarkImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bookmarkTapped)))
         cell.bookmarkImage.tag = indexPath.row
         cell.bookmarkImage.isUserInteractionEnabled = true

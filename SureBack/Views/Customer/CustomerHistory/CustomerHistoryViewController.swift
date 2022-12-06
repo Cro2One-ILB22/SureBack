@@ -64,7 +64,11 @@ class CustomerHistoryViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(redeemButtonTapped))
         headerView.redeemButtonView.isUserInteractionEnabled = true
         headerView.redeemButtonView.addGestureRecognizer(tapGesture)
-        headerView.loyaltCoinsValueLabel.text = "\(merchantData?.individualCoins?[1].outstanding ?? 0)"
+        var outstandingCoins = 0
+        if let individualCoins = merchantData?.individualCoins, individualCoins.count == 2, let localCoins = individualCoins.filter({$0.coinType == "local"}).first {
+            outstandingCoins = localCoins.outstanding
+        }
+        headerView.loyaltCoinsValueLabel.text = "\(outstandingCoins)"
         headerView.openLinkButton.addTarget(self, action: #selector(openLinkTapped), for: .touchUpInside)
         guard let coolDownDate = merchantData?.merchantDetail?.cooldownUntil else {return}
         headerView.lockImage.image = UIImage(named: coolDownDate.stringToDate() < Date() ? "lock.status.available" : "lock.status.unavailable")

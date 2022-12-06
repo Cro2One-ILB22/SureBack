@@ -61,13 +61,13 @@ class CustomerPurchaseViewController: UIViewController {
     let alertSuccess = UIAlertController(title: "Alert", message: "Message", preferredStyle: .alert)
 
     let alertWaiting: UIAlertController = {
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "Please wait for merchant...", preferredStyle: .alert)
         alert.view.tintColor = UIColor.black
-        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating()
-        alert.view.addSubview(loadingIndicator)
+//        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+//        loadingIndicator.hidesWhenStopped = true
+//        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+//        loadingIndicator.startAnimating()
+//        alert.view.addSubview(loadingIndicator)
         return alert
     }()
 
@@ -122,25 +122,36 @@ class CustomerPurchaseViewController: UIViewController {
         purchasePusherService?.purchase(customerId: user.id, merchantId: merchantId) { [weak self] response in
             guard let self = self else { return }
             if let purchase = response.purchase, let coins = self.secondView.coinUsedValue.text, let coins = Int(coins) {
-                self.apiRequest.requestPurchase(merchantId: self.merchantId, coinsUsed: self.isUseCoinActive ? coins : 0, isRequestingForToken: self.isGetTokenActive) { [weak self] response in
-                    guard let self = self else { return }
-                    switch response {
-                    case .success:
-                        self.purchasePusherService?.disconnect()
-                        self.merchantsProcessViewModel.fetchMerchants()
-                        self.activeTokensViewModel.fetchTokens()
-                        self.alertWaiting.dismiss(animated: true, completion: {
-                            self.alertSuccess.title = "Congratulations!"
-                            self.alertSuccess.message = "Transaction success"
-                            self.alertSuccess.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                                self.navigationController?.popViewController(animated: true)
-                            }))
-                            self.present(self.alertSuccess, animated: true, completion: nil)
-                        })
-                    case let .failure(failure):
-                        print(failure)
-                    }
-                }
+                self.purchasePusherService?.disconnect()
+                self.merchantsProcessViewModel.fetchMerchants()
+                self.activeTokensViewModel.fetchTokens()
+                self.alertWaiting.dismiss(animated: true, completion: {
+                    self.alertSuccess.title = "Congratulations!"
+                    self.alertSuccess.message = "Transaction success"
+                    self.alertSuccess.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                        self.navigationController?.popViewController(animated: true)
+                    }))
+                    self.present(self.alertSuccess, animated: true, completion: nil)
+                })
+//                self.apiRequest.requestPurchase(merchantId: self.merchantId, coinsUsed: self.isUseCoinActive ? coins : 0, isRequestingForToken: self.isGetTokenActive) { [weak self] response in
+//                    guard let self = self else { return }
+//                    switch response {
+//                    case .success:
+//                        self.purchasePusherService?.disconnect()
+//                        self.merchantsProcessViewModel.fetchMerchants()
+//                        self.activeTokensViewModel.fetchTokens()
+//                        self.alertWaiting.dismiss(animated: true, completion: {
+//                            self.alertSuccess.title = "Congratulations!"
+//                            self.alertSuccess.message = "Transaction success"
+//                            self.alertSuccess.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+//                                self.navigationController?.popViewController(animated: true)
+//                            }))
+//                            self.present(self.alertSuccess, animated: true, completion: nil)
+//                        })
+//                    case let .failure(failure):
+//                        print(failure)
+//                    }
+//                }
             } else if let totalPurchase = response.totalPurchase {
                 self.totalPurchase = totalPurchase
             }

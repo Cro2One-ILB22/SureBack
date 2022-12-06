@@ -9,7 +9,11 @@ import UIKit
 import RxSwift
 
 class MerchantDashboardViewController: UIViewController {
-    var user: UserInfoResponse?
+    var user: UserInfoResponse? {
+        didSet {
+            configHeaderView()
+        }
+    }
     private let apiRequest = RequestFunction()
     private let viewModel = CustomerStoryViewModel.shared
     private let dispose = DisposeBag()
@@ -122,7 +126,6 @@ extension MerchantDashboardViewController: UITableViewDataSource, UITableViewDel
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: StoryTableViewCell.id, for: indexPath) as? StoryTableViewCell else { return UITableViewCell() }
-        cell.listCustomerStory = viewModel.customerStory.stories
         cell.delegate = self
         return cell
     }

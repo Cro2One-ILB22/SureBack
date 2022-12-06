@@ -34,6 +34,11 @@ class CustomerStoryViewModel {
             self?.customerStorySubject.onNext(CustomerStory(loadingState: .success, stories: stories))
         }
     }
+
+    func removeWhere(id: Int) {
+        customerStory.stories = customerStory.stories.filter({$0.id != id})
+        self.customerStorySubject.onNext(customerStory)
+    }
 }
 
 struct CustomerStory {

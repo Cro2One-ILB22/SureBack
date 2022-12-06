@@ -50,13 +50,14 @@ class ProfileViewController: UIViewController {
     let profileUsernameIg: UILabel = {
         let label = UILabel()
         label.text = "@usernameIG"
+        label.textColor = .systemGreen
         return label
     }()
 
     let manageProfileButton: UIButton = {
         let button = UIButton()
         button.setTitle("Manage Profile", for: .normal)
-        button.setTitleColor(UIColor.tealishGreen, for: .normal)
+        button.setTitleColor(UIColor.systemGreen, for: .normal)
         button.backgroundColor = .clear
         return button
     }()
@@ -136,6 +137,13 @@ class ProfileViewController: UIViewController {
         accountSafetyCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(accountSafetyTapped)))
         appGuideCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(appGuideTapped)))
         manageProfileButton.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
+        profileUsernameIg.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(usernameTapped)))
+        profileUsernameIg.isUserInteractionEnabled = true
+    }
+
+    @objc func usernameTapped(_: UITapGestureRecognizer) {
+        guard let username = viewModel.user?.instagramUsername else {return}
+        UIApplication.shared.open(URL(string: "https://instagram.com/\(username)")!)
     }
 
     @objc func accountSafetyTapped(sender: UITapGestureRecognizer) {

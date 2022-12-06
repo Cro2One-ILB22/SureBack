@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol StoryTableViewCellCellDelegate: AnyObject {
     func didSelectItem(with storyData: MyStoryData)
@@ -14,7 +15,11 @@ protocol StoryTableViewCellCellDelegate: AnyObject {
 class StoryTableViewCell: UITableViewCell {
     static let id = "StoryTableViewCell"
     var delegate: StoryTableViewCellCellDelegate?
-    public var listCustomerStory: [MyStoryData] = []
+//    public var listCustomerStory: [MyStoryData] = []
+    var viewModel = CustomerStoryViewModel.shared
+    let disposeBag = DisposeBag()
+
+
     private let collectionView: UICollectionView = {
        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -39,11 +44,17 @@ class StoryTableViewCell: UITableViewCell {
         super.layoutSubviews()
         collectionView.frame = contentView.bounds
     }
+
+    override func didMoveToSuperview() {
+        viewModel.customerStorySubject.subscribe(onNext: { [weak self] story in
+            self?.collectionView.reloadData()
+        }).disposed(by: disposeBag)
+    }
 }
 
 extension StoryTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let data = listCustomerStory[indexPath.row]
+        let data = viewModel.customerStory.stories[indexPath.row]
         delegate?.didSelectItem(with: data)
     }
 }
@@ -53,11 +64,12 @@ extension StoryTableViewCell: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemStoryCollectionViewCell.id, for: indexPath) as? ItemStoryCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let data = listCustomerStory[indexPath.row]
+//        let data = listCustomerStory[indexPath.row]
+        let data = viewModel.customerStory.stories[indexPath.row]
         cell.setCellWithValueOf(data)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listCustomerStory.count
+        return viewModel.customerStory.stories.count
     }
 }

@@ -59,7 +59,7 @@ class MerchantDetailStoryViewController: UIViewController {
         let imageDownloader = ImageDownloader()
         let name = storyData?.customer?.name
         let username = "@" + (storyData?.customer?.instagramUsername ?? "")
-        let createdStory = storyData?.createdAt.formatTodMMMyyyhmma()
+        let createdStory = storyData?.submittedAt?.formatTodMMMyyyhmma()
         headerView.loadingIndicatorImageProfile.show(true)
         storyCardView.loadingIndicatorStory.show(true)
         guard let urlProfile = URL(string: storyData?.customer?.profilePicture ?? defaultImage) else {return}
@@ -80,7 +80,23 @@ class MerchantDetailStoryViewController: UIViewController {
             self?.storyCardView.userImageStory.image = UIImage(data: data)
         }
         storyCardView.cashbackLabel.text = "\(cashbackAmount)"
+
+        headerView.usernameIGUser.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(usernameTapped)))
+        headerView.usernameIGUser.isUserInteractionEnabled = true
+
+        storyCardView.userImageStory.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(storyTapped)))
+        storyCardView.userImageStory.isUserInteractionEnabled = true
     }
+    @objc func usernameTapped(_: UITapGestureRecognizer) {
+        guard let username = storyData?.customer?.instagramUsername else {return}
+        UIApplication.shared.open(URL(string: "https://instagram.com/\(username)")!)
+    }
+
+    @objc func storyTapped(_: UITapGestureRecognizer) {
+        guard let storyURL = storyData?.storyURL else {return}
+        UIApplication.shared.open(URL(string: "\(storyURL)")!)
+    }
+
     private func getUserFollower() {
         guard let username = storyData?.customer?.instagramUsername else {return}
         apiRequest.getProfileIG(username: username) { [weak self]result in

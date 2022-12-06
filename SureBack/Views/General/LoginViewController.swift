@@ -52,7 +52,7 @@ class LoginViewController: UIViewController {
 
     let toRegisterLabel: UILabel = {
         let label = UILabel()
-        label.text = "join now"
+        label.text = "Join now"
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textColor = .tealishGreen
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -96,7 +96,7 @@ class LoginViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = false
     }
 
     @objc func handleTextChanged() {

@@ -198,6 +198,7 @@ class MerchantDetailPurchaseViewController: UIViewController {
             customerId: self.customerId, purchaseAmount: purchaseAmount, coinUsed: coinUsed, isRequestingToken: isRequestingToken) {[weak self] data, statusCode in
             guard let self = self else {return}
             guard let statusCode = statusCode else {return}
+                self.userViewModel.fetchUser()
                 self.alertWaiting.dismiss(animated: true) {
                     if statusCode != 200 {
                         self.snackBarMessage?.showResponseMessage(statusCode: statusCode)

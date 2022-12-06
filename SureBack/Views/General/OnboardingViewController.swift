@@ -41,6 +41,16 @@ class OnboardingViewController: UIViewController {
         return button
     }()
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .porcelain
@@ -95,12 +105,15 @@ extension OnboardingViewController: UIScrollViewDelegate {
         pageController.currentPage = Int(current)
 
         if pageController.currentPage == pageController.numberOfPages - 1 {
-            nextButton.setTitleColor(.tealishGreen, for: .normal)
+            nextButton.setTitle("GET STARTED", for: .normal)
+            nextButton.setTitleColor(.systemGreen, for: .normal)
             nextButton.addTarget(self, action: #selector(getStartedTapped), for: .touchUpInside)
-            nextButton.isEnabled = true
+//            nextButton.isEnabled = true
         } else {
-            nextButton.setTitleColor(.porcelain, for: .normal)
-            nextButton.isEnabled = false
+            nextButton.setTitle("SKIP", for: .normal)
+            nextButton.setTitleColor(.systemGreen, for: .normal)
+            nextButton.addTarget(self, action: #selector(getStartedTapped), for: .touchUpInside)
+//            nextButton.isEnabled = false
         }
     }
 }

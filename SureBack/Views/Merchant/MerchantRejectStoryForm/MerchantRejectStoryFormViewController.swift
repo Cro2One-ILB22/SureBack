@@ -10,6 +10,7 @@ import UIKit
 class MerchantRejectStoryFormViewController: CommonSheetViewController {
     var id: Int?
     private let apiRequest = RequestFunction()
+    var customerStoryViewModel = CustomerStoryViewModel.shared
     let question1TextLabel: UILabel = {
         let label = UILabel()
         label.text = "What's wrong with that Story?"
@@ -113,7 +114,9 @@ class MerchantRejectStoryFormViewController: CommonSheetViewController {
                 self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
                 return
             }
+            self.customerStoryViewModel.removeWhere(id: id)
             self.dismiss(animated: true)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }

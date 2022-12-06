@@ -32,6 +32,7 @@ class HeaderMerchantDetailStoryView: UIView {
     let usernameIGUser: UILabel = {
         let label = UILabel()
         label.text = "Username IG"
+        label.textColor = .tealishGreen
         label.font = .systemFont(ofSize: 15)
         return label
     }()

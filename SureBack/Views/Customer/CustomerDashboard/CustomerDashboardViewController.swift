@@ -48,6 +48,7 @@ class CustomerDashboardViewController: UIViewController, UIViewToController, Sen
         view.backgroundColor = .porcelain
         setupLoadingIndicator()
         loadingService = LoadingService(loadingIndicator: loadingIndicator)
+        loadingService?.setState(state: .loading)
         locationSubject.subscribe(onNext: { [weak self] location in
             if let location = location {
                 self?.merchantsProcessViewModel.setLocation(location: location)
@@ -58,16 +59,16 @@ class CustomerDashboardViewController: UIViewController, UIViewToController, Sen
         activeTokensViewModel.fetchTokens()
 
         activeTokensViewModel.activeTokensSubject.subscribe(onNext: { [weak self] tokens in
-            self?.loadingService?.setState(state: tokens.loadingState)
             self?.tableView.reloadData()
+            self?.loadingService?.setState(state: tokens.loadingState)
         }).disposed(by: disposeBag)
 
         merchantsProcessViewModel.merchantsProcessSubject.subscribe(onNext: { [weak self] merchantsProcess in
-            self?.loadingService?.setState(state: merchantsProcess.loadingState)
             if merchantsProcess.loadingState == .success {
                 self?.tableView.isHidden = false
             }
             self?.tableView.reloadData()
+            self?.loadingService?.setState(state: merchantsProcess.loadingState)
         }).disposed(by: disposeBag)
 
         tableView.isHidden = true
@@ -196,8 +197,11 @@ extension CustomerDashboardViewController: UITableViewDelegate, UITableViewDataS
                 completed: nil
             )
             cell.merchantNameLabel.text = merchantsProcessViewModel.merchantsProcess.merchants[indexPath.row].name
-            cell.totalCoinsLabel.text = "\(merchantsProcessViewModel.merchantsProcess.merchants[indexPath.row].individualCoins?[1].outstanding ?? 0) Coin(s)"
-
+            var outstandingCoins = 0
+            if let individualCoins = merchantsProcessViewModel.merchantsProcess.merchants[indexPath.row].individualCoins, individualCoins.count == 2, let localCoins = individualCoins.filter({$0.coinType == "local"}).first {
+                outstandingCoins = localCoins.outstanding
+            }
+            cell.totalCoinsLabel.text = "\(outstandingCoins) Coin(s)"
             cell.bookmarkImage.tag = indexPath.row
             cell.bookmarkImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(bookmarkTapped)))
             cell.bookmarkImage.isUserInteractionEnabled = true

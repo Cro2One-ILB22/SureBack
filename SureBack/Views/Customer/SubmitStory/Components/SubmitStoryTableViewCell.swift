@@ -13,7 +13,6 @@ class SubmitStoryTableViewCell: UITableViewCell {
 
     var storyData = [ResultStoryIG]() {
         didSet {
-            collectionView.reloadData()
             collectionView.isHidden = false
             if storyData.count == 0 {
                 guard let username = merchantData?.instagramUsername else {return}
@@ -24,7 +23,10 @@ class SubmitStoryTableViewCell: UITableViewCell {
                     centerYAnchorConstant: -90,
                     username: username
                 )
+            } else {
+                collectionView.restore()
             }
+            collectionView.reloadData()
         }
     }
 

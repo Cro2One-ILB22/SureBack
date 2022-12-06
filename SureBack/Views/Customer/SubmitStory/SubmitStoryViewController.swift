@@ -9,6 +9,7 @@ import UIKit
 
 class SubmitStoryViewController: UIViewController, SendDataDelegate {
     let activeTokensViewModel = ActiveTokensViewModel.shared
+    let customerStoryViewModel = CustomerStoryViewModel.shared
     let request = RequestFunction()
     var user: UserInfoResponse?
     var tokenData: Token?
@@ -75,6 +76,7 @@ class SubmitStoryViewController: UIViewController, SendDataDelegate {
         let redeemButton = UIBarButtonItem(title: "Redeem", style: .done, target: self, action: #selector(submitStoryTapped))
         navigationItem.rightBarButtonItem = redeemButton
 
+        setupLoadingIndicator()
         loadingService = LoadingService(loadingIndicator: loadingIndicator)
         loadingService?.setState(state: .loading)
 
@@ -275,5 +277,10 @@ extension SubmitStoryViewController {
         tableView.setLeadingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         tableView.setTrailingAnchorConstraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         tableView.setBottomAnchorConstraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+    }
+    private func setupLoadingIndicator() {
+        view.addSubview(loadingIndicator)
+        loadingIndicator.setCenterXAnchorConstraint(equalTo: view.centerXAnchor)
+        loadingIndicator.setCenterYAnchorConstraint(equalTo: view.centerYAnchor)
     }
 }

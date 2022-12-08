@@ -61,6 +61,7 @@
 		169FCD5F292E1935009CBAB2 /* MerchantDashboardViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD5E292E1935009CBAB2 /* MerchantDashboardViewController+SetupUI.swift */; };
 		169FCD62292F09F2009CBAB2 /* ConfirmRegistrationViewController+SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169FCD61292F09F2009CBAB2 /* ConfirmRegistrationViewController+SetupUI.swift */; };
 		16A8AD1D2915674700532374 /* ApproveOrRejectStoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */; };
+		16B8AD2229422C7500F01861 /* CustomerGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B8AD2129422C7500F01861 /* CustomerGuideViewController.swift */; };
 		16BD919E291C58860010731E /* UIScreen+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD919D291C58860010731E /* UIScreen+Ext.swift */; };
 		16BD91A5291D527C0010731E /* BussinesStatusCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91A4291D527C0010731E /* BussinesStatusCardView.swift */; };
 		16BD91A7291D52E30010731E /* StoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BD91A6291D52E30010731E /* StoryTableViewCell.swift */; };
@@ -223,6 +224,7 @@
 		169FCD5E292E1935009CBAB2 /* MerchantDashboardViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MerchantDashboardViewController+SetupUI.swift"; sourceTree = "<group>"; };
 		169FCD61292F09F2009CBAB2 /* ConfirmRegistrationViewController+SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConfirmRegistrationViewController+SetupUI.swift"; sourceTree = "<group>"; };
 		16A8AD1C2915674700532374 /* ApproveOrRejectStoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveOrRejectStoryResponse.swift; sourceTree = "<group>"; };
+		16B8AD2129422C7500F01861 /* CustomerGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerGuideViewController.swift; sourceTree = "<group>"; };
 		16BD919D291C58860010731E /* UIScreen+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Ext.swift"; sourceTree = "<group>"; };
 		16BD91A4291D527C0010731E /* BussinesStatusCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BussinesStatusCardView.swift; sourceTree = "<group>"; };
 		16BD91A6291D52E30010731E /* StoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -838,6 +840,7 @@
 				ACF6441C2925DF0E00A6AD10 /* CustomerProfile */,
 				AC59F88F292056E8000F8345 /* CustomerHistory */,
 				AC3BCEBA2921F8A0009BFB05 /* SubmitStory */,
+				16B8AD2129422C7500F01861 /* CustomerGuideViewController.swift */,
 			);
 			path = Customer;
 			sourceTree = "<group>";
@@ -1358,6 +1361,7 @@
 				AC3BCEB92921E5F9009BFB05 /* HeaderSubmitStoryView.swift in Sources */,
 				165122052925853E00DBC0AE /* NotificationsResponses.swift in Sources */,
 				165121FD2924501000DBC0AE /* MerchantProfileViewController.swift in Sources */,
+				16B8AD2229422C7500F01861 /* CustomerGuideViewController.swift in Sources */,
 				AC24AA412931EE3A0050A086 /* CustomerEditProfileViewController.swift in Sources */,
 				AC59F89429206137000F8345 /* ItemCustomerHistoryTableViewCell.swift in Sources */,
 				ACCE1075293420DD00C2CB45 /* TransactionDetailViewController.swift in Sources */,

@@ -13,5 +13,11 @@ class CustomerProfileViewController: ProfileViewController {
     override func viewDidLoad() {
         isMerchantProfile = false
         super.viewDidLoad()
+        appGuideCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(appGuideTapped)))
+    }
+    @objc func appGuideTapped(sender: UITapGestureRecognizer) {
+        let customerGuideVC = CustomerGuideViewController()
+        customerGuideVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(customerGuideVC, animated: true)
     }
 }

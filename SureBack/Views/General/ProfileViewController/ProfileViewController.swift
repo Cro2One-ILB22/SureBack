@@ -81,7 +81,6 @@ class ProfileViewController: UIViewController {
         let card = SettingCardView()
         card.titleImage.image = UIImage(named: "app.guide")
         card.title.text = "App Guide"
-        card.backgroundColor = .lightGray.lighter(by: 10)
         return card
     }()
 
@@ -135,7 +134,7 @@ class ProfileViewController: UIViewController {
         manageProfileButton.setImage(UIImage(named: "Appicon"), for: .normal)
 
         accountSafetyCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(accountSafetyTapped)))
-        appGuideCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(appGuideTapped)))
+        
         manageProfileButton.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
         profileUsernameIg.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(usernameTapped)))
         profileUsernameIg.isUserInteractionEnabled = true
@@ -148,10 +147,6 @@ class ProfileViewController: UIViewController {
 
     @objc func accountSafetyTapped(sender: UITapGestureRecognizer) {
         print("account safety tapped")
-    }
-
-    @objc func appGuideTapped(sender: UITapGestureRecognizer) {
-        print("app guide tapped")
     }
 
     @objc func editProfile() {

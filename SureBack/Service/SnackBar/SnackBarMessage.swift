@@ -10,17 +10,19 @@ import UIKit
 class SnackBarMessage {
 
     private let currentWindow: UIWindow = UIApplication.shared.keyWindow!
-    public func showResponseMessage(statusCode: Int) {
+    public func showResponseMessage(statusCode: Int, message: String? = nil) {
         let viewModel: SnackbarViewModel?
         switch statusCode {
         case 400:
             viewModel = SnackbarViewModel(type: .info, text: "Invalid Request")
         case 401:
             viewModel = SnackbarViewModel(type: .info, text: "Unauthorized")
+        case 404:
+            viewModel = SnackbarViewModel(type: .info, text: message ?? "Not found")
         case 500:
             viewModel = SnackbarViewModel(type: .info, text: "The server is undergoing repairs")
         default:
-            return
+            viewModel = SnackbarViewModel(type: .info, text: "Something Wrong")
         }
         let frame = CGRect(x: 0, y: 0, width: currentWindow.frame.size.width/1.5, height: 60)
         guard let viewModel = viewModel else {return}

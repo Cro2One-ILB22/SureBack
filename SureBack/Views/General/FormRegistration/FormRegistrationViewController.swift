@@ -193,6 +193,12 @@ class FormRegistrationViewController: UIViewController {
             self.alertWaiting.dismiss(animated: true)
             guard let statusCode = statusCode else {return}
             if statusCode != 200 {
+                if statusCode == 404 {
+                    self.snackBarMessage?.showResponseMessage(
+                        statusCode: statusCode,
+                        message: "No such username on Instagram")
+                    return
+                }
                 self.snackBarMessage?.showResponseMessage(statusCode: statusCode)
                 return
             }

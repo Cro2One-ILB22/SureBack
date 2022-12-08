@@ -10,6 +10,7 @@ import UIKit
 class MerchantProfileViewController: ProfileViewController {
     override func viewDidLoad() {
         isMerchantProfile = true
+        appGuideCard.backgroundColor = .lightGray.lighter(by: 10)
         super.viewDidLoad()
         businessSettingsCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(businessSettingCardAction)))
         tabBarController?.tabBar.backgroundColor = .white
